@@ -4,8 +4,8 @@ This sets the standard for any WordPress build made internally by [We Create Dig
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
 - Why? *"Number three on this list is to store the config in the environment because configuration varies substantially across deploys, code does not."*
-- We are inspired by the environment file [Laravel](laravel.com) and took note from (this)[https://m.dotdev.co/secure-your-wordpress-config-with-dotenv-d939fcb06e24] article to get us started!
-- The .env config file follows many common WP constaints and a few extras which help speed up development
+- We love working in [Laravel](laravel.com) and have introduced an environment file by [vlucas](https://github.com/vlucas/). [This](https://m.dotdev.co/secure-your-wordpress-config-with-dotenv-d939fcb06e24) article got us started!
+- The .env config file follows many common WP constants and a few extras which help speed up development
 
         ENV=local
         WP_DEBUG=true
@@ -35,7 +35,7 @@ This sets the standard for any WordPress build made internally by [We Create Dig
 
 ##### WP_DEBUG
 - Makes both `WP_DEBUG` and `SAVEQUERIES` true in wp-config.php
-- Helps with debugging and also enableds the [debugbar](https://en-gb.wordpress.org/plugins/debug-bar/)
+- Helps with debugging and also enables the [debugbar](https://en-gb.wordpress.org/plugins/debug-bar/)
 
 ##### SSL_ENABLED
 - Value `YES` will enable
@@ -45,7 +45,7 @@ This sets the standard for any WordPress build made internally by [We Create Dig
 - Simply provide tracking ID and will insert the new gtag.js immediately after `<head>`
 
 ##### DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PREFIX
-- These are all the familiar constaints, provide them in the .env file to populate the wp-config.php file
+- These are all the familiar constants, provide them in the .env file to populate the wp-config.php file
 
 ### [2. Sage/Roots](https://roots.io/sage/)
 - Extended theme to include some security enhancements and to remove aspects of WordPress we never use
