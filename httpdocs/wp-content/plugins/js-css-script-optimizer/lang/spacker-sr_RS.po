@@ -1,0 +1,281 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: JS & CSS Script Optimizer\n"
+"POT-Creation-Date: 2014-08-05 01:41+0200\n"
+"PO-Revision-Date: 2014-08-07 10:10+0100\n"
+"Last-Translator: jelena kovacevic <jecajeca260@gmail.com>\n"
+"Language-Team: \n"
+"Language: ru_RU\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.5\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../trunk/backend.php:55
+#, php-format
+msgid ""
+"Cannot create cache directory \"%s\". Please create this folder with a "
+"\"write\" (777) permissions."
+msgstr ""
+"Ne može se kreirati keš direktorijum\"%s\". Molimo vas da ovaj folder "
+"kreirate uz dozvole za pisanje (777) \"write\" ."
+
+#: ../trunk/backend.php:62 ../trunk/backend.php:80
+msgid "JS & CSS Script Optimizer Options"
+msgstr "Opcije za JS & CSS Script Optimizer "
+
+#: ../trunk/backend.php:62
+msgid "Script Optimizer"
+msgstr "JS & CSS Script Optimizer "
+
+#: ../trunk/backend.php:74
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Nemate odgovarajuće dozvole za pristup ovoj stranici."
+
+#: ../trunk/backend.php:81
+msgid "(i)"
+msgstr "(i)"
+
+#: ../trunk/backend.php:139
+msgid "Options have been saved! Cache cleared."
+msgstr "Opcije su sačuvane. Keš memorija je očišćena."
+
+#: ../trunk/backend.php:161
+msgid "Enable plugin"
+msgstr "Aktiviraj plugin"
+
+#: ../trunk/backend.php:165
+msgid "Enable"
+msgstr "Aktiviraj"
+
+#: ../trunk/backend.php:169
+msgid "Cache directory URL"
+msgstr "URL direktorijuma keš memorije"
+
+#: ../trunk/backend.php:175
+msgid "Cache directory path"
+msgstr "putanja direktorijuma keš memorije"
+
+#: ../trunk/backend.php:182
+msgid "JavaScript output options"
+msgstr "Opcije JavaScript izlaza"
+
+#: ../trunk/backend.php:186
+msgid "Strict ordering"
+msgstr "Strogo određivanje"
+
+#: ../trunk/backend.php:190
+msgid "Better compatibility with other plugins <sup>betta</sup>"
+msgstr "Bolja kompatibilnost s drugim plugin-ovima<sup>betta</sup>"
+
+#: ../trunk/backend.php:194
+msgid "Ignore external JavaScript"
+msgstr "Zanemari eksterni JavaScript"
+
+#: ../trunk/backend.php:198 ../trunk/backend.php:248
+msgid "For self-hosted only"
+msgstr "Samo za self-hosted"
+
+#: ../trunk/backend.php:202
+msgid "Pack JavaScripts"
+msgstr "Pakuj JavaScripts"
+
+#: ../trunk/backend.php:206
+msgid "Pack scripts using Dean Edwards's JavaScript Packer"
+msgstr "Spakuj skripte koristeći JavaScript Packer Dean-a Edwards-a "
+
+#: ../trunk/backend.php:210
+msgid "Combine JavaScripts"
+msgstr "Kombinuj JavaScripts"
+
+#: ../trunk/backend.php:213
+msgid "Combine all scripts into the two files (in the header & footer)"
+msgstr "Kombinuj sve skripte u dve datoteke (u zaglavlje i podnožje)"
+
+#: ../trunk/backend.php:216
+msgid "Combine & Move all JavaScripts to the bottom"
+msgstr "Kombinuj i preseli sve JavaScripts na dno"
+
+#: ../trunk/backend.php:219
+msgid "Do not combine JavaScripts"
+msgstr "Nemoj kombinovati JavaScripts"
+
+#: ../trunk/backend.php:223
+msgid "Ignore next JavaScripts"
+msgstr "Zanemari sledeće JavaScripts"
+
+#: ../trunk/backend.php:226
+msgid ""
+"Comma separated handles or file names. For example: jquery, jquery-ui.js"
+msgstr ""
+"Zarezom odvojene brojeve ili nazive datoteka. Na primer,  jquery, jquery-ui."
+"js"
+
+#: ../trunk/backend.php:232
+msgid "Style-sheets output options"
+msgstr "Opcije izlaza datoteke sa stilovima."
+
+#: ../trunk/backend.php:236
+msgid "Enable CSS optimizer"
+msgstr "Aktiviraj CSS optimizer"
+
+#: ../trunk/backend.php:240
+msgid "Use plugin for CSS"
+msgstr "Koristi plugin za CSS"
+
+#: ../trunk/backend.php:244
+msgid "Ignore external CSS"
+msgstr "Zanemari eksterni CSS"
+
+#: ../trunk/backend.php:252
+msgid "Combine CSS"
+msgstr "Kombinuj CSS"
+
+#: ../trunk/backend.php:256
+msgid "Combine all CSS scripts into the single file"
+msgstr "Kombinuj sve CSS skripte u jednoj datoteci."
+
+#: ../trunk/backend.php:260
+msgid "Style-sheets packing"
+msgstr "Pakovanje datoteka sa stilovima. "
+
+#: ../trunk/backend.php:264
+msgid "Minify CSS files (remove comments, tabs, spaces, newlines)"
+msgstr "Umanji CSS datoteke (ukloni komentare, oznake, razmake, nove redove)"
+
+#: ../trunk/backend.php:268
+msgid "Ignore next CSS"
+msgstr "Zanemari sledeći CSS"
+
+#: ../trunk/backend.php:271
+msgid ""
+"Comma separated handles or file names. For example: jquery-ui.custom.css"
+msgstr ""
+"Zarezom odvojene brojeve ili nazive datoteka. Na primer: jquery-ui.custom."
+"css."
+
+#: ../trunk/backend.php:275
+msgid "Save options"
+msgstr "Sačuvaj opcije"
+
+#: ../trunk/backend.php:298 ../trunk/backend.php:305 ../trunk/backend.php:330
+#: ../trunk/backend.php:339
+msgid "Name"
+msgstr "Naziv"
+
+#: ../trunk/backend.php:299 ../trunk/backend.php:306 ../trunk/backend.php:331
+#: ../trunk/backend.php:340
+msgid "URL"
+msgstr "URL"
+
+#: ../trunk/backend.php:300 ../trunk/backend.php:307 ../trunk/backend.php:333
+#: ../trunk/backend.php:342
+msgid "Action"
+msgstr "Aktivnost"
+
+#: ../trunk/backend.php:317 ../trunk/backend.php:354
+msgid "Delete"
+msgstr "Obriši"
+
+#: ../trunk/backend.php:332 ../trunk/backend.php:341
+msgid "Media"
+msgstr "Medij"
+
+#: ../trunk/backend.php:334 ../trunk/backend.php:343
+msgid "Known users only"
+msgstr "Isključivo poznati korisnici"
+
+#: ../trunk/backend.php:366
+msgid "Include next JavaScript"
+msgstr "Obuhvati sledeći JavaScript"
+
+#: ../trunk/backend.php:367 ../trunk/backend.php:387
+msgid "Loading..."
+msgstr "Učitavanje..."
+
+#: ../trunk/backend.php:374 ../trunk/backend.php:394
+msgid "Name:"
+msgstr "Naziv:"
+
+#: ../trunk/backend.php:376 ../trunk/backend.php:396
+msgid "URL:"
+msgstr "URL:"
+
+#: ../trunk/backend.php:378
+msgid "Add JavaScript"
+msgstr "Dodaj JavaScript"
+
+#: ../trunk/backend.php:386
+msgid "Include next StyleSheet"
+msgstr "Obuhvati sledeću datoteku sa stilovima."
+
+#: ../trunk/backend.php:399
+msgid "Media:"
+msgstr "Medij"
+
+#: ../trunk/backend.php:407
+msgid "If logged in:"
+msgstr "ako je prijavljen:"
+
+#: ../trunk/backend.php:407
+msgid "Display to known users only"
+msgstr "Prikaži samo poznatim korisnicima"
+
+#: ../trunk/backend.php:409
+msgid "Add CSS"
+msgstr "Dodaj CSS"
+
+#: ../trunk/backend.php:438
+msgid "Help me to make my site more fast &rarr;"
+msgstr "Pomozite da moj site bude brži:"
+
+#: ../trunk/backend.php:440
+msgid ""
+"We appreciate your attention to our plug-in and hope it works well for you."
+msgstr ""
+"Drago nam je što ste obratili pažnju na naš plugin i nadamo se da vam je "
+"pomogao."
+
+#: ../trunk/backend.php:441
+msgid ""
+"If you need any support in the plug-in use or you need an advanced speed "
+"optimization please do not hesitate to contact us."
+msgstr ""
+"Ako vam treba bilo kakva podrška za korišćenje plugin-a ili brža "
+"optimizacija, nemojte oklevati da nam se obratite. "
+
+#: ../trunk/backend.php:442
+msgid "We will reply as soon as we can."
+msgstr "Odgovorićemo čim budemo mogli."
+
+#: ../trunk/backend.php:445
+msgid "Email"
+msgstr "Email"
+
+#: ../trunk/backend.php:465 ../trunk/backend.php:532
+msgid "Fields \"Name\" and \"URL\" cannot be empty."
+msgstr "Polja \"Naziv\" i \"URL\" ne mogu biti nepopunjena."
+
+#: ../trunk/backend.php:468
+msgid "This name is already used."
+msgstr "Ovaj naziv se već koristi."
+
+#: ../trunk/backend.php:484 ../trunk/backend.php:551
+msgid "Script has been added."
+msgstr "Skripta je dodata."
+
+#: ../trunk/backend.php:496 ../trunk/backend.php:563
+msgid "Cannot find this script."
+msgstr "Nemoguće je pronaći ovu skriptu."
+
+#: ../trunk/backend.php:512 ../trunk/backend.php:579
+msgid "Script has been deleted."
+msgstr "Skripta je obrisana."
+
+#: ../trunk/backend.php:535
+msgid "This Name is already used."
+msgstr "Ovaj naziv se već koristi."

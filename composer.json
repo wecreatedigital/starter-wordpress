@@ -1,0 +1,12 @@
+{
+  "name": "wecreatedigital/starter-wordpress",
+  "require": {
+    "vlucas/phpdotenv": "^2.2"
+  },
+  "authors": [
+    {
+      "name": "We Create Digital",
+      "email": "enquiries@wecreatedigital.co.uk"
+    }
+  ]
+}
