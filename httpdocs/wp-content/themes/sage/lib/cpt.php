@@ -2,6 +2,10 @@
 
 /**
  * Sample CPT - PLEASE UNCOMMENT function.php
+ *
+ * Feel free to use:
+ * - https://generatewp.com/taxonomy/
+ * - https://generatewp.com/post-type/
  */
 
  function contacts_post_type() {

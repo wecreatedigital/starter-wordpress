@@ -72,6 +72,7 @@ This sets the standard for any WordPress build made internally by [We Create Dig
 ##### lib/general.php
 - Looks for ACF and if available adds options page
 - Place to set `add_image_size`
+- Includes a footer menu
 
 ##### Other theme modifications
 - Looks for Yoast SEO Breadcrumbs
@@ -92,3 +93,21 @@ Comes with the following plugins:
 - [WP Super Cache](https://wordpress.org/plugins/wp-super-cache/) (production only)
 - [WP-PageNavi](https://en-gb.wordpress.org/plugins/wp-pagenavi/)
 - [Yoast SEO](https://yoast.com/wordpress/plugins/seo/)
+
+
+### 4. ACF Migrations
+- To sync our field changes we have now included `acf-json` directory within the theme folder. JSON is automatically populated here when fields are created/updated, [read more](https://www.advancedcustomfields.com/resources/local-json/)
+- The build includes includes typical fields for the options page such as phone number, email address and social media URLs
+
+## Log of changes
+**03/09/2017**
+- Included latest version of Bootstrap in bower.json
+- Included Slick in bower.json
+- Created `acf-json` folder for sync of ACF migrations
+- JSON for typical ACF option fields
+- Helpful URLs for generating CPT and taxonomies
+- Registered nav menu for footer
+
+## To do
+- Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
+- Add more customisation!
