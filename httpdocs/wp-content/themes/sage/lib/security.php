@@ -107,7 +107,6 @@ function remove_excess_links_etc () {
   add_filter( 'embed_oembed_discover', '__return_false' );              // Turn off oEmbed auto discovery.
   remove_filter( 'oembed_dataparse', 'wp_filter_oembed_result', 10 );   // Don't filter oEmbed results.
   remove_action( 'wp_head', 'wp_oembed_add_host_js' );                  // Remove oEmbed-specific JavaScript from the front-end and back-end.
-  add_filter( 'rewrite_rules_array', 'disable_embeds_rewrites' );       // Remove all embeds rewrite rules.
 
   // Filters for WP-API version 1.x
   add_filter('json_enabled', '__return_false');
