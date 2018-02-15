@@ -29,7 +29,8 @@ class WPSEO_Config_Field_Site_Name extends WPSEO_Config_Field {
 			$this->get_identifier(),
 			array( $this, 'get_data' ),
 			array( $this, 'set_data' )
-		);	}
+		);
+	}
 
 	/**
 	 * Get the data from the stored options.
@@ -55,7 +56,7 @@ class WPSEO_Config_Field_Site_Name extends WPSEO_Config_Field {
 	public function set_data( $data ) {
 		$value = $data;
 
-		$option                   = WPSEO_Options::get_option( 'wpseo' );
+		$option                 = WPSEO_Options::get_option( 'wpseo' );
 		$option['website_name'] = $value;
 
 		update_option( 'wpseo', $option );

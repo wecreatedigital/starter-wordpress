@@ -7,6 +7,7 @@ final class ITSEC_Response {
 	private $errors;
 	private $warnings;
 	private $messages;
+	private $infos;
 	private $success;
 	private $js_function_calls;
 	private $show_default_success_message;
@@ -16,6 +17,7 @@ final class ITSEC_Response {
 	private $close_modal;
 	private $regenerate_wp_config;
 	private $regenerate_server_config;
+	private $has_new_notifications = false;
 
 	private function __construct() {
 		$this->reset_to_defaults();
@@ -111,6 +113,24 @@ final class ITSEC_Response {
 		$self = self::get_instance();
 
 		return $self->messages;
+	}
+
+	public static function add_infos( $messages ) {
+		foreach ( $messages as $message ) {
+			self::add_info( $message );
+		}
+	}
+
+	public static function add_info( $message ) {
+		$self = self::get_instance();
+
+		$self->infos[] = $message;
+	}
+
+	public static function get_infos() {
+		$self = self::get_instance();
+
+		return $self->infos;
 	}
 
 	public static function add_js_function_call( $js_function, $args = null ) {
@@ -249,6 +269,26 @@ final class ITSEC_Response {
 		}
 	}
 
+	public static function maybe_flag_new_notifications_available() {
+		$nc = ITSEC_Core::get_notification_center();
+
+		$current = array_keys( $nc->get_notifications() );
+		$nc->clear_notifications_cache();
+		$new = array_keys( $nc->get_notifications() );
+
+		$added = array_diff( $new, $current );
+
+		if ( $added ) {
+			self::reload_module( 'notification-center' );
+			self::get_instance()->has_new_notifications = true;
+			self::get_instance()->add_info( sprintf(
+				esc_html__( 'New notifications available in the %1$sNotification Center%2$s.', 'better-wp-security' ),
+				'<a href="#" data-module-link="notification-center">',
+				'</a>'
+			) );
+		}
+	}
+
 	public static function get_raw_data() {
 		$self = self::get_instance();
 
@@ -263,15 +303,17 @@ final class ITSEC_Response {
 
 
 		$data = array(
-			'source'        => 'ITSEC_Response',
-			'success'       => $self->success,
-			'response'      => $self->response,
-			'errors'        => self::get_error_strings( $self->errors ),
-			'warnings'      => self::get_error_strings( $self->warnings ),
-			'messages'      => $self->messages,
-			'functionCalls' => self::parse_js_function_calls_for_module_reloads(),
-			'redirect'      => $self->redirect,
-			'closeModal'    => $self->close_modal,
+			'source'           => 'ITSEC_Response',
+			'success'          => $self->success,
+			'response'         => $self->response,
+			'errors'           => self::get_error_strings( $self->errors ),
+			'warnings'         => self::get_error_strings( $self->warnings ),
+			'messages'         => $self->messages,
+			'infos'            => $self->infos,
+			'functionCalls'    => self::parse_js_function_calls_for_module_reloads(),
+			'redirect'         => $self->redirect,
+			'closeModal'       => $self->close_modal,
+			'newNotifications' => $self->has_new_notifications,
 		);
 
 		return $data;

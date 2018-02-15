@@ -15,10 +15,7 @@ class ITSEC_IPCheck {
 	private $settings;
 
 	public function run() {
-		add_action( 'wp_login', array( $this, 'wp_login' ), 10, 2 );
-		add_action( 'itsec-handle-failed-login', array( $this, 'handle_failed_login' ), 10, 2 );
-
-		add_filter( 'itsec_logger_modules', array( $this, 'itsec_logger_modules' ) );
+		add_filter( 'authenticate', array( $this, 'filter_authenticate' ), 10000, 3 ); // Set a very late priority so that we run after actual authentication takes place.
 	}
 
 	private function load_settings() {
@@ -27,44 +24,27 @@ class ITSEC_IPCheck {
 		}
 	}
 
-	private function set_cache( $ip, $response ) {
-		$cache = $this->get_cache( $ip );
-		$time = ITSEC_Core::get_current_time_gmt();
+	public function filter_authenticate( $user, $username, $password ) {
+		global $itsec_lockout;
 
-		if ( isset( $response['block'] ) ) {
-			$cache['block'] = (boolean) $response['block'];
+		if ( is_wp_error( $user ) && $user->get_error_codes() == array( 'empty_username', 'empty_password' ) ) {
+			// This is not an authentication attempt. It is simply the login page loading.
+			return $user;
 		}
 
-		if ( isset( $response['cache_ttl'] ) ) {
-			$cache['cache_ttl'] = intval( $response['cache_ttl'] ) + $time;
-		} else if ( 0 === $cache['cache_ttl'] ) {
-			$cache['cache_ttl'] = $time + HOUR_IN_SECONDS;
+		$this->load_settings();
+
+		if ( is_wp_error( $user ) || null == $user ) {
+			if ( $this->report_ip() && $this->settings['enable_ban'] ) {
+				ITSEC_Log::add_notice( 'ipcheck', 'failed-login-by-blocked-ip', array( 'details' => ITSEC_Lib::get_login_details() ) );
+				$itsec_lockout->execute_lock( array( 'network_lock' => true ) );
+			}
+		} else if ( $this->settings['enable_ban'] && $this->is_ip_banned() ) {
+			ITSEC_Log::add_critical_issue( 'ipcheck', 'successful-login-by-blocked-ip', array( 'details' => ITSEC_Lib::get_login_details() ) );
+			$itsec_lockout->execute_lock( array( 'network_lock' => true ) );
 		}
 
-		if ( isset( $response['report_ttl'] ) ) {
-			$cache['report_ttl'] = intval( $response['report_ttl'] ) + $time;
-		}
-
-		$transient_time = max( $cache['cache_ttl'], $cache['report_ttl'] ) - $time;
-
-
-		set_site_transient( "itsec_ipcheck_$ip", $cache, $transient_time );
-	}
-
-	private function get_cache( $ip ) {
-		$cache = get_site_transient( "itsec_ipcheck_$ip" );
-
-		$defaults = array(
-			'block'      => false,
-			'cache_ttl'  => 0,
-			'report_ttl' => 0,
-		);
-
-		if ( ! is_array( $cache ) ) {
-			return $defaults;
-		}
-
-		return array_merge( $defaults, $cache );
+		return $user;
 	}
 
 	/**
@@ -74,8 +54,8 @@ class ITSEC_IPCheck {
 	 *
 	 * @return bool true if banned, false otherwise.
 	 */
-	private function is_ip_banned( $ip = false ) {
-		return $this->get_server_response( 'check-ip', $ip );
+	private function is_ip_banned() {
+		return $this->get_server_response( 'check-ip' );
 	}
 
 	/**
@@ -85,14 +65,11 @@ class ITSEC_IPCheck {
 	 *
 	 * @return bool true if banned, false otherwise.
 	 */
-	private function report_ip( $ip = false ) {
-		return $this->get_server_response( 'report-ip', $ip );
+	private function report_ip() {
+		return $this->get_server_response( 'report-ip' );
 	}
 
-	private function get_server_response( $action, $ip = false ) {
-		global $itsec_logger;
-
-
+	private function get_server_response( $action ) {
 		$this->load_settings();
 
 		if ( empty( $this->settings['api_key'] ) || empty( $this->settings['api_secret'] ) ) {
@@ -100,9 +77,7 @@ class ITSEC_IPCheck {
 		}
 
 
-		if ( false === $ip ) {
-			$ip = ITSEC_Lib::get_ip();
-		}
+		$ip = ITSEC_Lib::get_ip();
 
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-ip-tools.php' );
 
@@ -167,12 +142,52 @@ class ITSEC_IPCheck {
 				'type'        => 'host',
 			);
 
-			$itsec_logger->log_event( 'lockout', 10, $data, $ip );
+			ITSEC_Log::add_action( 'ipcheck', 'ip-blocked', $data );
 
 			return true;
 		}
 
 		return false;
+	}
+
+	private function set_cache( $ip, $response ) {
+		$cache = $this->get_cache( $ip );
+		$time = ITSEC_Core::get_current_time_gmt();
+
+		if ( isset( $response['block'] ) ) {
+			$cache['block'] = (boolean) $response['block'];
+		}
+
+		if ( isset( $response['cache_ttl'] ) ) {
+			$cache['cache_ttl'] = intval( $response['cache_ttl'] ) + $time;
+		} else if ( 0 === $cache['cache_ttl'] ) {
+			$cache['cache_ttl'] = $time + HOUR_IN_SECONDS;
+		}
+
+		if ( isset( $response['report_ttl'] ) ) {
+			$cache['report_ttl'] = intval( $response['report_ttl'] ) + $time;
+		}
+
+		$transient_time = max( $cache['cache_ttl'], $cache['report_ttl'] ) - $time;
+
+
+		set_site_transient( "itsec_ipcheck_$ip", $cache, $transient_time );
+	}
+
+	private function get_cache( $ip ) {
+		$cache = get_site_transient( "itsec_ipcheck_$ip" );
+
+		$defaults = array(
+			'block'      => false,
+			'cache_ttl'  => 0,
+			'report_ttl' => 0,
+		);
+
+		if ( ! is_array( $cache ) ) {
+			return $defaults;
+		}
+
+		return array_merge( $defaults, $cache );
 	}
 
 	/**
@@ -198,64 +213,6 @@ class ITSEC_IPCheck {
 		$hmac = pack( 'H*', sha1( ( $key ^ $opad ) . pack( 'H*', sha1( ( $key ^ $ipad ) . $data ) ) ) );
 
 		return base64_encode( $hmac );
-	}
-
-	/**
-	 * Register IPCheck for logger
-	 *
-	 * @since 4.5
-	 *
-	 * @param  array $logger_modules array of logger modules
-	 *
-	 * @return array                   array of logger modules
-	 */
-	public function itsec_logger_modules( $logger_modules ) {
-		$logger_modules['ipcheck'] = array(
-			'type'     => 'ipcheck',
-			'function' => __( 'IP Flagged by Network Brute Force Protection', 'better-wp-security' ),
-		);
-
-		return $logger_modules;
-	}
-
-	/**
-	 * Make sure user isn't already locked out even on successful form submission
-	 *
-	 * @since 4.5
-	 *
-	 * @return void
-	 */
-	public function wp_login() {
-
-		/** @var ITSEC_Lockout $itsec_lockout */
-		global $itsec_logger, $itsec_lockout;
-
-		$this->load_settings();
-
-		if ( $this->settings['enable_ban'] && $this->is_ip_banned() ) {
-			$itsec_logger->log_event( 'ipcheck', 10, array(), ITSEC_Lib::get_ip() );
-			$itsec_lockout->execute_lock( array( 'network_lock' => true ) );
-		}
-	}
-
-	/**
-	 * Sends to lockout class when username and password are filled out and wrong
-	 *
-	 * @since 4.5
-	 *
-	 * @return void
-	 */
-	public function handle_failed_login( $username, $details ) {
-
-		/** @var ITSEC_Lockout $itsec_lockout */
-		global $itsec_logger, $itsec_lockout;
-
-		$this->load_settings();
-
-		if ( $this->settings['enable_ban'] && $this->report_ip() ) {
-			$itsec_logger->log_event( 'ipcheck', 10, array(), ITSEC_Lib::get_ip() );
-			$itsec_lockout->execute_lock( array( 'network_lock' => true ) );
-		}
 	}
 
 }

@@ -19,9 +19,11 @@ final class ITSEC_404_Detection_Settings_Page extends ITSEC_Module_Settings_Page
 	}
 	
 	protected function render_settings( $form ) {
-		
+
+		/** @var ITSEC_Lockout $itsec_lockout */
+		global $itsec_lockout;
 ?>
-	<?php echo $GLOBALS['itsec_lockout']->get_lockout_description(); ?>
+	<?php echo $itsec_lockout->get_lockout_description(); ?>
 	<table class="form-table">
 		<tr>
 			<th scope="row"><label for="itsec-404-detection-check_period"><?php _e( 'Minutes to Remember 404 Error (Check Period)', 'better-wp-security' ); ?></label></th>

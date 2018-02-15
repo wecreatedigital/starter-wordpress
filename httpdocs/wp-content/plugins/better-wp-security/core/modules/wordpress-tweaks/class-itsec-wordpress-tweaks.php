@@ -185,7 +185,7 @@ final class ITSEC_WordPress_Tweaks {
 			return $result;
 		}
 
-		$route = $request->get_route();
+		$route = strtolower( $request->get_route() );
 		$route_parts = explode( '/', trim( $route, '/' ) );
 
 		if ( 'wp' !== $route_parts[0] ) {

@@ -15,7 +15,7 @@ jQuery( document ).ready( function ( $ ) {
 			'method': 'secure-site'
 		};
 
-		itsecSettingsPage.sendModuleAJAXRequest( 'security-check', data, function( results ) {
+		itsecUtil.sendModuleAJAXRequest( 'security-check', data, function( results ) {
 			$( '#itsec-security-check-secure_site' )
 				.addClass( 'button-primary' )
 				.removeClass( 'button-secondary' )
@@ -62,7 +62,7 @@ jQuery( document ).ready( function ( $ ) {
 				.attr( 'value', $( this ).data( 'clicked-value' ) )
 		}
 
-		var ajaxFunction = itsecSettingsPage.sendModuleAJAXRequest;
+		var ajaxFunction = itsecUtil.sendModuleAJAXRequest;
 
 		if ( 'undefined' !== typeof itsecSecurityCheckAJAXRequest ) {
 			ajaxFunction = itsecSecurityCheckAJAXRequest;
@@ -108,6 +108,6 @@ jQuery( document ).ready( function ( $ ) {
 /*
 function itsecSecurityCheckAJAXRequest( type, data, callback ) {
 	console.log( 'Override called' );
-	itsecSettingsPage.sendModuleAJAXRequest( type, data, callback );
+	itsecUtil.sendModuleAJAXRequest( type, data, callback );
 }
 */

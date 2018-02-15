@@ -143,9 +143,9 @@ final class ITSEC_Files {
 			$host_rule .= "</IfModule>\n";
 			$host_rule .= "<IfModule !mod_authz_core.c>\n";
 			$host_rule .= "\tOrder allow,deny\n";
+			$host_rule .= "\tAllow from all\n";
 			$host_rule .= "\tDeny from env=DenyAccess\n";
 			$host_rule .= "\tDeny from $host\n";
-			$host_rule .= "\tAllow from all\n";
 			$host_rule .= "</IfModule>\n";
 		}
 

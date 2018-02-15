@@ -34,10 +34,10 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 		} else {
 
 			foreach ( $parameters as $name => $value ) {
-				if ( $has_error = $this->set_value_by_key( $value, $name ) ) {
-					if ( false == is_numeric( $has_error ) && false == is_bool( $has_error ) ) {
-						$errors[] = $has_error;
-					}
+				$has_error = $this->set_value_by_key( $value, $name );
+
+				if ( false == is_numeric( $has_error ) && false == is_bool( $has_error ) ) {
+					$errors[] = $has_error;
 				}
 			}
 
@@ -46,7 +46,7 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 			$this->set_debug_settings( $parameters );
 		}
 
-		if ( count( $errors ) > 0 ) {
+		if ( ! empty( $errors ) ) {
 			return rest_ensure_response( $errors );
 
 		} else {
@@ -67,7 +67,6 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 	protected function set_value_by_key( $value, $key ) {
 
 		$settings_map = WP_Super_Cache_Settings_Map::$map;
-		$error = null;
 
 		// If this parameter isn't in the map, then let's ignore it.
 		if ( ! isset( $settings_map[ $key ] ) ) {
@@ -77,32 +76,25 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 		$map = $settings_map[ $key ];
 
 		if ( isset( $map['set'] ) ) {
-			$set_method = $map['set'];
+			if ( method_exists( $this, $map['set'] ) ) {
+				$has_error = call_user_func( array( $this, $map['set'] ), $value, $key );
 
-			if ( method_exists( $this, $set_method ) ) {
-				if ( $has_error = $this->$set_method( $value, $key ) ) {
-					$error = $has_error;
-				}
+			} elseif ( function_exists( $map['set'] ) ) {
+				$has_error = call_user_func( $map['set'], $value );
 
-			} elseif ( function_exists( $set_method ) ) {
-				$set_method( $value );
 			}
-
 		} elseif ( isset( $map['global'] ) ) {
 
-			if ( method_exists( $this, 'set_' . $map['global'] ) ) {
-				$set_method = 'set_' . $map['global'];
-
-				if ( $has_error = $this->$set_method( $value ) ) {
-					$error = $has_error;
-				}
-			} else {
-
-				$this->set_global( $map['global'], $value );
-			}
+			$set_method = method_exists( $this, 'set_' . $map['global'] ) ?
+				'set_' . $map['global'] : 'set_global';
+			$has_error  = call_user_func( array( $this, $set_method ), $value );
 		}
 
-		return $error;
+		if ( ! empty( $has_error ) ) {
+			return $has_error;
+		}
+
+		return null;
 	}
 
 	/**
@@ -502,9 +494,7 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 		);
 
 		foreach ( $advanced_settings as $setting ) {
-			global ${$setting};
-
-			$value = ( isset( $$setting ) && $$setting == 1 ) ? 1 : 0;
+			$value = ( isset( $GLOBALS[ $setting ] ) && $GLOBALS[ $setting ] == 1 ) ? 1 : 0;
 			$this->set_value_by_key( $value, $setting );
 		}
 	}
@@ -529,9 +519,8 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 		);
 
 		foreach ( $all_time_settings as $time_setting ) {
-			global ${$time_setting};
-			if ( false == isset( $_POST[ $time_setting ] ) || $$time_setting == $_POST[ $time_setting ] ) {
-				$_POST[ $time_setting ] = $$time_setting; // fill in the potentially missing fields before updating GC settings.
+			if ( false == isset( $_POST[ $time_setting ] ) || $GLOBALS[ $time_setting ] == $_POST[ $time_setting ] ) {
+				$_POST[ $time_setting ] = $GLOBALS[ $time_setting ]; // fill in the potentially missing fields before updating GC settings.
 			}
 		}
 
@@ -590,8 +579,7 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 
 		foreach ( $all_preload_settings as $key => $original ) {
 			if ( ! isset( $_POST[ $key ] ) ) {
-				global ${$original};
-				$_POST[ $original ] = $$original;
+				$_POST[ $original ] = $GLOBALS[ $original ];
 			} else {
 				$_POST[ $original ] = $_POST[ $key ];
 				if ( $key !== 'preload_interval' && ( $_POST[ $key ] === 0 || $_POST[ $key ] === false ) ) {
@@ -649,8 +637,7 @@ class WP_Super_Cache_Rest_Update_Settings extends WP_REST_Controller {
 				}
 				$_POST[ 'wp_cache_debug' ] = 1;
 			} else {
-				global $$setting;
-				$_POST[ $setting ] = $$setting;
+				$_POST[ $setting ] = $GLOBALS[ $setting ];
 			}
 		}
 		global $valid_nonce;

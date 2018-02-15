@@ -24,37 +24,14 @@ class ITSEC_File_Change {
 	 */
 	function run() {
 
-		$settings = ITSEC_Modules::get_settings( 'file-change' );
-		$interval = 86400; //Run daily
-
-		// If we're splitting the file check run it every 6 hours.
-		if ( isset( $settings['split'] ) && true === $settings['split'] ) {
-			$interval = 12342;
-		}
-
 		add_action( 'itsec_execute_file_check_cron', array( $this, 'run_scan' ) ); //Action to execute during a cron run.
 
-		add_filter( 'itsec_logger_displays', array( $this, 'itsec_logger_displays' ) ); //adds logs metaboxes
-		add_filter( 'itsec_logger_modules', array( $this, 'itsec_logger_modules' ) );
 		add_action( 'ithemes_sync_register_verbs', array( $this, 'register_sync_verbs' ) );
+		add_filter( 'itsec_notifications', array( $this, 'register_notification' ) );
+		add_filter( 'itsec_file-change_notification_strings', array( $this, 'register_notification_strings' ) );
 
-
-		if (
-			( ! defined( 'DOING_AJAX' ) || DOING_AJAX === false ) &&
-			isset( $settings['last_run'] ) &&
-			( ITSEC_Core::get_current_time() - $interval ) > $settings['last_run'] &&
-			( ! defined( 'ITSEC_FILE_CHECK_CRON' ) || false === ITSEC_FILE_CHECK_CRON )
-		) {
-
-			wp_clear_scheduled_hook( 'itsec_file_check' );
-			add_action( 'init', array( $this, 'run_scan' ) );
-
-		} elseif ( defined( 'ITSEC_FILE_CHECK_CRON' ) && true === ITSEC_FILE_CHECK_CRON && ! wp_next_scheduled( 'itsec_execute_file_check_cron' ) ) { //Use cron if needed
-
-			wp_schedule_event( time(), 'daily', 'itsec_execute_file_check_cron' );
-
-		}
-
+		add_action( 'itsec_scheduler_register_events', array( $this, 'register_event' ) );
+		add_action( 'itsec_scheduled_file-change', array( $this, 'run_scan' ) );
 	}
 
 	public function run_scan() {
@@ -64,99 +41,17 @@ class ITSEC_File_Change {
 	}
 
 	/**
-	 * Register file change detection for logger
+	 * Register the file change scan event.
 	 *
-	 * Registers the file change detection module with the core logger functionality.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param  array $logger_modules array of logger modules
-	 *
-	 * @return array array of logger modules
+	 * @param ITSEC_Scheduler $scheduler
 	 */
-	public function itsec_logger_modules( $logger_modules ) {
+	public function register_event( $scheduler ) {
 
-		$logger_modules['file_change'] = array(
-			'type'     => 'file_change',
-			'function' => __( 'File Changes Detected', 'better-wp-security' ),
-		);
+		// If we're splitting the file check run it every 6 hours.
+		$split    = ITSEC_Modules::get_setting( 'file-change', 'split', false );
+		$interval = $split ? ITSEC_Scheduler::S_FOUR_DAILY : ITSEC_Scheduler::S_DAILY;
 
-		return $logger_modules;
-
-	}
-
-	/**
-	 * Array of displays for the logs screen
-	 *
-	 * Registers the custom log page with the core plugin to allow for access from the log page's
-	 * dropdown menu.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param array $displays metabox array
-	 *
-	 * @return array metabox array
-	 */
-	public function itsec_logger_displays( $displays ) {
-
-		$displays[] = array(
-			'module'   => 'file_change',
-			'title'    => __( 'File Change History', 'better-wp-security' ),
-			'callback' => array( $this, 'logs_metabox_content' )
-		);
-
-		return $displays;
-
-	}
-
-	/**
-	 * Render the file change log metabox
-	 *
-	 * Displays a metabox on the logs page, when filtered, showing all file change items.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return void
-	 */
-	public function logs_metabox_content() {
-
-		if ( ! class_exists( 'ITSEC_File_Change_Log' ) ) {
-			require( dirname( __FILE__ ) . '/class-itsec-file-change-log.php' );
-		}
-
-
-		$settings = ITSEC_Modules::get_settings( 'file-change' );
-
-
-		// If we're splitting the file check run it every 6 hours. Else daily.
-		if ( isset( $settings['split'] ) && true === $settings['split'] ) {
-
-			$interval = 12342;
-
-		} else {
-
-			$interval = 86400;
-
-		}
-
-		$next_run_raw = $settings['last_run'] + $interval;
-
-		if ( date( 'j', $next_run_raw ) == date( 'j', ITSEC_Core::get_current_time() ) ) {
-			$next_run_day = __( 'Today', 'better-wp-security' );
-		} else {
-			$next_run_day = __( 'Tomorrow', 'better-wp-security' );
-		}
-
-		$next_run = $next_run_day . ' at ' . date( 'g:i a', $next_run_raw );
-
-		echo '<p>' . __( 'Next automatic scan at: ', 'better-wp-security' ) . '<strong>' . $next_run . '*</strong></p>';
-		echo '<p><em>*' . __( 'Automatic file change scanning is triggered by a user visiting your page and may not happen exactly at the time listed.', 'better-wp-security' ) . '</em>';
-
-		$log_display = new ITSEC_File_Change_Log();
-
-		$log_display->prepare_items();
-		$log_display->display();
-
+		$scheduler->schedule( $interval, 'file-change' );
 	}
 
 	/**
@@ -168,5 +63,37 @@ class ITSEC_File_Change {
 	 */
 	public function register_sync_verbs( $api ) {
 		$api->register( 'itsec-perform-file-scan', 'Ithemes_Sync_Verb_ITSEC_Perform_File_Scan', dirname( __FILE__ ) . '/sync-verbs/itsec-perform-file-scan.php' );
+	}
+
+	/**
+	 * Register the file change notification.
+	 *
+	 * @param array $notifications
+	 *
+	 * @return array
+	 */
+	public function register_notification( $notifications ) {
+		$notifications['file-change'] = array(
+			'recipient'        => ITSEC_Notification_Center::R_USER_LIST_ADMIN_UPGRADE,
+			'schedule'         => ITSEC_Notification_Center::S_NONE,
+			'subject_editable' => true,
+			'optional'         => true,
+			'module'           => 'file-change',
+		);
+
+		return $notifications;
+	}
+
+	/**
+	 * Register the file change notification strings.
+	 *
+	 * @return array
+	 */
+	public function register_notification_strings() {
+		return array(
+			'label'       => esc_html__( 'File Change', 'better-wp-security' ),
+			'description' => sprintf( esc_html__( 'The %1$sFile Change Detection%2$s module will email a file scan report after changes have been detected.', 'better-wp-security' ), '<a href="#" data-module-link="file-change">', '</a>' ),
+			'subject'     => esc_html__( 'File Change Warning', 'better-wp-security' ),
+		);
 	}
 }

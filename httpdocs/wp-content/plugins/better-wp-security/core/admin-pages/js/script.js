@@ -14,6 +14,7 @@ var itsecSettingsPage = {
 
 		this.initFilters();
 		this.initCurrentModule();
+		this.makeNoticesDismissible();
 	},
 
 	initFilters: function() {
@@ -236,6 +237,7 @@ var itsecSettingsPage = {
 			itsecSettingsPage.showErrors( results.errors, results.module, 'open' );
 			itsecSettingsPage.showErrors( results.warnings, results.module, 'open', 'warning' );
 			itsecSettingsPage.showMessages( results.messages, results.module, 'open' );
+			itsecSettingsPage.showMessages( results.infos, results.module, 'open', 'info' );
 
 			if ( 'grid' === view ) {
 				$container.find( '.itsec-module-settings-content-container:visible' ).animate( {'scrollTop': 0}, 'fast' );
@@ -246,6 +248,7 @@ var itsecSettingsPage = {
 			}
 		} else {
 			itsecSettingsPage.showMessages( results.messages, results.module, 'closed' );
+			itsecSettingsPage.showMessages( results.infos, results.module, 'closed', 'info' );
 
 			if ( 'grid' === view ) {
 				$container.find( '.itsec-module-settings-content-container:visible' ).scrollTop( 0 );
@@ -303,13 +306,16 @@ var itsecSettingsPage = {
 		container.append( $notice ).addClass( 'visible' );
 	},
 
-	showMessages: function( messages, module, containerStatus ) {
+	showMessages: function( messages, module, containerStatus, type ) {
 		jQuery.each( messages, function( index, message ) {
-			itsecSettingsPage.showMessage( message, module, containerStatus );
+			itsecSettingsPage.showMessage( message, module, containerStatus, type );
 		} );
 	},
 
-	showMessage: function( message, module, containerStatus ) {
+	showMessage: function( message, module, containerStatus, type ) {
+
+		type = type || 'success';
+
 		if ( jQuery( '.itsec-module-cards-container' ).hasClass( 'grid' ) ) {
 			var view = 'grid';
 		} else {
@@ -328,17 +334,25 @@ var itsecSettingsPage = {
 		if ( 'closed' === containerStatus || '' === module ) {
 			var container = jQuery( '#itsec-settings-messages-container' );
 
-			setTimeout( function() {
+			var dismiss = function () {
+
+				if ( container.is( ':hover' ) ) {
+					return setTimeout( dismiss, 2000 );
+				}
+
 				container.removeClass( 'visible' );
-				setTimeout( function() {
+				setTimeout( function () {
 					container.find( 'div' ).remove();
 				}, 500 );
-			}, 4000 );
+			};
+
+			setTimeout( dismiss, 4000 );
 		} else {
 			var container = jQuery( '#itsec-module-card-' + module + ' .itsec-module-messages-container' );
 		}
 
-		var $notice = jQuery( '<div class="notice notice-success fade"><p><strong>' + message + '</strong></p></div>' );
+		var $notice = jQuery( '<div class="notice fade"><p><strong>' + message + '</strong></p></div>' );
+		$notice.addClass( 'notice-' + type );
 
 		if ( containerStatus === 'open' || module.length ) {
 			$notice.addClass( 'notice-alt' );
@@ -434,7 +448,7 @@ var itsecSettingsPage = {
 		var $listClassElement = $module.parents( '.itsec-module-cards-container' ),
 			$toggleButton = $module.find( '.itsec-toggle-settings' );
 
-		if ( highlight.length ) {
+		if ( highlight && highlight.length ) {
 			jQuery( 'label[for="' + highlight + '"]', $module ).parents( 'tr' ).addClass( 'itsec-highlighted-setting' );
 		}
 
@@ -447,6 +461,14 @@ var itsecSettingsPage = {
 		var type = $module.hasClass( 'itsec-module-type-advanced' ) ? 'advanced' : 'recommended';
 
 		window.history.pushState( {module: module}, module, '?page=itsec&module=' + module + '&module_type=' + type );
+
+		var href = $link.attr( 'href' );
+
+		if ( href && href.length > 1 && href.charAt( 0 ) === '#' ) {
+			setTimeout( function () {
+				jQuery( '.itsec-module-settings-content-container', '#itsec-module-card-notification-center' ).scrollTo( jQuery( href ), 'swing', { offset: -30 } );
+			}, 350 );
+		}
 	},
 
 	toggleSettings: function( e ) {
@@ -698,6 +720,11 @@ var itsecSettingsPage = {
 
 		jQuery( '#itsec-module-filter-enabled .count' ).html( '(' + enabledCount + ')' );
 		jQuery( '#itsec-module-filter-disabled .count' ).html( '(' + disabledCount + ')' );
+
+
+		itsecSettingsPage.showErrors( results.warnings, results.module, 'closed', 'warning' );
+		itsecSettingsPage.showMessages( results.messages, results.module, 'closed' );
+		itsecSettingsPage.showMessages( results.infos, results.module, 'closed', 'info' );
 	},
 
 	isModuleActive: function( module ) {
@@ -733,13 +760,25 @@ var itsecSettingsPage = {
 
 		itsecSettingsPage.sendAJAXRequest( module, method, data, function( results ) {
 			if ( results.success && results.response ) {
-				jQuery( '#itsec-module-card-' + module + ' .itsec-module-settings-content-main' ).html( results.response );
-				jQuery( '.itsec-settings-toggle' ).trigger( 'change' );
+				var $card = jQuery( '#itsec-module-card-' + module );
+				var isHidden = $card.is( ':hidden' );
+
+				jQuery( '.itsec-module-settings-content-main', $card ).html( results.response );
+
+				if ( isHidden ) {
+					$card.hide();
+				} else {
+					jQuery( '.itsec-settings-toggle' ).trigger( 'change' );
+				}
 			} else if ( results.errors && results.errors.length > 0 ) {
 				itsecSettingsPage.showErrors( results.errors, results.module, 'open' );
 			} else if ( results.warnings && results.warnings.length > 0 ) {
 				itsecSettingsPage.showErrors( results.warnings, results.module, 'open', 'warning' );
 			}
+
+			itsecSettingsPage.events.trigger( 'moduleReloaded', module );
+
+			itsecSettingsPage.makeNoticesDismissible();
 		} );
 	},
 
@@ -779,10 +818,12 @@ var itsecSettingsPage = {
 
 			if ( initialResponse ) {
 				itsecSettingsPage.showMessages( initialResponse.messages, initialResponse.module, $open ? 'open' : 'closed' );
+				itsecSettingsPage.showMessages( initialResponse.infos, initialResponse.module, $open ? 'open' : 'closed', 'info' );
 				itsecSettingsPage.showErrors( initialResponse.errors, initialResponse.module, $open ? 'open' : 'closed' );
 				itsecSettingsPage.showErrors( initialResponse.warnings, initialResponse.module, $open ? 'open' : 'closed', 'warning' );
 			}
 
+			itsecSettingsPage.makeNoticesDismissible();
 			itsecSettingsPage.events.trigger( 'modulesReloaded', initialResponse );
 		} );
 	},
@@ -828,6 +869,7 @@ var itsecSettingsPage = {
 			'errors':        [],
 			'warnings':      [],
 			'messages':      [],
+			'infos':		 [],
 			'functionCalls': [],
 			'redirect':      false,
 			'closeModal':    true
@@ -842,6 +884,7 @@ var itsecSettingsPage = {
 			results.errors = a.errors;
 			results.warnings = a.warnings;
 			results.messages = a.messages;
+			results.infos = a.infos;
 			results.functionCalls = a.functionCalls;
 			results.redirect = a.redirect;
 			results.closeModal = a.closeModal;
@@ -934,7 +977,37 @@ var itsecSettingsPage = {
 		}
 		// If the requested parameter doesn't exist, return false
 		return false;
-	}
+	},
+
+	// Make notices dismissible
+	makeNoticesDismissible: function(){
+	jQuery( '.notice.itsec-is-dismissible' ).each( function() {
+		var $el = jQuery( this ),
+			$button = jQuery( '<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>' ),
+			btnText = itsec_page.translations.dismiss || '';
+
+		// Don't rebind twice
+		if ( jQuery( '.notice-dismiss', $el ).length ) {
+			return;
+		}
+
+		// Ensure plain text
+		$button.find( '.screen-reader-text' ).text( btnText );
+		$button.on( 'click.wp-dismiss-notice', function( event ) {
+			event.preventDefault();
+
+			$el.trigger( 'itsec-dismiss-notice' );
+
+			$el.fadeTo( 100, 0, function() {
+				$el.slideUp( 100, function() {
+					$el.remove();
+				});
+			});
+		});
+
+		$el.append( $button );
+	});
+}
 };
 
 jQuery(document).ready(function( $ ) {

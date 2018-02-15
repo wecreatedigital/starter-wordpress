@@ -2,7 +2,7 @@
 
 
 final class ITSEC_Settings_Page {
-	private $version = 1.8;
+	private $version = 2.0;
 
 	private static $instance;
 
@@ -94,7 +94,7 @@ final class ITSEC_Settings_Page {
 		}
 
 		wp_enqueue_script( 'itsec-scrollTo', plugins_url( 'js/scrollTo.js', dirname( __FILE__ ) ), array( 'jquery' ) );
-		wp_enqueue_script( 'itsec-settings-page-script', plugins_url( 'js/script.js', __FILE__ ), array( 'underscore' ), $this->version, true );
+		wp_enqueue_script( 'itsec-settings-page-script', plugins_url( 'js/settings.js', __FILE__ ), array( 'underscore' ), $this->version, true );
 		wp_localize_script( 'itsec-settings-page-script', 'itsec_page', $vars );
 	}
 
@@ -114,25 +114,12 @@ final class ITSEC_Settings_Page {
 			'activate'          => __( 'Enable', 'better-wp-security' ),
 			'deactivate'        => __( 'Disable', 'better-wp-security' ),
 			'error'             => __( 'Error', 'better-wp-security' ),
+			'dismiss'			=> __( 'Dismiss Notice', 'better-wp-security' ), // Screen reader text for dismissible notices
 			'copied'            => __( 'Copied!', 'better-wp-security' ),
 			'copy_instruction'  => __( 'Please press Ctrl/Cmd+C to copy.', 'better-wp-security' ),
 
 			/* translators: 1: module name */
 			'successful_save'   => __( 'Settings saved successfully for %1$s.', 'better-wp-security' ),
-
-			'ajax_invalid'      => new WP_Error( 'itsec-settings-page-invalid-ajax-response', __( 'An "invalid format" error prevented the request from completing as expected. The format of data returned could not be recognized. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_forbidden'    => new WP_Error( 'itsec-settings-page-forbidden-ajax-response: %1$s "%2$s"',  __( 'A "request forbidden" error prevented the request from completing as expected. The server returned a 403 status code, indicating that the server configuration is prohibiting this request. This could be due to a plugin/theme conflict or a server configuration issue. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings or server configuration that could account for this AJAX request being blocked.', 'better-wp-security' ) ),
-
-			'ajax_not_found'    => new WP_Error( 'itsec-settings-page-not-found-ajax-response: %1$s "%2$s"', __( 'A "not found" error prevented the request from completing as expected. The server returned a 404 status code, indicating that the server was unable to find the requested admin-ajax.php file. This could be due to a plugin/theme conflict, a server configuration issue, or an incomplete WordPress installation. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings, alter server configurations, or reinstall WordPress.', 'better-wp-security' ) ),
-
-			'ajax_server_error' => new WP_Error( 'itsec-settings-page-server-error-ajax-response: %1$s "%2$s"', __( 'A "internal server" error prevented the request from completing as expected. The server returned a 500 status code, indicating that the server was unable to complete the request due to a fatal PHP error or a server problem. This could be due to a plugin/theme conflict, a server configuration issue, a temporary hosting issue, or invalid custom PHP modifications. Please check your server\'s error logs for details about the source of the error and contact your hosting company for assistance if required.', 'better-wp-security' ) ),
-
-			'ajax_unknown'      => new WP_Error( 'itsec-settings-page-ajax-error-unknown: %1$s "%2$s"', __( 'An unknown error prevented the request from completing as expected. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_timeout'      => new WP_Error( 'itsec-settings-page-ajax-error-timeout: %1$s "%2$s"', __( 'A timeout error prevented the request from completing as expected. The site took too long to respond. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_parsererror'  => new WP_Error( 'itsec-settings-page-ajax-error-parsererror: %1$s "%2$s"', __( 'A parser error prevented the request from completing as expected. The site sent a response that jQuery could not process. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
 		);
 
 		foreach ( $this->translations as $key => $message ) {
@@ -167,12 +154,21 @@ final class ITSEC_Settings_Page {
 			ITSEC_Response::add_error( new WP_Error( 'itsec-settings-page-missing-method', __( 'The server did not receive a valid request. The required "method" argument is missing. Please try again.', 'better-wp-security' ) ) );
 		} else if ( 'save' === $method ) {
 			$this->handle_post();
+			ITSEC_Response::maybe_flag_new_notifications_available();
 		} else if ( empty( $module ) ) {
 			ITSEC_Response::add_error( new WP_Error( 'itsec-settings-page-missing-module', __( 'The server did not receive a valid request. The required "module" argument is missing. Please try again.', 'better-wp-security' ) ) );
 		} else if ( 'activate' === $method ) {
-			ITSEC_Response::set_response( ITSEC_Modules::activate( $module ) );
+			$was_active = ITSEC_Modules::activate( $module );
+			ITSEC_Response::set_response( $was_active );
+
+			if ( ! $was_active ) {
+				ITSEC_Modules::load_module_file( 'active.php', $module );
+			}
+
+			ITSEC_Response::maybe_flag_new_notifications_available();
 		} else if ( 'deactivate' === $method ) {
 			ITSEC_Response::set_response( ITSEC_Modules::deactivate( $module ) );
+			ITSEC_Response::maybe_flag_new_notifications_available();
 		} else if ( 'is_active' === $method ) {
 			ITSEC_Response::set_response( ITSEC_Modules::is_active( $module ) );
 		} else if ( 'get_refreshed_module_settings' === $method ) {
@@ -310,6 +306,7 @@ final class ITSEC_Settings_Page {
 			return;
 		}
 
+		ITSEC_Response::maybe_flag_new_notifications_available();
 		ITSEC_Response::maybe_regenerate_wp_config();
 		ITSEC_Response::maybe_regenerate_server_config();
 		ITSEC_Response::maybe_do_force_logout();
@@ -543,6 +540,10 @@ final class ITSEC_Settings_Page {
 				if ( $module->pro ) {
 					$classes[] = 'itsec-module-type-pro';
 				}
+
+				if ( 'warning' === $module->status ) {
+					$classes[] = 'itsec-module-status--warning';
+				}
 				?>
 				<li id="itsec-module-card-<?php echo $id; ?>" class="itsec-module-card <?php echo implode( ' ', $classes ); ?>" data-module-id="<?php echo $id; ?>">
 					<div class="itsec-module-card-content">
@@ -579,7 +580,10 @@ final class ITSEC_Settings_Page {
 							</div>
 							<div class="itsec-module-settings-content-container">
 								<div class="itsec-module-settings-content">
-									<h3 class="itsec-modal-header"><?php echo esc_html( $module->title ); ?></h3>
+									<h3 class="itsec-modal-header">
+										<?php echo esc_html( $module->title ); ?>
+										<?php do_action( 'itsec_module_settings_after_title', $id ); ?>
+									</h3>
 									<div class="itsec-module-messages-container"></div>
 									<div class="itsec-module-settings-content-main">
 										<?php $this->get_module_settings( $id, $form, true ); ?>

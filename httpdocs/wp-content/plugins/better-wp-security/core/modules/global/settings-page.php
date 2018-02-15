@@ -84,29 +84,6 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="itsec-global-notification_email"><?php _e( 'Notification Email', 'better-wp-security' ); ?></label></th>
-			<td>
-				<?php $form->add_textarea( 'notification_email', array( 'class' => 'textarea-small' ) ); ?>
-				<p class="description"><?php _e( 'The email address(es) all security notifications will be sent to. One address per line.', 'better-wp-security' ); ?></p>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="itsec-global-digest_email"><?php _e( 'Send Digest Email', 'better-wp-security' ); ?></label></th>
-			<td>
-				<?php $form->add_checkbox( 'digest_email' ); ?>
-				<label for="itsec-global-digest_email"><?php _e( 'Send digest email', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'During periods of heavy attack or other times a security plugin can generate a LOT of email just telling you that it is doing its job. Turning this on will reduce the emails from this plugin to no more than one per day for any notification.', 'better-wp-security' ); ?></p>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="itsec-global-backup_email"><?php _e( 'Backup Delivery Email', 'better-wp-security' ); ?></label></th>
-			<td>
-				<?php $form->add_textarea( 'backup_email', array( 'class' => 'textarea-small' ) ); ?>
-				<br />
-				<p class="description"><?php _e( 'The email address(es) all database backups will be sent to. One address per line.', 'better-wp-security' ); ?></p>
-			</td>
-		</tr>
-		<tr>
 			<th scope="row"><label for="itsec-global-lockout_message"><?php _e( 'Host Lockout Message', 'better-wp-security' ); ?></label></th>
 			<td>
 				<?php $form->add_textarea( 'lockout_message', array( 'class' => 'widefat' ) ); ?>
@@ -181,14 +158,6 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 				</ul>
 				<p><a href="<?php echo esc_url( ITSEC_Lib::get_trace_ip_link() ); ?>" target="_blank" rel="noopener noreferrer"><?php _e( 'Lookup IP Address.', 'better-wp-security' ); ?></a></p>
 				<p class="description"><strong><?php _e( 'This white list will prevent any IP listed from triggering an automatic lockout. You can still block the IP address manually in the banned users settings.', 'better-wp-security' ); ?></strong></p>
-			</td>
-		</tr>
-		<tr>
-			<th scope="row"><label for="itsec-global-email_notifications"><?php _e( 'Email Lockout Notifications', 'better-wp-security' ); ?></label></th>
-			<td>
-				<?php $form->add_checkbox( 'email_notifications' ); ?>
-				<label for="itsec-global-email_notifications"><?php _e( 'Enable Email Lockout Notifications', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'This feature will trigger an email to be sent to the email addresses listed in the Notification Email setting whenever a host or user is locked out of the system.', 'better-wp-security' ); ?></p>
 			</td>
 		</tr>
 		<tr>

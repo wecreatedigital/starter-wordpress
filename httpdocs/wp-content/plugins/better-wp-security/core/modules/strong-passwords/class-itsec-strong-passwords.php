@@ -17,9 +17,7 @@ final class ITSEC_Strong_Passwords {
 	 * @return void
 	 */
 	public function add_scripts() {
-		$module_path = ITSEC_Lib::get_module_path( __FILE__ );
-
-		wp_enqueue_script( 'itsec_strong_passwords', $module_path . 'js/script.js', array( 'jquery' ), ITSEC_Core::get_plugin_build() );
+		wp_enqueue_script( 'itsec_strong_passwords', plugins_url( 'js/script.js', __FILE__ ), array( 'jquery' ), ITSEC_Core::get_plugin_build() );
 	}
 
 	/**

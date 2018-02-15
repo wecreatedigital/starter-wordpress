@@ -48,67 +48,21 @@ final class ITSEC_Hide_Backend_Validator extends ITSEC_Validator {
 
 		if ( $this->settings['enabled'] && $this->settings['slug'] !== $this->previous_settings['slug'] ) {
 			$url = get_site_url() . '/' . $this->settings['slug'];
-			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now active. Your new login URL is <strong><code>%1$s</code></strong>. Please note this may be different than what you sent as the URL was sanitized to meet various requirements. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Global settings.', 'better-wp-security' ), esc_url( $url ) ) );
+			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now active. Your new login URL is <strong><code>%1$s</code></strong>. Please note this may be different than what you sent as the URL was sanitized to meet various requirements. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Notification Center.', 'better-wp-security' ), esc_url( $url ) ) );
 		} else if ( $this->settings['enabled'] && ! $this->previous_settings['enabled'] ) {
 			$url = get_site_url() . '/' . $this->settings['slug'];
-			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now active. Your new login URL is <strong><code>%1$s</code></strong>. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Global settings.', 'better-wp-security' ), esc_url( $url ) ) );
+			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now active. Your new login URL is <strong><code>%1$s</code></strong>. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Notification Center.', 'better-wp-security' ), esc_url( $url ) ) );
 		} else if ( ! $this->settings['enabled'] && $this->previous_settings['enabled'] ) {
 			$url = get_site_url() . '/wp-login.php';
-			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now disabled. Your new login URL is <strong><code>%1$s</code></strong>. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Global settings.', 'better-wp-security' ), esc_url( $url ) ) );
+			ITSEC_Response::add_message( sprintf( __( 'The Hide Backend feature is now disabled. Your new login URL is <strong><code>%1$s</code></strong>. A reminder has also been sent to the notification email addresses set in iThemes Security\'s Notification Center.', 'better-wp-security' ), esc_url( $url ) ) );
 		}
 
 		if ( isset( $url ) ) {
-			$this->send_new_login_url( $url );
 			ITSEC_Response::prevent_modal_close();
 		}
 
 
 		ITSEC_Response::reload_module( $this->get_id() );
-	}
-
-	private function send_new_login_url( $url ) {
-		if ( ITSEC_Core::doing_data_upgrade() ) {
-			// Do not send emails when upgrading data. This prevents spamming users with notifications just because the
-			// data was ported from an old version to a new version.
-			return;
-		}
-
-		$message = '<p>' . __( 'Dear Site Admin,', 'better-wp-security' ) . "</p>\n";
-
-		/* translators: 1: Site name, 2: Site address, 3: New login address */
-		$message .= '<p>' . sprintf( __( 'The login address for %1$s (<code>%2$s</code>) has changed. The new login address is <code>%3$s</code>. You will be unable to use the old login address.', 'better-wp-security' ), get_bloginfo( 'name' ), esc_url( get_site_url() ), esc_url( $url ) ) . "</p>\n";
-
-		if ( defined( 'ITSEC_DEBUG' ) && ITSEC_DEBUG === true ) {
-			$message.= '<p>Debug info (source page): ' . esc_url( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) . "</p>\n";
-		}
-
-		$message = "<html>\n$message</html>\n";
-
-
-		//Setup the remainder of the email
-		$recipients = ITSEC_Modules::get_setting( 'global', 'notification_email' );
-		$subject    = sprintf( __( '[%1$s] WordPress Login Address Changed', 'better-wp-security' ), get_site_url() );
-		$subject    = apply_filters( 'itsec_lockout_email_subject', $subject );
-		$headers    = 'From: ' . get_bloginfo( 'name' ) . ' <' . get_option( 'admin_email' ) . '>' . "\r\n";
-
-		//Use HTML Content type
-		add_filter( 'wp_mail_content_type', array( $this, 'get_html_content_type' ) );
-
-		//Send emails to all recipients
-		foreach ( $recipients as $recipient ) {
-			$recipient = trim( $recipient );
-
-			if ( is_email( $recipient ) ) {
-
-				wp_mail( $recipient, $subject, $message, $headers );
-
-			}
-
-		}
-
-		//Remove HTML Content type
-		remove_filter( 'wp_mail_content_type', array( $this, 'get_html_content_type' ) );
-
 	}
 
 	/**

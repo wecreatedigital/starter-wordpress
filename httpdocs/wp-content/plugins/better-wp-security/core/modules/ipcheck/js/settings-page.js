@@ -20,7 +20,7 @@ jQuery( document ).ready(function ( $ ) {
 
 		$( '#itsec-network-brute-force-reset-status' ).html( '' );
 
-		itsecSettingsPage.sendModuleAJAXRequest( 'network-brute-force', data, function( results ) {
+		itsecUtil.sendModuleAJAXRequest( 'network-brute-force', data, function( results ) {
 			$( '#itsec-network-brute-force-reset-status' ).html( '' );
 
 			if ( true !== results.response ) {

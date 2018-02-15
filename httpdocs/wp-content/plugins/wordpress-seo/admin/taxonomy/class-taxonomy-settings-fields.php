@@ -33,13 +33,6 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 	 */
 	public function get() {
 		$fields = array(
-			'metakey'         => $this->get_field_config(
-				__( 'Meta keywords', 'wordpress-seo' ),
-				esc_html__( 'Meta keywords used on the archive page for this term.', 'wordpress-seo' ),
-				'text',
-				'',
-				$this->options['usemetakeywords'] !== true
-			),
 			'noindex'         => $this->get_field_config(
 				esc_html__( 'Meta robots index', 'wordpress-seo' ),
 				esc_html__( 'This taxonomy follows the indexation rules set under Metas and Titles, you can override it here.', 'wordpress-seo' ),
@@ -71,8 +64,8 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 	/**
 	 * Translate options text strings for use in the select fields
 	 *
-	 * @internal IMPORTANT: if you want to add a new string (option) somewhere, make sure you add
-	 * that array key to the main options definition array in the class WPSEO_Taxonomy_Meta() as well!!!!
+	 * {@internal IMPORTANT: if you want to add a new string (option) somewhere, make sure you add
+	 * that array key to the main options definition array in the class WPSEO_Taxonomy_Meta() as well!!!!}}
 	 */
 	private function translate_meta_options() {
 		$this->no_index_options        = WPSEO_Taxonomy_Meta::$no_index_options;
@@ -95,7 +88,7 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 	 */
 	private function get_noindex_options() {
 		$noindex_options['options']            = $this->no_index_options;
-			$noindex_options['options']['default'] = sprintf( $noindex_options['options']['default'], $this->get_robot_index() );
+		$noindex_options['options']['default'] = sprintf( $noindex_options['options']['default'], $this->get_robot_index() );
 
 		if ( get_option( 'blog_public' ) === 0 ) {
 			$noindex_options['description'] = '<br /><span class="error-message">' . esc_html__( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'wordpress-seo' ) . '</span>';

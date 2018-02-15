@@ -53,6 +53,14 @@ if ( ! class_exists( 'ITSEC_Core_Setup' ) ) {
 			if ( $build < 4069 ) {
 				delete_site_option( 'itsec_free_just_activated' );
 			}
+
+			if ( $build < 4076 ) {
+				$digest = wp_next_scheduled( 'itsec_digest_email' );
+
+				if ( $digest ) {
+					wp_unschedule_event( $digest, 'itsec_digest_email' );
+				}
+			}
 		}
 
 	}

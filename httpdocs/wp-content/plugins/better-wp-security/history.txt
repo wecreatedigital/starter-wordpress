@@ -692,3 +692,32 @@
 	Bug Fix: Fixed SQL query bug that resulted in the "Minutes to Remember Bad Login (check period)" setting being ignored.
 	Bug Fix: Fixed bug that prevents wp-admin/install.php blocking from working properly on nginx servers.
 	Bug Fix: Don't attempt to do an SSL redirect when WP CLI is running.
+6.7.0 - 2017-11-07 - Chris Jean & Timothy Jacobs
+	New Feature: Introduces the Notification Center, a centralized place to manage and customize email notifications sent by iThemes Security.
+	Enhancement: Updated queries and prepare statements to account for changes to the esc_sql() function in WordPress 4.8.3.
+	Bug Fix: Corrected some Javascript and CSS links not generating correctly on Windows servers.
+6.8.0 - 2018-01-10 - Chris Jean & Timothy Jacobs
+	New Feature: Introduces a scheduling framework for handling events. Cron is now used by default, and will switch to using an alternate scheduling system if it detects an error. To disable this detection set ITSEC_DISABLE_CRON_TEST in your wp-config.php file.
+	Important: The ITSEC_FILE_CHECK_CRON and ITSEC_BACKUP_CRON constants have been deprecated. Use ITSEC_USE_CRON instead.
+	Enhancement: Preserve notification settings when the responsible module is deactivated.
+	Bug Fix: Process 404 lockouts on the 'wp' hook to prevent a headers have already been sent warning message.
+	Bug Fix: Ensure Hide Backend emails are properly sent when activating Hide Backend before saving the Notification Center for the first time.
+	Bug Fix: Prevent warning from being issued on new installs by allowing previous settings to be preserved if they exist.
+	Bug Fix: Better handle WP_Error objects in mail errors that occurred before updating to first patch release.
+	Bug Fix: A non static method was being called statically.
+	Bug Fix: Fix occasional duplicate backups and file scans.
+	Bug Fix: Fixed issue where scheduled events could repeat on sites that do not properly support WordPress's cron system.
+	Bug Fix: Reactivating Away Mode now replaces the active file if you had previously removed it.
+	Bug Fix: Ensure lockouts take effect immediately, even on systems where changes to server configuration files do not take effect immediately.
+6.8.1 - 2017-01-29 - Chris Jean & Timothy Jacobs
+	Enhancement: Display user lockouts in Lockout Sidebar.
+	Bug Fix: Load translations on the plugins_loaded hook.
+	Bug Fix: Fixed method that could be used to discover hidden login slug on some sites.
+	Bug Fix: Fixed issue that could prevent Sync from loading Malware Scan results if a scan previously failed.
+	Bug Fix: Update to the REST API "Restricted Access" feature to protect against methods to work around the restricted access.
+	Bug Fix: Prevent login page being hidden when following the "Confirm Email Address" notification URL.
+	Bug Fix: Hide Backend notifications not being properly sent when first enabled.
+6.9.0 - 2018-02-12 - Chris Jean & Timothy Jacobs
+	Enhancement: Updated logging system to keep track of more information and have more options to filter and sort log entries.
+	Enhancement: Improved efficiency of File Change Detection scanning.
+	Bug Fix: Fixed issue that could register loading the logging page as a failed login attempt on some sites.

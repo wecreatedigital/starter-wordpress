@@ -104,6 +104,14 @@ abstract class ITSEC_Validator {
 		}
 	}
 
+	final protected function preserve_setting_if_exists( $vars ) {
+		foreach ( (array) $vars as $var ) {
+			if ( array_key_exists( $var, $this->previous_settings ) && ( ! isset( $this->settings['var'] ) || '' === $this->settings[ $var ] ) ) {
+				$this->settings[ $var ] = $this->previous_settings[ $var ];
+			}
+		}
+	}
+
 	final protected function sanitize_setting( $type, $var, $name, $prevent_save_on_error = true, $trim_value = true ) {
 		$id = $this->get_id();
 

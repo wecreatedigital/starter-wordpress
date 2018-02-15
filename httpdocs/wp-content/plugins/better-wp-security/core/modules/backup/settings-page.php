@@ -142,16 +142,14 @@ final class ITSEC_Backup_Settings_Page extends ITSEC_Module_Settings_Page {
 				<label for="itsec-backup-enabled"><?php _e( 'Enable Scheduled Database Backups', 'better-wp-security' ); ?></label>
 			</td>
 		</tr>
-		<?php if ( ! defined( 'ITSEC_BACKUP_CRON' ) || ! ITSEC_BACKUP_CRON ) : ?>
-			<tr class="itsec-backup-enabled-content">
-				<th scope="row"><label for="itsec-backup-interval"><?php _e( 'Backup Interval', 'better-wp-security' ); ?></label></th>
-				<td>
-					<?php $form->add_text( 'interval', array( 'class' => 'small-text' ) ); ?>
-					<label for="itsec-backup-interval"><?php _e( 'Days', 'better-wp-security' ); ?></label>
-					<p class="description"><?php _e( 'The number of days between database backups.', 'better-wp-security' ); ?></p>
-				</td>
-			</tr>
-		<?php endif; ?>
+		<tr class="itsec-backup-enabled-content">
+			<th scope="row"><label for="itsec-backup-interval"><?php _e( 'Backup Interval', 'better-wp-security' ); ?></label></th>
+			<td>
+				<?php $form->add_text( 'interval', array( 'class' => 'small-text' ) ); ?>
+				<label for="itsec-backup-interval"><?php _e( 'Days', 'better-wp-security' ); ?></label>
+				<p class="description"><?php _e( 'The number of days between database backups.', 'better-wp-security' ); ?></p>
+			</td>
+		</tr>
 	</table>
 <?php
 

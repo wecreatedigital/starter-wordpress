@@ -6,7 +6,7 @@
 /**
  * Class WPSEO_Sitemaps
  *
- * TODO This class could use a general description with some explanation on sitemaps. OR.
+ * @todo This class could use a general description with some explanation on sitemaps. OR.
  */
 class WPSEO_Sitemaps {
 
@@ -91,7 +91,7 @@ class WPSEO_Sitemaps {
 	 */
 	public function init_sitemaps_providers() {
 
-		$this->providers   = array(
+		$this->providers = array(
 			new WPSEO_Post_Type_Sitemap_Provider(),
 			new WPSEO_Taxonomy_Sitemap_Provider(),
 			new WPSEO_Author_Sitemap_Provider(),
@@ -118,7 +118,7 @@ class WPSEO_Sitemaps {
 		$request_uri = $_SERVER['REQUEST_URI'];
 		$extension   = substr( $request_uri, -4 );
 
-		if ( false !== stripos( $request_uri, 'sitemap' ) && in_array( $extension, array( '.xml', '.xsl' ) ) ) {
+		if ( false !== stripos( $request_uri, 'sitemap' ) && in_array( $extension, array( '.xml', '.xsl' ), true ) ) {
 			remove_all_actions( 'widgets_init' );
 		}
 	}
@@ -207,6 +207,13 @@ class WPSEO_Sitemaps {
 		$xsl = get_query_var( 'xsl' );
 
 		if ( ! empty( $xsl ) ) {
+			/*
+			 * This is a method to provide the XSL via the home_url.
+			 * Needed when the site_url and home_url are not the same.
+			 * Loading the XSL needs to come from the same domain, protocol and port as the XML.
+			 *
+			 * Whenever home_url and site_url are the same, the file can be loaded directly.
+			 */
 			$this->xsl_output( $xsl );
 			$this->sitemap_close();
 
@@ -393,7 +400,7 @@ class WPSEO_Sitemaps {
 		header( 'Cache-Control: maxage=' . $expires );
 		header( 'Expires: ' . gmdate( 'D, d M Y H:i:s', ( time() + $expires ) ) . ' GMT' );
 
-		require_once( WPSEO_PATH . 'css/xml-sitemap-xsl.php' );
+		readfile( WPSEO_PATH . 'css/main-sitemap.xsl' );
 	}
 
 	/**
@@ -428,7 +435,7 @@ class WPSEO_Sitemaps {
 	 *
 	 * @return string|array|false
 	 */
-	static public function get_last_modified_gmt( $post_types, $return_all = false ) {
+	public static function get_last_modified_gmt( $post_types, $return_all = false ) {
 
 		global $wpdb;
 
@@ -447,26 +454,30 @@ class WPSEO_Sitemaps {
 
 		if ( is_null( $post_type_dates ) ) {
 
-			$sql = "
+			$post_type_dates = array();
+
+			// Consider using WPSEO_Post_Type::get_accessible_post_types() to filter out any `no-index` post-types.
+			$post_type_names = get_post_types( array( 'public' => true ) );
+
+			if ( ! empty( $post_type_names ) ) {
+				$sql = "
 				SELECT post_type, MAX(post_modified_gmt) AS date
 				FROM $wpdb->posts
 				WHERE post_status IN ('publish','inherit')
-					AND post_type IN ('" . implode( "','", get_post_types( array( 'public' => true ) ) ) . "')
+					AND post_type IN ('" . implode( "','", $post_type_names ) . "')
 				GROUP BY post_type
 				ORDER BY post_modified_gmt DESC
 			";
 
-			$post_type_dates = array();
-
-			foreach ( $wpdb->get_results( $sql ) as $obj ) {
-				$post_type_dates[ $obj->post_type ] = $obj->date;
+				foreach ( $wpdb->get_results( $sql ) as $obj ) {
+					$post_type_dates[ $obj->post_type ] = $obj->date;
+				}
 			}
 		}
 
 		$dates = array_intersect_key( $post_type_dates, array_flip( $post_types ) );
 
 		if ( count( $dates ) > 0 ) {
-
 			if ( $return_all ) {
 				return $dates;
 			}
@@ -558,7 +569,7 @@ class WPSEO_Sitemaps {
 	 *
 	 * @return mixed|void
 	 */
-	static public function filter_frequency( $filter, $default, $url ) {
+	public static function filter_frequency( $filter, $default, $url ) {
 		_deprecated_function( __METHOD__, 'WPSEO 3.5' );
 
 		/**
@@ -577,7 +588,7 @@ class WPSEO_Sitemaps {
 			'monthly',
 			'yearly',
 			'never',
-		) )
+		), true )
 		) {
 			$change_freq = $default;
 		}

@@ -42,11 +42,10 @@ class WP_Super_Cache_Rest_Get_Settings extends WP_REST_Controller {
 				$settings[ $name ] = get_option( $map['option'] );
 
 			} elseif ( isset( $map['global'] ) ) {
-				$global_var = $map['global'];
-				if ( false == isset( $$global_var ) ) {
+				if ( false == isset( $GLOBALS[ $map[ 'global' ] ] ) ) {
 					$settings[ $name ] = false;
 				} else {
-					$settings[ $name ] = $$global_var;
+					$settings[ $name ] = $GLOBALS[ $map[ 'global' ] ];
 				}
 			}
 		}
@@ -160,7 +159,7 @@ class WP_Super_Cache_Rest_Get_Settings extends WP_REST_Controller {
 	 * @return int
 	 */
 	protected function get_is_preload_active() {
-		if ( wp_next_scheduled( 'wp_cache_preload_hook' ) || wp_next_scheduled( 'wp_cache_full_preload_hook' ) ) { 
+		if ( wp_next_scheduled( 'wp_cache_preload_hook' ) || wp_next_scheduled( 'wp_cache_full_preload_hook' ) ) {
 			return true;
 		} else {
 			return false;

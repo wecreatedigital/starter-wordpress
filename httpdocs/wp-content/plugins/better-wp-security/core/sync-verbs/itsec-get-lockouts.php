@@ -9,9 +9,10 @@ class Ithemes_Sync_Verb_ITSEC_Get_Lockouts extends Ithemes_Sync_Verb {
 
 	public function run( $arguments ) {
 
+		/** @var ITSEC_Lockout $itsec_lockout */
 		global $itsec_lockout;
 
-		$lockouts = $itsec_lockout->get_lockouts( 'all', true ); //Gets all lockouts, host and user
+		$lockouts = $itsec_lockout->get_lockouts(); //Gets all lockouts, host and user
 
 		//Send the user name or false
 		foreach ( $lockouts as $key => $lockout ) {

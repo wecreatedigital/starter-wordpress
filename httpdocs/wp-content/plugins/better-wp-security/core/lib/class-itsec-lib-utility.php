@@ -189,5 +189,28 @@ if ( ! class_exists( 'ITSEC_Lib_Utility' ) ) {
 
 			return $contents;
 		}
+
+		/**
+		 * Check if an array is associative.
+		 *
+		 * @param array $array
+		 *
+		 * @return bool
+		 */
+		public static function is_associative_array( $array ) {
+			if ( ! is_array( $array ) || empty( $array ) ) {
+				return false;
+			}
+
+			$next = 0;
+
+			foreach ( $array as $k => $v ) {
+				if ( $k !== $next ++ ) {
+					return true;
+				}
+			}
+
+			return false;
+		}
 	}
 }

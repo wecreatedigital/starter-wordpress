@@ -47,6 +47,14 @@ if ( filter_input( INPUT_POST, 'import' ) || filter_input( INPUT_GET, 'import' )
 	if ( ! empty( $post_wpseo['importwpseo'] ) || filter_input( INPUT_GET, 'importwpseo' ) ) {
 		$import = new WPSEO_Import_WPSEO( $replace );
 	}
+
+	if ( ! empty( $post_wpseo['importseoultimate'] ) || filter_input( INPUT_GET, 'importseoultimate' ) ) {
+		$import = new WPSEO_Import_Ultimate_SEO( $replace );
+	}
+
+	if ( ! empty( $post_wpseo['importseopressor'] ) || filter_input( INPUT_GET, 'importseopressor' ) ) {
+		$import = new WPSEO_Import_SEOPressor( $replace );
+	}
 }
 
 if ( isset( $_FILES['settings_import_file'] ) ) {
@@ -70,13 +78,13 @@ if ( $import ) {
 	 */
 	$msg = apply_filters( 'wpseo_import_message', isset( $import->msg ) ? $import->msg : '' );
 
-	if ( $msg != '' ) {
+	if ( ! empty( $msg ) ) {
 		// Check if we've deleted old data and adjust message to match it.
 		if ( $replace ) {
 			$msg .= ' ' . __( 'The old data of the imported plugin was deleted successfully.', 'wordpress-seo' );
 		}
 
-		$status = ( $import->success ) ? 'updated' : 'error';
+		$status = ( ! empty( $import->success ) ) ? 'updated' : 'error';
 
 		echo '<div id="message" class="message ', $status, '"><p>', $msg, '</p></div>';
 	}
@@ -102,7 +110,7 @@ $tabs = array(
 
 	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
 		<?php foreach ( $tabs as $identifier => $tab ) : ?>
-			<a class="nav-tab" id="<?php echo $identifier; ?>-tab" href="#top#<?php echo $identifier; ?>"><?php echo $tab['label']; ?></a>
+			<a class="nav-tab" id="<?php echo esc_attr( $identifier . '-tab' ); ?>" href="<?php echo esc_url( '#top#' . $identifier ); ?>"><?php echo esc_html( $tab['label'] ); ?></a>
 		<?php endforeach; ?>
 
 		<?php
@@ -114,22 +122,27 @@ $tabs = array(
 	</h2>
 
 <?php
+
+$helpcenter_tabs = new WPSEO_Option_Tabs( '', '' );
+
 foreach ( $tabs as $identifier => $tab ) {
-
-	printf( '<div id="%s" class="wpseotab">', $identifier );
-
 	if ( ! empty( $tab['screencast_video_url'] ) ) {
 		$tab_video_url = $tab['screencast_video_url'];
 
 		$helpcenter_tab = new WPSEO_Option_Tab( $identifier, $tab['label'],
 			array( 'video_url' => $tab['screencast_video_url'] ) );
-
-		$helpcenter = new WPSEO_Help_Center( $identifier, $helpcenter_tab );
-		$helpcenter->output_help_center();
 	}
 
-	require_once WPSEO_PATH . 'admin/views/tabs/tool/' . $identifier . '.php';
+	$helpcenter_tabs->add_tab( $helpcenter_tab );
+}
 
+$helpcenter = new WPSEO_Help_Center( '', $helpcenter_tabs, WPSEO_Utils::is_yoast_seo_premium() );
+$helpcenter->localize_data();
+$helpcenter->mount();
+
+foreach ( $tabs as $identifier => $tab ) {
+	printf( '<div id="%s" class="wpseotab">', esc_attr( $identifier ) );
+	require_once WPSEO_PATH . 'admin/views/tabs/tool/' . $identifier . '.php';
 	echo '</div>';
 }
 

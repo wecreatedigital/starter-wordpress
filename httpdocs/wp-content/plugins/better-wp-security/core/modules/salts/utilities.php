@@ -1,7 +1,7 @@
 <?php
 
 final class ITSEC_WordPress_Salts_Utilities {
-	public function generate_new_salts() {
+	public static function generate_new_salts() {
 		if ( ! ITSEC_Modules::get_setting( 'global', 'write_files' ) ) {
 			return new WP_Error( 'itsec-wordpress-salts-utilities-write-files-disabled', __( 'The "Write to Files" setting is disabled in Global Settings. In order to use this feature, you must enable the "Write to Files" setting.', 'better-wp-security' ) );
 		}
@@ -38,12 +38,12 @@ final class ITSEC_WordPress_Salts_Utilities {
 			if ( empty( $salt ) ) {
 				$salt = wp_generate_password( 64, true, true );
 			}
-			
+
 			$salt = str_replace( '$', '\\$', $salt );
 			$regex = "/(define\s*\(\s*(['\"])$define\\2\s*,\s*)(['\"]).+?\\3(\s*\)\s*;)/";
 			$config = preg_replace( $regex, "\${1}'$salt'\${4}", $config );
 		}
-		
+
 		$write_result = ITSEC_Lib_File::write( $config_file_path, $config );
 		
 		if ( is_wp_error( $write_result ) ) {

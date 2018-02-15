@@ -18,13 +18,22 @@ final class ITSEC_File_Change_Settings extends ITSEC_Settings {
 				'.mo',
 				'.po'
 			),
-			'email'          => true,
 			'notify_admin'   => true,
 			'last_run'       => 0,
 			'last_chunk'     => false,
 			'show_warning'   => false,
 			'latest_changes' => array(),
 		);
+	}
+
+	protected function handle_settings_changes( $old_settings ) {
+		$split = isset( $old_settings['split'] ) ? $old_settings['split'] : false;
+
+		if ( $split !== $this->settings['split'] ) {
+			ITSEC_Core::get_scheduler()->unschedule( 'file-change' );
+			$interval = $this->settings['split'] ? ITSEC_Scheduler::S_FOUR_DAILY : ITSEC_Scheduler::S_DAILY;
+			ITSEC_Core::get_scheduler()->schedule( $interval, 'file-change' );
+		}
 	}
 }
 

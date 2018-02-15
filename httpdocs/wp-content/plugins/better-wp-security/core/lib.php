@@ -52,84 +52,14 @@ final class ITSEC_Lib {
 	/**
 	 * Creates appropriate database tables.
 	 *
-	 * Uses dbdelta to create database tables either on activation or in the event that one is missing.
-	 *
 	 * @since 4.0.0
 	 *
 	 * @return void
 	 */
 	public static function create_database_tables() {
+		require_once( ITSEC_Core::get_core_dir() . '/lib/schema.php' );
 
-		global $wpdb;
-
-		$charset_collate = '';
-
-		if ( ! empty( $wpdb->charset ) ) {
-			$charset_collate = "DEFAULT CHARACTER SET $wpdb->charset";
-		}
-
-		if ( ! empty( $wpdb->collate ) ) {
-			$charset_collate .= " COLLATE $wpdb->collate";
-		}
-
-		//Set up log table
-		$tables = "CREATE TABLE " . $wpdb->base_prefix . "itsec_log (
-				log_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-				log_type varchar(20) NOT NULL DEFAULT '',
-				log_function varchar(255) NOT NULL DEFAULT '',
-				log_priority int(2) NOT NULL DEFAULT 1,
-				log_date datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
-				log_date_gmt datetime NOT NULL DEFAULT '1000-01-01 00:00:00',
-				log_host varchar(40),
-				log_username varchar(60),
-				log_user bigint(20) UNSIGNED,
-				log_url varchar(255),
-				log_referrer varchar(255),
-				log_data longtext NOT NULL,
-				PRIMARY KEY  (log_id),
-				KEY log_type (log_type),
-				KEY log_date_gmt (log_date_gmt)
-				) " . $charset_collate . ";";
-
-		//set up lockout table
-		$tables .= "CREATE TABLE " . $wpdb->base_prefix . "itsec_lockouts (
-				lockout_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-				lockout_type varchar(20) NOT NULL,
-				lockout_start datetime NOT NULL,
-				lockout_start_gmt datetime NOT NULL,
-				lockout_expire datetime NOT NULL,
-				lockout_expire_gmt datetime NOT NULL,
-				lockout_host varchar(40),
-				lockout_user bigint(20) UNSIGNED,
-				lockout_username varchar(60),
-				lockout_active int(1) NOT NULL DEFAULT 1,
-				PRIMARY KEY  (lockout_id),
-				KEY lockout_expire_gmt (lockout_expire_gmt),
-				KEY lockout_host (lockout_host),
-				KEY lockout_user (lockout_user),
-				KEY lockout_username (lockout_username),
-				KEY lockout_active (lockout_active)
-				) " . $charset_collate . ";";
-
-		//set up temp table
-		$tables .= "CREATE TABLE " . $wpdb->base_prefix . "itsec_temp (
-				temp_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-				temp_type varchar(20) NOT NULL,
-				temp_date datetime NOT NULL,
-				temp_date_gmt datetime NOT NULL,
-				temp_host varchar(40),
-				temp_user bigint(20) UNSIGNED,
-				temp_username varchar(60),
-				PRIMARY KEY  (temp_id),
-				KEY temp_date_gmt (temp_date_gmt),
-				KEY temp_host (temp_host),
-				KEY temp_user (temp_user),
-				KEY temp_username (temp_username)
-				) " . $charset_collate . ";";
-
-		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-		@dbDelta( $tables );
-
+		ITSEC_Schema::create_database_tables();
 	}
 
 	/**
@@ -145,42 +75,6 @@ final class ITSEC_Lib {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-config-file.php' );
 
 		return ITSEC_Lib_Config_File::get_wp_config_file_path();
-	}
-
-	/**
-	 * Gets current url
-	 *
-	 * Finds and returns current url.
-	 *
-	 * @since 4.3.0
-	 *
-	 * @return string current url
-	 * */
-	public static function get_current_url() {
-
-		$page_url = 'http';
-
-		if ( isset( $_SERVER["HTTPS"] ) ) {
-
-			if ( 'on' == $_SERVER["HTTPS"] ) {
-				$page_url .= "s";
-			}
-
-		}
-
-		$page_url .= "://";
-
-		if ( '80' != $_SERVER["SERVER_PORT"] ) {
-
-			$page_url .= $_SERVER["SERVER_NAME"] . ":" . $_SERVER["SERVER_PORT"] . $_SERVER["REQUEST_URI"];
-
-		} else {
-
-			$page_url .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"];
-
-		}
-
-		return esc_url( $page_url );
 	}
 
 	/**
@@ -393,43 +287,6 @@ final class ITSEC_Lib {
 	}
 
 	/**
-	 * Gets PHP Memory Limit.
-	 *
-	 * Attempts to get the maximum amount of memory allowed for the application by the server.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return int php memory limit in megabytes
-	 */
-	public static function get_memory_limit() {
-
-		return (int) ini_get( 'memory_limit' );
-
-	}
-
-	/**
-	 * Returns the URL of the current module.
-	 *
-	 * Get's the full URL of the current module.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param string $file the module file from which to derive the path
-	 *
-	 * @return string the path of the current module
-	 */
-	public static function get_module_path( $file ) {
-
-		$path = str_replace( ITSEC_Core::get_plugin_dir(), '', dirname( $file ) );
-		$path = ltrim( str_replace( '\\', '/', $path ), '/' );
-
-		$url_base = trailingslashit( plugin_dir_url( ITSEC_Core::get_plugin_file() ) );
-
-		return trailingslashit( $url_base . $path );
-
-	}
-
-	/**
 	 * Returns the server type of the plugin user.
 	 *
 	 * Attempts to figure out what http server the visiting user is running.
@@ -442,63 +299,6 @@ final class ITSEC_Lib {
 		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-utility.php' );
 
 		return ITSEC_Lib_Utility::get_web_server();
-	}
-
-	/**
-	 * Determine whether the server supports SSL (shared cert not supported.
-	 *
-	 * Attempts to retrieve an HTML version of the homepage in an effort to determine if SSL is available.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return bool true if ssl is supported or false
-	 */
-	public static function get_ssl() {
-
-		$url = str_ireplace( 'http://', 'https://', get_bloginfo( 'url' ) );
-
-		if ( function_exists( 'wp_http_supports' ) && wp_http_supports( array( 'ssl' ), $url ) ) {
-
-			return true;
-
-		} elseif ( function_exists( 'curl_init' ) ) {
-
-			//use a manual CURL request to better account for self-signed certificates
-			$timeout    = 5; //timeout for the request
-			$site_title = trim( get_bloginfo() );
-
-			$request = curl_init();
-
-			curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $request, CURLOPT_VERBOSE, false );
-			curl_setopt( $request, CURLOPT_SSL_VERIFYPEER, false );
-			curl_setopt( $request, CURLOPT_HEADER, true );
-			curl_setopt( $request, CURLOPT_URL, $url );
-			curl_setopt( $request, CURLOPT_RETURNTRANSFER, true );
-			curl_setopt( $request, CURLOPT_CONNECTTIMEOUT, $timeout );
-
-			$data = curl_exec( $request );
-
-			$header_size = curl_getinfo( $request, CURLINFO_HEADER_SIZE );
-			$http_code   = intval( curl_getinfo( $request, CURLINFO_HTTP_CODE ) );
-			$body        = substr( $data, $header_size );
-
-			preg_match( '/<title>(.+)<\/title>/', $body, $matches );
-
-			if ( 200 == $http_code && isset( $matches[1] ) && false !== strpos( $matches[1], $site_title ) ) {
-
-				return true;
-
-			} else {
-
-				return false;
-
-			}
-
-		}
-
-		return false;
-
 	}
 
 	public static function get_whitelisted_ips() {
@@ -589,21 +389,6 @@ final class ITSEC_Lib {
 		}
 
 		return false;
-	}
-
-	/**
-	 * Determine whether we're on the login page or not.
-	 *
-	 * Attempts to determine whether or not the user is on the WordPress dashboard login page.
-	 *
-	 * @since 4.0.0
-	 *
-	 * @return bool true if is login page else false
-	 */
-	public static function is_login_page() {
-
-		return in_array( $GLOBALS['pagenow'], array( 'wp-login.php', 'wp-register.php' ) );
-
 	}
 
 	/**
@@ -724,7 +509,7 @@ final class ITSEC_Lib {
 		}
 
 		//queary the user table to see if the user is there
-		$saved_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM `" . $wpdb->users . "` WHERE ID='%s';", sanitize_text_field( $user_id ) ) );
+		$saved_id = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM `" . $wpdb->users . "` WHERE ID= %d;", $user_id ) );
 
 		if ( $saved_id == $user_id ) {
 
@@ -735,96 +520,6 @@ final class ITSEC_Lib {
 			return false;
 
 		}
-
-	}
-
-	/**
-	 * Validates a file path
-	 *
-	 * Adapted from http://stackoverflow.com/questions/4049856/replace-phps-realpath/4050444#4050444 as a replacement for PHP's realpath
-	 *
-	 * @since 4.0.0
-	 *
-	 * @param string $path The original path, can be relative etc.
-	 *
-	 * @return bool true if the path is valid and writeable else false
-	 */
-	public static function validate_path( $path ) {
-
-		// whether $path is unix or not
-		$unipath = strlen( $path ) == 0 || $path{0} != '/';
-
-		// attempts to detect if path is relative in which case, add cwd
-		if ( false === strpos( $path, ':' ) && $unipath ) {
-			$path = getcwd() . DIRECTORY_SEPARATOR . $path;
-		}
-
-		// resolve path parts (single dot, double dot and double delimiters)
-		$path      = str_replace( array( '/', '\\' ), DIRECTORY_SEPARATOR, $path );
-		$parts     = array_filter( explode( DIRECTORY_SEPARATOR, $path ), 'strlen' );
-		$absolutes = array();
-
-		foreach ( $parts as $part ) {
-
-			if ( '.' == $part ) {
-				continue;
-			}
-
-			if ( '..' == $part ) {
-
-				array_pop( $absolutes );
-
-			} else {
-
-				$absolutes[] = $part;
-
-			}
-
-		}
-
-		$path = implode( DIRECTORY_SEPARATOR, $absolutes );
-
-		// resolve any symlinks
-		if ( function_exists( 'linkinfo' ) ) { //linkinfo not available on Windows with PHP < 5.3.0
-
-			if ( file_exists( $path ) && 0 < linkinfo( $path ) ) {
-				$path = @readlink( $path );
-			}
-
-		} else {
-
-			if ( file_exists( $path ) && 0 < linkinfo( $path ) ) {
-				$path = @readlink( $path );
-			}
-
-		}
-
-		// put initial separator that could have been lost
-		$path = ! $unipath ? '/' . $path : $path;
-
-		$test = @touch( $path . '/test.txt' );
-		@unlink( $path . '/test.txt' );
-
-		return $test;
-
-	}
-
-	/**
-	 * Validates a URL
-	 *
-	 * Ensures the provided URL is a valid URL.
-	 *
-	 * @since 4.3.0
-	 *
-	 * @param string $url the url to validate
-	 *
-	 * @return bool true if valid url else false
-	 */
-	public static function validate_url( $url ) {
-
-		$pattern = "/^(http|https|ftp):\/\/([A-Z0-9][A-Z0-9_-]*(?:\.[A-Z0-9][A-Z0-9_-]*)+):?(\d+)?\/?/i";
-
-		return (bool) preg_match( $pattern, $url );
 
 	}
 
@@ -938,6 +633,12 @@ final class ITSEC_Lib {
 	 * @param string $username
 	 */
 	public static function handle_wp_login_failed( $username ) {
+		$details = self::get_login_details();
+
+		do_action( 'itsec-handle-failed-login', $username, $details );
+	}
+
+	public static function get_login_details() {
 		$authentication_types = array();
 
 		if ( isset( $_SERVER['HTTP_AUTHORIZATION'] ) ) {
@@ -974,9 +675,8 @@ final class ITSEC_Lib {
 		}
 
 		$details = compact( 'source', 'authentication_types' );
-		$details = apply_filters( 'itsec-filter-failed-login-details', $details );
 
-		do_action( 'itsec-handle-failed-login', $username, $details );
+		return apply_filters( 'itsec-filter-failed-login-details', $details );
 	}
 
 	/**
@@ -1238,5 +938,139 @@ final class ITSEC_Lib {
 		}
 
 		return apply_filters( 'itsec-ssl-support-probability', $probability );
+	}
+
+	/**
+	 * Format a date using date_i18n and convert the time from GMT to local.
+	 *
+	 * @author Modified from ticket #25331
+	 *
+	 * @param int    $timestamp
+	 * @param string $format Specify the format. If blank, will default to the date and time format settings.
+	 *
+	 * @return string
+	 */
+	public static function date_format_i18n_and_local_timezone( $timestamp, $format = '' ) {
+
+		if ( ! $format ) {
+			$format = get_option( 'date_format' ) . ' ' . get_option( 'time_format' );
+		}
+
+		return date_i18n( $format, strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $timestamp ) ) ) );
+	}
+
+	/**
+	 * Get the value of an option directly from the database, bypassing any caching.
+	 *
+	 * @param string $option
+	 *
+	 * @return array|mixed
+	 */
+	public static function get_uncached_option( $option ) {
+		/** @var $wpdb \wpdb */
+		global $wpdb;
+
+		$storage = array();
+
+		if ( is_multisite() ) {
+			$network_id = get_current_site()->id;
+			$row        = $wpdb->get_row( $wpdb->prepare( "SELECT meta_value FROM $wpdb->sitemeta WHERE meta_key = %s AND site_id = %d", $option, $network_id ) );
+
+			if ( is_object( $row ) ) {
+				$storage = maybe_unserialize( $row->meta_value );
+			}
+		} else {
+			$row = $wpdb->get_row( $wpdb->prepare( "SELECT option_value FROM $wpdb->options WHERE option_name = %s LIMIT 1", $option ) );
+
+			if ( is_object( $row ) ) {
+				$storage = maybe_unserialize( $row->option_value );
+			}
+		}
+
+		return $storage;
+	}
+
+	public static function array_get( $array, $key, $default = null ) {
+
+		if ( ! is_array( $array ) ) {
+			return $default;
+		}
+
+		if ( null === $key ) {
+			return $array;
+		}
+
+		if ( isset( $array[ $key ] ) ) {
+			return $array[ $key ];
+		}
+
+		if ( strpos( $key, '.' ) === false ) {
+			return isset( $array[ $key ] ) ? $array[ $key ] : $default;
+		}
+
+		foreach ( explode( '.', $key ) as $segment ) {
+			if ( is_array( $array ) && isset( $array[ $segment ] ) ) {
+				$array = $array[ $segment ];
+			} else {
+				return $default;
+			}
+		}
+
+		return $array;
+	}
+
+	public static function print_r( $data, $args = array() ) {
+		require_once( ITSEC_Core::get_core_dir() . '/lib/debug.php' );
+
+		ITSEC_Debug::print_r( $data, $args );
+	}
+
+	public static function get_print_r( $data, $args = array() ) {
+		require_once( ITSEC_Core::get_core_dir() . '/lib/debug.php' );
+
+		return ITSEC_Debug::get_print_r( $data, $args );
+	}
+
+	/**
+	 * Check if WP Cron appears to be running properly.
+	 *
+	 * @return bool
+	 */
+	public static function is_cron_working() {
+		$working = ITSEC_Modules::get_setting( 'global', 'cron_status' );
+
+		return $working === 1;
+	}
+
+	/**
+	 * Should we be using Cron.
+	 *
+	 * @return bool
+	 */
+	public static function use_cron() {
+		return ITSEC_Modules::get_setting( 'global', 'use_cron' );
+	}
+
+	/**
+	 * Schedule a test to see if a user should be suggested to enable the Cron scheduler.
+	 */
+	public static function schedule_cron_test() {
+
+		if ( defined( 'ITSEC_DISABLE_CRON_TEST' ) && ITSEC_DISABLE_CRON_TEST ) {
+			return;
+		}
+
+		$crons = _get_cron_array();
+
+		foreach ( $crons as $timestamp => $cron ) {
+			if ( isset( $cron['itsec_cron_test'] ) ) {
+				return;
+			}
+		}
+
+		// Get a random time in the next 6-18 hours on a random minute.
+		$time = ITSEC_Core::get_current_time_gmt() + mt_rand( 6, 18 ) * HOUR_IN_SECONDS + mt_rand( 1, 60 ) * MINUTE_IN_SECONDS;
+		wp_schedule_single_event( $time, 'itsec_cron_test', array( $time ) );
+		ITSEC_Modules::set_setting( 'global', 'cron_test_time', $time );
 	}
 }

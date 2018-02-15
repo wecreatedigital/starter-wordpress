@@ -126,14 +126,6 @@ final class ITSEC_File_Change_Settings_Page extends ITSEC_Module_Settings_Page {
 			</td>
 		</tr>
 		<tr>
-			<th scope="row"><label for="itsec-file-change-email"><?php _e( 'Email File Change Notifications', 'better-wp-security' ); ?></label></th>
-			<td>
-				<?php $form->add_checkbox( 'email' ); ?>
-				<label for="itsec-file-change-email"><?php _e( 'Email file change notifications', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'Notifications will be sent to all emails set to receive notifications on the global settings page.', 'better-wp-security' ); ?></p>
-			</td>
-		</tr>
-		<tr>
 			<th scope="row"><label for="itsec-file-change-notify_admin"><?php _e( 'Display File Change Admin Warning', 'better-wp-security' ); ?></label></th>
 			<td>
 				<?php $form->add_checkbox( 'notify_admin' ); ?>

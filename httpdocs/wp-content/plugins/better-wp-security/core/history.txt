@@ -579,3 +579,62 @@
 	Bug Fix: Fixed SQL query bug that resulted in the "Minutes to Remember Bad Login (check period)" setting being ignored.
 	Bug Fix: Fixed bug that prevents wp-admin/install.php blocking from working properly on nginx servers.
 	Bug Fix: Don't attempt to do an SSL redirect when WP CLI is running.
+3.9.0 - 2017-10-25 - Chris Jean, Timothy Jacobs and Saylor Bullington
+	New Feature: Introduces the Notification Center, a centralized place to manage and customize email notifications sent by iThemes Security.
+	Bug Fix: Corrected some Javascript and CSS links not generating correctly on Windows servers.
+3.9.1 - 2017-10-26 - Chris Jean & Timothy Jacobs
+	Bug Fix: Only enable the Lockout email notification is the Daily Digest was previously disabled.
+	Bug Fix: Fix JavaScript error when loading the Notification Center on some systems.
+	Bug Fix: Don't store WP Error objects for mail errors preventing a fatal error for rare PHPMailer errors.
+	Bug Fix: Prevent error on upgrade warning the subject line was empty.
+	Bug Fix: Ensure file change notification is properly enabled/disabled on upgrade.
+	Bug Fix: Fallback to correct default subject lines.
+	Bug Fix: Don't enable all administrators as the recipients for emails where all custom email addresses did not have corresponding users.
+	Upgrade Routine: Properly enable lockout and file change notifications, uncheck all administrators as recipients when necessary.
+3.9.2 - 2017-11-01 - Chris Jean & Timothy Jacobs
+	Enhancement: Updated queries and prepare statements to account for changes to the esc_sql() function in WordPress 4.8.3.
+	Bug Fix: Fixed the File Change module being incorrectly enabled when upgrading.
+3.9.3 - 2017-11-02 - Chris Jean & Timothy Jacobs
+	Bug Fix: Fixed source of the following warning: "mysql_real_escape_string() expects parameter 1 to be string, object given".
+3.9.4 - 2017-11-06 - Chris Jean & Timothy Jacobs
+	Bug Fix: Don't display file change admin notifications if the Notify Admin setting is not enabled.
+3.9.5 - 2017-11-27 - Chris Jean & Timothy Jacobs
+	Enhancement: Preserve notification settings when the responsible module is deactivated.
+	Bug Fix: Process 404 lockouts on the 'wp' hook to prevent a headers have already been sent warning message.
+	Bug Fix: Ensure Hide Backend emails are properly sent when activating Hide Backend before saving the Notification Center for the first time.
+	Bug Fix: Prevent warning from being issued on new installs by allowing previous settings to be preserved if they exist.
+	Bug Fix: Better handle WP_Error objects in mail errors that occurred before updating to first patch release.
+	Bug Fix: A non static method was being called statically.
+4.0.0 - 2017-12-07 - Chris Jean & Timothy Jacobs
+	New Feature: Introduces a scheduling framework for handling events. Cron is now used by default, and will switch to using an alternate scheduling system if it detects an error. To disable this detection set ITSEC_DISABLE_CRON_TEST in your wp-config.php file.
+	Important: The ITSEC_FILE_CHECK_CRON and ITSEC_BACKUP_CRON constants have been deprecated. Use ITSEC_USE_CRON instead.
+	Bug Fix: Fix occasional duplicate backups and file scans.
+4.0.1 - 2017-12-11 - Chris Jean & Timothy Jacobs
+	Bug Fix: Fixed issue where scheduled events could repeat on sites that do not properly support WordPress's cron system.
+4.0.2 - 2017-12-28 - Chris Jean & Timothy Jacobs
+	Bug Fix: Make Cron scheduler available in more circumstances.
+	Bug Fix: Events with the Twice Daily schedule would not be carried over when switching scheduler strategies.
+	Bug Fix: Backup schedules respect the interval chosen.
+	Bug Fix: Prevent multiple cron tests from being scheduled at once.
+	Bug Fix: Cron test being stuck in a loop preventing a site from switching back to the cron scheduler.
+	Bug Fix: Prevent warnings when a single and recurring event were scheduled at the same time.
+4.0.3 - 2018-01-04 - Chris Jean & Timothy Jacobs
+	Bug Fix: Fix scheduling retries for Malware Scans on sites that don't fully support WordPress's cron system.
+	Bug Fix: Reactivating Away Mode now replaces the active file if you had previously removed it.
+	Bug Fix: Ensure lockouts take effect immediately, even on systems where changes to server configuration files do not take effect immediately.
+4.0.4 - 2018-01-29 - Chris Jean & Timothy Jacobs
+	Enhancement: Display user lockouts in Lockout Sidebar.
+	Bug Fix: Load translations on the plugins_loaded hook.
+	Bug Fix: Fixed method that could be used to discover hidden login slug on some sites.
+	Bug Fix: Fixed issue that could prevent Sync from loading Malware Scan results if a scan previously failed.
+	Bug Fix: Update to the REST API "Restricted Access" feature to protect against methods to work around the restricted access.
+	Bug Fix: Prevent login page being hidden when following the "Confirm Email Address" notification URL.
+	Bug Fix: Hide Backend notifications not being properly sent when first enabled.
+4.1.0 - 2018-02-08 - Chris Jean & Timothy Jacobs
+	Enhancement: Updated logging system to keep track of more information and have more options to filter and sort log entries.
+	Enhancement: Improved efficiency of File Change Detection scanning.
+	Bug Fix: Fixed issue that could register loading the logging page as a failed login attempt on some sites.
+4.1.1 - 2018-02-08 - Chris Jean & Timothy Jacobs
+	Bug Fix: Fixed schema issue with new logs table.
+4.1.2 - 2018-02-12 - Chris Jean & Timothy Jacobs
+	Bug Fix: Fixed "undefined offset" error when displaying specific migrated old log entries.

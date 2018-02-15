@@ -19,14 +19,14 @@ class ITSEC_Global_Validator extends ITSEC_Validator {
 		}
 
 
-		$this->set_previous_if_empty( array( 'did_upgrade', 'log_info', 'show_new_dashboard_notice', 'show_security_check', 'digest_last_sent', 'digest_messages', 'build', 'activation_timestamp', 'lock_file' ) );
+		$this->vars_to_skip_validate_matching_fields = array( 'digest_last_sent', 'digest_messages', 'digest_email', 'email_notifications', 'notification_email', 'backup_email' );
+		$this->set_previous_if_empty( array( 'did_upgrade', 'log_info', 'show_new_dashboard_notice', 'show_security_check', 'build', 'activation_timestamp', 'lock_file', 'cron_status', 'use_cron', 'cron_test_time' ) );
 		$this->set_default_if_empty( array( 'log_location', 'nginx_file' ) );
+		$this->preserve_setting_if_exists( array(  'digest_email', 'email_notifications', 'notification_email', 'backup_email' ) );
 
 
 		$this->sanitize_setting( 'bool', 'write_files', __( 'Write to Files', 'better-wp-security' ) );
-		$this->sanitize_setting( 'bool', 'digest_email', __( 'Send Digest Email', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'blacklist', __( 'Blacklist Repeat Offender', 'better-wp-security' ) );
-		$this->sanitize_setting( 'bool', 'email_notifications', __( 'Email Lockout Notifications', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'allow_tracking', __( 'Allow Data Tracking', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'proxy_override', __( 'Override Proxy Detection', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'hide_admin_bar', __( 'Hide Security Menu in Admin Bar', 'better-wp-security' ) );
@@ -48,19 +48,12 @@ class ITSEC_Global_Validator extends ITSEC_Validator {
 
 		$this->sanitize_setting( 'newline-separated-ips', 'lockout_white_list', __( 'Lockout White List', 'better-wp-security' ) );
 
-		$this->sanitize_setting( 'newline-separated-emails', 'notification_email', __( 'Notification Email', 'better-wp-security' ) );
-		$this->sanitize_setting( 'newline-separated-emails', 'backup_email', __( 'Backup Delivery Email', 'better-wp-security' ) );
-
 
 		$allowed_tags = $this->get_allowed_tags();
 
 		$this->settings['lockout_message'] = trim( wp_kses( $this->settings['lockout_message'], $allowed_tags ) );
 		$this->settings['user_lockout_message'] = trim( wp_kses( $this->settings['user_lockout_message'], $allowed_tags ) );
 		$this->settings['community_lockout_message'] = trim( wp_kses( $this->settings['community_lockout_message'], $allowed_tags ) );
-
-		if ( $this->settings['digest_last_sent'] <= 0 ) {
-			$this->settings['digest_last_sent'] = ITSEC_Core::get_current_time_gmt();
-		}
 	}
 
 	public function get_valid_log_types() {

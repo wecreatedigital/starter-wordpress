@@ -107,6 +107,10 @@ if ( ! class_exists( 'ITSEC_Backup_Setup' ) ) {
 			if ( $build < 4069 ) {
 				delete_site_option( 'itsec_backup' );
 			}
+
+			if ( $build < 4079 ) {
+				wp_clear_scheduled_hook( 'itsec_execute_backup_cron' );
+			}
 		}
 
 	}

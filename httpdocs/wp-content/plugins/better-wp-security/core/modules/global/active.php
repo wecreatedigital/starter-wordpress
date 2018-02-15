@@ -11,6 +11,10 @@ function itsec_global_add_notice() {
 		ITSEC_Core::add_notice( 'itsec_global_show_new_dashboard_notice' );
 	}
 
+	if ( ! defined( 'ITSEC_USE_CRON' ) && ITSEC_Core::current_user_can_manage() ) {
+		ITSEC_Core::add_notice( 'itsec_show_disable_cron_constants_notice' );
+	}
+
 	if ( ITSEC_Core::is_temp_disable_modules_set() && ITSEC_Core::current_user_can_manage() ) {
 		ITSEC_Core::add_notice( 'itsec_show_temp_disable_modules_notice', true );
 	}
@@ -63,3 +67,100 @@ add_action( 'wp_ajax_itsec-dismiss-notice-brute_force_network', 'itsec_network_b
 function itsec_show_temp_disable_modules_notice() {
 	ITSEC_Lib::show_error_message( esc_html__( 'The ITSEC_DISABLE_MODULES define is set. All iThemes Security protections are disabled. Please make the necessary settings changes and remove the define as quickly as possible.', 'better-wp-security' ) );
 }
+
+function itsec_show_disable_cron_constants_notice() {
+
+	$check = array( 'ITSEC_BACKUP_CRON', 'ITSEC_FILE_CHECK_CRON' );
+	$using = array();
+
+	foreach ( $check as $constant ) {
+		if ( defined( $constant ) && constant( $constant ) ) {
+			$using[] = "<span class='code'>{$constant}</span>";
+		}
+	}
+
+	if ( $using ) {
+		$message = wp_sprintf( esc_html(
+			_n( 'The %l define is deprecated. Please use %s instead.', 'The %l defines are deprecated. Please use %s instead.', count( $using ), 'better-wp-security' )
+		), $using, '<span class="code">ITSEC_USE_CRON</span>' );
+
+		echo "<div class='notice notice-error'><p>{$message}</p></div>";
+	}
+}
+
+/**
+ * On every page load, check if the cron test has successfully fired in time.
+ *
+ * If not, update the cron status and turn off using cron.
+ */
+function itsec_cron_test_fail_safe() {
+
+	if ( defined( 'ITSEC_DISABLE_CRON_TEST' ) && ITSEC_DISABLE_CRON_TEST ) {
+		return;
+	}
+
+	$time = ITSEC_Modules::get_setting( 'global', 'cron_test_time' );
+
+	if ( ! $time ) {
+		if ( ITSEC_Lib::get_lock( 'cron_test_fail_safe' ) ) {
+			ITSEC_Lib::schedule_cron_test();
+			ITSEC_Lib::release_lock( 'cron_test_fail_safe' );
+		}
+
+		return;
+	}
+
+	$threshold = HOUR_IN_SECONDS + DAY_IN_SECONDS;
+
+	if ( ITSEC_Core::get_current_time_gmt() <= $time + $threshold + 5 * MINUTE_IN_SECONDS ) {
+		return;
+	}
+
+	if ( ! ITSEC_Lib::get_lock( 'cron_test_fail_safe' ) ) {
+		return;
+	}
+
+	$uncached = ITSEC_Lib::get_uncached_option( 'itsec-storage' );
+	$time     = $uncached['global']['cron_test_time'];
+
+	if ( ITSEC_Core::get_current_time_gmt() > $time + $threshold + 5 * MINUTE_IN_SECONDS ) {
+		if ( ( ! defined( 'ITSEC_USE_CRON' ) || ! ITSEC_USE_CRON ) && ITSEC_Lib::use_cron() ) {
+			ITSEC_Modules::set_setting( 'global', 'use_cron', false );
+		}
+
+		ITSEC_Modules::set_setting( 'global', 'cron_status', 0 );
+	}
+
+	ITSEC_Lib::schedule_cron_test();
+	ITSEC_Lib::release_lock( 'cron_test_fail_safe' );
+}
+
+add_action( 'init', 'itsec_cron_test_fail_safe' );
+
+/**
+ * Callback for testing whether we should suggest the cron scheduler be enabled.
+ *
+ * @param int $time
+ */
+function itsec_cron_test_callback( $time ) {
+
+	$threshold = HOUR_IN_SECONDS + DAY_IN_SECONDS;
+
+	if ( empty( $time ) || ITSEC_Core::get_current_time_gmt() > $time + $threshold ) {
+		// Disable cron if the user hasn't set the use cron constant to true.
+		if ( ( ! defined( 'ITSEC_USE_CRON' ) || ! ITSEC_USE_CRON ) && ITSEC_Lib::use_cron() ) {
+			ITSEC_Modules::set_setting( 'global', 'use_cron', false );
+		}
+
+		ITSEC_Modules::set_setting( 'global', 'cron_status', 0 );
+	} elseif ( ! ITSEC_Lib::use_cron() ) {
+		ITSEC_Modules::set_setting( 'global', 'cron_status', 1 );
+		ITSEC_Modules::set_setting( 'global', 'use_cron', true );
+	} else {
+		ITSEC_Modules::set_setting( 'global', 'cron_status', 1 );
+	}
+
+	ITSEC_Lib::schedule_cron_test();
+}
+
+add_action( 'itsec_cron_test', 'itsec_cron_test_callback' );

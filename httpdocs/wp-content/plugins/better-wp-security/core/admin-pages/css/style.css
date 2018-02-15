@@ -384,6 +384,10 @@ body.itsec-modal-open {
 	border-left-color: #00a0d2;
 	box-shadow: 1px 1px 0px rgba(0,0,0,.1);
 }
+.itsec-module-type-enabled.itsec-module-status--warning .itsec-module-card-content {
+	background: #fff8e5;
+	border-left-color: #ffb900;
+}
 .itsec-module-card-content .module-actions {
 	float: none;
 	margin: 1em 0 0 0;
@@ -597,6 +601,25 @@ body.itsec-modal-open {
 	background: #fff9ec;
 }
 
+.notice.itsec-is-dismissible {
+	padding-right: 38px;
+	position: relative;
+}
+
+.itsec-notification-center-link {
+	float: right;
+	text-decoration: none;
+	font-style: italic;
+	font-weight: normal;
+	font-size: .8rem;
+}
+
+.itsec-notification-center-link::after {
+	content: "\f345";
+	font-family: Dashicons;
+	font-size: .8rem;
+	vertical-align: sub;
+}
 /*
  * Security Check
  */
@@ -731,4 +754,97 @@ ul.itsec-settings-contacts + ul.itsec-settings-contacts {
 }
 ul.itsec-settings-contacts li input[type="checkbox"] {
 	margin-top: 0;
+}
+
+/**
+ * Styling for the logs page
+ */
+@media screen and (max-width: 1200px) {
+	body.security_page_itsec-logs div#postbox-container-1 {
+		display: none;
+	}
+	body.security_page_itsec-logs #postbox-container-2 {
+		border-right: none !important;
+		padding-right: 0 !important;
+	}
+	body.security_page_itsec-logs #post-body {
+		margin-right: 0 !important;
+	}
+}
+.itsec-log-entries .dashicons {
+	color: #555;
+	font-size: 16px;
+	padding: 2px 0 0 2px;
+	visibility: hidden;
+}
+.itsec-log-entries td:hover .dashicons {
+	visibility: visible;
+}
+#itsec-log-details-container {
+	display: none;
+}
+#itsec-log-details-container.grid .itsec-module-settings-content {
+	max-width: none;
+}
+#itsec-log-details-container.grid .itsec-module-settings-content pre {
+	overflow: auto;
+}
+.itsec-log-entries .hidden {
+	display: none !important;
+}
+.itsec-logs-color > tbody > .itsec-log-type-critical-issue td,
+.itsec-logs-color > tbody > .itsec-log-type-critical-issue th,
+.itsec-logs-color > tbody > .itsec-log-type-fatal td,
+.itsec-logs-color > tbody > .itsec-log-type-fatal th {
+	color: #000;
+}
+.itsec-logs-color > tbody > .itsec-log-type-critical-issue a,
+.itsec-logs-color > tbody > .itsec-log-type-fatal a {
+	color: #124B66;
+}
+.itsec-logs-color > tbody > .itsec-log-type-critical-issue,
+.itsec-logs-color > tbody > .itsec-log-type-fatal {
+	background-color: #FF7575;
+}
+.itsec-logs-color > tbody > :nth-child(2n+1).itsec-log-type-critical-issue,
+.itsec-logs-color > tbody > :nth-child(2n+1).itsec-log-type-fatal {
+	background-color: #FF4848;
+}
+.itsec-logs-color > tbody > .itsec-log-type-error {
+	background-color: #FFDFDF;
+}
+.itsec-logs-color > tbody > :nth-child(2n+1).itsec-log-type-error {
+	background-color: #FFCECE;
+}
+.itsec-logs-color > tbody > .itsec-log-type-warning {
+	background-color: #FFFBDF;
+}
+.itsec-logs-color > tbody > :nth-child(2n+1).itsec-log-type-warning {
+	background-color: #FFF9CE;
+}
+.itsec-log-entries .column-description {
+	max-width: 30%;
+}
+.tablenav .actions {
+	overflow: visible;
+}
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table td pre {
+	margin: 0;
+}
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table th {
+	padding: 10px 10px 10px 0;
+	width: 150px;
+}
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table td {
+	padding: 5px 10px;
+}
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table td .itsec-log-raw-details {
+	display: none;
+	margin-top: 1em;
+}
+body.security_page_itsec-logs #old-logs-migration-status img {
+	vertical-align: middle;
+}
+body.security_page_itsec-logs #old-logs-migration-status p {
+	line-height: 1.4em;
 }

@@ -5,7 +5,7 @@ Plugin URI: http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-word
 Description: Add honeypot anti-spam functionality to the popular Contact Form 7 plugin.
 Author: Nocean
 Author URI: http://www.nocean.ca
-Version: 1.10
+Version: 1.13
 Text Domain: contact-form-7-honeypot
 Domain Path: /languages/
 */
@@ -108,22 +108,38 @@ function wpcf7_honeypot_formtag_handler( $tag ) {
 	$validation_error = wpcf7_get_validation_error( $tag->name );
 
 	$class = wpcf7_form_controls_class( 'text' );
-	
+	$unique_id = uniqid('hp');
 	$atts = array();
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_option( 'id', 'id', true );
 	$atts['message'] = apply_filters('wpcf7_honeypot_accessibility_message', __('Please leave this field empty.','contact-form-7-honeypot'));
 	$atts['name'] = $tag->name;
 	$atts['type'] = $tag->type;
+	$atts['validautocomplete'] = $tag->get_option('validautocomplete');
+	$atts['move_inline_css'] = $tag->get_option('move-inline-css');
 	$atts['nomessage'] = $tag->get_option('nomessage');
 	$atts['validation_error'] = $validation_error;
 	$atts['css'] = apply_filters('wpcf7_honeypot_container_css', 'display:none !important; visibility:hidden !important;');
 	$inputid = (!empty($atts['id'])) ? 'id="'.$atts['id'].'" ' : '';
-	$html = '<span class="wpcf7-form-control-wrap ' . $atts['name'] . '-wrap" style="'.$atts['css'].'">';
-	$html .= '<input ' . $inputid . 'class="' . $atts['class'] . '"  type="text" name="' . $atts['name'] . '" value="" size="40" tabindex="-1" />';
-	if (!$atts['nomessage']) {
-		$html .= '<span class="hp-message">'.$atts['message'].'</span>';
+	$inputid_for = ($inputid) ? 'for="'.$atts['id'].'" ' : '';
+	$autocomplete_value = ($atts['validautocomplete']) ? 'off' : 'nope';
+
+	// Check if we should move the CSS off the element and into the footer [todo: find a way to move to head]
+	if (!empty($atts['move_inline_css'])) {
+		$hp_css = '#'.$unique_id.' {'.$atts['css'].'}';
+		wp_register_style( 'wpcf7-'.$unique_id.'-inline', false);
+		wp_enqueue_style( 'wpcf7-'.$unique_id.'-inline' );
+		wp_add_inline_style( 'wpcf7-'.$unique_id.'-inline', $hp_css );
+		$el_css = '';
+	} else {
+		$el_css = 'style="'.$atts['css'].'"';
 	}
+
+	$html = '<span id="'.$unique_id.'" class="wpcf7-form-control-wrap ' . $atts['name'] . '-wrap" '.$el_css.'>';
+	if (!$atts['nomessage']) {
+		$html .= '<label ' . $inputid_for . ' class="hp-message">'.$atts['message'].'</label>';
+	}
+	$html .= '<input ' . $inputid . 'class="' . $atts['class'] . '"  type="text" name="' . $atts['name'] . '" value="" size="40" tabindex="-1" autocomplete="'.$autocomplete_value.'" />';
 	$html .= $validation_error . '</span>';
 
 	// Hook for filtering finished Honeypot form element.
@@ -148,7 +164,7 @@ function wpcf7_honeypot_filter ( $result, $tag ) {
 
 	$value = isset( $_POST[$name] ) ? $_POST[$name] : '';
 	
-	if ( $value != '' ) {
+	if ( $value != '' || !isset( $_POST[$name] ) ) {
 		$result['valid'] = false;
 		$result['reason'] = array( $name => wpcf7_get_message( 'spam' ) );
 	}
@@ -191,7 +207,7 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 						</th>
 						<td>
 							<input type="text" name="name" class="tg-name oneline" id="<?php echo esc_attr( $args['content'] . '-name' ); ?>" /><br>
-							<em><?php echo esc_html( __( 'For better security, change "honeypot" to something less bot-recognizable.', 'contact-form-7-honeypot' ) ); ?></em>
+							<em><?php echo esc_html( __( 'This can be anything, but should be changed from the default generated "honeypot". For better security, change "honeypot" to something more appealing to a bot, such as text including "email" or "website".', 'contact-form-7-honeypot' ) ); ?></em>
 						</td>
 					</tr>
 
@@ -215,11 +231,31 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 
 					<tr>
 						<th scope="row">
-							<label for="<?php echo esc_attr( $args['content'] . '-nomessage' ); ?>"><?php echo esc_html( __( 'Don\'t Use Accessibility Message (optional)', 'contact-form-7-honeypot' ) ); ?></label>
+							<label for="<?php echo esc_attr( $args['content'] . '-validautocomplete' ); ?>"><?php echo esc_html( __( 'Use W3C Valid Autocomplete (optional)', 'contact-form-7-honeypot' ) ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" name="validautocomplete:true" id="<?php echo esc_attr( $args['content'] . '-validautocomplete' ); ?>" class="validautocompletevalue option" /><br />
+							<em><?php echo __('See <a href="https://wordpress.org/support/topic/w3c-validation-in-1-11-explanation-and-work-arounds/" target="_blank" rel="noopener">here</a> for more details. If you\'re unsure, leave this unchecked.','contact-form-7-honeypot'); ?></em>
+						</td>
+					</tr>
+
+					<tr>
+						<th scope="row">
+							<label for="<?php echo esc_attr( $args['content'] . '-move-inline-css' ); ?>"><?php echo esc_html( __( 'Move inline CSS (optional)', 'contact-form-7-honeypot' ) ); ?></label>
+						</th>
+						<td>
+							<input type="checkbox" name="move-inline-css:true" id="<?php echo esc_attr( $args['content'] . '-move-inline-css' ); ?>" class="move-inline-css-value option" /><br />
+							<em><?php echo __('Moves the CSS to hide the honeypot from the element to the footer of the page. May help confuse bots.','contact-form-7-honeypot'); ?></em>
+						</td>
+					</tr>
+
+					<tr>
+						<th scope="row">
+							<label for="<?php echo esc_attr( $args['content'] . '-nomessage' ); ?>"><?php echo esc_html( __( 'Disable Accessibility Label (optional)', 'contact-form-7-honeypot' ) ); ?></label>
 						</th>
 						<td>
 							<input type="checkbox" name="nomessage:true" id="<?php echo esc_attr( $args['content'] . '-nomessage' ); ?>" class="messagekillvalue option" /><br />
-							<em><?php echo __('If checked, the accessibility message will not be generated. <strong>This is not recommended</strong>. If you\'re unsure, leave this unchecked.','contact-form-7-honeypot'); ?></em>
+							<em><?php echo __('If checked, the accessibility label will not be generated. <strong>This is not recommended</strong>. If you\'re unsure, leave this unchecked.','contact-form-7-honeypot'); ?></em>
 						</td>
 					</tr>
 

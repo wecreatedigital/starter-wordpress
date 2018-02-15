@@ -19,9 +19,12 @@ final class ITSEC_Brute_Force_Settings_Page extends ITSEC_Module_Settings_Page {
 	}
 	
 	protected function render_settings( $form ) {
+
+		/** @var ITSEC_Lockout $itsec_lockout */
+		global $itsec_lockout;
 		
 ?>
-	<?php echo $GLOBALS['itsec_lockout']->get_lockout_description(); ?>
+	<?php echo $itsec_lockout->get_lockout_description(); ?>
 	<table class="form-table" id="brute_force-settings">
 		<tr>
 			<th scope="row"><label for="itsec-brute-force-max_attempts_host"><?php _e( 'Max Login Attempts Per Host', 'better-wp-security' ); ?></label></th>

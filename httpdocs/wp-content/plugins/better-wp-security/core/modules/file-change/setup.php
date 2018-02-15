@@ -149,6 +149,10 @@ if ( ! class_exists( 'ITSEC_File_Change_Setup' ) ) {
 				}
 			}
 
+			if ( $itsec_old_version < 4079 ) {
+				wp_clear_scheduled_hook( 'itsec_execute_file_check_cron' );
+			}
+
 		}
 
 	}

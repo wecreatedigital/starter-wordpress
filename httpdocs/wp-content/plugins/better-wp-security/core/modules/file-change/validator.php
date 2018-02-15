@@ -19,13 +19,14 @@ class ITSEC_File_Change_Validator extends ITSEC_Validator {
 		}
 
 		$this->set_previous_if_empty( array( 'latest_changes' ) );
+		$this->preserve_setting_if_exists( array( 'email' ) );
 		$this->vars_to_skip_validate_matching_types[] = 'last_chunk';
+		$this->vars_to_skip_validate_matching_fields[] = 'email';
 
 		$this->sanitize_setting( 'bool', 'split', __( 'Split File Scanning', 'better-wp-security' ) );
 		$this->sanitize_setting( array( 'exclude', 'include' ), 'method', __( 'Include/Exclude Files and Folders', 'better-wp-security' ) );
 		$this->sanitize_setting( 'newline-separated-array', 'file_list', __( 'Files and Folders List', 'better-wp-security' ) );
 		$this->sanitize_setting( 'newline-separated-extensions', 'types', __( 'Ignore File Types', 'better-wp-security' ) );
-		$this->sanitize_setting( 'bool', 'email', __( 'Email File Change Notifications', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'notify_admin', __( 'Display File Change Admin Warning', 'better-wp-security' ) );
 		$this->sanitize_setting( 'positive-int', 'last_run', __( 'Last Run', 'better-wp-security' ), false );
 

@@ -39,9 +39,7 @@ final class ITSEC_Database_Prefix_Utility {
 			//complete with underscore
 			$new_prefix .= '_';
 
-			$new_prefix = esc_sql( $new_prefix ); //just be safe
-
-			$check_prefix = $wpdb->get_results( 'SHOW TABLES LIKE "' . $new_prefix . '%";', ARRAY_N ); //if there are no tables with that prefix in the database set checkPrefix to false
+			$check_prefix = $wpdb->get_results( $wpdb->prepare( 'SHOW TABLES LIKE %s;', $new_prefix . '%' ), ARRAY_N ); //if there are no tables with that prefix in the database set checkPrefix to false
 
 		}
 
@@ -72,7 +70,7 @@ final class ITSEC_Database_Prefix_Utility {
 
 
 
-		$tables = $wpdb->get_results( 'SHOW TABLES LIKE "' . $wpdb->base_prefix . '%"', ARRAY_N ); //retrieve a list of all tables in the DB
+		$tables = $wpdb->get_results( $wpdb->prepare( 'SHOW TABLES LIKE %s', $wpdb->base_prefix . '%' ), ARRAY_N ); //retrieve a list of all tables in the DB
 
 		//Rename each table
 		foreach ( $tables as $table ) {
@@ -113,7 +111,7 @@ final class ITSEC_Database_Prefix_Utility {
 
 		}
 
-		$rows = $wpdb->get_results( 'SELECT * FROM `' . $new_prefix . 'usermeta`' ); //get all rows in usermeta
+		$rows = $wpdb->get_results( "SELECT * FROM `{$new_prefix}usermeta`" ); //get all rows in usermeta
 
 		//update all prefixes in usermeta
 		foreach ( $rows as $row ) {
@@ -122,7 +120,7 @@ final class ITSEC_Database_Prefix_Utility {
 
 				$pos = $new_prefix . substr( $row->meta_key, strlen( $wpdb->base_prefix ), strlen( $row->meta_key ) );
 
-				$result = $wpdb->query( 'UPDATE `' . $new_prefix . 'usermeta` SET meta_key="' . $pos . '" WHERE meta_key= "' . $row->meta_key . '" LIMIT 1;' );
+				$result = $wpdb->query( $wpdb->prepare( "UPDATE `{$new_prefix}usermeta` SET meta_key = %s WHERE meta_key = %s LIMIT 1", $pos, $row->meta_key ) );
 
 				if ( $result == false ) {
 

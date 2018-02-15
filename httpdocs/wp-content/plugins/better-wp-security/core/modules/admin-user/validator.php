@@ -83,13 +83,14 @@ final class ITSEC_Admin_User_Validator extends ITSEC_Validator {
 				} else { // we're only changing the username
 
 					//query main user table
-					$wpdb->query( "UPDATE `" . $wpdb->users . "` SET user_login = '" . esc_sql( $new_user ) . "' WHERE user_login='admin';" );
+					$wpdb->query( $wpdb->prepare( "UPDATE `{$wpdb->users}` SET user_login = %s WHERE user_login = %s", $new_user, 'admin' ) );
 
 					if ( is_multisite() ) { //process sitemeta if we're in a multi-site situation
 
-						$oldAdmins = $wpdb->get_var( "SELECT meta_value FROM `" . $wpdb->sitemeta . "` WHERE meta_key = 'site_admins'" );
-						$newAdmins = str_replace( '5:"admin"', strlen( $new_user ) . ':"' . esc_sql( $new_user ) . '"', $oldAdmins );
-						$wpdb->query( "UPDATE `" . $wpdb->sitemeta . "` SET meta_value = '" . esc_sql( $newAdmins ) . "' WHERE meta_key = 'site_admins'" );
+						$old_admins = $wpdb->get_var( "SELECT meta_value FROM `" . $wpdb->sitemeta . "` WHERE meta_key = 'site_admins'" );
+						// No need to escape the new username. It is already safe via validate_userame() which will check for quotes
+						$new_admins = str_replace( '5:"admin"', strlen( $new_user ) . ':"' . $new_user . '"', $old_admins );
+						$wpdb->query( $wpdb->prepare( "UPDATE `{$wpdb->sitemeta}` SET meta_value = %s WHERE meta_key = 'site_admins'", $new_admins ) );
 
 					}
 
@@ -124,18 +125,19 @@ final class ITSEC_Admin_User_Validator extends ITSEC_Validator {
 
 				if ( is_multisite() && $username !== null && validate_username( $new_user ) ) { //process sitemeta if we're in a multi-site situation
 
-					$oldAdmins = $wpdb->get_var( "SELECT meta_value FROM `" . $wpdb->sitemeta . "` WHERE meta_key = 'site_admins'" );
-					$newAdmins = str_replace( '5:"admin"', strlen( $new_user ) . ':"' . esc_sql( $new_user ) . '"', $oldAdmins );
-					$wpdb->query( "UPDATE `" . $wpdb->sitemeta . "` SET meta_value = '" . esc_sql( $newAdmins ) . "' WHERE meta_key = 'site_admins'" );
+					$old_admins = $wpdb->get_var( "SELECT meta_value FROM `{$wpdb->sitemeta}` WHERE meta_key = 'site_admins'" );
+					// No need to escape the new username. It is already safe via validate_userame() which will check for quotes
+					$new_admins = str_replace( '5:"admin"', strlen( $new_user ) . ':"' . $new_user . '"', $old_admins );
+					$wpdb->query( $wpdb->prepare( "UPDATE `{$wpdb->sitemeta}` SET meta_value = %s WHERE meta_key = 'site_admins'", $new_admins ) );
 
 				}
 
 				$new_user = $wpdb->insert_id;
 
-				$wpdb->query( "UPDATE `" . $wpdb->posts . "` SET post_author = '" . $new_user . "' WHERE post_author = 1;" );
-				$wpdb->query( "UPDATE `" . $wpdb->usermeta . "` SET user_id = '" . $new_user . "' WHERE user_id = 1;" );
-				$wpdb->query( "UPDATE `" . $wpdb->comments . "` SET user_id = '" . $new_user . "' WHERE user_id = 1;" );
-				$wpdb->query( "UPDATE `" . $wpdb->links . "` SET link_owner = '" . $new_user . "' WHERE link_owner = 1;" );
+				$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->posts} SET post_author = %d WHERE post_author = 1", $new_user ) );
+				$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->usermeta} SET user_id = %d WHERE user_id = 1", $new_user ) );
+				$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->comments} SET user_id = %d WHERE user_id = 1", $new_user ) );
+				$wpdb->query( $wpdb->prepare( "UPDATE {$wpdb->links} SET link_owner = %d WHERE link_owner = 1", $new_user ) );
 
 				/**
 				 * Fires when the admin user with id of #1 has been changed.
