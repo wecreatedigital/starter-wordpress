@@ -8,10 +8,6 @@ function output_htaccess( $rules ) {
 <Files "xmlrpc.php">
   Order deny,allow
   Deny from all
-</Files>
-
-<Files "wp-json">
-  Deny from all
 </Files>';
   return $rules . $new_rules;
 }
