@@ -1,0 +1,196 @@
+# Translation of Plugins - WP-PageNavi - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - WP-PageNavi - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-10-12 19:12:30+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - WP-PageNavi - Stable (latest release)\n"
+
+#: core.php:128 core.php:147 core.php:159
+msgid "Page %s"
+msgstr "Page %s"
+
+#. Author URI of the plugin/theme
+msgid "https://lesterchan.net"
+msgstr "https://lesterchan.net"
+
+#. Author of the plugin/theme
+msgid "Lester 'GaMerZ' Chan"
+msgstr "Lester 'GaMerZ' Chan"
+
+#. Description of the plugin/theme
+msgid "Adds a more advanced paging navigation to your WordPress blog"
+msgstr "Adds a more advanced paging navigation to your WordPress blog"
+
+#. Plugin URI of the plugin/theme
+msgid "https://lesterchan.net/portfolio/programming/php/"
+msgstr "https://lesterchan.net/portfolio/programming/php/"
+
+#. Plugin Name of the plugin/theme
+msgid "WP-PageNavi"
+msgstr "WP-PageNavi"
+
+#: wp-pagenavi.php:27 wp-pagenavi.php:28
+msgid "..."
+msgstr "..."
+
+#: wp-pagenavi.php:26
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: wp-pagenavi.php:25
+msgid "&laquo;"
+msgstr "&laquo;"
+
+#: wp-pagenavi.php:24
+msgid "Last &raquo;"
+msgstr "Last &raquo;"
+
+#: wp-pagenavi.php:23
+msgid "&laquo; First"
+msgstr "&laquo; First"
+
+#: wp-pagenavi.php:20
+msgid "Page %CURRENT_PAGE% of %TOTAL_PAGES%"
+msgstr "Page %CURRENT_PAGE% of %TOTAL_PAGES%"
+
+#: scb/AdminPage.php:516
+msgid "Settings"
+msgstr "Settings"
+
+#: scb/AdminPage.php:259
+msgid "Settings <strong>saved</strong>."
+msgstr "Settings <strong>saved</strong>."
+
+#: admin.php:158
+msgid "Page Navigation Options"
+msgstr "Page Navigation Options"
+
+#: admin.php:153
+msgid "For example, if mutiple is 5, it will show: 5, 10, 15, 20, 25"
+msgstr "For example, if mutiple is 5, it will show: 5, 10, 15, 20, 25"
+
+#: admin.php:148
+msgid "Show Larger Page Numbers In Multiples Of"
+msgstr "Show Larger Page Numbers In Multiples Of"
+
+#: admin.php:144
+msgid "Enter 0 to disable."
+msgstr "Enter 0 to disable."
+
+#: admin.php:143
+msgid "For example, WP-PageNavi will display: Pages 1, 2, 3, 4, 5, 10, 20, 30, 40, 50."
+msgstr "For example, WP-PageNavi will display: Pages 1, 2, 3, 4, 5, 10, 20, 30, 40, 50."
+
+#: admin.php:142
+msgid "Larger page numbers are in addition to the normal page numbers. They are useful when there are many pages of posts."
+msgstr "Larger page numbers are in addition to the normal page numbers. They are useful when there are many pages of posts."
+
+#: admin.php:137
+msgid "Number Of Larger Page Numbers To Show"
+msgstr "Number Of Larger Page Numbers To Show"
+
+#: admin.php:130
+msgid "Number Of Pages To Show"
+msgstr "Number Of Pages To Show"
+
+#: admin.php:126
+msgid "Show navigation even if there's only one page."
+msgstr "Show navigation even if there's only one page."
+
+#: admin.php:122
+msgid "Always Show Page Navigation"
+msgstr "Always Show Page Navigation"
+
+#: admin.php:117
+msgid "Drop-down List"
+msgstr "Drop-down List"
+
+#: admin.php:117
+msgid "Normal"
+msgstr "Normal"
+
+#: admin.php:114
+msgid "Page Navigation Style"
+msgstr "Page Navigation Style"
+
+#: admin.php:110 admin.php:125
+msgid "No"
+msgstr "No"
+
+#: admin.php:110 admin.php:125
+msgid "Yes"
+msgstr "Yes"
+
+#: admin.php:107
+msgid "Use pagenavi-css.css"
+msgstr "Use pagenavi-css.css"
+
+#: admin.php:101
+msgid "Leaving a field blank will hide that part of the navigation."
+msgstr "Leaving a field blank will hide that part of the navigation."
+
+#: admin.php:100
+msgid "Page Navigation Text"
+msgstr "Page Navigation Text"
+
+#: admin.php:93
+msgid "Text For Next ..."
+msgstr "Text For Next ..."
+
+#: admin.php:87
+msgid "Text For Previous ..."
+msgstr "Text For Previous ..."
+
+#: admin.php:81
+msgid "Text For Next Page"
+msgstr "Text For Next Page"
+
+#: admin.php:75
+msgid "Text For Previous Page"
+msgstr "Text For Previous Page"
+
+#: admin.php:67
+msgid "Text For Last Page"
+msgstr "Text For Last Page"
+
+#: admin.php:59
+msgid "Text For First Page"
+msgstr "Text For First Page"
+
+#: admin.php:51
+msgid "Text For Page"
+msgstr "Text For Page"
+
+#: admin.php:47 admin.php:55
+msgid "The page number."
+msgstr "The page number."
+
+#: admin.php:43
+msgid "Text For Current Page"
+msgstr "Text For Current Page"
+
+#: admin.php:39 admin.php:63 admin.php:71
+msgid "The total number of pages."
+msgstr "The total number of pages."
+
+#: admin.php:38
+msgid "The current page number."
+msgstr "The current page number."
+
+#: admin.php:33
+msgid "Text For Number Of Pages"
+msgstr "Text For Number Of Pages"
+
+#: admin.php:10
+msgid "PageNavi"
+msgstr "PageNavi"
+
+#: admin.php:9
+msgid "PageNavi Settings"
+msgstr "PageNavi Settings"
