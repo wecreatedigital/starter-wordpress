@@ -1,0 +1,1080 @@
+# Translation of Plugins - Sucuri Security &#8211; Auditing, Malware Scanner and Security Hardening - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - Sucuri Security &#8211; Auditing, Malware Scanner and Security Hardening - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-08-04 20:09:51+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: en_GB\n"
+"Project-Id-Version: Plugins - Sucuri Security &#8211; Auditing, Malware Scanner and Security Hardening - Stable (latest release)\n"
+
+#: src/auditlogs.lib.php:102
+msgid "APIKeyMissing"
+msgstr "APIKeyMissing"
+
+#: src/settings-apiservice.php:122 src/settings-apiservice.php:129
+msgid "ChecksumsAPIChanged"
+msgstr "ChecksumsAPIChanged"
+
+#: src/integrity.lib.php:220
+msgid "MaxExecutionTimeAlert"
+msgstr "MaxExecutionTimeAlert"
+
+#: src/settings-alerts.php:388
+msgid "OptionNotifyFailedPassword"
+msgstr "OptionNotifyFailedPassword"
+
+#: src/command.lib.php:132
+msgid "ThereAreNoDifferences"
+msgstr "ThereAreNoDifferences"
+
+#: src/settings-general.php:601
+msgid "TimezoneStatus"
+msgstr "TimezoneStatus"
+
+#: src/auditlogs.lib.php:96
+msgid "AuditLogsNoAPI"
+msgstr "AuditLogsNoAPI"
+
+#: src/interface.lib.php:239
+msgid "AccessDenied"
+msgstr "AccessDenied"
+
+#: src/lastlogins-failed.php:41
+msgid "AccountsWereBlocked"
+msgstr "AccountsWereBlocked"
+
+#: src/lastlogins-blocked.php:50
+msgid "AccountsWereUnblocked"
+msgstr "AccountsWereUnblocked"
+
+#: src/firewall.lib.php:197 src/settings-general.php:444
+#: src/settings-posthack.php:231 src/settings-webinfo.php:52
+msgid "Active"
+msgstr "Active"
+
+#: src/api.lib.php:347
+msgid "AlertAPIKeySet"
+msgstr "AlertAPIKeySet"
+
+#: src/settings-alerts.php:452
+msgid "AlertSettingsUpdated"
+msgstr "AlertSettingsUpdated"
+
+#: src/integrity.lib.php:232
+msgid "AllItemsProcessed"
+msgstr "AllItemsProcessed"
+
+#: src/settings-general.php:115
+msgid "APIKeyRecovery"
+msgstr "APIKeyRecovery"
+
+#: src/settings-apiservice.php:46
+msgid "APIServiceChanged"
+msgstr "APIServiceChanged"
+
+#: src/settings-hardening.php:94 src/settings-hardening.php:121
+#: src/settings-hardening.php:169 src/settings-hardening.php:269
+#: src/settings-hardening.php:326 src/settings-hardening.php:393
+#: src/settings-hardening.php:427 src/settings-hardening.php:463
+#: src/settings-hardening.php:552
+msgid "ApplyHardening"
+msgstr "ApplyHardening"
+
+#: src/firewall.lib.php:469
+msgid "April"
+msgstr "April"
+
+#: src/lastlogins-failed.php:354 src/lastlogins-failed.php:378
+msgid "AttemptDatetime"
+msgstr "AttemptDatetime"
+
+#: src/lastlogins-failed.php:353 src/lastlogins-failed.php:377
+msgid "AttemptTimestamp"
+msgstr "AttemptTimestamp"
+
+#: src/firewall.lib.php:473
+msgid "August"
+msgstr "August"
+
+#: src/settings-general.php:297
+msgid "AvoidDocumentRoot"
+msgstr "AvoidDocumentRoot"
+
+#: src/settings-general.php:299
+msgid "AvoidFileOverride"
+msgstr "AvoidFileOverride"
+
+#: src/sitecheck.lib.php:298
+msgid "Blacklisted"
+msgstr "Blacklisted"
+
+#: src/settings-alerts.php:354
+msgid "BruteForceAlertFailure"
+msgstr "BruteForceAlertFailure"
+
+#: src/settings-alerts.php:350
+msgid "BruteForceAlertSuccess"
+msgstr "BruteForceAlertSuccess"
+
+#: src/settings-posthack.php:293
+msgid "CannotBackup"
+msgstr "CannotBackup"
+
+#: src/settings-posthack.php:290
+msgid "CannotDownload"
+msgstr "CannotDownload"
+
+#: src/settings-posthack.php:306
+msgid "CannotInstall"
+msgstr "CannotInstall"
+
+#: src/settings-hardening.php:481 src/settings-hardening.php:512
+#: src/settings-posthack.php:49
+msgid "ConfigNotFound"
+msgstr "ConfigNotFound"
+
+#: src/settings-hardening.php:483 src/settings-hardening.php:514
+#: src/settings-posthack.php:62
+msgid "ConfigNotWritable"
+msgstr "ConfigNotWritable"
+
+#: src/integrity.lib.php:95 src/settings-general.php:40
+#: src/settings-general.php:549 src/settings-posthack.php:44
+msgid "ConfirmOperation"
+msgstr "ConfirmOperation"
+
+#: src/settings-scanner.php:107
+msgid "CronjobRunNow"
+msgstr "CronjobRunNow"
+
+#: src/settings-scanner.php:68
+msgid "CronjobsWereDeleted"
+msgstr "CronjobsWereDeleted"
+
+#: src/settings-scanner.php:97
+msgid "CronjobsWereNotSelected"
+msgstr "CronjobsWereNotSelected"
+
+#: src/settings-scanner.php:81
+msgid "CronjobsWereReinstalled"
+msgstr "CronjobsWereReinstalled"
+
+#: src/settings-scanner.php:54
+msgid "CronjobsWillRunSoon"
+msgstr "CronjobsWillRunSoon"
+
+#: src/globals.php:75
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: src/firewall.lib.php:477
+msgid "December"
+msgstr "December"
+
+#: src/integrity.lib.php:386
+msgid "DiffUtility"
+msgstr "DiffUtility"
+
+#: src/settings-integrity.php:49
+msgid "DiffUtilityMissing"
+msgstr "DiffUtilityMissing"
+
+#: src/settings-integrity.php:57
+msgid "DiffUtilityStatus"
+msgstr "DiffUtilityStatus"
+
+#: src/settings-apiservice.php:31 src/settings-general.php:278
+#: src/settings-general.php:344 src/settings-general.php:391
+#: src/settings-integrity.php:65
+msgid "Disable"
+msgstr "Disable"
+
+#: src/settings-apiservice.php:54 src/settings-general.php:320
+#: src/settings-general.php:364 src/settings-general.php:425
+#: src/settings-integrity.php:41
+msgid "Disabled"
+msgstr "Disabled"
+
+#: src/option.lib.php:673
+msgid "DisallowedHTTPHeader"
+msgstr "DisallowedHTTPHeader"
+
+#: src/settings-general.php:410
+msgid "DNSLookupStatus"
+msgstr "DNSLookupStatus"
+
+#: src/settings-general.php:204
+msgid "DoesNotExist"
+msgstr "DoesNotExist"
+
+#: src/settings-posthack.php:180
+msgid "Done"
+msgstr "Done"
+
+#: src/event.lib.php:645
+msgid "EmailSubject.password_change"
+msgstr "EmailSubject.password_change"
+
+#: src/settings-apiservice.php:55 src/settings-general.php:321
+#: src/settings-general.php:365 src/settings-general.php:426
+#: src/settings-integrity.php:42
+msgid "Enable"
+msgstr "Enable"
+
+#: src/interface.lib.php:214
+msgid "EnableAPIServiceAgain"
+msgstr "EnableAPIServiceAgain"
+
+#: src/settings-apiservice.php:30 src/settings-general.php:277
+#: src/settings-general.php:343 src/settings-general.php:390
+#: src/settings-integrity.php:64
+msgid "Enabled"
+msgstr "Enabled"
+
+#: src/settings-posthack.php:176
+msgid "Error"
+msgstr "Error"
+
+#: src/integrity.lib.php:309
+msgid "ErrorIntegrityAdded"
+msgstr "ErrorIntegrityAdded"
+
+#: src/integrity.lib.php:311
+msgid "ErrorIntegrityModified"
+msgstr "ErrorIntegrityModified"
+
+#: src/integrity.lib.php:313
+msgid "ErrorIntegrityRemoved"
+msgstr "ErrorIntegrityRemoved"
+
+#: src/api.lib.php:318
+msgid "ErrorInvalidEmail"
+msgstr "ErrorInvalidEmail"
+
+#: src/api.lib.php:290
+msgid "ErrorLogFileNotFound"
+msgstr "ErrorLogFileNotFound"
+
+#: src/api.lib.php:280
+msgid "ErrorNoInfo"
+msgstr "ErrorNoInfo"
+
+#: src/api.lib.php:313
+msgid "ErrorSSLCertificate"
+msgstr "ErrorSSLCertificate"
+
+#: src/api.lib.php:299
+msgid "ErrorWrongAPIKey"
+msgstr "ErrorWrongAPIKey"
+
+#: src/settings-general.php:210
+msgid "Exists"
+msgstr "Exists"
+
+#: src/event.lib.php:516
+msgid "FailedLoginFooter"
+msgstr "FailedLoginFooter"
+
+#: src/firewall.lib.php:467
+msgid "February"
+msgstr "February"
+
+#: src/globals.php:76
+msgid "Firewall"
+msgstr "Firewall"
+
+#: src/firewall.lib.php:149
+msgid "FirewallAPIKeyInvalid"
+msgstr "FirewallAPIKeyInvalid"
+
+#: src/firewall.lib.php:233 src/firewall.lib.php:327 src/firewall.lib.php:543
+#: src/firewall.lib.php:576 src/firewall.lib.php:616 src/firewall.lib.php:705
+msgid "FirewallAPIKeyMissing"
+msgstr "FirewallAPIKeyMissing"
+
+#: src/firewall.lib.php:145
+msgid "FirewallAPIKeySet"
+msgstr "FirewallAPIKeySet"
+
+#: src/firewall.lib.php:156
+msgid "FirewallAPIKeyUnset"
+msgstr "FirewallAPIKeyUnset"
+
+#: src/firewall.lib.php:188
+msgid "FirewallDoCache"
+msgstr "FirewallDoCache"
+
+#: src/firewall.lib.php:190
+msgid "FirewallNoCache"
+msgstr "FirewallNoCache"
+
+#: src/firewall.lib.php:191
+msgid "FirewallNoCacheAtAll"
+msgstr "FirewallNoCacheAtAll"
+
+#: src/firewall.lib.php:189
+msgid "FirewallSiteCache"
+msgstr "FirewallSiteCache"
+
+#: src/template.lib.php:139
+msgid "GenerateAPIKey"
+msgstr "GenerateAPIKey"
+
+#: src/settings-posthack.php:77
+msgid "Good"
+msgstr "Good"
+
+#: src/settings-hardening.php:454
+msgid "HardeningAdminUserDescription"
+msgstr "HardeningAdminUserDescription"
+
+#: src/settings-hardening.php:453
+msgid "HardeningAdminUserTitle"
+msgstr "HardeningAdminUserTitle"
+
+#: src/settings-hardening.php:297
+msgid "HardeningContentApplyFailure"
+msgstr "HardeningContentApplyFailure"
+
+#: src/settings-hardening.php:295
+msgid "HardeningContentApplySuccess"
+msgstr "HardeningContentApplySuccess"
+
+#: src/settings-hardening.php:313
+msgid "HardeningContentDescription"
+msgstr "HardeningContentDescription"
+
+#: src/settings-hardening.php:308
+msgid "HardeningContentRevertFailure"
+msgstr "HardeningContentRevertFailure"
+
+#: src/settings-hardening.php:306
+msgid "HardeningContentRevertSuccess"
+msgstr "HardeningContentRevertSuccess"
+
+#: src/settings-hardening.php:312
+msgid "HardeningContentTitle"
+msgstr "HardeningContentTitle"
+
+#: src/settings-hardening.php:504
+msgid "HardeningFileEditorApplySuccess"
+msgstr "HardeningFileEditorApplySuccess"
+
+#: src/settings-hardening.php:543
+msgid "HardeningFileEditorDescription"
+msgstr "HardeningFileEditorDescription"
+
+#: src/settings-hardening.php:531
+msgid "HardeningFileEditorRevertFailure"
+msgstr "HardeningFileEditorRevertFailure"
+
+#: src/settings-hardening.php:537
+msgid "HardeningFileEditorRevertSuccess"
+msgstr "HardeningFileEditorRevertSuccess"
+
+#: src/settings-hardening.php:542
+msgid "HardeningFileEditorTitle"
+msgstr "HardeningFileEditorTitle"
+
+#: src/settings-hardening.php:90
+msgid "HardeningFirewallDescription"
+msgstr "HardeningFirewallDescription"
+
+#: src/settings-hardening.php:85
+msgid "HardeningFirewallPurchase"
+msgstr "HardeningFirewallPurchase"
+
+#: src/settings-hardening.php:89
+msgid "HardeningFirewallTitle"
+msgstr "HardeningFirewallTitle"
+
+#: src/settings-hardening.php:188
+msgid "HardeningGeneratorDescription"
+msgstr "HardeningGeneratorDescription"
+
+#: src/settings-hardening.php:184
+msgid "HardeningGeneratorTitle"
+msgstr "HardeningGeneratorTitle"
+
+#: src/settings-hardening.php:362
+msgid "HardeningIncludesApplyFailure"
+msgstr "HardeningIncludesApplyFailure"
+
+#: src/settings-hardening.php:357
+msgid "HardeningIncludesApplySuccess"
+msgstr "HardeningIncludesApplySuccess"
+
+#: src/settings-hardening.php:380
+msgid "HardeningIncludesDescription"
+msgstr "HardeningIncludesDescription"
+
+#: src/settings-hardening.php:375
+msgid "HardeningIncludesRevertFailure"
+msgstr "HardeningIncludesRevertFailure"
+
+#: src/settings-hardening.php:373
+msgid "HardeningIncludesRevertSuccess"
+msgstr "HardeningIncludesRevertSuccess"
+
+#: src/settings-hardening.php:379
+msgid "HardeningIncludesTitle"
+msgstr "HardeningIncludesTitle"
+
+#: src/settings-hardening.php:212
+msgid "HardeningNginxDescription"
+msgstr "HardeningNginxDescription"
+
+#: src/settings-hardening.php:211
+msgid "HardeningNginxField"
+msgstr "HardeningNginxField"
+
+#: src/settings-hardening.php:205
+msgid "HardeningNginxSuggestion"
+msgstr "HardeningNginxSuggestion"
+
+#: src/settings-hardening.php:208
+msgid "HardeningNginxTitle"
+msgstr "HardeningNginxTitle"
+
+#: src/settings-hardening.php:161
+msgid "HardeningPHPVersionDescription"
+msgstr "HardeningPHPVersionDescription"
+
+#: src/settings-hardening.php:156
+msgid "HardeningPHPVersionLifetime"
+msgstr "HardeningPHPVersionLifetime"
+
+#: src/settings-hardening.php:160
+msgid "HardeningPHPVersionTitle"
+msgstr "HardeningPHPVersionTitle"
+
+#: src/settings-hardening.php:412
+msgid "HardeningReadmeApplyFailure"
+msgstr "HardeningReadmeApplyFailure"
+
+#: src/settings-hardening.php:417
+msgid "HardeningReadmeApplySuccess"
+msgstr "HardeningReadmeApplySuccess"
+
+#: src/settings-hardening.php:422
+msgid "HardeningReadmeDescription"
+msgstr "HardeningReadmeDescription"
+
+#: src/settings-hardening.php:421
+msgid "HardeningReadmeTitle"
+msgstr "HardeningReadmeTitle"
+
+#: src/settings-hardening.php:240
+msgid "HardeningUploadsApplyFailure"
+msgstr "HardeningUploadsApplyFailure"
+
+#: src/settings-hardening.php:238
+msgid "HardeningUploadsApplySuccess"
+msgstr "HardeningUploadsApplySuccess"
+
+#: src/settings-hardening.php:256
+msgid "HardeningUploadsDescription"
+msgstr "HardeningUploadsDescription"
+
+#: src/settings-hardening.php:251
+msgid "HardeningUploadsRevertFailure"
+msgstr "HardeningUploadsRevertFailure"
+
+#: src/settings-hardening.php:249
+msgid "HardeningUploadsRevertSuccess"
+msgstr "HardeningUploadsRevertSuccess"
+
+#: src/settings-hardening.php:255
+msgid "HardeningUploadsTitle"
+msgstr "HardeningUploadsTitle"
+
+#: src/settings-hardening.php:123
+msgid "HardeningVersionDescription"
+msgstr "HardeningVersionDescription"
+
+#: src/settings-hardening.php:122
+msgid "HardeningVersionTitle"
+msgstr "HardeningVersionTitle"
+
+#: src/hardening.lib.php:229
+msgid "HTAccessIsMissing"
+msgstr "HTAccessIsMissing"
+
+#: src/hardening.lib.php:233
+msgid "HTAccessNotWritable"
+msgstr "HTAccessNotWritable"
+
+#: src/option.lib.php:688
+msgid "HTTPHeaderStatus"
+msgstr "HTTPHeaderStatus"
+
+#. Author URI of the plugin/theme
+msgid "https://sucuri.net/"
+msgstr "https://sucuri.net/"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.sucuri.net/"
+msgstr "https://wordpress.sucuri.net/"
+
+#: src/pagehandler.php:35
+msgid "iFrames"
+msgstr "iFrames"
+
+#: src/sitecheck.lib.php:347
+msgid "iFramesNum"
+msgstr "iFramesNum"
+
+#: src/settings-scanner.php:166
+msgid "Ignored"
+msgstr "Ignored"
+
+#: src/settings-general.php:541
+msgid "ImportCount"
+msgstr "ImportCount"
+
+#: src/settings-general.php:546
+msgid "IncorrectEncoding"
+msgstr "IncorrectEncoding"
+
+#: src/settings-integrity.php:92
+msgid "IntegrityLanguage"
+msgstr "IntegrityLanguage"
+
+#: src/api.lib.php:172
+msgid "InvalidAPIKey"
+msgstr "InvalidAPIKey"
+
+#: src/settings-alerts.php:57
+msgid "InvalidEmail"
+msgstr "InvalidEmail"
+
+#: src/settings-alerts.php:228
+msgid "InvalidEmailSubject"
+msgstr "InvalidEmailSubject"
+
+#: src/settings-integrity.php:131 src/settings-scanner.php:223
+#: src/settings-scanner.php:238
+msgid "ItemsProcessed"
+msgstr "ItemsProcessed"
+
+#: src/firewall.lib.php:466
+msgid "January"
+msgstr "January"
+
+#: src/firewall.lib.php:472
+msgid "July"
+msgstr "July"
+
+#: src/firewall.lib.php:471
+msgid "June"
+msgstr "June"
+
+#: src/lastlogins.php:413
+msgid "LastLoginMessage"
+msgstr "LastLoginMessage"
+
+#: src/globals.php:77
+msgid "LastLogins"
+msgstr "LastLogins"
+
+#: src/lastlogins.php:106
+msgid "LastLoginsNotWritable"
+msgstr "LastLoginsNotWritable"
+
+#: src/pagehandler.php:82
+msgid "LastLoginsResetFailure"
+msgstr "LastLoginsResetFailure"
+
+#: src/pagehandler.php:80
+msgid "LastLoginsResetSuccess"
+msgstr "LastLoginsResetSuccess"
+
+#: src/pagehandler.php:36
+msgid "Links"
+msgstr "Links"
+
+#: src/sitecheck.lib.php:362
+msgid "LinksNum"
+msgstr "LinksNum"
+
+#: src/pagehandler.php:38 src/pagehandler.php:39 src/pagehandler.php:40
+msgid "Loading"
+msgstr "Loading"
+
+#: src/firewall.lib.php:468
+msgid "March"
+msgstr "March"
+
+#: src/settings-alerts.php:309
+msgid "MaximumAlertsFailure"
+msgstr "MaximumAlertsFailure"
+
+#: src/settings-alerts.php:307
+msgid "MaximumAlertsSuccess"
+msgstr "MaximumAlertsSuccess"
+
+#: src/firewall.lib.php:470
+msgid "May"
+msgstr "May"
+
+#: src/settings-posthack.php:280
+msgid "MissingLibrary"
+msgstr "MissingLibrary"
+
+#: src/settings-posthack.php:390
+msgid "NewestWordPress"
+msgstr "NewestWordPress"
+
+#: src/interface.lib.php:227
+msgid "NewsletterInvitation"
+msgstr "NewsletterInvitation"
+
+#: src/settings-general.php:191
+msgid "NFilesWereDeleted"
+msgstr "NFilesWereDeleted"
+
+#: src/settings-alerts.php:568
+msgid "No"
+msgstr "No"
+
+#: src/firewall.lib.php:363 src/settings-alerts.php:541
+msgid "NoData"
+msgstr "NoData"
+
+#: src/auditlogs.lib.php:226
+msgid "NoLogs"
+msgstr "NoLogs"
+
+#: src/interface.lib.php:260
+msgid "NonceFailure"
+msgstr "NonceFailure"
+
+#: src/integrity.lib.php:100
+msgid "NonSupportedAction"
+msgstr "NonSupportedAction"
+
+#: src/settings-integrity.php:94
+msgid "NonSupportedLanguage"
+msgstr "NonSupportedLanguage"
+
+#: src/firewall.lib.php:198 src/settings-general.php:445
+#: src/settings-posthack.php:232 src/settings-webinfo.php:38
+#: src/sucuriscan.lib.php:96 src/sucuriscan.lib.php:110
+msgid "NotActive"
+msgstr "NotActive"
+
+#: src/sitecheck.lib.php:275
+msgid "NotBlacklisted"
+msgstr "NotBlacklisted"
+
+#: src/integrity.lib.php:117
+msgid "NothingSelected"
+msgstr "NothingSelected"
+
+#: src/settings-posthack.php:267
+msgid "NotInstalled"
+msgstr "NotInstalled"
+
+#: src/settings-general.php:126 src/settings-posthack.php:86
+#: src/settings-webinfo.php:41
+msgid "NotSet"
+msgstr "NotSet"
+
+#: src/settings-general.php:203 src/settings-posthack.php:277
+msgid "NotWritable"
+msgstr "NotWritable"
+
+#: src/settings-posthack.php:425
+msgid "NoUpdates"
+msgstr "NoUpdates"
+
+#: src/firewall.lib.php:476
+msgid "November"
+msgstr "November"
+
+#: src/command.lib.php:114
+msgid "NoWordPressFile"
+msgstr "NoWordPressFile"
+
+#: src/firewall.lib.php:475
+msgid "October"
+msgstr "October"
+
+#: src/settings-scanner.php:158
+msgid "Okay"
+msgstr "Okay"
+
+#: src/settings-alerts.php:521
+msgid "OnlyLowerUppercase"
+msgstr "OnlyLowerUppercase"
+
+#: src/settings-alerts.php:335
+msgid "OptionFailedLogins120"
+msgstr "OptionFailedLogins120"
+
+#: src/settings-alerts.php:336
+msgid "OptionFailedLogins240"
+msgstr "OptionFailedLogins240"
+
+#: src/settings-alerts.php:333
+msgid "OptionFailedLogins30"
+msgstr "OptionFailedLogins30"
+
+#: src/settings-alerts.php:337
+msgid "OptionFailedLogins480"
+msgstr "OptionFailedLogins480"
+
+#: src/settings-alerts.php:334
+msgid "OptionFailedLogins60"
+msgstr "OptionFailedLogins60"
+
+#: src/settings-alerts.php:382
+msgid "OptionLastLoginRedirection"
+msgstr "OptionLastLoginRedirection"
+
+#: src/settings-alerts.php:384
+msgid "OptionNotifyAvailableUpdates"
+msgstr "OptionNotifyAvailableUpdates"
+
+#: src/settings-alerts.php:389
+msgid "OptionNotifyBruteforceAttack"
+msgstr "OptionNotifyBruteforceAttack"
+
+#: src/settings-alerts.php:387
+msgid "OptionNotifyFailedLogin"
+msgstr "OptionNotifyFailedLogin"
+
+#: src/settings-alerts.php:395
+msgid "OptionNotifyPluginActivated"
+msgstr "OptionNotifyPluginActivated"
+
+#: src/settings-alerts.php:379
+msgid "OptionNotifyPluginChange"
+msgstr "OptionNotifyPluginChange"
+
+#: src/settings-alerts.php:396
+msgid "OptionNotifyPluginDeactivated"
+msgstr "OptionNotifyPluginDeactivated"
+
+#: src/settings-alerts.php:398
+msgid "OptionNotifyPluginDeleted"
+msgstr "OptionNotifyPluginDeleted"
+
+#: src/settings-alerts.php:394
+msgid "OptionNotifyPluginInstalled"
+msgstr "OptionNotifyPluginInstalled"
+
+#: src/settings-alerts.php:397
+msgid "OptionNotifyPluginUpdated"
+msgstr "OptionNotifyPluginUpdated"
+
+#: src/settings-alerts.php:390
+msgid "OptionNotifyPostPublication"
+msgstr "OptionNotifyPostPublication"
+
+#: src/settings-alerts.php:383
+msgid "OptionNotifyScanChecksums"
+msgstr "OptionNotifyScanChecksums"
+
+#: src/settings-alerts.php:392
+msgid "OptionNotifySettingsUpdated"
+msgstr "OptionNotifySettingsUpdated"
+
+#: src/settings-alerts.php:386
+msgid "OptionNotifySuccessLogin"
+msgstr "OptionNotifySuccessLogin"
+
+#: src/settings-alerts.php:402
+msgid "OptionNotifyThemeActivated"
+msgstr "OptionNotifyThemeActivated"
+
+#: src/settings-alerts.php:404
+msgid "OptionNotifyThemeDeleted"
+msgstr "OptionNotifyThemeDeleted"
+
+#: src/settings-alerts.php:393
+msgid "OptionNotifyThemeEditor"
+msgstr "OptionNotifyThemeEditor"
+
+#: src/settings-alerts.php:401
+msgid "OptionNotifyThemeInstalled"
+msgstr "OptionNotifyThemeInstalled"
+
+#: src/settings-alerts.php:403
+msgid "OptionNotifyThemeUpdated"
+msgstr "OptionNotifyThemeUpdated"
+
+#: src/settings-alerts.php:385
+msgid "OptionNotifyUserRegistration"
+msgstr "OptionNotifyUserRegistration"
+
+#: src/settings-alerts.php:391
+msgid "OptionNotifyWebsiteUpdated"
+msgstr "OptionNotifyWebsiteUpdated"
+
+#: src/settings-alerts.php:399
+msgid "OptionNotifyWidgetAdded"
+msgstr "OptionNotifyWidgetAdded"
+
+#: src/settings-alerts.php:400
+msgid "OptionNotifyWidgetDeleted"
+msgstr "OptionNotifyWidgetDeleted"
+
+#: src/settings-alerts.php:289
+msgid "OptionPerHour10"
+msgstr "OptionPerHour10"
+
+#: src/settings-alerts.php:293
+msgid "OptionPerHour160"
+msgstr "OptionPerHour160"
+
+#: src/settings-alerts.php:290
+msgid "OptionPerHour20"
+msgstr "OptionPerHour20"
+
+#: src/settings-posthack.php:81
+msgid "NotRandomized"
+msgstr "NotRandomized"
+
+#: src/settings-alerts.php:291
+msgid "OptionPerHour40"
+msgstr "OptionPerHour40"
+
+#: src/settings-alerts.php:288
+msgid "OptionPerHour5"
+msgstr "OptionPerHour5"
+
+#: src/settings-alerts.php:292
+msgid "OptionPerHour80"
+msgstr "OptionPerHour80"
+
+#: src/settings-alerts.php:294
+msgid "OptionPerHourUnlimited"
+msgstr "OptionPerHourUnlimited"
+
+#: src/settings-alerts.php:380
+msgid "OptionPrettifyMails"
+msgstr "OptionPrettifyMails"
+
+#: src/settings-alerts.php:381
+msgid "OptionUseWordPressMail"
+msgstr "OptionUseWordPressMail"
+
+#: src/settings-general.php:301
+msgid "ParentNotWritable"
+msgstr "ParentNotWritable"
+
+#: src/lastlogins-failed.php:351 src/lastlogins-failed.php:375
+msgid "Password"
+msgstr "Password"
+
+#: src/settings-hardening.php:604
+msgid "PHPDewhitelistSuccess"
+msgstr "PHPDewhitelistSuccess"
+
+#: src/settings-hardening.php:592
+msgid "PHPWhitelistFailure"
+msgstr "PHPWhitelistFailure"
+
+#: src/settings-hardening.php:587
+msgid "PHPWhitelistSuccess"
+msgstr "PHPWhitelistSuccess"
+
+#: src/settings-general.php:38
+msgid "PluginResetSuccess"
+msgstr "PluginResetSuccess"
+
+#: src/settings-alerts.php:526
+msgid "PostTypeFailure"
+msgstr "PostTypeFailure"
+
+#: src/settings-alerts.php:566
+msgid "PostTypeIgnore"
+msgstr "PostTypeIgnore"
+
+#: src/settings-alerts.php:523
+msgid "PostTypeIgnored"
+msgstr "PostTypeIgnored"
+
+#: src/settings-alerts.php:572
+msgid "PostTypeUnignore"
+msgstr "PostTypeUnignore"
+
+#: src/settings-alerts.php:530
+msgid "PostTypeUnignored"
+msgstr "PostTypeUnignored"
+
+#: src/settings-posthack.php:274
+msgid "PremiumPlugin"
+msgstr "PremiumPlugin"
+
+#: src/lastlogins-failed.php:352 src/lastlogins-failed.php:376
+msgid "RemoteAddr"
+msgstr "RemoteAddr"
+
+#: src/interface.lib.php:168
+msgid "RequiresModernPHP"
+msgstr "RequiresModernPHP"
+
+#: src/option.lib.php:656
+msgid "ReverseProxyStatus"
+msgstr "ReverseProxyStatus"
+
+#: src/settings-hardening.php:98 src/settings-hardening.php:127
+#: src/settings-hardening.php:166 src/settings-hardening.php:186
+#: src/settings-hardening.php:261 src/settings-hardening.php:265
+#: src/settings-hardening.php:318 src/settings-hardening.php:322
+#: src/settings-hardening.php:385 src/settings-hardening.php:389
+#: src/settings-hardening.php:430 src/settings-hardening.php:459
+#: src/settings-hardening.php:548
+msgid "RevertHardening"
+msgstr "RevertHardening"
+
+#: src/event.lib.php:75
+msgid "ScheduledTask"
+msgstr "ScheduledTask"
+
+#: src/event.lib.php:81
+msgid "ScheduledTaskNever"
+msgstr "ScheduledTaskNever"
+
+#: src/pagehandler.php:37
+msgid "Scripts"
+msgstr "Scripts"
+
+#: src/sitecheck.lib.php:386
+msgid "ScriptsNum"
+msgstr "ScriptsNum"
+
+#: src/settings-posthack.php:52
+msgid "SecretKeysUpdated"
+msgstr "SecretKeysUpdated"
+
+#: src/settings-general.php:295
+msgid "SelfHostingDisabled"
+msgstr "SelfHostingDisabled"
+
+#: src/settings-general.php:311
+msgid "SelfHostingEnabled"
+msgstr "SelfHostingEnabled"
+
+#: src/firewall.lib.php:474
+msgid "September"
+msgstr "September"
+
+#: src/globals.php:78
+msgid "Settings"
+msgstr "Settings"
+
+#: src/sitecheck.lib.php:234
+msgid "SiteClean"
+msgstr "SiteClean"
+
+#: src/sitecheck.lib.php:240
+msgid "SiteNotClean"
+msgstr "SiteNotClean"
+
+#: src/settings-general.php:92
+msgid "SiteWasRegistered"
+msgstr "SiteWasRegistered"
+
+#: src/integrity.lib.php:225
+msgid "SomeItemsProcessed"
+msgstr "SomeItemsProcessed"
+
+#: src/interface.lib.php:174
+msgid "StorageNotWritable"
+msgstr "StorageNotWritable"
+
+#. Author of the plugin/theme
+msgid "Sucuri Inc."
+msgstr "Sucuri Inc."
+
+#. Plugin Name of the plugin/theme
+msgid "Sucuri Security - Auditing, Malware Scanner and Hardening"
+msgstr "Sucuri Security - Auditing, Malware Scanner and Hardening"
+
+#: src/mail.lib.php:189 src/option.lib.php:140 src/settings-alerts.php:194
+msgid "SucuriAlert"
+msgstr "SucuriAlert"
+
+#: src/settings-alerts.php:94
+msgid "TestAlertSent"
+msgstr "TestAlertSent"
+
+#. Description of the plugin/theme
+msgid "The <a href=\"https://sucuri.net/\" target=\"_blank\">Sucuri</a> plugin provides the website owner the best Activity Auditing, SiteCheck Remote Malware Scanning, Effective Security Hardening and Post-Hack features. SiteCheck will check for malware, spam, blacklisting and other security issues like .htaccess redirects, hidden eval code, etc. The best thing about it is it's completely free."
+msgstr "The <a href=\"https://sucuri.net/\" target=\"_blank\">Sucuri</a> plugin provides the website owner the best Activity Auditing, SiteCheck Remote Malware Scanning, Effective Security Hardening and Post-Hack features. SiteCheck will check for malware, spam, blacklisting and other security issues like .htaccess redirects, hidden eval code, etc. The best thing about it is it's completely free."
+
+#: src/auditlogs.lib.php:175
+msgid "Today"
+msgstr "Today"
+
+#: src/settings-alerts.php:140
+msgid "TrustedIPAdded"
+msgstr "TrustedIPAdded"
+
+#: src/settings-alerts.php:153
+msgid "TrustedIPDeleted"
+msgstr "TrustedIPDeleted"
+
+#: src/settings-alerts.php:137
+msgid "TrustedIPDuplicate"
+msgstr "TrustedIPDuplicate"
+
+#: src/settings-alerts.php:142
+msgid "TrustedIPFailure"
+msgstr "TrustedIPFailure"
+
+#: src/firewall.lib.php:203 src/lastlogins.php:47 src/lastlogins.php:59
+#: src/lastlogins.php:124 src/mail.lib.php:120 src/mail.lib.php:121
+#: src/settings-general.php:381 src/settings-general.php:382
+#: src/settings-general.php:383 src/settings-general.php:384
+#: src/settings-general.php:385 src/settings-posthack.php:194
+#: src/settings-posthack.php:353 src/settings-posthack.php:354
+#: src/settings-posthack.php:355 src/settings-posthack.php:356
+#: src/settings-webinfo.php:37 src/settings-webinfo.php:39
+#: src/settings-webinfo.php:134 src/sucuriscan.lib.php:105
+#: src/sucuriscan.lib.php:482
+msgid "Unknown"
+msgstr "Unknown"
+
+#: src/command.lib.php:110
+msgid "UnsupportedWordPress"
+msgstr "UnsupportedWordPress"
+
+#: src/settings-alerts.php:241
+msgid "UpdatedEmailSubject"
+msgstr "UpdatedEmailSubject"
+
+#: src/mail.lib.php:163
+msgid "UserInfo"
+msgstr "UserInfo"
+
+#: src/lastlogins-failed.php:350 src/lastlogins-failed.php:374
+msgid "Username"
+msgstr "Username"
+
+#: src/settings-posthack.php:316
+msgid "VersionInstalled"
+msgstr "VersionInstalled"
+
+#: src/settings-alerts.php:76
+msgid "WillNotReceiveAlerts"
+msgstr "WillNotReceiveAlerts"
+
+#: src/settings-alerts.php:50
+msgid "WillReceiveAlerts"
+msgstr "WillReceiveAlerts"
+
+#: src/settings-general.php:216
+msgid "Writable"
+msgstr "Writable"
+
+#: src/settings-alerts.php:562
+msgid "Yes"
+msgstr "Yes"
