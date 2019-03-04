@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin\Configurator
  */
 
@@ -8,7 +10,11 @@
  */
 class WPSEO_Config_Factory_Post_Type {
 
-	/** @var WPSEO_Config_Field_Choice_Post_Type[] List of fields */
+	/**
+	 * List of fields.
+	 *
+	 * @var WPSEO_Config_Field_Choice_Post_Type[]
+	 */
 	protected static $fields = array();
 
 	/**
@@ -22,6 +28,7 @@ class WPSEO_Config_Factory_Post_Type {
 
 			// WPSEO_Post_type::get_accessible_post_types() should *not* be used to get a similar experience from the settings.
 			$post_types = get_post_types( array( 'public' => true ), 'objects' );
+			$post_types = WPSEO_Post_Type::filter_attachment_post_type( $post_types );
 			if ( ! empty( $post_types ) ) {
 				foreach ( $post_types as $post_type => $post_type_object ) {
 					$label = $this->decode_html_entities( $post_type_object->label );

@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin
  */
 
@@ -9,13 +11,20 @@
 class WPSEO_Taxonomy_Social_Fields extends WPSEO_Taxonomy_Fields {
 
 	/**
+	 * List of social networks.
+	 *
+	 * @var array
+	 */
+	protected $networks;
+
+	/**
 	 * Setting the class properties
 	 *
 	 * @param stdClass|WP_Term $term    The current taxonomy.
-	 * @param array            $options The options.
 	 */
-	public function __construct( $term, array $options = null ) {
-		parent::__construct( $term, $options );
+	public function __construct( $term ) {
+		parent::__construct( $term );
+
 		$this->networks = $this->get_social_networks();
 	}
 
@@ -25,7 +34,7 @@ class WPSEO_Taxonomy_Social_Fields extends WPSEO_Taxonomy_Fields {
 	 * @return bool
 	 */
 	public function show_social() {
-		return ( $this->options['opengraph'] === true || $this->options['twitter'] === true );
+		return ( WPSEO_Options::get( 'opengraph', false ) || WPSEO_Options::get( 'twitter', false ) );
 	}
 
 	/**
@@ -63,6 +72,11 @@ class WPSEO_Taxonomy_Social_Fields extends WPSEO_Taxonomy_Fields {
 				sprintf( __( 'The recommended image size for %1$s is %2$s pixels.', 'wordpress-seo' ), $settings['label'], $settings['size'] ),
 				'upload'
 			),
+			$settings['network'] . '-image-id' => $this->get_field_config(
+				'',
+				'',
+				'hidden'
+			),
 		);
 	}
 
@@ -88,20 +102,27 @@ class WPSEO_Taxonomy_Social_Fields extends WPSEO_Taxonomy_Fields {
 	 * @return array
 	 */
 	private function get_social_networks() {
-		$social_networks = array(
-			// Source: https://developers.facebook.com/docs/sharing/best-practices#images.
-			'opengraph' => $this->social_network( 'opengraph', __( 'Facebook', 'wordpress-seo' ), sprintf(
-				/* translators: %1$s expands to the image recommended width, %2$s to its height. */
-				__( '%1$s by %2$s', 'wordpress-seo' ), '1200', '630'
-			) ),
-			'twitter'   => $this->social_network( 'twitter', __( 'Twitter', 'wordpress-seo' ), sprintf(
-				/* translators: %1$s expands to the image recommended width, %2$s to its height. */
-				__( '%1$s by %2$s', 'wordpress-seo' ), '1024', '512'
-			) ),
+		// Source: https://developers.facebook.com/docs/sharing/best-practices#images.
+		$fb_image_size = sprintf(
+			/* translators: %1$s expands to the image recommended width, %2$s to its height. */
+			__( '%1$s by %2$s', 'wordpress-seo' ),
+			'1200',
+			'630'
 		);
-		$social_networks = $this->filter_social_networks( $social_networks );
 
-		return $social_networks;
+		$twitter_image_size = sprintf(
+			/* translators: %1$s expands to the image recommended width, %2$s to its height. */
+			__( '%1$s by %2$s', 'wordpress-seo' ),
+			'1024',
+			'512'
+		);
+
+		$social_networks = array(
+			'opengraph' => $this->social_network( 'opengraph', __( 'Facebook', 'wordpress-seo' ), $fb_image_size ),
+			'twitter'   => $this->social_network( 'twitter', __( 'Twitter', 'wordpress-seo' ), $twitter_image_size ),
+		);
+
+		return $this->filter_social_networks( $social_networks );
 	}
 
 	/**
@@ -130,7 +151,7 @@ class WPSEO_Taxonomy_Social_Fields extends WPSEO_Taxonomy_Fields {
 	 */
 	private function filter_social_networks( array $social_networks ) {
 		foreach ( $social_networks as $social_network => $settings ) {
-			if ( empty( $this->options[ $social_network ] ) ) {
+			if ( WPSEO_Options::get( $social_network, false ) === false ) {
 				unset( $social_networks[ $social_network ] );
 			}
 		}

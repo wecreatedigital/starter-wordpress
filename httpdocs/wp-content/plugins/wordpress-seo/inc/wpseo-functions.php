@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Internals
  */
 
@@ -31,8 +33,7 @@ if ( ! function_exists( 'yoast_breadcrumb' ) ) {
 	function yoast_breadcrumb( $before = '', $after = '', $display = true ) {
 		$breadcrumbs_enabled = current_theme_supports( 'yoast-seo-breadcrumbs' );
 		if ( ! $breadcrumbs_enabled ) {
-			$options             = get_option( 'wpseo_internallinks' );
-			$breadcrumbs_enabled = ( $options['breadcrumbs-enable'] === true );
+			$breadcrumbs_enabled = WPSEO_Options::get( 'breadcrumbs-enable', false );
 		}
 
 		if ( $breadcrumbs_enabled ) {
@@ -245,3 +246,16 @@ function wpseo_split_shared_term( $old_term_id, $new_term_id, $term_taxonomy_id,
 }
 
 add_action( 'split_shared_term', 'wpseo_split_shared_term', 10, 4 );
+
+/**
+ * Get all WPSEO related capabilities.
+ *
+ * @since 8.3
+ * @return array
+ */
+function wpseo_get_capabilities() {
+	if ( ! did_action( 'wpseo_register_capabilities' ) ) {
+		do_action( 'wpseo_register_capabilities' );
+	}
+	return WPSEO_Capability_Manager_Factory::get()->get_capabilities();
+}

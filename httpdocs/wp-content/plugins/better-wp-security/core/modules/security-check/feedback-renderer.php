@@ -17,6 +17,9 @@ final class ITSEC_Security_Check_Feedback_Renderer {
 		if ( isset( $section_groups['confirmation'] ) ) {
 			self::render_sections( 'confirmation', $section_groups['confirmation'] );
 		}
+		if ( isset( $section_groups['error'] ) ) {
+			self::render_sections( 'error', $section_groups['error'] );
+		}
 	}
 
 	private static function render_sections( $status, $sections ) {

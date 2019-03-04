@@ -3,8 +3,9 @@ Contributors: teckel
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=99J6Y4WCHCUN4&lc=US&item_name=Minify%20HTML&item_number=Minify%20HTML%20Plugin&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
 Tags: minify, minifer, minification, HTML, fast, faster, speed, performance, optimize, optimization, downloading, beautify, beautifier, sloppy, clean, cleaner, markup, compress, css, javascript
 Requires at least: 1.5
-Tested up to: 4.8
-Stable tag: 1.98
+Tested up to: 4.9.6
+Stable tag: 1.99
+Requires PHP: 5.2.4
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -21,6 +22,7 @@ Minify HTML also has optional specialized minification for JavaScript and intern
 
 Settings options to removes HTML, CSS and JavaScript comments (leaving MSIE conditional comments), remove unneeded XHTML closing tags from HTML5 void elements and remove unneeded relative schemes and domains from links.
 
+> Do you know it's also important for SEO to have your images optimized? We recommend you use the **[ShortPixel Image Optimization](https://shortpixel.com/wp/af/1SFO1HD28044 "ShortPixel Image Optimization")** plugin for that. Use this **[special link](https://shortpixel.com/wp/af/1SFO1HD28044 "ShortPixel Image Optimization")** to get 50% more credits!
 
 == Installation ==
 
@@ -76,6 +78,10 @@ With Minify HTML, the source HTML file will be smaller, therefore, it will compr
 
 
 == Changelog ==
+
+= v1.99 - 05/21/2018 =
+* Compatiblity with WordPress thru 4.9.6
+* Text changes
 
 = v1.98 - 03/15/2017 =
 * Forces the multi-byte UTF-8 encoding option to default to OFF

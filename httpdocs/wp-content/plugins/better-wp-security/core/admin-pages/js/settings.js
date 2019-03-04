@@ -665,6 +665,8 @@ var itsecSettingsPage = {
 				itsecSettingsPage.isModuleActive( module );
 			}, 1000 );
 
+			itsecSettingsPage.showErrors( results.errors, results.module, 'closed', 'error' );
+
 			return;
 		}
 
@@ -824,34 +826,38 @@ var itsecSettingsPage = {
 	},
 
 	// Make notices dismissible
-	makeNoticesDismissible: function(){
-	jQuery( '.notice.itsec-is-dismissible' ).each( function() {
-		var $el = jQuery( this ),
-			$button = jQuery( '<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>' ),
-			btnText = itsec_page.translations.dismiss || '';
+	makeNoticesDismissible: function() {
+		jQuery( '.notice.itsec-is-dismissible' ).each( function() {
+			var $el = jQuery( this ),
+				$button = jQuery( '<button type="button" class="notice-dismiss"><span class="screen-reader-text"></span></button>' ),
+				btnText = itsec_page.translations.dismiss || '';
 
-		// Don't rebind twice
-		if ( jQuery( '.notice-dismiss', $el ).length ) {
-			return;
-		}
+			// Don't rebind twice
+			if ( jQuery( '.notice-dismiss', $el ).length ) {
+				return;
+			}
 
-		// Ensure plain text
-		$button.find( '.screen-reader-text' ).text( btnText );
-		$button.on( 'click.wp-dismiss-notice', function( event ) {
-			event.preventDefault();
+			// Ensure plain text
+			$button.find( '.screen-reader-text' ).text( btnText );
+			$button.on( 'click.wp-dismiss-notice', function( event ) {
+				event.preventDefault();
 
-			$el.trigger( 'itsec-dismiss-notice' );
+				$el.trigger( 'itsec-dismiss-notice' );
 
-			$el.fadeTo( 100, 0, function() {
-				$el.slideUp( 100, function() {
-					$el.remove();
+				$el.fadeTo( 100, 0, function() {
+					$el.slideUp( 100, function() {
+						$el.remove();
+					});
 				});
 			});
-		});
 
-		$el.append( $button );
-	});
-}
+			$el.append( $button );
+		});
+	},
+
+	refreshPage: function() {
+		location.reload( true );
+	}
 };
 
 jQuery(document).ready(function( $ ) {

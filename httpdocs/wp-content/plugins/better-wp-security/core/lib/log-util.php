@@ -42,31 +42,6 @@ final class ITSEC_Log_Util {
 		global $wpdb;
 
 
-		$get_count = false;
-		$min_timestamp = false;
-
-		if ( isset( $filters['__get_count'] ) ) {
-			if ( $filters['__get_count'] ) {
-				$get_count = true;
-			}
-
-			unset( $filters['__get_count'] );
-		}
-
-		if ( isset( $filters['__min_timestamp'] ) ) {
-			$min_timestamp = $filters['__min_timestamp'];
-			unset( $filters['__min_timestamp'] );
-		}
-
-		$limit = max( 0, min( 100, intval( $limit ) ) );
-		$page = max( 1, intval( $page ) );
-
-		$sort_direction = strtoupper( $sort_direction );
-		if ( ! in_array( $sort_direction, array( 'DESC', 'ASC' ) ) ) {
-			$sort_direction = 'DESC';
-		}
-
-
 		$valid_columns = array(
 			'id',
 			'parent_id',
@@ -81,6 +56,55 @@ final class ITSEC_Log_Util {
 			'memory_current',
 			'memory_peak',
 		);
+
+
+		$get_count = false;
+		$min_timestamp = $max_timestamp = false;
+
+		if ( isset( $filters['__get_count'] ) ) {
+			if ( $filters['__get_count'] ) {
+				$get_count = true;
+			}
+
+			unset( $filters['__get_count'] );
+		}
+
+		if ( isset( $filters['__min_timestamp'] ) ) {
+			$min_timestamp = $filters['__min_timestamp'];
+			unset( $filters['__min_timestamp'] );
+		}
+
+		if ( isset( $filters['__max_timestamp'] ) ) {
+			$max_timestamp = $filters['__max_timestamp'];
+			unset( $filters['__max_timestamp'] );
+		}
+
+
+		$limit = max( 0, min( 100, intval( $limit ) ) );
+		$page = max( 1, intval( $page ) );
+
+		if ( is_array( $sort_by_column ) ) {
+			$regex_valid_columns = '(?:' . implode( '|', $valid_columns ) . ')';
+
+			foreach ( $sort_by_column as $index => $sort_by ) {
+				if ( in_array( $sort_by, $valid_columns ) ) {
+					$sort_by_column[$index] = "$sort_by DESC";
+				} else if ( ! preg_match( "/^$regex_valid_columns\s+(?:DESC|ASC)$/i", $sort_by ) ) {
+					unset( $sort_by_column[$index] );
+				}
+			}
+
+			if ( empty( $sort_by_column ) ) {
+				$sort_by_column = 'timestamp';
+			}
+		} else if ( ! in_array( $sort_by_column, $valid_columns ) ) {
+			$sort_by_column = 'timestamp';
+		}
+
+		$sort_direction = strtoupper( $sort_direction );
+		if ( ! in_array( $sort_direction, array( 'DESC', 'ASC' ) ) ) {
+			$sort_direction = 'DESC';
+		}
 
 		if ( false === $columns ) {
 			$columns = $valid_columns;
@@ -153,8 +177,13 @@ final class ITSEC_Log_Util {
 		}
 
 		if ( false !== $min_timestamp ) {
-			$where_entries[] = 'init_timestamp>%s';
+			$where_entries[] = 'timestamp>%s';
 			$prepare_args[] = date( 'Y-m-d H:i:s', $min_timestamp );
+		}
+
+		if ( false !== $max_timestamp ) {
+			$where_entries[] = 'timestamp<%s';
+			$prepare_args[] = date( 'Y-m-d H:i:s', $max_timestamp );
 		}
 
 		$query .= ' WHERE ' . implode( ' AND ', $where_entries );

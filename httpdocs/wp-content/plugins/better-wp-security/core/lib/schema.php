@@ -72,7 +72,49 @@ CREATE TABLE {$wpdb->base_prefix}itsec_temp (
 	KEY temp_host (temp_host),
 	KEY temp_user (temp_user),
 	KEY temp_username (temp_username)
-) $charset_collate;";
+) $charset_collate;
+
+CREATE TABLE {$wpdb->base_prefix}itsec_distributed_storage (
+	storage_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	storage_group varchar(40) NOT NULL,
+	storage_key varchar(40) NOT NULL default '',
+	storage_chunk int NOT NULL default 0,
+	storage_data longtext NOT NULL,
+	storage_updated datetime NOT NULL,
+	PRIMARY KEY  (storage_id),
+	UNIQUE KEY storage_group__key__chunk (storage_group,storage_key,storage_chunk)
+) $charset_collate;
+
+CREATE TABLE {$wpdb->base_prefix}itsec_geolocation_cache (
+	location_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	location_host varchar(40) NOT NULL,
+	location_lat decimal(10,8) NOT NULL,
+	location_long decimal(11,8) NOT NULL,
+	location_label varchar(255) NOT NULL,
+	location_credit varchar (255) NOT NULL,
+	location_time datetime NOT NULL,
+	PRIMARY KEY  (location_id),
+	UNIQUE KEY location_host (location_host),
+	KEY location_time (location_time)
+) $charset_collate;
+
+CREATE TABLE {$wpdb->base_prefix}itsec_fingerprints (
+	fingerprint_id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
+	fingerprint_user bigint(20) UNSIGNED NOT NULL,
+	fingerprint_hash char(32) NOT NULL,
+	fingerprint_created_at datetime NOT NULL,
+	fingerprint_approved_at datetime NOT NULL,
+	fingerprint_data longtext NOT NULL,
+	fingerprint_snapshot longtext NOT NULL,
+	fingerprint_last_seen datetime NOT NULL,
+	fingerprint_uses int NOT NULL default 0,
+	fingerprint_status varchar(20) NOT NULL,
+	fingerprint_uuid char(36) NOT NULL,
+	PRIMARY KEY  (fingerprint_id),
+	UNIQUE KEY fingerprint_user__hash (fingerprint_user,fingerprint_hash),
+	UNIQUE KEY fingerprint_uuid (fingerprint_uuid)
+) $charset_collate;
+";
 
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 		dbDelta( $tables );
@@ -85,5 +127,8 @@ CREATE TABLE {$wpdb->base_prefix}itsec_temp (
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_log;" );
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_lockouts;" );
 		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_temp;" );
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_distributed_storage;" );
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_geolocation_cache;" );
+		$wpdb->query( "DROP TABLE IF EXISTS {$wpdb->base_prefix}itsec_fingerprints;" );
 	}
 }

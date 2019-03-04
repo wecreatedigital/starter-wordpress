@@ -252,13 +252,13 @@ body.itsec-modal-open {
 	background: #efefef;
 	cursor: pointer;
 }
-.itsec-modal-navigation button.itsec-left:before {
+.itsec-modal-navigation button.itsec-left::before {
 	content: '\f341';
 }
-.itsec-modal-navigation button.itsec-right:before {
+.itsec-modal-navigation button.itsec-right::before {
 	content: '\f345';
 }
-.itsec-modal-navigation button.itsec-close-modal:before {
+.itsec-modal-navigation button.itsec-close-modal::before {
 	content: '\f335';
 }
 .itsec-modal-content-footer {
@@ -274,7 +274,6 @@ body.itsec-modal-open {
 .itsec-modal-content-footer .align-left{
 	float: left;
 }
-
 .itsec-modal-content-footer .align-right{
 	float: right;
 }
@@ -294,13 +293,14 @@ body.itsec-modal-open {
 .itsec-settings-section .itsec-setting-field {
 	margin-bottom: 1.5em;
 }
-
 .itsec-settings-module-settings .form-table th {
 	padding-left: 15px;
 }
-
 .itsec-settings-module-settings .itsec-highlighted-setting {
 	background: #e5f5fa;
+}
+.itsec-settings-module-settings .form-table td select {
+	margin: 1em 0;
 }
 
 
@@ -318,7 +318,7 @@ body.itsec-modal-open {
 	padding: .35em 0;
 }
 .itsec-settings-view-toggle a,
-.itsec-settings-view-toggle a:before {
+.itsec-settings-view-toggle a::before {
 	color: #b4b9be;
 	padding: 0 .25em 0 0;
 }
@@ -641,7 +641,7 @@ body.itsec-modal-open {
 	position: relative;
 }
 
-.itsec-security-check-container:before {
+.itsec-security-check-container::before {
 	font-family: 'Dashicons';
 	font-size: 1.75em;
 	position: absolute;
@@ -650,20 +650,20 @@ body.itsec-modal-open {
 	margin: -9px 0 0 0;
 }
 
-.itsec-security-check-container-action-taken:before,
-.itsec-security-check-container-complete:before,
-.itsec-security-check-container-confirmation:before {
+.itsec-security-check-container-action-taken::before,
+.itsec-security-check-container-complete::before,
+.itsec-security-check-container-confirmation::before {
 	content: "\f147";
 	color: #46b450;
 }
 
-.itsec-security-check-container-incomplete:before,
-.itsec-security-check-container-call-to-action:before {
+.itsec-security-check-container-incomplete::before,
+.itsec-security-check-container-call-to-action::before {
 	content: "\f534";
 	color: #f2dd28;
 }
 
-.itsec-security-check-container-error:before {
+.itsec-security-check-container-error::before {
 	content: "\f534";
 	color: #dc3232;
 }
@@ -688,6 +688,9 @@ body.itsec-modal-open {
  */
 .itsec-two-factor .dashicons {
 	cursor: default;
+}
+.itsec-two-factor .dashicons.not-configured {
+	color: #F56E28;
 }
 .itsec-two-factor .dashicons.dashicons-unlock {
 	color: #dc3232;
@@ -847,4 +850,234 @@ body.security_page_itsec-logs #old-logs-migration-status img {
 }
 body.security_page_itsec-logs #old-logs-migration-status p {
 	line-height: 1.4em;
+}
+#itsec-system-info, #itsec-settings-editor {
+	font-family: monospace;
+	width: 100%;
+	margin: 0;
+	height: 300px;
+	padding: 20px;
+	border-radius: 0;
+	resize: none;
+	font-size: 12px;
+	line-height: 20px;
+	outline: 0;
+}
+
+#itsec-settings-editor:empty {
+	display: none;
+}
+.itsec-module-cards-container .bulkactions:empty {
+	display: none;
+}
+
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table .widefat th {
+	padding: 8px 10px;
+}
+
+body.security_page_itsec-logs .itsec-module-settings-content-main .form-table .widefat td {
+	padding: 15px 10px;
+}
+
+
+/***************************************
+	Tooltip
+****************************************/
+.tooltip {
+	position: relative;
+	top: -6px;
+	display: inline-block;
+	background: #0080C9;
+	padding: 0px 4px;
+	border-radius: 50px;
+	font-size: 0.7em;
+	margin: -10px 0;
+	cursor: pointer;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.tooltip-trigger-only {
+	position: relative;
+	font-size: 0.7em;
+	cursor: pointer;
+	color: #FFFFFF;
+	text-align: left;
+}
+
+.tooltip:hover .info,
+.tooltip-trigger-only:hover .info,
+.tooltip:focus .info,
+.tooltip-trigger-only:focus .info {
+	visibility: visible;
+	opacity: 1;
+	transform: translate3d(0, 0, 0);
+}
+
+.tooltip .info,
+.tooltip-trigger-only .info {
+	box-sizing: border-box;
+	position: absolute;
+	top: 18px;
+	left: -8px;
+	display: block;
+	background: #0080C9;
+	border: 1px solid #D6D6D6;
+	width: 350px;
+	font-size: 1.45em;
+	font-weight: 300;
+	line-height: 1.5;
+	cursor: text;
+	visibility: hidden;
+	opacity: 0;
+	transform: translate3d(0, -20px, 0);
+	transition: all .5s ease-out;
+	z-index: 2;
+}
+
+.tooltip .info:before,
+.tooltip-trigger-only .info:before {
+	position: absolute;
+	content: '';
+	width: 100%;
+	height: 14px;
+	bottom: -14px;
+	left: 0;
+}
+
+.tooltip .info:after,
+.tooltip-trigger-only .info:after {
+	position: absolute;
+	content: '';
+	width: 10px;
+	height: 10px;
+	transform: rotate(45deg);
+	top: -5px;
+	left: 13px;
+	margin-left: -5px;
+	background: #0080C9;
+}
+
+.tooltip .text,
+.tooltip-trigger-only .text {
+	display: block;
+	padding: 2em;
+	color: #FFFFFF;
+}
+
+.tooltip .info .text a,
+.tooltip-trigger-only .info .text a {
+	color: white;
+}
+
+.tooltip .info .text a:hover,
+.tooltip-trigger-only .info .text a:hover {
+	color: #000000;
+}
+
+.included-with-bb .tooltip span {
+	border-bottom: none;
+}
+
+.tooltip .tooltip-container .info,
+.tooltip-trigger-only .tooltip-container .info {
+	border-bottom: 1px solid #D6D6D6;
+}
+
+/***************************************
+	Tooltip Responsive Styles
+****************************************/
+@media ( min-width: 1042px ) and ( max-width: 1342px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		width: 250px;
+		left: -58px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 63px;
+	}
+}
+
+@media ( min-width: 783px ) and ( max-width: 1041px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		width: 200px;
+		left: -130px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 136px;
+	}
+}
+
+@media ( max-width: 740px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		width: 250px;
+	}
+}
+
+@media ( max-width: 646px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		left: -130px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 136px;
+	}
+}
+
+@media ( min-width: 450px ) and ( max-width: 520px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		left: -230px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 236px;
+	}
+}
+
+@media ( max-width: 483px ) {
+	#itsec-version-management-scan_for_old_wordpress_sites ~ .tooltip .info {
+		left: -8px;
+	}
+
+	#itsec-version-management-scan_for_old_wordpress_sites ~ .tooltip .info:after {
+		left: 14px;
+	}
+}
+
+@media ( max-width: 449px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		left: -58px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 63px;
+	}
+
+	.itsec-settings-module-settings .form-table td p {
+		max-width: 275px;
+	}
+}
+
+@media ( max-width: 336px ) {
+	.tooltip .info,
+	.tooltip-trigger-only .info {
+		left: -100px;
+	}
+
+	.tooltip .info:after,
+	.tooltip-trigger-only .info:after {
+		left: 106px;
+	}
 }

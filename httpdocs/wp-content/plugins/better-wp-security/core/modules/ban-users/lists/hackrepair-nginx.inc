@@ -152,7 +152,6 @@ if ($http_user_agent ~* "PHPCrawl"){return 403;}
 if ($http_user_agent ~* "PleaseCrawl"){return 403;}
 if ($http_user_agent ~* "SBIder"){return 403;}
 if ($http_user_agent ~* "SearchmetricsBot"){return 403;}
-if ($http_user_agent ~* "SeznamBot"){return 403;}
 if ($http_user_agent ~* "Snoopy"){return 403;}
 if ($http_user_agent ~* "Steeler"){return 403;}
 if ($http_user_agent ~* "URI\:\:Fetch"){return 403;}

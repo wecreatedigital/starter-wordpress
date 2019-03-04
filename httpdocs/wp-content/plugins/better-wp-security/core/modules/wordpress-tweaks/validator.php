@@ -21,6 +21,7 @@ class ITSEC_WordPress_Tweaks_Validator extends ITSEC_Validator {
 		$this->sanitize_setting( 'bool', 'disable_unused_author_pages', __( 'Disable Extra User Archives', 'better-wp-security' ) );
 		$this->sanitize_setting( 'bool', 'block_tabnapping', __( 'Protect Against Tabnapping', 'better-wp-security' ) );
 		$this->sanitize_setting( array( 'both', 'email', 'username' ), 'valid_user_login_type', __( 'Login with Email Address or Username', 'better-wp-security' ) );
+		$this->sanitize_setting( 'bool', 'patch_thumb_file_traversal', __( 'Mitigate Attachment File Traversal Attack', 'better-wp-security' ) );
 	}
 
 	protected function validate_settings() {

@@ -2,6 +2,7 @@
 
 abstract class ITSEC_Scheduler {
 
+	const S_TWICE_HOURLY = 'twice-hourly';
 	const S_HOURLY = 'hourly';
 	const S_FOUR_DAILY = 'four-daily';
 	const S_TWICE_DAILY = 'twice-daily';
@@ -13,6 +14,12 @@ abstract class ITSEC_Scheduler {
 
 	/** @var array */
 	protected $custom_schedules = array();
+
+	/** @var array */
+	protected $loops = array();
+
+	/** @var bool */
+	private $is_running = false;
 
 	/**
 	 * Schedule a recurring event.
@@ -57,6 +64,23 @@ abstract class ITSEC_Scheduler {
 	}
 
 	/**
+	 * Schedule an event loop.
+	 *
+	 * @param string $id   The event ID.
+	 * @param array  $data Event data.
+	 * @param array  $opts
+	 *  - fire_at: Manually specify the first time the event should be fired.
+	 */
+	public function schedule_loop( $id, $data = array(), $opts = array() ) {
+		$start = isset( $opts['fire_at'] ) ? $opts['fire_at'] : ITSEC_Core::get_current_time_gmt() + 60 * mt_rand( 1, 30 );
+
+		$this->schedule_once( $start, $id, array_merge( $data, array(
+			'loop_start' => $start,
+			'loop_item'  => 1,
+		) ) );
+	}
+
+	/**
 	 * Is a recurring event scheduled.
 	 *
 	 * @param string $id
@@ -90,8 +114,8 @@ abstract class ITSEC_Scheduler {
 	 *
 	 * The data specified needs to be identical to the data the single event was scheduled with.
 	 *
-	 * @param string $id
-	 * @param array  $data
+	 * @param string     $id The event ID to unschedule.
+	 * @param array|null $data Unschedules the event with the given data. Pass null to delete any and all events matching the ID.
 	 *
 	 * @return bool
 	 */
@@ -117,6 +141,7 @@ abstract class ITSEC_Scheduler {
 	 *  - id: The ID the event was scheduled with.
 	 *  - data: The data the event was scheduled with.
 	 *  - fire_at: The time the event should be fired.
+	 *  - hash: The event's data hash.
 	 *
 	 * @return array
 	 */
@@ -146,11 +171,39 @@ abstract class ITSEC_Scheduler {
 	abstract public function run_single_event( $id, $data = array() );
 
 	/**
+	 * Run a single event by it's hash.
+	 *
+	 * @param string $id
+	 * @param string $hash
+	 *
+	 * @return void
+	 */
+	abstract public function run_single_event_by_hash( $id, $hash );
+
+	/**
+	 * Run any events that are due now.
+	 *
+	 * @param int $now
+	 *
+	 * @return void
+	 */
+	abstract public function run_due_now( $now = 0 );
+
+	/**
 	 * Code executed on every page load to setup the scheduler.
 	 *
 	 * @return void
 	 */
 	abstract public function run();
+
+	/**
+	 * Check whether the scheduler is currently executing an event.
+	 *
+	 * @return bool
+	 */
+	final public function is_running() {
+		return $this->is_running;
+	}
 
 	/**
 	 * Manually trigger modules to register their scheduled events.
@@ -173,10 +226,37 @@ abstract class ITSEC_Scheduler {
 	 * Register a custom schedule.
 	 *
 	 * @param string $slug
-	 * @param int $interval
+	 * @param int    $interval
 	 */
 	public function register_custom_schedule( $slug, $interval ) {
 		$this->custom_schedules[ $slug ] = $interval;
+	}
+
+	/**
+	 * Register an event loop.
+	 *
+	 * This allows for splitting up a long running process across multiple page loads.
+	 *
+	 * @param string $id       The event ID.
+	 * @param string $schedule The schedule between loop starts. This is the maximum amount of time to wait.
+	 * @param int    $wait     Time to wait in seconds between loop parts.
+	 */
+	public function register_loop( $id, $schedule, $wait ) {
+		$this->loops[ $id ] = array(
+			'schedule' => $schedule,
+			'wait'     => $wait,
+		);
+	}
+
+	/**
+	 * Get the loop configuration.
+	 *
+	 * @param string $id
+	 *
+	 * @return array
+	 */
+	public function get_loop( $id ) {
+		return isset( $this->loops[ $id ] ) ? $this->loops[ $id ] : array();
 	}
 
 	/**
@@ -214,12 +294,28 @@ abstract class ITSEC_Scheduler {
 	 * @param ITSEC_Job $job
 	 */
 	protected final function call_action( ITSEC_Job $job ) {
-		/**
-		 * Fires when a scheduled job should be executed.
-		 *
-		 * @param ITSEC_Job $job
-		 */
-		do_action( "itsec_scheduled_{$job->get_id()}", $job );
+		$interactive = ITSEC_Core::is_interactive();
+		ITSEC_Core::set_interactive( false );
+		$this->is_running = true;
+
+		try {
+			/**
+			 * Fires when a scheduled job should be executed.
+			 *
+			 * @param ITSEC_Job $job
+			 */
+			do_action( "itsec_scheduled_{$job->get_id()}", $job );
+		} catch ( Exception $e ) {
+			ITSEC_Log::add_fatal_error( 'scheduler', 'unhandled-exception', array(
+				'exception' => (string) $e,
+				'job'       => $job->get_id(),
+				'data'      => $job->get_data(),
+			) );
+			$job->reschedule_in( 500 );
+		}
+
+		$this->is_running = false;
+		ITSEC_Core::set_interactive( $interactive );
 	}
 
 	/**
@@ -240,8 +336,10 @@ abstract class ITSEC_Scheduler {
 	 *
 	 * @return int
 	 */
-	protected final function get_schedule_interval( $schedule ) {
+	final public function get_schedule_interval( $schedule ) {
 		switch ( $schedule ) {
+			case self::S_TWICE_HOURLY:
+				return HOUR_IN_SECONDS / 2;
 			case self::S_HOURLY:
 				return HOUR_IN_SECONDS;
 			case self::S_FOUR_DAILY:

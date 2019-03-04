@@ -5,10 +5,8 @@ jQuery( function ( $ ) {
 	} );
 
 	$( document ).on( 'itsec-dismiss-notice', '.itsec-notification-center-mail-errors-container .notice.itsec-is-dismissible', function () {
-		var errorId = $( this ).data( 'id' );
-
-		itsecUtil.sendModuleAJAXRequest( 'notification-center', { method: 'dismiss-mail-error', mail_error: errorId }, function ( r ) {
-			if ( r.response && r.response.status === 'all-cleared' ) {
+		itsecUtil.sendModuleAJAXRequest( 'notification-center', { method: 'dismiss-mail-error' }, function ( r ) {
+			if ( r.success ) {
 				jQuery( '#itsec-module-card-notification-center' ).removeClass( 'itsec-module-status--warning' );
 			}
 		} )
@@ -34,6 +32,10 @@ jQuery( function ( $ ) {
 			$other.hide();
 		}
 	}
+
+	$( document ).on( 'change', '.itsec-notification-center-user-list-type', function ( e ) {
+		$( this ).next().toggleClass( 'hidden' );
+	} );
 
 	itsecSettingsPage.events.on( 'modulesReloaded', initializeHiding );
 	itsecSettingsPage.events.on( 'moduleReloaded', function ( _, module ) {

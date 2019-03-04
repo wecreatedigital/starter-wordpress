@@ -1,6 +1,62 @@
 Changelog
 =========
 
+1.7.1 (2019-02-07)
+- Reinstall settings page for multisites.
+
+1.7 (2019-01-21)
+- Remove settings page for multisites.
+- Simplify admin notifications.
+- Test plugin with PHP 7.2.
+- Test plugin up to WordPress 5.0.3.
+
+1.6.1 (2018-10-08)
+- Restore Settings page form for all install types.
+
+1.6 (2018-9-21)
+- Refactor admin notifications
+- Enable Settings page for all WordPress install types
+- Enable Test Configuration for all WordPress install types
+- Test plugin up to WordPress 4.9.8.
+
+1.5.14 (2018-09-11)
+- Force SSL-secured SMTP connections to use port 465 (SMTPS) to connect, 587 for plain and TLS
+- Support region endpoint switching for SMTP
+
+1.5.13.1 (2018-08-15)
+- Fix line breaks in Test Configuration email
+
+1.5.13 (2018-08-14)
+- Default to US region if no region is configured in settings
+- Add admin notification about region configuration
+- Log an error message when an email is sent with no explicit region configured
+
+1.5.12.3 (2018-08-09)
+- Fix Region select menu default when wp-config.php variable is set
+- Fix front end email input validation
+
+1.5.12.2 (2018-08-09)
+- Fix plugin not saving after update
+
+1.5.12.1 (2018-08-06)
+- Fix for backwards compatibility
+
+1.5.12 (2018-08-02)
+- Add EU endpoint for Mailgun HTTP API
+- Fix broken logo image on Lists page
+- Test plugin up to Wordpress 4.9.7
+
+1.5.11 (2018-05-30):
+- Fix an issue with authentication failing for newer API keys
+- Test plugin up to Wordpress 4.9.6
+
+1.5.10 (2017-11-22):
+- Fix back to settings link on lists page (https://github.com/mailgun/wordpress-plugin/pull/65)
+- Fix a bug causing `text/html` emails to send as both `text/plain` *and* `text/html` parts
+
+1.5.9 (2017-09-13):
+- Add a configuration option to allow setting security type for SMTP connection (SSL / TLS)
+
 1.5.8.5 (2017-09-05):
 - Change default click tracking setting to `htmlonly` (https://github.com/mailgun/wordpress-plugin/pull/58)
 - Change PHPMailer set-up stanza to use TLS

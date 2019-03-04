@@ -1,6 +1,9 @@
 <?php
 
 class ITSEC_Settings_Page_Sidebar_Widget_Mail_List_Signup extends ITSEC_Settings_Page_Sidebar_Widget {
+
+	private $version = 1;
+
 	public function __construct() {
 		$this->id = 'mail-list-signup';
 		$this->title = __( 'Download Our WordPress Security Pocket Guide', 'better-wp-security' );
@@ -11,7 +14,7 @@ class ITSEC_Settings_Page_Sidebar_Widget_Mail_List_Signup extends ITSEC_Settings
 	}
 
 	public function render( $form ) {
-		wp_enqueue_script( 'itsec-mc-validate', plugins_url( '/js/mc-validate.js', __FILE__ ), array( 'jquery' ), '20160526', true );
+		wp_enqueue_script( 'itsec-mc-validate', plugins_url( '/js/mc-validate.js', __FILE__ ), array( 'jquery' ), $this->version, true );
 		$this->inline_js = "(function($) {window.fnames = new Array(); window.ftypes = new Array();fnames[0]='EMAIL';ftypes[0]='email';fnames[1]='FNAME';ftypes[1]='text';fnames[2]='LNAME';ftypes[2]='text';}(jQuery));";
 		if ( function_exists( 'wp_add_inline_script' ) ) {
 			wp_add_inline_script( 'itsec-mc-validate', $this->inline_js );

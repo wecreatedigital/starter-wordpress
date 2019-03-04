@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin
  */
 
@@ -8,7 +10,9 @@
  */
 class WPSEO_Collector {
 
-	/** @var WPSEO_Collection[] */
+	/**
+	 * @var WPSEO_Collection[]
+	 */
 	protected $collections = array();
 
 	/**

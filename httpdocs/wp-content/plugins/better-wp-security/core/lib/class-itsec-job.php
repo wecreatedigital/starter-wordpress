@@ -34,10 +34,11 @@ class ITSEC_Job {
 	 *
 	 * The original event will not fire while a reschedule is pending.
 	 *
-	 * @param int $seconds
+	 * @param int   $seconds
+	 * @param array $data Additional data to attach to the rescheduled event.
 	 */
-	public function reschedule_in( $seconds ) {
-		$data = $this->get_data();
+	public function reschedule_in( $seconds, $data = array() ) {
+		$data = array_merge( $this->data, $data );
 
 		if ( isset( $data['retry_count'] ) ) {
 			$data['retry_count'] ++;
@@ -46,6 +47,45 @@ class ITSEC_Job {
 		}
 
 		$this->scheduler->schedule_once( ITSEC_Core::get_current_time_gmt() + $seconds, $this->id, $data );
+	}
+
+	/**
+	 * Schedule the next loop item.
+	 *
+	 * @param array $data Data to provide to the next event.
+	 */
+	public function schedule_next_in_loop( $data = array() ) {
+		if ( ! $config = $this->scheduler->get_loop( $this->get_id() ) ) {
+			return;
+		}
+
+		$data = array_merge( $this->get_data(), $data, array(
+			'loop_item' => $this->data['loop_item'] + 1,
+		) );
+
+		$this->scheduler->schedule_once( ITSEC_Core::get_current_time_gmt() + $config['wait'], $this->get_id(), $data );
+	}
+
+	/**
+	 * Schedule the loop to start over again.
+	 *
+	 * @param array $data
+	 */
+	public function schedule_new_loop( $data = array() ) {
+
+		if ( ! $config = $this->scheduler->get_loop( $this->get_id() ) ) {
+			return;
+		}
+
+		$start    = $this->data['loop_start'];
+		$interval = $this->scheduler->get_schedule_interval( $config['schedule'] );
+		$now      = ITSEC_Core::get_current_time_gmt();
+
+		$next = $start + $interval < $now ? $now + $config['wait'] : $start + $interval;
+
+		$this->scheduler->schedule_loop( $this->get_id(), $data, array(
+			'fire_at' => $next,
+		) );
 	}
 
 	/**

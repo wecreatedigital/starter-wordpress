@@ -1,6 +1,11 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin\Views
+ *
+ * @uses Yoast_Form $yform                                   Form object.
+ * @uses array      WPSEO_Option_Social::$twitter_card_types
  */
 
 if ( ! defined( 'WPSEO_VERSION' ) ) {

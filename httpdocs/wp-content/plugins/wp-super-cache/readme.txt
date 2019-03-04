@@ -1,9 +1,9 @@
 # WP Super Cache #
 * Contributors: donncha, automattic, kraftbj
 * Tags: performance, caching, wp-cache, wp-super-cache, cache
-* Tested up to: 4.9.1
-* Stable tag: 1.5.9
-* Requires at least: 3.0
+* Tested up to: 5.0.2
+* Stable tag: 1.6.4
+* Requires at least: 3.1
 * Requires PHP: 5.2.4
 * License: GPLv2 or later
 * License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -89,7 +89,12 @@ There is one regular WordPress filter too. Use the "do_createsupercache" filter
 to customize the checks made before caching. The filter accepts one parameter.
 The output of WP-Cache's wp_cache_get_cookies_values() function.
 
-See plugins/searchengine.php as an example I use for my [No Adverts for Friends](https://odd.blog/no-adverts-for-friends/) plugin.
+WP Super Cache has it's own plugin system. This code is loaded when WP Super Cache loads and can be used to change how caching is done. This is before most of WordPress loads so some functionality will not be available. Plugins can be located anywhere that PHP can load them. Add your own plugin by calling wpsc_add_plugin( $name ) where $name is the full filename and path to the plugin. You only need to call that function once to add it. Use wpsc_delete_plugin( $name ) to remove it from the list of loaded plugins.
+
+The cookies WP Super Cache uses to identify "known users" can be modified now by adding the names of those cookies to a list in the plugin configuration. Use wpsc_add_cookie( $name ) to add a new cookie, and wpsc_delete_cookie( $name ) to remove it. The cookie names also modify the mod_rewrite rules used by the plugin but I recommend using Simple mode caching to avoid complications with updating the .htaccess file.
+The cookie name and value are used to differenciate users so you can have one cookie, but different values for each type of user on your site for example. They'll be served different cache files.
+
+See [plugins/searchengine.php](https://github.com/Automattic/wp-super-cache/blob/4cda5c0f2218e40e118232b5bf22d227fb3206b7/plugins/searchengine.php) as an example I use for my [No Adverts for Friends](https://odd.blog/no-adverts-for-friends/) plugin.
 
 ### Troubleshooting ###
 If things don't work when you installed the plugin here are a few things to check:
@@ -136,7 +141,7 @@ If that doesn't work, add this line to your wp-config.php:
 27. Use [Cron View](https://wordpress.org/plugins/cron-view/) to help diagnose garbage collection and preload problems. Use the plugin to make sure jobs are scheduled and for what time. Look for the wp_cache_gc and wp_cache_full_preload_hook jobs.
 18. The error message, "WP Super Cache is installed but broken. The constant WPCACHEHOME must be set in the file wp-config.php and point at the WP Super Cache plugin directory." appears at the end of every page. You can delete wp-content/advanced-cache.php and reload the plugin settings page or edit wp-config.php and look for WPCACHEHOME and make sure it points at the wp-super-cache folder. This will normally be wp-content/plugins/wp-super-cache/ but you'll likely need the full path to that file (so it's easier to let the settings page fix it). If it is not correct the caching engine will not load.
 19. If your server is running into trouble because of the number of semaphores used by the plugin it's because your users are using file locking which is not recommended (but is needed by a small number of users). You can globally disable file locking by defining the constant WPSC_DISABLE_LOCKING, or defining the constant WPSC_REMOVE_SEMAPHORE so that sem_remove() is called after every page is cached but that seems to cause problems for other processes requesting the same semaphore. Best to disable it.
-
+20. Set the variable $htaccess_path in wp-config.php or wp-cache-config.php to the path of your global .htaccess if the plugin is looking for that file in the wrong directory. This might happen if you have WordPress installed in an unusual way.
 
 ## Installation ##
 Install like any other plugin, directly from your plugins page but make sure you have custom permalinks enabled. Go to the plugin settings page at Settings->WP Super Cache and enable caching.
@@ -200,7 +205,7 @@ Cached files are served before almost all of WordPress is loaded. While that's g
 This plugin caches entire pages but some plugins think they can run PHP code every time a page loads. To fix this, the plugin needs to use Javascript/AJAX methods or the wpsc_cachedata filter described in the previous answer to update or display dynamic information.
 
 ### Why do my WP Super Cache plugins disappear when I upgrade the plugin? ###
-WordPress deletes the plugin folder when it updates a plugin. This is the same with WP Super Cache so any modified files in wp-super-cache/plugins/ will be deleted. You can define the variable $wp_cache_plugins_dir in wp-config.php or wp-content/wp-cache-config.php and point it at a directory outside of the wp-super-cache folder. The plugin will look there for it's plugins.
+WordPress deletes the plugin folder when it updates a plugin. This is the same with WP Super Cache so any modified files in wp-super-cache/plugins/ will be deleted. You can put your custom plugins in a different directory in a number of ways. You can define the variable $wp_cache_plugins_dir in wp-config.php or wp-content/wp-cache-config.php and point it at a directory outside of the wp-super-cache folder. The plugin will look there for it's plugins. Or if you distribute a plugin that needs to load early you can use the function `wpsc_add_plugin( $filename )` to add a new plugin wherever it may be. Use `wpsc_delete_plugin( $filename )` to remove the plugin file. See [#574](https://github.com/Automattic/wp-super-cache/pull/574/) or [this post](https://odd.blog/2017/10/25/writing-wp-super-cache-plugins/) on writing WP Super Cache plugins.
 
 ### What does the Cache Rebuild feature do? ###
 When a visitor leaves a comment the cached file for that page is deleted and the next visitor recreates the cached page. A page takes time to load so what happens if it receives 100 visitors during this time? There won't be a cached page so WordPress will serve a fresh page for each user and the plugin will try to create a cached page for each of those 100 visitors causing a huge load on your server. This feature stops this happening. The cached page is not cleared when a comment is left. It is marked for rebuilding instead. The next visitor within the next 10 seconds will regenerate the cached page while the old page is served to the other 99 visitors. The page is eventually loaded by the first visitor and the cached page updated. See [this post](https://odd.blog/2009/01/23/wp-super-cache-089/) for more.
@@ -260,6 +265,64 @@ Your theme is probably responsive which means it resizes the page to suit whatev
 
 
 ## Changelog ##
+
+### 1.6.4 ###
+* Changes between [1.6.3 and 1.6.4](https://github.com/Automattic/wp-super-cache/compare/1.6.3...1.6.4)
+* Fixes for WP-CLI (#587) (#592)
+* Bumped the minimum WordPress version to 3.1 to use functions introduced then. (#591)
+* Fixes to wpsc_post_transition to avoid a fatal error using get_sample_permalink. (#595)
+* Fixed the admin bar "Delete Cache" link. (#589)
+* Fixed the headings used in the settings page. (#597)
+
+### 1.6.3 ###
+* Changes between [1.6.2 and 1.6.3](https://github.com/Automattic/wp-super-cache/compare/1.6.2...1.6.3)
+* Added cookie helper functions (#580)
+* Added plugin helper functions (#574)
+* Added actions to modify cookie and plugin lists. (#582)
+* Really disable garbage collection when timeout = 0 (#571)
+* Added warnings about DISABLE_WP_CRON (#575)
+* Don't clean expired cache files after preload if garbage collection is disabled (#572)
+* On preload, if deleting a post don't delete the sub directories if it's the homepage. (#573)
+* Fix generation of semaphores when using WP CLI (#576)
+* Fix deleting from the admin bar (#578)
+* Avoid a strpos() warning. (#579)
+* Improve deleting of cache in edit/delete/publish actions (#577)
+* Fixes to headers code (#496)
+
+### 1.6.2 ###
+* Fixed serving expired supercache files (#562)
+* Write directly to the config file to avoid permission problems with wp-content. (#563)
+* Correctly set the .htaccess rules on the main site of a multisite. (#557)
+* Check if set_transient() exists before using it. (#565)
+* Removed searchengine.php example plugin as it sets a cookie to track users. Still available [here](https://github.com/Automattic/wp-super-cache/blob/4cda5c0f2218e40e118232b5bf22d227fb3206b7/plugins/searchengine.php). (#567)
+* For advanced users only. Change the vary and cache control headers. See https://github.com/Automattic/wp-super-cache/pull/555 (#555)
+
+### 1.6.1 ###
+* Fix the name of the WP Crontrol plugin. (#549)
+* Handle errors during deactivation/uninstall by email rather than exiting. (#551)
+* Add a notice when settings can't be updated. (#552 and #553)
+
+### 1.6.0 ###
+* Fix issues in multisite plugin (#501)
+* Fixes wp-cli plugin deactivate/activate (#499)
+* Cleanup - change quotes. (#495)
+* $htaccess_path defines the path to the global .htacess file. (#507)
+* Fix 'cannot redeclare gzip_accepted()' (#511)
+* Correct the renaming of tmp_wpcache_filename (removed unnecessary slash in path) which caused renaming to fail. (#516)
+* Add check for Jetpack mobile theme cookie (#515)
+* Optimize wp_cache_phase2 and create wpsc_register_post_hooks (#508)
+* WPCACHEHOME has a trailing slash (#513)
+* Cleanup cache enable/disable and update_mod_rewrite_rules (#500)
+* Post Update now clears category cache (#519)
+* Various fixes for saving the debug page form (#542)
+* Expert-caching and empty parameters, like ?amp, should not serve cached page (#533)
+* Tiny Yslow description fix (#527)
+* Add ipad to mobile list (#525)
+* Hide opcache_invalidate() warnings since it's disabled some places. (#543)
+* Check that HTTP_REFERER exists before checking it. (#544)
+* Replace Cron View" with WP Crontrol because it's still updated. (#546)
+* adding hook (wp_cache_cleared) for full cache purges (#537)
+
 
 ### 1.5.9 ###
 * Fixed fatal error if the debug log was deleted while debugging was enabled and a visitor came to the site.
@@ -628,4 +691,4 @@ Your theme is probably responsive which means it resizes the page to suit whatev
 
 
 ## Upgrade Notice ##
-Fixes rare fatal error when using debug log
+Bug fixes

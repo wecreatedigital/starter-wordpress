@@ -7,7 +7,7 @@
 jQuery(document).ready(function ($) {
     var sucuriscanSiteCheckLinks = function (target, links) {
         if (links.length === 0) {
-            $(target).html('<div><em>no data available</em></div>');
+            $(target).html('<div><em>{{No data available}}</em></div>');
             return;
         }
 
@@ -28,6 +28,7 @@ jQuery(document).ready(function ($) {
     $.post('%%SUCURI.AjaxURL.Dashboard%%', {
         action: 'sucuriscan_ajax',
         sucuriscan_page_nonce: '%%SUCURI.PageNonce%%',
+        sucuriscan_sitecheck_refresh: '%%SUCURI.SiteCheck.Refresh%%',
         form_action: 'malware_scan',
     }, function (data) {
         $('#sucuriscan-title-iframes').html(data.iframes.title);
@@ -50,7 +51,7 @@ jQuery(document).ready(function ($) {
         <div class="sucuriscan-panel">
             <div class="sucuriscan-tabs">
                 <ul class="sucuriscan-clearfix sucuriscan-tabs-buttons">
-                    <li><a href="%%SUCURI.URL.Dashboard%%#auditlogs">Audit Logs</a></li>
+                    <li><a href="%%SUCURI.URL.Dashboard%%#auditlogs">{{Audit Logs}}</a></li>
                     <li><a href="%%SUCURI.URL.Dashboard%%#iframes" id="sucuriscan-title-iframes">%%SUCURI.SiteCheck.iFramesTitle%%</a></li>
                     <li><a href="%%SUCURI.URL.Dashboard%%#links" id="sucuriscan-title-links">%%SUCURI.SiteCheck.LinksTitle%%</a></li>
                     <li><a href="%%SUCURI.URL.Dashboard%%#scripts" id="sucuriscan-title-scripts">%%SUCURI.SiteCheck.ScriptsTitle%%</a></li>

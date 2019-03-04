@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -39,15 +39,6 @@ function sucuriscan_failed_logins_panel()
         'FailedLogins.PaginationVisibility' => 'hidden',
     );
 
-    if (SucuriScanInterface::checkNonce()) {
-        $blockUsers = SucuriScanRequest::post(':block_user', '_array');
-
-        if (is_array($blockUsers) && !empty($blockUsers)) {
-            SucuriScanBlockedUsers::block($blockUsers);
-            SucuriScanInterface::info('Selected user accounts were blocked');
-        }
-    }
-
     // Define variables for the pagination.
     $page_number = SucuriScanTemplate::pageNumber();
     $max_per_page = SUCURISCAN_MAX_PAGINATION_BUTTONS;
@@ -57,7 +48,6 @@ function sucuriscan_failed_logins_panel()
     $max_failed_logins = SucuriScanOption::getOption(':maximum_failed_logins');
     $notify_bruteforce_attack = SucuriScanOption::getOption(':notify_bruteforce_attack');
     $failed_logins = sucuriscan_get_all_failed_logins($page_offset, $max_per_page);
-    $show_password = SucuriScanOption::isEnabled(':notify_failed_password');
 
     if ($failed_logins) {
         $counter = 0;
@@ -70,21 +60,6 @@ function sucuriscan_failed_logins_panel()
                     continue;
                 }
 
-                $wrong_user_password = 'hidden';
-                $wrong_user_password_color = 'default';
-
-                if (isset($login_data['user_password']) && !empty($login_data['user_password'])) {
-                    $wrong_user_password = $login_data['user_password'];
-                    $wrong_user_password_color = 'danger';
-                } else {
-                    $wrong_user_password = 'empty';
-                    $wrong_user_password_color = 'info';
-                }
-
-                if (!$show_password) {
-                    $wrong_user_password = 'hidden';
-                }
-
                 $template_variables['FailedLogins.List'] .= SucuriScanTemplate::getSnippet(
                     'lastlogins-failedlogins',
                     array(
@@ -92,8 +67,6 @@ function sucuriscan_failed_logins_panel()
                         'FailedLogins.Username' => $login_data['user_login'],
                         'FailedLogins.RemoteAddr' => $login_data['remote_addr'],
                         'FailedLogins.UserAgent' => $login_data['user_agent'],
-                        'FailedLogins.Password' => $wrong_user_password,
-                        'FailedLogins.PasswordColor' => $wrong_user_password_color,
                         'FailedLogins.Datetime' => SucuriScan::datetime($login_data['attempt_time']),
                     )
                 );
@@ -270,7 +243,7 @@ function sucuriscan_get_failed_logins($get_old_logs = false, $offset = 0, $limit
             $login_data['attempt_count'] = ( $key + 1 );
 
             if (!$login_data['user_agent']) {
-                $login_data['user_agent'] = 'Unknown';
+                $login_data['user_agent'] = __('Unknown', 'sucuri-scanner');
             }
 
             if (!isset($login_data['user_password'])) {
@@ -314,11 +287,10 @@ function sucuriscan_get_failed_logins($get_old_logs = false, $offset = 0, $limit
  * this entry will contain the username, timestamp of the login attempt, remote
  * address of the computer sending the request, and the user-agent.
  *
- * @param  string $user_login     Information from the current failed login event.
- * @param  string $wrong_password Wrong password used during the supposed attack.
- * @return bool                   Whether the information of the current failed login event was stored or not.
+ * @param  string $user_login Information from the current failed login event.
+ * @return bool               True if the information was saved, false otherwise.
  */
-function sucuriscan_log_failed_login($user_login = '', $wrong_password = '')
+function sucuriscan_log_failed_login($user_login = '')
 {
     $storage = sucuriscan_failed_logins_datastore_path();
 
@@ -329,7 +301,6 @@ function sucuriscan_log_failed_login($user_login = '', $wrong_password = '')
     $login_data = json_encode(
         array(
             'user_login' => $user_login,
-            'user_password' => $wrong_password,
             'attempt_time' => time(),
             'remote_addr' => SucuriScan::getRemoteAddr(),
             'user_agent' => SucuriScan::getUserAgent(),
@@ -370,11 +341,11 @@ function sucuriscan_report_failed_logins($failed_logins = array())
         // Add the table headers.
         $table_html .= '<thead>';
         $table_html .= '<tr>';
-        $table_html .= '<th>' . 'Username' . '</th>';
-        $table_html .= '<th>' . 'Password' . '</th>';
-        $table_html .= '<th>' . 'IP Address' . '</th>';
-        $table_html .= '<th>' . 'Attempt Timestamp' . '</th>';
-        $table_html .= '<th>' . 'Attempt Date/Time' . '</th>';
+        $table_html .= '<th>' . __('Username', 'sucuri-scanner') . '</th>';
+        $table_html .= '<th>' . __('Password', 'sucuri-scanner') . '</th>';
+        $table_html .= '<th>' . __('IP Address', 'sucuri-scanner') . '</th>';
+        $table_html .= '<th>' . __('Attempt Timestamp', 'sucuri-scanner') . '</th>';
+        $table_html .= '<th>' . __('Attempt Date/Time', 'sucuri-scanner') . '</th>';
         $table_html .= '</tr>';
         $table_html .= '</thead>';
 
@@ -394,11 +365,11 @@ function sucuriscan_report_failed_logins($failed_logins = array())
             $table_html .= '</tr>';
         } else {
             $mail_content .= "\n";
-            $mail_content .= 'Username' . ":\x20" . $login_data['user_login'] . "\n";
-            $mail_content .= 'Password' . ":\x20" . $login_data['user_password'] . "\n";
-            $mail_content .= 'IP Address' . ":\x20" . $login_data['remote_addr'] . "\n";
-            $mail_content .= 'Attempt Timestamp' . ":\x20" . $login_data['attempt_time'] . "\n";
-            $mail_content .= 'Attempt Date/Time' . ":\x20" . $login_data['attempt_date'] . "\n";
+            $mail_content .= __('Username', 'sucuri-scanner') . ":\x20" . $login_data['user_login'] . "\n";
+            $mail_content .= __('Password', 'sucuri-scanner') . ":\x20" . $login_data['user_password'] . "\n";
+            $mail_content .= __('IP Address', 'sucuri-scanner') . ":\x20" . $login_data['remote_addr'] . "\n";
+            $mail_content .= __('Attempt Timestamp', 'sucuri-scanner') . ":\x20" . $login_data['attempt_time'] . "\n";
+            $mail_content .= __('Attempt Date/Time', 'sucuri-scanner') . ":\x20" . $login_data['attempt_date'] . "\n";
         }
     }
 

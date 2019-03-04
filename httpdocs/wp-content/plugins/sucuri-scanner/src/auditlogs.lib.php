@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -29,7 +29,7 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -109,15 +109,15 @@ class SucuriScanAuditLogs
 
             /* report latency in the API calls */
             if (!is_array($auditlogs)) {
-                $response['status'] = 'API is not available; using local queue';
+                $response['status'] = __('API is not available; using local queue', 'sucuri-scanner');
             } else {
-                $response['status'] = sprintf('API %s secs', round($duration, 4));
+                $response['status'] = sprintf(__('API %s secs', 'sucuri-scanner'), round($duration, 4));
             }
         }
 
         /* explain missing API key */
         if (!SucuriScanAPI::getPluginKey()) {
-            $response['status'] = 'API key is missing';
+            $response['status'] = __('API key is missing', 'sucuri-scanner');
         }
 
         /* stop everything and report errors */
@@ -160,7 +160,7 @@ class SucuriScanAuditLogs
             || !is_array($auditlogs['output_data'])
             || !is_numeric($auditlogs['total_entries'])
         ) {
-            $response['content'] = 'There are no logs.';
+            $response['content'] = __('There are no logs.', 'sucuri-scanner');
             wp_send_json($response, 200);
             return;
         }
@@ -170,7 +170,6 @@ class SucuriScanAuditLogs
         $outdata = (array) $auditlogs['output_data'];
         $todaysDate = SucuriScan::datetime(null, 'M d, Y');
         $iterator_start = ($pageNumber - 1) * $maxPerPage;
-        $show_password = SucuriScanOption::isEnabled(':notify_failed_password');
         $total_items = count($outdata);
 
         usort($outdata, array('SucuriScanAuditLogs', 'sortByDate'));
@@ -186,7 +185,7 @@ class SucuriScanAuditLogs
 
             $audit_log = (array) $outdata[$i];
 
-            if (!$show_password && strpos($audit_log['message'], ";\x20password:")) {
+            if (strpos($audit_log['message'], ";\x20password:")) {
                 $idx = strpos($audit_log['message'], ";\x20password:");
                 $audit_log['message'] = substr($audit_log['message'], 0, $idx);
             }
@@ -206,7 +205,7 @@ class SucuriScanAuditLogs
                 $snippet_data['AuditLog.Date'] = '';
             } elseif ($snippet_data['AuditLog.Date'] === $todaysDate) {
                 $previousDate = $snippet_data['AuditLog.Date'];
-                $snippet_data['AuditLog.Date'] = 'Today';
+                $snippet_data['AuditLog.Date'] = __('Today', 'sucuri-scanner');
             } else {
                 $previousDate = $snippet_data['AuditLog.Date'];
             }
@@ -229,7 +228,7 @@ class SucuriScanAuditLogs
             }
 
             /* simplify the details of events with low metadata */
-            if (strpos($audit_log['message'], 'status has been changed')) {
+            if (strpos($audit_log['message'], __('status has been changed', 'sucuri-scanner'))) {
                 $snippet_data['AuditLog.Extra'] = implode(",\x20", $audit_log['file_list']);
             }
 

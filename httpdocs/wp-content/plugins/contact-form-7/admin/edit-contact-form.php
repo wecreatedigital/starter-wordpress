@@ -29,7 +29,7 @@ function wpcf7_admin_save_button( $post_id ) {
 	echo $button;
 }
 
-?><div class="wrap">
+?><div class="wrap" id="wpcf7-contact-form-editor">
 
 <h1 class="wp-heading-inline"><?php
 	if ( $post->initial() ) {
@@ -40,17 +40,31 @@ function wpcf7_admin_save_button( $post_id ) {
 ?></h1>
 
 <?php
-	if ( ! $post->initial() && current_user_can( 'wpcf7_edit_contact_forms' ) ) {
-		echo sprintf( '<a href="%1$s" class="add-new-h2">%2$s</a>',
-			esc_url( menu_page_url( 'wpcf7-new', false ) ),
-			esc_html( __( 'Add New', 'contact-form-7' ) ) );
+	if ( ! $post->initial()
+	and current_user_can( 'wpcf7_edit_contact_forms' ) ) {
+		echo wpcf7_link(
+			menu_page_url( 'wpcf7-new', false ),
+			__( 'Add New', 'contact-form-7' ),
+			array( 'class' => 'page-title-action' )
+		);
 	}
 ?>
 
 <hr class="wp-header-end">
 
-<?php do_action( 'wpcf7_admin_warnings' ); ?>
-<?php do_action( 'wpcf7_admin_notices' ); ?>
+<?php
+	do_action( 'wpcf7_admin_warnings',
+		$post->initial() ? 'wpcf7-new' : 'wpcf7',
+		wpcf7_current_action(),
+		$post
+	);
+
+	do_action( 'wpcf7_admin_notices',
+		$post->initial() ? 'wpcf7-new' : 'wpcf7',
+		wpcf7_current_action(),
+		$post
+	);
+?>
 
 <?php
 if ( $post ) :
@@ -167,13 +181,31 @@ if ( $post ) :
 <?php endif; ?>
 
 <div id="informationdiv" class="postbox">
-<h3><?php echo esc_html( __( 'Information', 'contact-form-7' ) ); ?></h3>
+<h3><?php echo esc_html( __( "Do you need help?", 'contact-form-7' ) ); ?></h3>
 <div class="inside">
-<ul>
-<li><?php echo wpcf7_link( __( 'https://contactform7.com/docs/', 'contact-form-7' ), __( 'Docs', 'contact-form-7' ) ); ?></li>
-<li><?php echo wpcf7_link( __( 'https://contactform7.com/faq/', 'contact-form-7' ), __( 'FAQ', 'contact-form-7' ) ); ?></li>
-<li><?php echo wpcf7_link( __( 'https://contactform7.com/support/', 'contact-form-7' ), __( 'Support', 'contact-form-7' ) ); ?></li>
-</ul>
+	<p><?php echo esc_html( __( "Here are some available options to help solve your problems.", 'contact-form-7' ) ); ?></p>
+	<ol>
+		<li><?php echo sprintf(
+			/* translators: 1: FAQ, 2: Docs ("FAQ & Docs") */
+			__( '%1$s &#38; %2$s', 'contact-form-7' ),
+			wpcf7_link(
+				__( 'https://contactform7.com/faq/', 'contact-form-7' ),
+				__( 'FAQ', 'contact-form-7' )
+			),
+			wpcf7_link(
+				__( 'https://contactform7.com/docs/', 'contact-form-7' ),
+				__( 'Docs', 'contact-form-7' )
+			)
+		); ?></li>
+		<li><?php echo wpcf7_link(
+			__( 'https://wordpress.org/support/plugin/contact-form-7/', 'contact-form-7' ),
+			__( 'Support Forums', 'contact-form-7' )
+		); ?></li>
+		<li><?php echo wpcf7_link(
+			__( 'https://contactform7.com/custom-development/', 'contact-form-7' ),
+			__( 'Professional Services', 'contact-form-7' )
+		); ?></li>
+	</ol>
 </div>
 </div><!-- #informationdiv -->
 

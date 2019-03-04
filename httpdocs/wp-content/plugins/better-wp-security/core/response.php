@@ -72,7 +72,7 @@ final class ITSEC_Response {
 
 		return $self->errors;
 	}
-	
+
 	public static function add_warnings( $warnings ) {
 		foreach ( $warnings as $warning ) {
 			self::add_warning( $warning );
@@ -199,6 +199,10 @@ final class ITSEC_Response {
 		self::get_instance()->add_js_function_call( 'reloadAllModules' );
 	}
 
+	public static function refresh_page() {
+		self::get_instance()->add_js_function_call( 'refreshPage' );
+	}
+
 	public static function regenerate_wp_config() {
 		$self = self::get_instance();
 
@@ -279,14 +283,24 @@ final class ITSEC_Response {
 		$added = array_diff( $new, $current );
 
 		if ( $added ) {
-			self::reload_module( 'notification-center' );
-			self::get_instance()->has_new_notifications = true;
-			self::get_instance()->add_info( sprintf(
-				esc_html__( 'New notifications available in the %1$sNotification Center%2$s.', 'better-wp-security' ),
-				'<a href="#" data-module-link="notification-center">',
-				'</a>'
-			) );
+			self::flag_new_notifications_available();
 		}
+	}
+
+	public static function flag_new_notifications_available() {
+		static $run_count = 0;
+
+		if ( $run_count++ > 0 ) {
+			return;
+		}
+
+		self::reload_module( 'notification-center' );
+		self::get_instance()->has_new_notifications = true;
+		self::get_instance()->add_info( sprintf(
+			esc_html__( 'New notifications available in the %1$sNotification Center%2$s.', 'better-wp-security' ),
+			'<a href="#" data-module-link="notification-center">',
+			'</a>'
+		) );
 	}
 
 	public static function get_raw_data() {
@@ -339,6 +353,7 @@ final class ITSEC_Response {
 		$this->errors = array();
 		$this->warnings = array();
 		$this->messages = array();
+		$this->infos = array();
 		$this->success = true;
 		$this->js_function_calls = array();
 		$this->show_default_success_message = true;

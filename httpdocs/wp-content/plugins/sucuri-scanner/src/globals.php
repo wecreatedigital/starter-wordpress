@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -62,7 +62,6 @@ if (defined('SUCURISCAN')) {
      * execute the bootstrap method of the plugin.
      */
     add_action('init', 'SucuriScanInterface::initialize', 1);
-    add_action('init', 'SucuriScanBlockedUsers::blockUserLogin', 1);
     add_action('admin_enqueue_scripts', 'SucuriScanInterface::enqueueScripts', 1);
 
     if (SucuriScan::runAdminInit()) {
@@ -78,10 +77,10 @@ if (defined('SUCURISCAN')) {
     function sucuriscanMainPages()
     {
         return array(
-            'sucuriscan' => 'Dashboard',
-            'sucuriscan_firewall' => 'Firewall (WAF)',
-            'sucuriscan_lastlogins' => 'Last Logins',
-            'sucuriscan_settings' => 'Settings',
+            'sucuriscan' => __('Dashboard', 'sucuri-scanner'),
+            'sucuriscan_firewall' => __('Firewall (WAF)', 'sucuri-scanner'),
+            'sucuriscan_lastlogins' => __('Last Logins', 'sucuri-scanner'),
+            'sucuriscan_settings' => __('Settings', 'sucuri-scanner'),
         );
     }
 
@@ -102,8 +101,8 @@ if (defined('SUCURISCAN')) {
             $pages = sucuriscanMainPages();
 
             add_menu_page(
-                'Sucuri Security',
-                'Sucuri Security',
+                __('Sucuri Security', 'sucuri-scanner'),
+                __('Sucuri Security', 'sucuri-scanner'),
                 'manage_options',
                 'sucuriscan',
                 'sucuriscan_page',
@@ -143,6 +142,7 @@ if (defined('SUCURISCAN')) {
         add_action('activated_plugin', 'SucuriScanHook::hookPluginActivate', 50, 2);
         add_action('add_attachment', 'SucuriScanHook::hookAttachmentAdd', 50, 5);
         add_action('add_link', 'SucuriScanHook::hookLinkAdd', 50, 5);
+        add_action('add_user_to_blog', 'SucuriScanHook::hookAddUserToBlog', 50, 4);
         add_action('before_delete_post', 'SucuriScanHook::hookPostBeforeDelete', 50, 5);
         add_action('create_category', 'SucuriScanHook::hookCategoryCreate', 50, 5);
         add_action('deactivated_plugin', 'SucuriScanHook::hookPluginDeactivate', 50, 2);
@@ -150,9 +150,11 @@ if (defined('SUCURISCAN')) {
         add_action('delete_user', 'SucuriScanHook::hookUserDelete', 50, 5);
         add_action('edit_link', 'SucuriScanHook::hookLinkEdit', 50, 5);
         add_action('login_form_resetpass', 'SucuriScanHook::hookLoginFormResetpass', 50, 5);
+        add_action('profile_update', 'SucuriScanHook::hookProfileUpdate', 50, 5);
         add_action('publish_page', 'SucuriScanHook::hookPublishPage', 50, 5);
         add_action('publish_phone', 'SucuriScanHook::hookPublishPhone', 50, 5);
         add_action('publish_post', 'SucuriScanHook::hookPublishPost', 50, 5);
+        add_action('remove_user_from_blog', 'SucuriScanHook::hookRemoveUserFromBlog', 50, 2);
         add_action('retrieve_password', 'SucuriScanHook::hookRetrievePassword', 50, 5);
         add_action('switch_theme', 'SucuriScanHook::hookThemeSwitch', 50, 5);
         add_action('transition_post_status', 'SucuriScanHook::hookPostStatus', 50, 3);

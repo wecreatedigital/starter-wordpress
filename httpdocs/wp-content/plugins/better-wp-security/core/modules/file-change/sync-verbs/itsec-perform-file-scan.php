@@ -7,6 +7,6 @@ class Ithemes_Sync_Verb_ITSEC_Perform_File_Scan extends Ithemes_Sync_Verb {
 	public function run( $arguments ) {
 		require_once( dirname( dirname( __FILE__ ) ) . '/scanner.php' );
 
-		return ITSEC_File_Change_Scanner::run_scan( false, true );
+		return ITSEC_File_Change_Scanner::schedule_start();
 	}
 }

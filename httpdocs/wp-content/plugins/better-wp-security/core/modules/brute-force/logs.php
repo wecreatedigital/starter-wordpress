@@ -2,16 +2,17 @@
 
 final class ITSEC_Brute_Force_Logs {
 	public function __construct() {
-		add_filter( 'itsec_logs_prepare_brute_force_entry_for_list_display', array( $this, 'filter_entry_for_list_display' ) );
+		add_filter( 'itsec_logs_prepare_brute_force_entry_for_list_display', array( $this, 'filter_entry_for_list_display' ), 10, 2 );
 		add_filter( 'itsec_logs_prepare_brute_force_entry_for_details_display', array( $this, 'filter_entry_for_details_display' ), 10, 4 );
+		add_filter( 'itsec_logs_prepare_brute_force_filter_row_action_for_code', array( $this, 'code_row_action' ), 10, 4 );
 	}
 
-	public function filter_entry_for_list_display( $entry ) {
+	public function filter_entry_for_list_display( $entry, $code ) {
 		$entry['module_display'] = esc_html__( 'Brute Force', 'better-wp-security' );
 
-		if ( 'invalid-login' === $entry['code'] ) {
+		if ( 'invalid-login' === $code ) {
 			$entry['description'] = esc_html__( 'Invalid Login', 'better-wp-security' );
-		} else if ( 'auto-ban-admin-username' === $entry['code'] ) {
+		} else if ( 'auto-ban-admin-username' === $code ) {
 			$entry['description'] = esc_html__( 'Banned Use of "admin" Username', 'better-wp-security' );
 		}
 
@@ -42,6 +43,14 @@ final class ITSEC_Brute_Force_Logs {
 		);
 
 		return $details;
+	}
+
+	public function code_row_action( $vars, $entry, $code, $data ) {
+		if ( 'invalid-login' === $code ) {
+			$vars = array( 'filters[10]' => 'code|invalid-login%' );
+		}
+
+		return $vars;
 	}
 }
 new ITSEC_Brute_Force_Logs();

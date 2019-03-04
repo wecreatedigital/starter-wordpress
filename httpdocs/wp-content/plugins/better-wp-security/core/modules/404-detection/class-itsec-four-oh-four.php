@@ -10,7 +10,7 @@ class ITSEC_Four_Oh_Four {
 
 		add_filter( 'itsec_lockout_modules', array( $this, 'register_lockout' ) );
 
-		add_action( 'wp', array( $this, 'check_404' ), 9999 );
+		add_action( 'template_redirect', array( $this, 'check_404' ), 9999 );
 	}
 
 	/**
@@ -29,19 +29,15 @@ class ITSEC_Four_Oh_Four {
 
 		$uri = explode( '?', $_SERVER['REQUEST_URI'] );
 
-		if ( in_array( '/' . ITSEC_Lib::get_request_path(), $this->settings['white_list'] ) ) {
-			// white listed page.
-			return;
-		}
-
-		ITSEC_Log::add_notice( 'four_oh_four', 'found_404', array( 'SERVER' => $_SERVER ) );
-
-		if ( ! in_array( '.' . pathinfo( $uri[0], PATHINFO_EXTENSION ), $this->settings['types'] ) ) {
-
+		if (
+			! in_array( '/' . ITSEC_Lib::get_request_path(), $this->settings['white_list'], true ) &&
+			! in_array( '.' . pathinfo( $uri[0], PATHINFO_EXTENSION ), $this->settings['types'], true )
+		) {
+			ITSEC_Log::add_notice( 'four_oh_four', 'found_404', array( 'SERVER' => $_SERVER ) );
 			$itsec_lockout->do_lockout( 'four_oh_four' );
-
+		} else {
+			do_action( 'itsec_four_oh_four_whitelisted', $uri );
 		}
-
 	}
 
 	/**

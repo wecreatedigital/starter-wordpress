@@ -6,10 +6,10 @@ if ( ! class_exists( 'ITSEC_Strong_Passwords_Setup' ) ) {
 
 		public function __construct() {
 
-			add_action( 'itsec_modules_do_plugin_activation',   array( $this, 'execute_activate'   )          );
-			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' )          );
-			add_action( 'itsec_modules_do_plugin_uninstall',    array( $this, 'execute_uninstall'  )          );
-			add_action( 'itsec_modules_do_plugin_upgrade',      array( $this, 'execute_upgrade'    ), null, 2 );
+			add_action( 'itsec_modules_do_plugin_activation', array( $this, 'execute_activate' ) );
+			add_action( 'itsec_modules_do_plugin_deactivation', array( $this, 'execute_deactivate' ) );
+			add_action( 'itsec_modules_do_plugin_uninstall', array( $this, 'execute_uninstall' ) );
+			add_action( 'itsec_modules_do_plugin_upgrade', array( $this, 'execute_upgrade' ), null, 2 );
 
 		}
 
@@ -86,6 +86,28 @@ if ( ! class_exists( 'ITSEC_Strong_Passwords_Setup' ) ) {
 				}
 			}
 
+			if ( $itsec_old_version < 4096 ) {
+				$active = get_site_option( 'itsec_active_modules', array() );
+
+				if ( ! empty( $active['strong-passwords'] ) ) {
+					$active_requirements = ITSEC_Modules::get_setting( 'password-requirements', 'enabled_requirements' );
+					$active_requirements['strength'] = true;
+					ITSEC_Modules::set_setting( 'password-requirements', 'enabled_requirements', $active_requirements );
+				}
+
+				$requirement_settings = ITSEC_Modules::get_setting( 'password-requirements', 'requirement_settings' );
+				$requirement_settings['strength']['role'] = ITSEC_Modules::get_setting( 'strong-passwords', 'role', 'administrator' );
+				ITSEC_Modules::set_setting( 'password-requirements', 'requirement_settings', $requirement_settings );
+
+				unset( $active['strong-passwords'] );
+
+				// Need to do this directly to be able to remove a module from the list entirely.
+				if ( is_multisite() ) {
+					update_site_option( 'itsec_active_modules', $active );
+				} else {
+					update_option( 'itsec_active_modules', $active );
+				}
+			}
 		}
 
 	}

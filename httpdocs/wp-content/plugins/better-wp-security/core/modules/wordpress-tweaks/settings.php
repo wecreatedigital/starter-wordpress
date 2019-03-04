@@ -19,6 +19,7 @@ final class ITSEC_Wordpress_Tweaks_Settings extends ITSEC_Settings {
 			'disable_unused_author_pages' => false,
 			'block_tabnapping'            => false,
 			'valid_user_login_type'       => 'both',
+			'patch_thumb_file_traversal'  => true,
 		);
 	}
 }

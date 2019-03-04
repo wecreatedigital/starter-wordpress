@@ -1,7 +1,7 @@
 <?php
 
 final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
-	private $version = 1;
+	private $version = 3;
 
 
 	public function __construct() {
@@ -37,7 +37,7 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			'log_location' => ITSEC_Modules::get_default( $this->id, 'log_location' ),
 		);
 
-		wp_enqueue_script( 'itsec-global-settings-page-script', plugins_url( 'js/settings-page.js', __FILE__ ), array( 'jquery' ), $this->version, true );
+		wp_enqueue_script( 'itsec-global-settings-page-script', plugins_url( 'js/settings-page.js', __FILE__ ), array( 'jquery', 'itsec-settings-page-script' ), $this->version, true );
 		wp_localize_script( 'itsec-global-settings-page-script', 'itsec_global_settings_page', $vars );
 	}
 
@@ -72,6 +72,46 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			false => __( 'No (default)' ),
 			true  => __( 'Yes' ),
 		);
+
+		$enable_grade_report_options = array(
+			false => __( 'No (default)' ),
+			true  => __( 'Yes' ),
+		);
+
+		$proxy = array( 'value' => $validator->get_proxy_types() );
+
+		if ( $proxy_header = ITSEC_Modules::get_setting( 'security-check-pro', 'remote_ip_index' ) ) {
+			$proxy['disabled'] = true;
+		}
+
+		$possible_headers = apply_filters( 'itsec_filter_remote_addr_headers', array(
+			'HTTP_CF_CONNECTING_IP', // CloudFlare
+			'HTTP_X_FORWARDED_FOR',  // Squid and most other forward and reverse proxies
+			'REMOTE_ADDR',           // Default source of remote IP
+		) );
+
+		$ucwords = version_compare( phpversion(), '5.5.16', '>=' ) || ( version_compare( phpversion(), '5.4.32', '>=' ) && version_compare( phpversion(), '5.5.0', '<' ) );
+		$proxy_header_opt = array();
+
+		foreach ( $possible_headers as $header ) {
+			$label = $header;
+
+			if ( 0 === strpos( $header, 'HTTP_' ) ) {
+				$label = substr( $label, 5 );
+			}
+
+			$label = str_replace( '_', '-', $label );
+			$label = strtolower( $label );
+			$label = $ucwords ? ucwords( $label, '-' ) : implode( '-', array_map( 'ucfirst', explode( '-', $label ) ) );
+
+			if ( isset( $_SERVER[ $header ] ) ) {
+				$label .= ' (' . esc_attr( $_SERVER[ $header ] ) . ')';
+			}
+
+			$label = str_replace('Ip', 'IP', $label );
+
+			$proxy_header_opt[ $header ] = $label;
+		}
 
 ?>
 	<table class="form-table itsec-settings-section">
@@ -173,7 +213,15 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			<td>
 				<?php $form->add_text( 'log_rotation', array( 'class' => 'small-text' ) ); ?>
 				<label for="itsec-global-log_rotation"><?php _e( 'Days', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'The number of days database logs should be kept. File logs will be kept indefinitely but will be rotated once the file hits 10MB.', 'better-wp-security' ); ?></p>
+				<p class="description"><?php _e( 'The number of days database logs should be kept.', 'better-wp-security' ); ?></p>
+			</td>
+		</tr>
+		<tr>
+			<th scope="row"><label for="itsec-global-file_log_rotation"><?php _e( 'Days to Keep File Logs', 'better-wp-security' ); ?></label></th>
+			<td>
+				<?php $form->add_text( 'file_log_rotation', array( 'class' => 'small-text' ) ); ?>
+				<label for="itsec-global-log_rotation"><?php _e( 'Days', 'better-wp-security' ); ?></label>
+				<p class="description"><?php _e( 'The number of days file logs should be kept. File logs will additionally be rotated once the file hits 10MB. Set to 0 to only use log rotation.', 'better-wp-security' ); ?></p>
 			</td>
 		</tr>
 		<tr>
@@ -213,11 +261,38 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 			</tr>
 		<?php endif; ?>
 		<tr>
-			<th scope="row"><label for="itsec-global-proxy_override"><?php _e( 'Override Proxy Detection', 'better-wp-security' ); ?></label></th>
+			<th scope="row"><label for="itsec-global-proxy"><?php esc_html_e( 'Proxy Detection', 'better-wp-security' ); ?></label></th>
 			<td>
-				<?php $form->add_checkbox( 'proxy_override' ); ?>
-				<label for="itsec-global-proxy_override"><?php _e( 'Disable Proxy IP Detection', 'better-wp-security' ); ?></label>
-				<p class="description"><?php _e( 'If you\'re not using a proxy service such as Varnish, Cloudflare or others turning this on may result in more accurate IP detection.', 'better-wp-security' ); ?></p>
+				<?php if ( $proxy_header ) : ?>
+					<p class="description">
+						<?php printf( esc_html__( 'Security Check Pro has automatically determined the correct header, %s.', 'better-wp-security' ), '<code>' . esc_attr( $proxy_header ) . '</code>' ); ?>
+					</p>
+				<?php else: ?>
+					<?php $form->add_select( 'proxy', $proxy ); ?>
+					<?php if ( ITSEC_Core::is_pro() ): ?>
+						<p class="">
+							<?php printf(
+								esc_html__( 'Configure this automatically by running a %1$sSecurity Check%2$s scan.', 'better-wp-security' ),
+								'<a href="#itsec-security-check-secure_site" data-module-link="security-check">', '</a>'
+							); ?>
+						</p>
+					<?php endif; ?>
+					<p class="description">
+						<?php esc_html_e( 'By default, iThemes Security will try to find the correct proxy header to use automatically. However, we highly recommend manually selecting the header your proxy service uses or disabling it completely if your website is not behind a proxy. Otherwise, IP detection might not be accurate, allowing attackers to bypass lockouts.', 'better-wp-security' ) ?>
+					</p>
+				<?php endif; ?>
+			</td>
+		</tr>
+		<tr class="itsec-global-proxy_header-container">
+			<th scope="row"><label for="itsec-global-proxy_header"><?php esc_html_e( 'Proxy Header', 'better-wp-security' ); ?></label></th>
+			<td>
+				<?php $form->add_select( 'proxy_header', $proxy_header_opt ); ?>
+				<p class="description">
+					<?php printf(
+						esc_html__( 'Select the header your Proxy Server uses to forward the client IP address. If you don\'t know the header, you can contact your hosting provider or select the header that has your %1$sIP Address%2$s.', 'better-wp-security' ),
+						'<a href="https://whatismyipaddress.com">', '</a>'
+					); ?>
+				</p>
 			</td>
 		</tr>
 		<tr>
@@ -234,6 +309,15 @@ final class ITSEC_Global_Settings_Page extends ITSEC_Module_Settings_Page {
 				<p class="description"><?php _e( 'Each error message in iThemes Security has an associated error code that can help diagnose an issue. Changing this setting to "Yes" causes these codes to display. This setting should be left set to "No" unless iThemes Security support requests that you change it.', 'better-wp-security' ); ?></p>
 			</td>
 		</tr>
+		<?php if ( ITSEC_Core::is_pro() ) : ?>
+			<tr>
+				<th scope="row"><label for="itsec-global-enable_grade_report"><?php _e( 'Enable Grade Report', 'better-wp-security' ); ?></label></th>
+				<td>
+					<?php $form->add_select( 'enable_grade_report', $enable_grade_report_options ); ?>
+					<p class="description"><?php _e( 'The Grade Report feature can help you identify vulnerabilities on the site. Visit the Notification Center to select which users receive emails from this feature.', 'better-wp-security' ); ?></p>
+				</td>
+			</tr>
+		<?php endif; ?>
 	</table>
 <?php
 

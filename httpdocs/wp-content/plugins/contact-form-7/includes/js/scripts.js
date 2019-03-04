@@ -46,12 +46,16 @@
 		var $form = $( form );
 
 		$form.submit( function( event ) {
-			if ( typeof window.FormData !== 'function' ) {
-				return;
+			if ( ! wpcf7.supportHtml5.placeholder ) {
+				$( '[placeholder].placeheld', $form ).each( function( i, n ) {
+					$( n ).val( '' ).removeClass( 'placeheld' );
+				} );
 			}
 
-			wpcf7.submit( $form );
-			event.preventDefault();
+			if ( typeof window.FormData === 'function' ) {
+				wpcf7.submit( $form );
+				event.preventDefault();
+			}
 		} );
 
 		$( '.wpcf7-submit', $form ).after( '<span class="ajax-loader"></span>' );
@@ -193,10 +197,6 @@
 
 		$( '.ajax-loader', $form ).addClass( 'is-active' );
 
-		$( '[placeholder].placeheld', $form ).each( function( i, n ) {
-			$( n ).val( '' );
-		} );
-
 		wpcf7.clearResponse( $form );
 
 		var formData = new FormData( $form.get( 0 ) );
@@ -266,13 +266,6 @@
 					$message.addClass( 'wpcf7-spam-blocked' );
 					$form.addClass( 'spam' );
 
-					$( '[name="g-recaptcha-response"]', $form ).each( function() {
-						if ( '' === $( this ).val() ) {
-							var $recaptcha = $( this ).closest( '.wpcf7-form-control-wrap' );
-							wpcf7.notValidTip( $recaptcha, wpcf7.recaptcha.messages.empty );
-						}
-					} );
-
 					wpcf7.triggerEvent( data.into, 'spam', detail );
 					break;
 				case 'aborted':
@@ -308,11 +301,15 @@
 				$form.each( function() {
 					this.reset();
 				} );
+
+				wpcf7.toggleSubmit( $form );
 			}
 
-			$form.find( '[placeholder].placeheld' ).each( function( i, n ) {
-				$( n ).val( $( n ).attr( 'placeholder' ) );
-			} );
+			if ( ! wpcf7.supportHtml5.placeholder ) {
+				$form.find( '[placeholder].placeheld' ).each( function( i, n ) {
+					$( n ).val( $( n ).attr( 'placeholder' ) );
+				} );
+			}
 
 			$message.html( '' ).append( data.message ).slideDown( 'fast' );
 			$message.attr( 'role', 'alert' );

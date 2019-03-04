@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\XML_Sitemaps
  */
 
@@ -8,19 +10,39 @@
  */
 class WPSEO_Sitemap_Image_Parser {
 
-	/** @var string $home_url Holds the home_url() value to speed up loops. */
+	/**
+	 * Holds the home_url() value to speed up loops.
+	 *
+	 * @var string
+	 */
 	protected $home_url = '';
 
-	/** @var string $host Holds site URL hostname. */
+	/**
+	 * Holds site URL hostname.
+	 *
+	 * @var string
+	 */
 	protected $host = '';
 
-	/** @var string $scheme Holds site URL protocol. */
+	/**
+	 * Holds site URL protocol.
+	 *
+	 * @var string
+	 */
 	protected $scheme = 'http';
 
-	/** @var array $attachments Cached set of attachments for multiple posts. */
+	/**
+	 * Cached set of attachments for multiple posts.
+	 *
+	 * @var array
+	 */
 	protected $attachments = array();
 
-	/** @var string $charset Holds blog charset value for use in DOM parsing.  */
+	/**
+	 * Holds blog charset value for use in DOM parsing.
+	 *
+	 * @var string
+	 */
 	protected $charset = 'UTF-8';
 
 	/**
@@ -62,7 +84,7 @@ class WPSEO_Sitemap_Image_Parser {
 		if ( $thumbnail_id ) {
 
 			$src      = $this->get_absolute_url( $this->image_url( $thumbnail_id ) );
-			$alt      = get_post_meta( $thumbnail_id, '_wp_attachment_image_alt', true );
+			$alt      = WPSEO_Image_Utils::get_alt_tag( $thumbnail_id );
 			$title    = get_post_field( 'post_title', $thumbnail_id );
 			$images[] = $this->get_image_item( $post, $src, $title, $alt );
 		}
@@ -84,7 +106,7 @@ class WPSEO_Sitemap_Image_Parser {
 		foreach ( $this->parse_galleries( $post->post_content, $post->ID ) as $attachment ) {
 
 			$src = $this->get_absolute_url( $this->image_url( $attachment->ID ) );
-			$alt = get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true );
+			$alt = WPSEO_Image_Utils::get_alt_tag( $attachment->ID );
 
 			$images[] = $this->get_image_item( $post, $src, $attachment->post_title, $alt );
 		}
@@ -92,7 +114,7 @@ class WPSEO_Sitemap_Image_Parser {
 		if ( 'attachment' === $post->post_type && wp_attachment_is_image( $post ) ) {
 
 			$src = $this->get_absolute_url( $this->image_url( $post->ID ) );
-			$alt = get_post_meta( $post->ID, '_wp_attachment_image_alt', true );
+			$alt = WPSEO_Image_Utils::get_alt_tag( $post->ID );
 
 			$images[] = $this->get_image_item( $post, $src, $post->post_title, $alt );
 		}
@@ -129,7 +151,7 @@ class WPSEO_Sitemap_Image_Parser {
 			$images[] = array(
 				'src'   => $this->get_absolute_url( $this->image_url( $attachment->ID ) ),
 				'title' => $attachment->post_title,
-				'alt'   => get_post_meta( $attachment->ID, '_wp_attachment_image_alt', true ),
+				'alt'   => WPSEO_Image_Utils::get_alt_tag( $attachment->ID ),
 			);
 		}
 
@@ -237,7 +259,7 @@ class WPSEO_Sitemap_Image_Parser {
 		}
 
 		if ( PHP_VERSION_ID >= 50209 ) {
-			// phpcs:ignore PHPCompatibility.PHP.NewFunctionParameters.array_unique_sort_flagsFound -- Wrapped in version check.
+			// phpcs:ignore PHPCompatibility.FunctionUse.NewFunctionParameters.array_unique_sort_flagsFound -- Wrapped in version check.
 			return array_unique( $attachments, SORT_REGULAR );
 		}
 
@@ -494,15 +516,5 @@ class WPSEO_Sitemap_Image_Parser {
 
 		$get_attachments = new WP_Query();
 		return $get_attachments->query( $args );
-	}
-
-	/**
-	 * Cache attached images and thumbnails for a set of posts.
-	 *
-	 * @deprecated 3.3 Blanket caching no longer makes sense with modern galleries. R.
-	 */
-	public function cache_attachments() {
-
-		_deprecated_function( __METHOD__, '3.3' );
 	}
 }
