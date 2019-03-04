@@ -28,11 +28,11 @@ if (!include dirname(__FILE__).'/mg-filter.php') {
  * mg_api_last_error is a compound getter/setter for the last error that was
  * encountered during a Mailgun API call.
  *
- * @param string $error OPTIONAL
+ * @param	string	$error	OPTIONAL
  *
- * @return string Last error that occurred.
+ * @return	string	Last error that occurred.
  *
- * @since 1.5.0
+ * @since	1.5.0
  */
 function mg_api_last_error($error = null)
 {
@@ -98,15 +98,15 @@ function mg_mutate_to_rcpt_vars_cb($to_addrs)
  * Based off of the core wp_mail function, but with modifications required to
  * send email using the Mailgun HTTP API
  *
- * @param string|array $to          Array or comma-separated list of email addresses to send message.
- * @param string       $subject     Email subject
- * @param string       $message     Message contents
- * @param string|array $headers     Optional. Additional headers.
- * @param string|array $attachments Optional. Files to attach.
+ * @param	string|array	$to				Array or comma-separated list of email addresses to send message.
+ * @param	string			$subject		Email subject
+ * @param	string			$message		Message contents
+ * @param	string|array	$headers		Optional. Additional headers.
+ * @param	string|array	$attachments	Optional. Files to attach.
  *
- * @return bool Whether the email contents were sent successfully.
+ * @return	bool	Whether the email contents were sent successfully.
  *
- * @since 0.1
+ * @since	0.1
  */
 function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
 {
@@ -114,11 +114,18 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
     extract(apply_filters('wp_mail', compact('to', 'subject', 'message', 'headers', 'attachments')));
 
     $mailgun = get_option('mailgun');
+    $region = (defined('MAILGUN_REGION') && MAILGUN_REGION) ? MAILGUN_REGION : $mailgun['region'];
     $apiKey = (defined('MAILGUN_APIKEY') && MAILGUN_APIKEY) ? MAILGUN_APIKEY : $mailgun['apiKey'];
     $domain = (defined('MAILGUN_DOMAIN') && MAILGUN_DOMAIN) ? MAILGUN_DOMAIN : $mailgun['domain'];
 
     if (empty($apiKey) || empty($domain)) {
         return false;
+    }
+
+    // If a region is not set via defines or through the options page, default to US region.
+    if (!((bool) $region)) {
+        error_log('[Mailgun] No region configuration was found! Defaulting to US region.');
+        $region = 'us';
     }
 
     if (!is_array($attachments)) {
@@ -218,7 +225,6 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
         'from'    => "{$from_name} <{$from_email}>",
         'to'      => $to,
         'subject' => $subject,
-        'text'    => $message,
     );
 
     $rcpt_data = apply_filters('mg_mutate_to_rcpt_vars', $to);
@@ -256,21 +262,18 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
         $body['bcc'] = implode(', ', $bcc);
     }
 
-    // If we are not given a Content-Type from the supplied headers, use
-    // text/html and *attempt* to strip tags and provide a text/plain
-    // version.
+    // If we are not given a Content-Type in the supplied headers,
+    // write the message body to a file and try to determine the mimetype
+    // using get_mime_content_type.
     if (!isset($content_type)) {
-        // Try to figure out the content type with mime_content_type.
         $tmppath = tempnam(sys_get_temp_dir(), 'mg');
         $tmp = fopen($tmppath, 'w+');
 
         fwrite($tmp, $message);
         fclose($tmp);
 
-        // Get mime type with mime_content_type
         $content_type = get_mime_content_type($tmppath, 'text/plain');
 
-        // Remove the tmpfile
         unlink($tmppath);
     }
 
@@ -284,8 +287,11 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
 
     if ('text/plain' === $content_type) {
         $body['text'] = $message;
+    } else if ('text/html' === $content_type) {
+        $body['html'] = $message;
     } else {
         // Unknown Content-Type??
+        error_log('[mailgun] Got unknown Content-Type: ' . $content_type);
         $body['text'] = $message;
         $body['html'] = $message;
     }
@@ -320,50 +326,32 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
      * not support files directly.
      */
 
+    $payload = '';
+
     // First, generate a boundary for the multipart message.
     $boundary = base_convert(uniqid('boundary', true), 10, 36);
 
-    $payload = null;
-
-    // Allow other plugins to apply body changes before writing the payload.
+    // Allow other plugins to apply body changes before creating the payload.
     $body = apply_filters('mg_mutate_message_body', $body);
-
-    // Iterate through pre-built params and build payload:
-    foreach ($body as $key => $value) {
-        if (is_array($value)) {
-            $parent_key = $key;
-            foreach ($value as $key => $value) {
-                $payload .= '--'.$boundary;
-                $payload .= "\r\n";
-                $payload .= 'Content-Disposition: form-data; name="'.$parent_key."\"\r\n\r\n";
-                $payload .= $value;
-                $payload .= "\r\n";
-            }
-        } else {
-            $payload .= '--'.$boundary;
-            $payload .= "\r\n";
-            $payload .= 'Content-Disposition: form-data; name="'.$key.'"'."\r\n\r\n";
-            $payload .= $value;
-            $payload .= "\r\n";
-        }
+    if ( ($body_payload = mg_build_payload_from_body($body, $boundary)) != null ) {
+        $payload .= $body_payload;
     }
 
-    // Allow other plugins to apply attachent changes before writing to the payload.
-    $attachments = apply_filters('mg_mutate_attachments', $attachments);
+    // TODO: Special handling for multipart/alternative mail
+    // if ('multipart/alternative' === $content_type) {
+    //     // Build payload from mime
+    //     // error_log(sprintf('building message payload from multipart/alternative'));
+    //     // error_log($body['message']);
+    //     // error_log('Attachments:');
+    //     // foreach ($attachments as $attachment) {
+    //     //     error_log($attachment);
+    //     // }
+    // }
 
-    // If we have attachments, add them to the payload.
-    if (!empty($attachments)) {
-        $i = 0;
-        foreach ($attachments as $attachment) {
-            if (!empty($attachment)) {
-                $payload .= '--'.$boundary;
-                $payload .= "\r\n";
-                $payload .= 'Content-Disposition: form-data; name="attachment['.$i.']"; filename="'.basename($attachment).'"'."\r\n\r\n";
-                $payload .= file_get_contents($attachment);
-                $payload .= "\r\n";
-                $i++;
-            }
-        }
+    // Allow other plugins to apply attachment changes before writing to the payload.
+    $attachments = apply_filters('mg_mutate_attachments', $attachments);
+    if ( ($attachment_payload = mg_build_attachments_payload($attachments, $boundary)) != null ) {
+        $payload .= $attachment_payload;
     }
 
     $payload .= '--'.$boundary.'--';
@@ -376,7 +364,9 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
         ),
     );
 
-    $url = "https://api.mailgun.net/v3/{$domain}/messages";
+    $endpoint = mg_api_get_region($region);
+    $endpoint = ($endpoint) ? $endpoint : 'https://api.mailgun.net/v3/';
+    $url = $endpoint."{$domain}/messages";
 
     // TODO: Mailgun only supports 1000 recipients per request, since we are
     // overriding this function, let's add looping here to handle that
@@ -411,4 +401,56 @@ function wp_mail($to, $subject, $message, $headers = '', $attachments = array())
     }
 
     return true;
+}
+
+function mg_build_payload_from_body($body, $boundary) {
+    $payload = '';
+
+    // Iterate through pre-built params and build payload:
+    foreach ($body as $key => $value) {
+        if (is_array($value)) {
+            $parent_key = $key;
+            foreach ($value as $key => $value) {
+                $payload .= '--'.$boundary;
+                $payload .= "\r\n";
+                $payload .= 'Content-Disposition: form-data; name="'.$parent_key."\"\r\n\r\n";
+                $payload .= $value;
+                $payload .= "\r\n";
+            }
+        } else {
+            $payload .= '--'.$boundary;
+            $payload .= "\r\n";
+            $payload .= 'Content-Disposition: form-data; name="'.$key.'"'."\r\n\r\n";
+            $payload .= $value;
+            $payload .= "\r\n";
+        }
+    }
+
+    return $payload;
+}
+
+function mg_build_payload_from_mime($body, $boundary) {
+}
+
+function mg_build_attachments_payload($attachments, $boundary) {
+    $payload = '';
+
+    // If we have attachments, add them to the payload.
+    if (!empty($attachments)) {
+        $i = 0;
+        foreach ($attachments as $attachment) {
+            if (!empty($attachment)) {
+                $payload .= '--'.$boundary;
+                $payload .= "\r\n";
+                $payload .= 'Content-Disposition: form-data; name="attachment['.$i.']"; filename="'.basename($attachment).'"'."\r\n\r\n";
+                $payload .= file_get_contents($attachment);
+                $payload .= "\r\n";
+                $i++;
+            }
+        }
+    } else {
+        return null;
+    }
+
+    return $payload;
 }

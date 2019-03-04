@@ -5,7 +5,7 @@ Plugin URI: http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-word
 Description: Add honeypot anti-spam functionality to the popular Contact Form 7 plugin.
 Author: Nocean
 Author URI: http://www.nocean.ca
-Version: 1.13
+Version: 1.14
 Text Domain: contact-form-7-honeypot
 Domain Path: /languages/
 */
@@ -84,7 +84,15 @@ function wpcf7_add_form_tag_honeypot() {
 
 	// Test if new 4.6+ functions exists
 	if (function_exists('wpcf7_add_form_tag')) {
-		wpcf7_add_form_tag( 'honeypot', 'wpcf7_honeypot_formtag_handler', true );
+		wpcf7_add_form_tag( 
+			'honeypot', 
+			'wpcf7_honeypot_formtag_handler', 
+			array( 
+				'name-attr' => true, 
+				'do-not-store' => true,
+				'not-for-mail' => true
+			)
+		);
 	} else {
 		wpcf7_add_shortcode( 'honeypot', 'wpcf7_honeypot_formtag_handler', true );
 	}
@@ -108,10 +116,13 @@ function wpcf7_honeypot_formtag_handler( $tag ) {
 	$validation_error = wpcf7_get_validation_error( $tag->name );
 
 	$class = wpcf7_form_controls_class( 'text' );
-	$unique_id = uniqid('hp');
 	$atts = array();
 	$atts['class'] = $tag->get_class_option( $class );
 	$atts['id'] = $tag->get_option( 'id', 'id', true );
+	
+	$atts['wrapper_id'] = $tag->get_option('wrapper-id');
+	$wrapper_id = (!empty($atts['wrapper_id'])) ? reset($atts['wrapper_id']) : uniqid('wpcf7-');
+
 	$atts['message'] = apply_filters('wpcf7_honeypot_accessibility_message', __('Please leave this field empty.','contact-form-7-honeypot'));
 	$atts['name'] = $tag->name;
 	$atts['type'] = $tag->type;
@@ -124,18 +135,18 @@ function wpcf7_honeypot_formtag_handler( $tag ) {
 	$inputid_for = ($inputid) ? 'for="'.$atts['id'].'" ' : '';
 	$autocomplete_value = ($atts['validautocomplete']) ? 'off' : 'nope';
 
-	// Check if we should move the CSS off the element and into the footer [todo: find a way to move to head]
-	if (!empty($atts['move_inline_css'])) {
-		$hp_css = '#'.$unique_id.' {'.$atts['css'].'}';
-		wp_register_style( 'wpcf7-'.$unique_id.'-inline', false);
-		wp_enqueue_style( 'wpcf7-'.$unique_id.'-inline' );
-		wp_add_inline_style( 'wpcf7-'.$unique_id.'-inline', $hp_css );
+	// Check if we should move the CSS off the element and into the footer
+	if (!empty($atts['move_inline_css']) && $atts['move_inline_css'][0] === 'true') {
+		$hp_css = '#'.$wrapper_id.' {'.$atts['css'].'}';
+		wp_register_style( 'wpcf7-'.$wrapper_id.'-inline', false);
+		wp_enqueue_style( 'wpcf7-'.$wrapper_id.'-inline' );
+		wp_add_inline_style( 'wpcf7-'.$wrapper_id.'-inline', $hp_css );
 		$el_css = '';
 	} else {
 		$el_css = 'style="'.$atts['css'].'"';
 	}
 
-	$html = '<span id="'.$unique_id.'" class="wpcf7-form-control-wrap ' . $atts['name'] . '-wrap" '.$el_css.'>';
+	$html = '<span id="'.$wrapper_id.'" class="wpcf7-form-control-wrap ' . $atts['name'] . '-wrap" '.$el_css.'>';
 	if (!$atts['nomessage']) {
 		$html .= '<label ' . $inputid_for . ' class="hp-message">'.$atts['message'].'</label>';
 	}
@@ -231,6 +242,16 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 
 					<tr>
 						<th scope="row">
+							<label for="<?php echo esc_attr( $args['content'] . '-wrapper-id' ); ?>"><?php echo esc_html( __( 'Wrapper ID (optional)', 'contact-form-7-honeypot' ) ); ?></label>
+						</th>
+						<td>
+							<input type="text" name="wrapper-id" class="wrapper-id-value oneline option" id="<?php echo esc_attr( $args['content'] . '-wrapper-id' ); ?>" /><br>
+							<em><?php echo esc_html( __( 'By default the markup that wraps this form item has a random ID. You can customize it here. If you\'re unsure, leave blank.', 'contact-form-7-honeypot' ) ); ?></em>
+						</td>
+					</tr>
+
+					<tr>
+						<th scope="row">
 							<label for="<?php echo esc_attr( $args['content'] . '-validautocomplete' ); ?>"><?php echo esc_html( __( 'Use W3C Valid Autocomplete (optional)', 'contact-form-7-honeypot' ) ); ?></label>
 						</th>
 						<td>
@@ -255,7 +276,7 @@ function wpcf7_tg_pane_honeypot($contact_form, $args = '') {
 						</th>
 						<td>
 							<input type="checkbox" name="nomessage:true" id="<?php echo esc_attr( $args['content'] . '-nomessage' ); ?>" class="messagekillvalue option" /><br />
-							<em><?php echo __('If checked, the accessibility label will not be generated. <strong>This is not recommended</strong>. If you\'re unsure, leave this unchecked.','contact-form-7-honeypot'); ?></em>
+							<em><?php echo __('If checked, the accessibility label will not be generated. This is not recommended, but may improve spam blocking. If you\'re unsure, leave this unchecked.','contact-form-7-honeypot'); ?></em>
 						</td>
 					</tr>
 

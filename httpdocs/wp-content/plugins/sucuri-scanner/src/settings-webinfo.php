@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -36,8 +36,8 @@ function sucuriscan_settings_webinfo_details()
         'Datetime_and_Timezone' => '',
         'Operating_system' => sprintf('%s (%d Bit)', PHP_OS, PHP_INT_SIZE * 8),
         'Server' => 'unknown',
-        'WordPress_debug' => 'not active',
-        'Memory_usage' => 'unknown',
+        'WordPress_debug' => __('not active', 'sucuri-scanner'),
+        'Memory_usage' => __('unknown', 'sucuri-scanner'),
         'PHP_version' => PHP_VERSION,
     );
 
@@ -49,7 +49,7 @@ function sucuriscan_settings_webinfo_details()
     );
 
     if (defined('WP_DEBUG') && WP_DEBUG) {
-        $info_vars['WordPress_debug'] = 'active';
+        $info_vars['WordPress_debug'] = __('active', 'sucuri-scanner');
     }
 
     if (function_exists('memory_get_usage')) {

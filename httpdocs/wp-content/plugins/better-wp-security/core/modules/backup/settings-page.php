@@ -47,8 +47,8 @@ final class ITSEC_Backup_Settings_Page extends ITSEC_Module_Settings_Page {
 			foreach ( $errors as $error ) {
 				$message .= '<div class="error inline"><p><strong>' . $error . '</strong></p></div>';
 			}
-		} else if ( is_string( $result ) ) {
-			$message = '<div class="updated fade inline"><p><strong>' . $result . '</strong></p></div>';
+		} else if ( is_array( $result ) ) {
+			$message = '<div class="updated fade inline"><p><strong>' . $result['message'] . '</strong></p></div>';
 		} else {
 			$message = '<div class="error inline"><p><strong>' . sprintf( __( 'The backup request returned an unexpected response. It returned a response of type <code>%1$s</code>.', 'better-wp-security' ), gettype( $result ) ) . '</strong></p></div>';
 		}

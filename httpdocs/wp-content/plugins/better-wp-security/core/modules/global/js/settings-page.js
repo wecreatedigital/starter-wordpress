@@ -23,17 +23,20 @@ var itsec_log_type_changed = function() {
 
 	if ( 'both' === type ) {
 		jQuery( '#itsec-global-log_rotation' ).parents( 'tr' ).show();
+		jQuery( '#itsec-global-file_log_rotation' ).parents( 'tr' ).show();
 		jQuery( '#itsec-global-log_location' ).parents( 'tr' ).show();
 	} else if ( 'file' === type ) {
 		jQuery( '#itsec-global-log_rotation' ).parents( 'tr' ).hide();
+		jQuery( '#itsec-global-file_log_rotation' ).parents( 'tr' ).show();
 		jQuery( '#itsec-global-log_location' ).parents( 'tr' ).show();
 	} else {
 		jQuery( '#itsec-global-log_rotation' ).parents( 'tr' ).show();
+		jQuery( '#itsec-global-file_log_rotation' ).parents( 'tr' ).hide();
 		jQuery( '#itsec-global-log_location' ).parents( 'tr' ).hide();
 	}
 };
 
-jQuery( document ).ready(function() {
+jQuery( document ).ready(function($) {
 	var $container = jQuery( '#wpcontent' );
 
 	$container.on( 'click', '#itsec-global-add-to-whitelist', function( e ) {
@@ -54,4 +57,16 @@ jQuery( document ).ready(function() {
 	$container.on( 'change', '#itsec-global-log_type', itsec_log_type_changed );
 
 	itsec_log_type_changed();
+
+	function proxyHeaderChanged() {
+		if ( 'manual' === $( "#itsec-global-proxy" ).val() ) {
+			$( '.itsec-global-proxy_header-container' ).show();
+		} else {
+			$( '.itsec-global-proxy_header-container' ).hide();
+		}
+	}
+
+	proxyHeaderChanged();
+	$( document ).on( 'change', '#itsec-global-proxy', proxyHeaderChanged );
+	itsecSettingsPage.events.on( 'modulesReloaded', proxyHeaderChanged );
 });

@@ -65,13 +65,13 @@ class ITSEC_Backup {
 	/**
 	 * Public function to get lock and call backup.
 	 *
-	 * Attempts to get a lock to prevent concurrant backups and calls the backup function itself.
+	 * Attempts to get a lock to prevent concurrent backups and calls the backup function itself.
 	 *
 	 * @since 4.0.0
 	 *
 	 * @param  boolean $one_time whether this is a one time backup
 	 *
-	 * @return mixed false on error or nothing
+	 * @return array|WP_Error false on error or nothing
 	 */
 	public function do_backup( $one_time = false ) {
 
@@ -79,21 +79,25 @@ class ITSEC_Backup {
 			return new WP_Error( 'itsec-backup-do-backup-already-running', __( 'Unable to create a backup at this time since a backup is currently being created. If you wish to create an additional backup, please wait a few minutes before trying again.', 'better-wp-security' ) );
 		}
 
-
 		ITSEC_Lib::set_minimum_memory_limit( '256M' );
-		$this->execute_backup( $one_time );
+		$result = $this->execute_backup( $one_time );
 		ITSEC_Lib::release_lock( 'backup' );
 
 		switch ( $this->settings['method'] ) {
-
 			case 0:
-				return __( 'Backup complete. The backup was sent to the selected email recipients and was saved locally.', 'better-wp-security' );
+				$message = __( 'Backup complete. The backup was sent to the selected email recipients and was saved locally.', 'better-wp-security' );
+				break;
 			case 1:
-				return __( 'Backup complete. The backup was sent to the selected email recipients.', 'better-wp-security' );
+				$message = __( 'Backup complete. The backup was sent to the selected email recipients.', 'better-wp-security' );
+				break;
 			default:
-				return __( 'Backup complete. The backup was saved locally.', 'better-wp-security' );
-
+				$message = __( 'Backup complete. The backup was saved locally.', 'better-wp-security' );
+				break;
 		}
+
+		$result['message'] = $message;
+
+		return $result;
 	}
 
 	/**
@@ -105,12 +109,10 @@ class ITSEC_Backup {
 	 *
 	 * @param bool $one_time whether this is a one-time backup
 	 *
-	 * @return void
+	 * @return array|WP_Error
 	 */
 	private function execute_backup( $one_time = false ) {
 		global $wpdb;
-
-
 
 		require_once( ITSEC_Core::get_core_dir() . 'lib/class-itsec-lib-directory.php' );
 
@@ -222,7 +224,17 @@ class ITSEC_Backup {
 
 		if ( 2 !== $this->settings['method'] || true === $one_time ) {
 			$mail_success = $this->send_mail( $file );
+		} else {
+			$mail_success = null;
 		}
+
+		$log_data = array(
+			'settings'     => $this->settings,
+			'mail_success' => $mail_success,
+			'file'         => $backup_file,
+			'output_file'  => $file,
+			'size'         => @filesize( $file ),
+		);
 
 		if ( 1 === $this->settings['method'] ) {
 			@unlink( $file );
@@ -246,13 +258,6 @@ class ITSEC_Backup {
 			}
 		}
 
-
-		$log_data = array(
-			'settings'     => $this->settings,
-			'mail_success' => $mail_success,
-			'file'         => $backup_file,
-		);
-
 		if ( 0 === $this->settings['method'] ) {
 			if ( false === $mail_success ) {
 				ITSEC_Log::add_warning( 'backup', 'email-failed-file-stored', $log_data );
@@ -268,6 +273,8 @@ class ITSEC_Backup {
 		} else {
 			ITSEC_Log::add_notice( 'backup', 'file-stored', $log_data );
 		}
+
+		return $log_data;
 	}
 
 	private function send_mail( $file ) {

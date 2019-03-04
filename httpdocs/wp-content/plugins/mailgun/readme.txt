@@ -4,8 +4,8 @@ Mailgun for WordPress
 Contributors: Mailgun, sivel, lookahead.io, m35dev
 Tags: mailgun, smtp, http, api, mail, email
 Requires at least: 3.3
-Tested up to: 4.8
-Stable tag: 1.5.8.5
+Tested up to: 5.0.3
+Stable tag: 1.7.1
 License: GPLv2 or later
 
 
@@ -18,7 +18,7 @@ Easily send email from your WordPress site through Mailgun using the HTTP API or
 
 One particularly useful feature of this plugin is that it provides you with a way to send email when the server you are on does not support SMTP or where outbound SMTP is restricted since the plug-in uses the Mailgun HTTP API for sending email by default. All you need to use the plugin is a [Mailgun account](http://www.mailgun.com/). Mailgun has a free account that lets you send up to 200 emails per day, which is great for testing. Paid subscriptions are available for increased limits.
 
-The latest version of this plugin adds support for Mailgun list subscription. Using the shortcode, you can place a form on an article or page to allow the visitor to subscribe to one or more lists. Using the widget, you can provide subscription functionality in sidebars or anywhere widgets are supported e.g. footers.
+The latest version of this plugin now supports regions. Select either U.S./North America or Europe to choose the API endpoint from which you will send email.
 
 The current version of this plugin only handles sending emails, tracking and tagging and list subscription. 
 
@@ -53,12 +53,15 @@ define( 'MG_DEBUG_SMTP', true );
 Yes, using the following constants that can be placed in wp-config.php:
 
 `
-MAILGUN_USEAPI       Type: boolean
+MAILGUN_REGION       Type: string   Choices: 'us' or 'eu'
+     ex. define('MAILGUN_REGION', 'us');
+MAILGUN_USEAPI       Type: boolean  Choices: '0' or '1' (0 = false/no)
 MAILGUN_APIKEY       Type: string
 MAILGUN_DOMAIN       Type: string
 MAILGUN_USERNAME     Type: string
 MAILGUN_PASSWORD     Type: string
-MAILGUN_SECURE       Type: boolean
+MAILGUN_SECURE       Type: boolean  Choices: '0' or '1' (0 = false/no)
+MAILGUN_SECTYPE      Type: string   Choices: 'ssl' or 'tls'
 MAILGUN_FROM_NAME    Type: string
 MAILGUN_FROM_ADDRESS Type: string
 `
@@ -69,7 +72,7 @@ MAILGUN_FROM_ADDRESS Type: string
   Mutates messages to use recipient variables syntax - see
   https://documentation.mailgun.com/user_manual.html#batch-sending for more info.
 
-  Should accept a list of `To` addressses.
+  Should accept a list of `To` addresses.
 
   Should *only* return `true` or `false`.
 
@@ -94,7 +97,7 @@ MAILGUN_FROM_ADDRESS Type: string
   Mutates messages to use recipient variables syntax - see
   https://documentation.mailgun.com/user_manual.html#batch-sending for more info.
 
-  Should accept a list of `To` addressses.
+  Should accept a list of `To` addresses.
 
   Should *only* return `true` or `false`.
 
@@ -125,6 +128,62 @@ MAILGUN_FROM_ADDRESS Type: string
 
 
 == Changelog ==
+
+= 1.7.1 (2019-02-07): =
+- Reinstall settings page for multisites.
+
+= 1.7 (2019-01-21): =
+- Remove settings page for multisites.
+- Simplify admin notifications.
+- Test plugin with PHP 7.2.
+- Test plugin up to WordPress 5.0.3.
+
+= 1.6.1 (2018-10-08): =
+- Restore Settings page form for all install types.
+
+= 1.6 (2018-9-21): =
+- Refactor admin notifications
+- Enable Settings page for all WordPress install types
+- Enable Test Configuration for all WordPress install types
+- Test plugin up to WordPress 4.9.8.
+
+= 1.5.14 (2018-09-11): =
+- Force SSL-secured SMTP connections to use port 465 (SMTPS) to connect, 587 for plain and TLS
+- Support region endpoint switching for SMTP
+
+= 1.5.13.1 (2018-08-15): =
+- Fix line breaks in Test Configuration email
+
+= 1.5.13 (2018-08-14): =
+- Default to US region if no region is configured in settings
+- Add admin notification about region configuration
+- Log an error message when an email is sent with no explicit region configured
+
+= 1.5.12.3 (2018-08-09): =
+- Fix Region select menu default when wp-config.php variable is set
+- Fix front end email input validation
+
+= 1.5.12.2 (2018-08-09): =
+- Fix plugin not saving after update
+
+= 1.5.12.1 (2018-08-06): =
+- Fix for backwards compatibility
+
+= 1.5.12 (2018-08-02): =
+- Add EU endpoint for Mailgun HTTP API
+- Fix broken logo image on Lists page
+- Test plugin up to Wordpress 4.9.7
+
+= 1.5.11 (2018-05-30): =
+- Fix an issue with authentication failing for newer API keys
+- Test plugin up to Wordpress 4.9.6
+
+= 1.5.10 (2017-11-22): =
+- Fix back to settings link on lists page (https://github.com/mailgun/wordpress-plugin/pull/65)
+- Fix a bug causing `text/html` emails to send as both `text/plain` *and* `text/html` parts
+
+= 1.5.9 (2017-09-13): =
+- Add a configuration option to allow setting security type for SMTP connection (SSL / TLS)
 
 = 1.5.8.5 (2017-09-05): =
 - Change default click tracking setting to `htmlonly` (https://github.com/mailgun/wordpress-plugin/pull/58)

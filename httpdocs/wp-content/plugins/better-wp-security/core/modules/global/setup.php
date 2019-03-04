@@ -122,6 +122,12 @@ if ( ! class_exists( 'ITSEC_Global_Setup' ) ) {
 			if ( $itsec_old_version < 4064 ) {
 				delete_site_option( 'itsec_global' );
 			}
+
+			if ( $itsec_old_version < 4108 ) {
+				if ( ITSEC_Modules::get_setting( 'global', 'proxy_override' ) ) {
+					ITSEC_Modules::set_setting( 'global', 'proxy', 'disabled' );
+				}
+			}
 		}
 
 	}

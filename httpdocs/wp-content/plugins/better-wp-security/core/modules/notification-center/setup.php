@@ -2,9 +2,11 @@
 
 class ITSEC_Notification_Center_Setup {
 
+	private $old_version;
+
 	public function __construct() {
 		add_action( 'itsec_modules_do_plugin_uninstall', array( $this, 'execute_uninstall' ) );
-		add_action( 'itsec_modules_do_plugin_upgrade', array( $this, 'execute_upgrade' ) );
+		add_action( 'itsec_modules_do_plugin_upgrade', array( $this, 'execute_upgrade' ), -100 );
 	}
 
 	/**
@@ -71,6 +73,7 @@ class ITSEC_Notification_Center_Setup {
 
 			ITSEC_Modules::set_settings( 'notification-center', $settings );
 
+			$this->old_version = $itsec_old_version;
 			add_action( 'itsec_initialized', array( $this, 'fire_continue_upgrade' ) );
 		} elseif ( $itsec_old_version < 4077 ) { // Only run this if user is updating from 4076 -> 4077
 			ITSEC_Modules::load_module_file( 'active.php', 'notification-center' );
@@ -113,10 +116,24 @@ class ITSEC_Notification_Center_Setup {
 				ITSEC_Modules::set_settings( 'notification-center', $settings );
 			}
 		}
+
+		if ( $itsec_old_version < 4099 ) {
+			ITSEC_Modules::load_module_file( 'active.php', 'notification-center' );
+
+			$settings = ITSEC_Modules::get_settings( 'notification-center' );
+			unset( $settings['mail_errors'] );
+			ITSEC_Modules::set_settings( 'notification-center', $settings );
+		}
+
+		if ( $itsec_old_version < 4101 ) {
+			$this->old_version = $itsec_old_version;
+			add_action( 'itsec_initialized', array( $this, 'fire_continue_upgrade' ) );
+		}
 	}
 
 	public function fire_continue_upgrade() {
-		do_action( 'itsec_notification_center_continue_upgrade' );
+		ITSEC_Modules::load_module_file( 'settings.php', 'notification-center' );
+		do_action( 'itsec_notification_center_continue_upgrade', $this->old_version );
 	}
 }
 

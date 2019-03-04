@@ -25,7 +25,7 @@ class ITSEC_Brute_Force {
 	 * @param string $username username attempted
 	 * @param string $password password attempted
 	 *
-	 * @return user object or WordPress error
+	 * @return WP_User|WP_Error|null
 	 */
 	public function authenticate( $user, $username = '', $password = '' ) {
 		/** @var ITSEC_Lockout $itsec_lockout */
@@ -48,6 +48,7 @@ class ITSEC_Brute_Force {
 				$itsec_lockout->do_lockout( 'brute_force_admin_user', $username );
 			} else {
 				$user_id = false;
+				$code = 'invalid-login';
 
 				if ( empty( $username ) ) {
 					$itsec_lockout->check_lockout( false, false, 'brute_force_empty_username' );
@@ -56,12 +57,14 @@ class ITSEC_Brute_Force {
 
 					if ( empty( $user_id ) ) {
 						$itsec_lockout->check_lockout( false, $username, 'brute_force_invalid_username' );
+						$code = "invalid-login::username-{$username}";
 					} else {
 						$itsec_lockout->check_lockout( $user_id, false, 'brute_force_invalid_password' );
+						$code = "invalid-login::user-{$user_id}";
 					}
 				}
 
-				ITSEC_Log::add_notice( 'brute_force', 'invalid-login', compact( 'details', 'user', 'username', 'user_id', 'SERVER' ) );
+				ITSEC_Log::add_notice( 'brute_force', $code, compact( 'details', 'user', 'username', 'user_id', 'SERVER' ) );
 
 				$itsec_lockout->do_lockout( 'brute_force', $username );
 			}

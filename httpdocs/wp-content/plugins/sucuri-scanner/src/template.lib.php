@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -39,7 +39,7 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -78,6 +78,18 @@ class SucuriScanTemplate extends SucuriScanRequest
                 $kvalue = SucuriScan::escape($kvalue);
                 $content = str_replace($with_escape, $kvalue, $content);
                 continue;
+            }
+        }
+
+        global $locale;
+
+        preg_match_all('~{{(.+)}}~', $content, $matches);
+
+        if ( ! empty( $matches[1] ) ) {
+            foreach($matches[1] as $string) {
+                $pattern = sprintf('~{{%s}}~', preg_quote($string, '~'));
+                $replacement = ('en_US' !== $locale) ? translate($string, 'sucuri-scanner') : $string;
+                $content = preg_replace($pattern, $replacement, $content);
             }
         }
 
@@ -121,7 +133,7 @@ class SucuriScanTemplate extends SucuriScanRequest
             SucuriScanTemplate::getModal(
                 'register-site',
                 array(
-                    'Title' => 'Generate API Key',
+                    'Title' => __('Generate API Key', 'sucuri-scanner'),
                     'Identifier' => 'register-site',
                     'Visibility' => 'hidden',
                 )
@@ -262,12 +274,12 @@ class SucuriScanTemplate extends SucuriScanRequest
         );
 
         if (!array_key_exists($type, $filenames)) {
-            return (string) SucuriScan::throwException('Invalid template type');
+            return (string) SucuriScan::throwException(__('Invalid template type', 'sucuri-scanner'));
         }
 
         $output = ''; /* initialize response */
         $_page = self::get('page', '_page');
-        $params['SucuriURL'] = SUCURISCAN_URL;
+        $params['PluginURL'] = SUCURISCAN_URL;
         $trailing = $_page ? 'admin.php?page=' . $_page : '';
         $params['CurrentURL'] = SucuriScan::adminURL($trailing);
 

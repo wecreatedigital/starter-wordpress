@@ -1,6 +1,8 @@
 <?php
 
-require_once dirname( __FILE__ ) . '/wp-cache-phase2.php';
+if ( ! function_exists( 'wp_cache_phase2' ) ) {
+	require_once dirname( __FILE__ ) . '/wp-cache-phase2.php';
+}
 
 // error_reporting(E_ERROR | E_PARSE); // uncomment to debug this file!
 if ( ! @include WP_CONTENT_DIR . '/wp-cache-config.php' ) {
@@ -43,6 +45,28 @@ if ( is_array( $plugins ) ) {
 	foreach ( $plugins as $plugin ) {
 		if ( is_file( $plugin ) ) {
 			require_once $plugin;
+		}
+	}
+}
+
+if ( isset( $wpsc_plugins ) && is_array( $wpsc_plugins ) ) {
+	foreach( $wpsc_plugins as $plugin_file ) {
+		if ( file_exists( ABSPATH . $plugin_file ) ) {
+			include_once( ABSPATH . $plugin_file );
+		}
+	}
+}
+
+if (
+	file_exists( WPCACHEHOME . '../wp-super-cache-plugins/' ) &&
+	is_dir( WPCACHEHOME . '../wp-super-cache-plugins/' )
+) {
+	$plugins = glob( WPCACHEHOME . '../wp-super-cache-plugins/*.php' );
+	if ( is_array( $plugins ) ) {
+		foreach ( $plugins as $plugin ) {
+			if ( is_file( $plugin ) ) {
+				require_once $plugin;
+			}
 		}
 	}
 }

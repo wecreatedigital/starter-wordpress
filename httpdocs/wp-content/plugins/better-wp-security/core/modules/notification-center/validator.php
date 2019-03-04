@@ -13,11 +13,51 @@ class ITSEC_Notification_Center_Validator extends ITSEC_Validator {
 	}
 
 	protected function sanitize_settings() {
-		$this->vars_to_skip_validate_matching_fields = array( 'last_sent', 'data', 'resend_at', 'mail_errors', 'admin_emails' );
+		$this->vars_to_skip_validate_matching_fields = array( 'last_sent', 'data', 'resend_at', 'admin_emails', 'last_mail_error' );
 		$this->set_previous_if_empty( array( 'last_sent', 'data', 'resend_at', 'admin_emails' ) );
 
-		if ( ! isset( $this->settings['mail_errors'] ) ) {
-			$this->settings['mail_errors'] = $this->previous_settings['mail_errors'];
+		if ( ! isset( $this->settings['last_mail_error'] ) ) {
+			$this->settings['last_mail_error'] = $this->previous_settings['last_mail_error'];
+		}
+
+		// We allow an empty email string.
+		if ( ! empty( $this->settings['from_email'] ) ) {
+			$this->sanitize_setting( 'email', 'from_email', __( 'Admin Email', 'better-wp-security' ) );
+		}
+
+		if ( $this->sanitize_setting( 'array', 'default_recipients', esc_html__( 'Default Recipients', 'better-wp-security' ) ) ) {
+			if ( empty( $this->settings['default_recipients']['user_list'] ) ) {
+				$this->add_error( new WP_Error(
+					'itsec-validator-notification-center-invalid-type-default_recipients[user_list]-non-empty',
+					esc_html__( 'Selecting "Default Recipients" is required.', 'better-wp-security' )
+				) );
+
+				if ( ITSEC_Core::is_interactive() ) {
+					$this->set_can_save( false );
+				}
+			} else {
+				$users_and_roles = $this->get_available_admin_users_and_roles();
+				$valid_contacts  = $users_and_roles['users'] + $users_and_roles['roles'];
+
+				$contact_errors = array();
+
+				foreach ( $this->settings['default_recipients']['user_list'] as $contact ) {
+					if ( ! isset( $valid_contacts[ $contact ] ) ) {
+						$contact_errors[] = $contact;
+					}
+				}
+
+				if ( $contact_errors ) {
+					$this->add_error( new WP_Error(
+						'itsec-validator-notification-center-invalid-type-default_recipients[user_list]-invalid-contacts',
+						wp_sprintf( esc_html__( 'Unknown Default Recipients contacts, %l.', 'better-wp-security' ), $contact_errors )
+					) );
+
+					if ( ITSEC_Core::is_interactive() ) {
+						$this->set_can_save( false );
+					}
+				}
+			}
 		}
 
 		if ( ! $this->sanitize_setting( 'array', 'notifications', esc_html__( 'Notifications', 'better-wp-security' ) ) ) {
@@ -36,7 +76,7 @@ class ITSEC_Notification_Center_Validator extends ITSEC_Validator {
 			$strings = ITSEC_Core::get_notification_center()->get_notification_strings( $notification );
 
 			if ( ITSEC_Notification_Center::R_USER_LIST !== $config['recipient'] && ITSEC_Notification_Center::R_USER_LIST_ADMIN_UPGRADE !== $config['recipient'] ) {
-				unset( $settings['user_list'] );
+				unset( $settings['user_list'], $settings['recipient_type'] );
 			} else {
 				if ( ! is_array( $settings['user_list'] ) ) {
 					$settings['user_list'] = array();
@@ -65,6 +105,19 @@ class ITSEC_Notification_Center_Validator extends ITSEC_Validator {
 					$this->add_error( new WP_Error(
 						'itsec-validator-notification-center-invalid-type-notifications[user_list]-invalid-contacts',
 						wp_sprintf( esc_html__( 'Unknown contacts for %1$s, %2$l.', 'better-wp-security' ), $strings['label'], $contact_errors )
+					) );
+
+					if ( ITSEC_Core::is_interactive() ) {
+						$this->set_can_save( false );
+					}
+				}
+
+				if ( ! isset( $settings['recipient_type'] ) ) {
+					$settings['recipient_type'] = 'default';
+				} elseif ( ! in_array( $settings['recipient_type'], array( 'default', 'custom' ), true ) ) {
+					$this->add_error( new WP_Error(
+						'itsec-validator-notification-center-invalid-type-notifications[recipient_type]-array',
+						wp_sprintf( esc_html__( 'Unknown recipient type for %s.', 'better-wp-security' ), $strings['label'] )
 					) );
 
 					if ( ITSEC_Core::is_interactive() ) {
@@ -241,8 +294,10 @@ class ITSEC_Notification_Center_Validator extends ITSEC_Validator {
 		$available_roles = array();
 		$available_users = array();
 
+		require_once( ITSEC_Core::get_core_dir() . '/lib/class-itsec-lib-canonical-roles.php' );
+
 		foreach ( $roles->roles as $role => $details ) {
-			if ( isset( $details['capabilities']['manage_options'] ) && ( true === $details['capabilities']['manage_options'] ) ) {
+			if ( 'administrator' === ITSEC_Lib_Canonical_Roles::get_canonical_role_from_role( $role ) ) {
 				$available_roles["role:$role"] = translate_user_role( $details['name'] );
 
 				$users = get_users( array( 'role' => $role ) );

@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -34,7 +34,7 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -149,14 +149,16 @@ class SucuriScanFileInfo extends SucuriScan
      */
     private function ignoreFolder($path)
     {
+        $content = basename(WP_CONTENT_DIR);
+
         return (bool) ($this->ignore_directories && (
             strpos($path, '/.hg') !== false
             || strpos($path, '/.git') !== false
             || strpos($path, '/.svn') !== false
-            || strpos($path, 'wp-content/backup') !== false
-            || strpos($path, 'wp-content/cache') !== false
-            || strpos($path, 'wp-content/uploads') !== false
-            || strpos($path, 'wp-content/w3tc') !== false
+            || strpos($path, $content . '/backup') !== false
+            || strpos($path, $content . '/cache') !== false
+            || strpos($path, $content . '/uploads') !== false
+            || strpos($path, $content . '/w3tc') !== false
         ));
     }
 
@@ -235,23 +237,27 @@ class SucuriScanFileInfo extends SucuriScan
                     continue;
                 }
 
-                /* check only files */
-                if ($fifo->isFile()
-                    && $filterby === 'file'
-                    && !$this->ignoreFile($filepath)
-                    && !$this->ignoreFolder($filepath)
-                ) {
-                    $files[] = $filepath;
-                    continue;
-                }
+                try {
+                    /* check only files */
+                    if ($fifo->isFile()
+                        && $filterby === 'file'
+                        && !$this->ignoreFile($filepath)
+                        && !$this->ignoreFolder($filepath)
+                    ) {
+                        $files[] = $filepath;
+                        continue;
+                    }
 
-                /* check only directories */
-                if ($fifo->isDir()
-                    && $filterby === 'directory'
-                    && !$this->ignoreFolder($filepath)
-                ) {
-                    $files[] = $filepath;
-                    continue;
+                    /* check only directories */
+                    if ($fifo->isDir()
+                        && $filterby === 'directory'
+                        && !$this->ignoreFolder($filepath)
+                    ) {
+                        $files[] = $filepath;
+                        continue;
+                    }
+                } catch (RuntimeException $e) {
+                    SucuriScanEvent::reportCriticalEvent($e->getMessage());
                 }
             }
 
@@ -282,7 +288,7 @@ class SucuriScanFileInfo extends SucuriScan
         }
 
         if (!$files) {
-            return self::throwException('No files were found');
+            return self::throwException(__('No files were found', 'sucuri-scanner'));
         }
 
         sort($files); /* sort file list alphabetically */
@@ -293,7 +299,13 @@ class SucuriScanFileInfo extends SucuriScan
             $filesize = @filesize($filepath);
 
             if ($as_array) {
-                $basename = str_replace($abspath . '/', '', $filepath);
+                $basename = $filepath;
+
+                if (strlen($abspath . '/') > 1) {
+                    /* convert absolute path into relative path */
+                    $basename = str_replace($abspath . '/', '', $filepath);
+                }
+
                 $signatures[$basename] = array(
                     'filepath' => $filepath,
                     'checksum' => $file_checksum,
@@ -334,15 +346,17 @@ class SucuriScanFileInfo extends SucuriScan
         $directory = realpath($directory);
 
         if (!is_dir($directory)) {
-            return self::throwException('Directory does not exists');
+            return self::throwException(__('Directory does not exists', 'sucuri-scanner'));
         }
 
-        if ($directory === ABSPATH . 'wp-content') {
-            return self::throwException('Cannot delete content directory');
+        if ($directory === WP_CONTENT_DIR) {
+            return self::throwException(__('Cannot delete content directory', 'sucuri-scanner'));
         }
 
-        if ($directory === ABSPATH . 'wp-content/uploads') {
-            return self::throwException('Cannot delete uploads directory');
+        $upload_dir = wp_upload_dir();
+
+        if ($directory === $upload_dir['basedir']) {
+            return self::throwException(__('Cannot delete uploads directory', 'sucuri-scanner'));
         }
 
         /* force complete scan */

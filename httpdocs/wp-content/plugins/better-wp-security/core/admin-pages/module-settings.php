@@ -194,10 +194,21 @@ class ITSEC_Module_Settings_Page {
 	 */
 	public function render( $form ) {
 
+		$messages = ITSEC_Lib_Remote_Messages::get_messages_for_placement( array( 'module' => $this->id ) );
+
 ?>
 	<div class="itsec-settings-module-description">
 		<?php $this->render_description( $form ); ?>
 	</div>
+	<?php if ( $messages ) : ?>
+		<div class="itsec-settings-module-service-status">
+			<?php foreach ( $messages as $message ): ?>
+				<div class="notice notice-alt notice-<?php echo esc_attr( $message['type'] ); ?> below-h2">
+					<p><?php echo $message['message']; ?></p>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 	<div class="itsec-settings-module-settings">
 		<?php $this->render_settings( $form ); ?>
 	</div>

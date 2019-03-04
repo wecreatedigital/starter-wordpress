@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -40,15 +40,20 @@ function sucuriscan_page()
     $params['AuditLogs'] = SucuriScanAuditLogs::pageAuditLogs();
 
     /* load data for the SiteCheck section */
-    $params['SiteCheck.iFramesTitle'] = 'iFrames';
-    $params['SiteCheck.LinksTitle'] = 'Links';
-    $params['SiteCheck.ScriptsTitle'] = 'Scripts';
-    $params['SiteCheck.iFramesContent'] = 'Loading...';
-    $params['SiteCheck.LinksContent'] = 'Loading...';
-    $params['SiteCheck.ScriptsContent'] = 'Loading...';
+    $params['SiteCheck.Refresh'] = 'false';
+    $params['SiteCheck.iFramesTitle'] = __('iFrames', 'sucuri-scanner');
+    $params['SiteCheck.LinksTitle'] = __('Links', 'sucuri-scanner');
+    $params['SiteCheck.ScriptsTitle'] = __('Scripts', 'sucuri-scanner');
+    $params['SiteCheck.iFramesContent'] = __('Loading...', 'sucuri-scanner');
+    $params['SiteCheck.LinksContent'] = __('Loading...', 'sucuri-scanner');
+    $params['SiteCheck.ScriptsContent'] = __('Loading...', 'sucuri-scanner');
     $params['SiteCheck.Malware'] = '<div id="sucuriscan-malware"></div>';
     $params['SiteCheck.Blacklist'] = '<div id="sucuriscan-blacklist"></div>';
     $params['SiteCheck.Recommendations'] = '<div id="sucuriscan-recommendations"></div>';
+
+    if (SucuriScanRequest::get(':sitecheck_refresh') !== false) {
+        $params['SiteCheck.Refresh'] = 'true';
+    }
 
     echo SucuriScanTemplate::getTemplate('dashboard', $params);
 }
@@ -89,9 +94,9 @@ function sucuriscan_lastlogins_page()
 
         if (@unlink($file_path)) {
             sucuriscan_lastlogins_datastore_exists();
-            SucuriScanInterface::info('Last-Logins logs were successfully reset.');
+            SucuriScanInterface::info(__('Last-Logins logs were successfully reset.', 'sucuri-scanner'));
         } else {
-            SucuriScanInterface::error('Could not reset the last-logins data file.');
+            SucuriScanInterface::error(__('Could not reset the last-logins data file.', 'sucuri-scanner'));
         }
     }
 
@@ -101,7 +106,6 @@ function sucuriscan_lastlogins_page()
         'LastLogins.Admins' => sucuriscan_lastlogins_admins(),
         'LoggedInUsers' => sucuriscan_loggedin_users_panel(),
         'FailedLogins' => sucuriscan_failed_logins_panel(),
-        'BlockedUsers' => SucuriScanBlockedUsers::page(),
     );
 
     echo SucuriScanTemplate::getTemplate('lastlogins', $params);
@@ -127,9 +131,9 @@ function sucuriscan_settings_page()
     $params['Settings.General.DataStorage'] = sucuriscan_settings_general_datastorage($nonce);
     $params['Settings.General.SelfHosting'] = sucuriscan_settings_general_selfhosting($nonce);
     $params['Settings.General.ReverseProxy'] = sucuriscan_settings_general_reverseproxy($nonce);
-    $params['Settings.General.IPDiscoverer'] = sucuriscan_settings_general_ipdiscoverer($nonce);
     $params['Settings.General.ImportExport'] = sucuriscan_settings_general_importexport($nonce);
     $params['Settings.General.Timezone'] = sucuriscan_settings_general_timezone($nonce);
+    $params['Settings.General.IPDiscoverer'] = sucuriscan_settings_general_ipdiscoverer($nonce);
 
     /* settings - scanner */
     $params['Settings.Scanner.Cronjobs'] = SucuriScanSettingsScanner::cronjobs($nonce);
@@ -159,12 +163,12 @@ function sucuriscan_settings_page()
 
     /* settings - alerts */
     $params['Settings.Alerts.Recipients'] = sucuriscan_settings_alerts_recipients($nonce);
-    $params['Settings.Alerts.TrustedIPs'] = sucuriscan_settings_alerts_trustedips();
     $params['Settings.Alerts.Subject'] = sucuriscan_settings_alerts_subject($nonce);
     $params['Settings.Alerts.PerHour'] = sucuriscan_settings_alerts_perhour($nonce);
     $params['Settings.Alerts.BruteForce'] = sucuriscan_settings_alerts_bruteforce($nonce);
     $params['Settings.Alerts.Events'] = sucuriscan_settings_alerts_events($nonce);
     $params['Settings.Alerts.IgnorePosts'] = sucuriscan_settings_alerts_ignore_posts();
+    $params['Settings.Alerts.TrustedIPs'] = sucuriscan_settings_alerts_trustedips();
 
     /* settings - api service */
     $params['Settings.APIService.Status'] = sucuriscan_settings_apiservice_status($nonce);
@@ -192,6 +196,8 @@ function sucuriscan_ajax()
         SucuriScanAuditLogs::ajaxAuditLogs();
         SucuriScanAuditLogs::ajaxAuditLogsSendLogs();
         SucuriScanSiteCheck::ajaxMalwareScan();
+        SucuriScanIntegrity::ajaxIntegrity();
+        SucuriScanIntegrity::ajaxIntegrityDiffUtility();
         SucuriScanFirewall::auditlogsAjax();
         SucuriScanFirewall::ipAccessAjax();
         SucuriScanFirewall::blacklistAjax();
@@ -199,8 +205,7 @@ function sucuriscan_ajax()
         SucuriScanFirewall::getSettingsAjax();
         SucuriScanFirewall::clearCacheAjax();
         SucuriScanFirewall::clearAutoCacheAjax();
-        SucuriScanIntegrity::ajaxIntegrity();
-        SucuriScanIntegrity::ajaxIntegrityDiffUtility();
+        SucuriScanSettingsScanner::cronjobsAjax();
         SucuriScanSettingsPosthack::availableUpdatesAjax();
         SucuriScanSettingsPosthack::getPluginsAjax();
         SucuriScanSettingsPosthack::resetPasswordAjax();

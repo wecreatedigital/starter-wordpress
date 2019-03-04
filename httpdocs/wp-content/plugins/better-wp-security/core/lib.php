@@ -39,7 +39,7 @@ final class ITSEC_Lib {
 			w3tc_dbcache_flush();
 			w3tc_objectcache_flush();
 
-		} else if ( function_exists( 'wp_cache_clear_cache' ) && true == $page ) {
+		} elseif ( function_exists( 'wp_cache_clear_cache' ) && true == $page ) {
 
 			wp_cache_clear_cache();
 
@@ -84,7 +84,7 @@ final class ITSEC_Lib {
 	 *
 	 * @since 4.0.0
 	 *
-	 * @param string $url          URL to filter
+	 * @param string $url URL to filter
 	 *
 	 * @return string domain name or '*' on error or domain mapped multisite
 	 * */
@@ -106,49 +106,10 @@ final class ITSEC_Lib {
 		$host_parts = explode( '.', $host );
 
 		if ( count( $host_parts ) > 2 ) {
-			$host_parts = array_slice( $host_parts, -2, 2 );
+			$host_parts = array_slice( $host_parts, - 2, 2 );
 		}
 
 		return implode( '.', $host_parts );
-	}
-
-	/**
-	 * Get path to WordPress install.
-	 *
-	 * Get the absolute filesystem path to the root of the WordPress installation.
-	 *
-	 * @since 4.3.0
-	 *
-	 * @return string Full filesystem path to the root of the WordPress installation
-	 */
-	public static function get_home_path() {
-
-		$home    = set_url_scheme( get_option( 'home' ), 'http' );
-		$siteurl = set_url_scheme( get_option( 'siteurl' ), 'http' );
-
-		if ( ! empty( $home ) && 0 !== strcasecmp( $home, $siteurl ) ) {
-
-			$wp_path_rel_to_home = str_ireplace( $home, '', $siteurl ); /* $siteurl - $home */
-			$pos                 = strripos( str_replace( '\\', '/', $_SERVER['SCRIPT_FILENAME'] ), trailingslashit( $wp_path_rel_to_home ) );
-
-			if ( $pos === false ) {
-
-				$home_path = dirname( $_SERVER['SCRIPT_FILENAME'] );
-
-			} else {
-
-				$home_path = substr( $_SERVER['SCRIPT_FILENAME'], 0, $pos );
-
-			}
-
-		} else {
-
-			$home_path = ABSPATH;
-
-		}
-
-		return trailingslashit( str_replace( '\\', '/', $home_path ) );
-
 	}
 
 	/**
@@ -206,7 +167,6 @@ final class ITSEC_Lib {
 			return $GLOBALS['__itsec_remote_ip'];
 		}
 
-
 		$ip = apply_filters( 'itsec-get-ip', false );
 
 		if ( false !== $ip ) {
@@ -214,17 +174,12 @@ final class ITSEC_Lib {
 
 			if ( ! empty( $ip ) ) {
 				$GLOBALS['__itsec_remote_ip'] = $ip;
+
 				return $ip;
 			}
 		}
 
 		unset( $ip );
-
-
-		if ( ITSEC_Modules::get_setting( 'global', 'proxy_override' ) ) {
-			$GLOBALS['__itsec_remote_ip'] = $_SERVER['REMOTE_ADDR'];
-			return $GLOBALS['__itsec_remote_ip'];
-		}
 
 		$headers = array(
 			'HTTP_CF_CONNECTING_IP', // CloudFlare
@@ -232,29 +187,40 @@ final class ITSEC_Lib {
 			'REMOTE_ADDR',           // Default source of remote IP
 		);
 
-		$headers = apply_filters( 'itsec_filter_remote_addr_headers', $headers );
+		$headers = (array) apply_filters( 'itsec_filter_remote_addr_headers', $headers );
+		$proxy   = ITSEC_Modules::get_setting( 'global', 'proxy' );
 
-		$headers = (array) $headers;
+		switch ( $proxy ) {
+			case 'disabled':
+				return $GLOBALS['__itsec_remote_ip'] = $_SERVER['REMOTE_ADDR'];
+			case 'manual':
+				$header = ITSEC_Modules::get_setting( 'global', 'proxy_header' );
 
-		if ( ! in_array( 'REMOTE_ADDR', $headers ) ) {
+				if ( in_array( $header, $headers, true ) ) {
+					$headers = array( $header );
+				}
+				break;
+		}
+
+		if ( ! in_array( 'REMOTE_ADDR', $headers, true ) ) {
 			$headers[] = 'REMOTE_ADDR';
 		}
 
 		// Loop through twice. The first run won't accept a reserved or private range IP. If an acceptable IP is not
 		// found, try again while accepting reserved or private range IPs.
-		for ( $x = 0; $x < 2; $x++ ) {
+		for ( $x = 0; $x < 2; $x ++ ) {
 			foreach ( $headers as $header ) {
-				if ( ! isset( $_SERVER[$header] ) ) {
+				if ( ! isset( $_SERVER[ $header ] ) ) {
 					continue;
 				}
 
-				$ip = trim( $_SERVER[$header] );
+				$ip = trim( $_SERVER[ $header ] );
 
 				if ( empty( $ip ) ) {
 					continue;
 				}
 
-				if ( false !== ( $comma_index = strpos( $_SERVER[$header], ',' ) ) ) {
+				if ( false !== ( $comma_index = strpos( $_SERVER[ $header ], ',' ) ) ) {
 					$ip = substr( $ip, 0, $comma_index );
 				}
 
@@ -445,21 +411,21 @@ final class ITSEC_Lib {
 
 		if ( - 1 < $memory_limit ) {
 
-			$unit = strtolower( substr( $memory_limit, - 1 ) );
+			$unit         = strtolower( substr( $memory_limit, - 1 ) );
 			$memory_limit = (int) $memory_limit;
 
-			$new_unit = strtolower( substr( $new_memory_limit, - 1 ) );
+			$new_unit         = strtolower( substr( $new_memory_limit, - 1 ) );
 			$new_memory_limit = (int) $new_memory_limit;
 
 			if ( 'm' == $unit ) {
 
 				$memory_limit *= 1048576;
 
-			} else if ( 'g' == $unit ) {
+			} elseif ( 'g' == $unit ) {
 
 				$memory_limit *= 1073741824;
 
-			} else if ( 'k' == $unit ) {
+			} elseif ( 'k' == $unit ) {
 
 				$memory_limit *= 1024;
 
@@ -469,11 +435,11 @@ final class ITSEC_Lib {
 
 				$new_memory_limit *= 1048576;
 
-			} else if ( 'g' == $new_unit ) {
+			} elseif ( 'g' == $new_unit ) {
 
 				$new_memory_limit *= 1073741824;
 
-			} else if ( 'k' == $new_unit ) {
+			} elseif ( 'k' == $new_unit ) {
 
 				$new_memory_limit *= 1024;
 
@@ -570,11 +536,11 @@ final class ITSEC_Lib {
 
 		if ( false === $user ) {
 			$user = wp_get_current_user();
-		} else if ( is_int( $user ) ) {
+		} elseif ( is_int( $user ) ) {
 			$user = get_user_by( 'id', $user );
-		} else if ( is_string( $user ) ) {
+		} elseif ( is_string( $user ) ) {
 			$user = get_user_by( 'login', $user );
-		} else if ( is_object( $user ) && isset( $user->ID ) ) {
+		} elseif ( is_object( $user ) && isset( $user->ID ) ) {
 			$user = get_user_by( 'id', $user->ID );
 		} else {
 			if ( is_object( $user ) ) {
@@ -646,7 +612,7 @@ final class ITSEC_Lib {
 
 			if ( 'Basic ' === $http_auth_type ) {
 				$authentication_types[] = 'header_http_basic_auth';
-			} else if ( 'OAuth ' === $http_auth_type ) {
+			} elseif ( 'OAuth ' === $http_auth_type ) {
 				$authentication_types[] = 'header_http_oauth';
 			}
 		}
@@ -663,14 +629,14 @@ final class ITSEC_Lib {
 			$authentication_types[] = 'post_oauth';
 		}
 
-		if ( defined('XMLRPC_REQUEST') && XMLRPC_REQUEST ) {
-			$source = 'xmlrpc';
+		if ( defined( 'XMLRPC_REQUEST' ) && XMLRPC_REQUEST ) {
+			$source               = 'xmlrpc';
 			$authentication_types = array( 'username_and_password' );
-		} else if ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
-			$source = 'rest_api';
+		} elseif ( defined( 'REST_REQUEST' ) && REST_REQUEST ) {
+			$source                 = 'rest_api';
 			$authentication_types[] = 'cookie';
 		} else {
-			$source = 'wp-login.php';
+			$source               = 'wp-login.php';
 			$authentication_types = array( 'username_and_password' );
 		}
 
@@ -712,7 +678,7 @@ final class ITSEC_Lib {
 	 */
 	public static function get_request_path() {
 		if ( ! isset( $GLOBALS['__itsec_lib_get_request_path'] ) ) {
-			$request_uri = preg_replace( '|//+|', '/', $_SERVER['REQUEST_URI'] );
+			$request_uri                             = preg_replace( '|//+|', '/', $_SERVER['REQUEST_URI'] );
 			$GLOBALS['__itsec_lib_get_request_path'] = self::get_url_path( $request_uri, self::get_home_root() );
 		}
 
@@ -735,8 +701,8 @@ final class ITSEC_Lib {
 		global $wpdb;
 		$main_options = $wpdb->base_prefix . 'options';
 
-		$lock = "itsec-lock-{$name}";
-		$now = ITSEC_Core::get_current_time_gmt();
+		$lock       = "itsec-lock-{$name}";
+		$now        = ITSEC_Core::get_current_time_gmt();
 		$release_at = $now + $expires_in;
 
 		if ( is_multisite() ) {
@@ -819,7 +785,7 @@ final class ITSEC_Lib {
 				$alloptions = wp_cache_get( 'alloptions' );
 
 				if ( is_array( $alloptions ) && isset( $alloptions[ $lock ] ) ) {
-					unset( $alloptions[$lock] );
+					unset( $alloptions[ $lock ] );
 					wp_cache_set( 'alloptions', $alloptions, 'options' );
 				} else {
 					wp_cache_delete( $lock, 'options' );
@@ -830,6 +796,31 @@ final class ITSEC_Lib {
 		} else {
 			delete_option( $lock );
 		}
+	}
+
+	public static function has_lock( $name ) {
+
+		/** @var \wpdb $wpdb */
+		global $wpdb;
+		$main_options = $wpdb->base_prefix . 'options';
+
+		$lock = "itsec-lock-{$name}";
+
+		if ( is_multisite() ) {
+			$result = $wpdb->get_var( $wpdb->prepare( "SELECT `option_value` FROM `{$main_options}` WHERE `option_name` = %s", $lock ) );
+		} else {
+			$result = $wpdb->get_var( $wpdb->prepare( "SELECT `option_value` FROM `$wpdb->options` WHERE `option_name` = %s", $lock ) );
+		}
+
+		if ( ! $result ) {
+			return false;
+		}
+
+		if ( (int) $result < ITSEC_Core::get_current_time_gmt() ) {
+			return false;
+		}
+
+		return true;
 	}
 
 	/**
@@ -859,13 +850,13 @@ final class ITSEC_Lib {
 					wp_cache_switch_to_blog( 1 );
 
 					$alloptions = wp_cache_get( 'alloptions' );
-					$set_all = false;
+					$set_all    = false;
 
 					foreach ( $rows as $row ) {
 						$lock = $row->option_name;
 
 						if ( is_array( $alloptions ) && isset( $alloptions[ $lock ] ) ) {
-							unset( $alloptions[$lock] );
+							unset( $alloptions[ $lock ] );
 							$set_all = true;
 						} else {
 							wp_cache_delete( $lock, 'options' );
@@ -932,7 +923,7 @@ final class ITSEC_Lib {
 	public static function get_ssl_support_probability() {
 		if ( is_ssl() ) {
 			$probability = 50; // The site appears to be on an SSL connection but it could be self-signed or otherwise
-			                   // not valid to a visitor.
+			// not valid to a visitor.
 		} else {
 			$probability = 0;
 		}
@@ -1060,11 +1051,11 @@ final class ITSEC_Lib {
 			return;
 		}
 
-		$crons = _get_cron_array();
-
-		foreach ( $crons as $timestamp => $cron ) {
-			if ( isset( $cron['itsec_cron_test'] ) ) {
-				return;
+		if ( $crons = _get_cron_array() ) {
+			foreach ( $crons as $timestamp => $cron ) {
+				if ( isset( $cron['itsec_cron_test'] ) ) {
+					return;
+				}
 			}
 		}
 
@@ -1072,5 +1063,626 @@ final class ITSEC_Lib {
 		$time = ITSEC_Core::get_current_time_gmt() + mt_rand( 6, 18 ) * HOUR_IN_SECONDS + mt_rand( 1, 60 ) * MINUTE_IN_SECONDS;
 		wp_schedule_single_event( $time, 'itsec_cron_test', array( $time ) );
 		ITSEC_Modules::set_setting( 'global', 'cron_test_time', $time );
+	}
+
+	public static function fwdslash( $string ) {
+		return '/' . ltrim( $string, '/' );
+	}
+
+	/**
+	 * Enqueue the itsec_util script.
+	 *
+	 * Will only be included once per page.
+	 *
+	 * @param array $args
+	 */
+	public static function enqueue_util( $args = array() ) {
+
+		static $enqueued = false;
+
+		if ( $enqueued ) {
+			return;
+		}
+
+		$translations = array(
+			'ajax_invalid'      => new WP_Error( 'itsec-settings-page-invalid-ajax-response', __( 'An "invalid format" error prevented the request from completing as expected. The format of data returned could not be recognized. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
+			'ajax_forbidden'    => new WP_Error( 'itsec-settings-page-forbidden-ajax-response: %1$s "%2$s"', __( 'A "request forbidden" error prevented the request from completing as expected. The server returned a 403 status code, indicating that the server configuration is prohibiting this request. This could be due to a plugin/theme conflict or a server configuration issue. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings or server configuration that could account for this AJAX request being blocked.', 'better-wp-security' ) ),
+			'ajax_not_found'    => new WP_Error( 'itsec-settings-page-not-found-ajax-response: %1$s "%2$s"', __( 'A "not found" error prevented the request from completing as expected. The server returned a 404 status code, indicating that the server was unable to find the requested admin-ajax.php file. This could be due to a plugin/theme conflict, a server configuration issue, or an incomplete WordPress installation. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings, alter server configurations, or reinstall WordPress.', 'better-wp-security' ) ),
+			'ajax_server_error' => new WP_Error( 'itsec-settings-page-server-error-ajax-response: %1$s "%2$s"', __( 'A "internal server" error prevented the request from completing as expected. The server returned a 500 status code, indicating that the server was unable to complete the request due to a fatal PHP error or a server problem. This could be due to a plugin/theme conflict, a server configuration issue, a temporary hosting issue, or invalid custom PHP modifications. Please check your server\'s error logs for details about the source of the error and contact your hosting company for assistance if required.', 'better-wp-security' ) ),
+			'ajax_unknown'      => new WP_Error( 'itsec-settings-page-ajax-error-unknown: %1$s "%2$s"', __( 'An unknown error prevented the request from completing as expected. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
+			'ajax_timeout'      => new WP_Error( 'itsec-settings-page-ajax-error-timeout: %1$s "%2$s"', __( 'A timeout error prevented the request from completing as expected. The site took too long to respond. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
+			'ajax_parsererror'  => new WP_Error( 'itsec-settings-page-ajax-error-parsererror: %1$s "%2$s"', __( 'A parser error prevented the request from completing as expected. The site sent a response that jQuery could not process. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
+		);
+
+		foreach ( $translations as $i => $translation ) {
+			$messages = ITSEC_Response::get_error_strings( $translation );
+
+			if ( $messages ) {
+				$translations[ $i ] = $messages[0];
+			}
+		}
+
+		wp_enqueue_script( 'itsec-util', plugins_url( 'admin-pages/js/util.js', __FILE__ ), array( 'jquery' ), ITSEC_Core::get_plugin_build(), true );
+		wp_localize_script( 'itsec-util', 'itsec_util', array(
+			'ajax_action'  => isset( $args['action'] ) ? $args['action'] : 'itsec_settings_page',
+			'ajax_nonce'   => wp_create_nonce( isset( $args['nonce'] ) ? $args['nonce'] : 'itsec-settings-nonce' ),
+			'translations' => $translations,
+		) );
+
+		$enqueued = true;
+	}
+
+	/**
+	 * Replace the prefix of a target string with another prefix.
+	 *
+	 * If the given target does not start with the current prefix, the string
+	 * will be returned unmodified.
+	 *
+	 * @param string $target      String to perform replacement on.
+	 * @param string $current     The current prefix.
+	 * @param string $replacement The new prefix.
+	 *
+	 * @return string
+	 */
+	public static function replace_prefix( $target, $current, $replacement ) {
+		if ( 0 !== strpos( $target, $current ) ) {
+			return $target;
+		}
+
+		$stripped = substr( $target, strlen( $current ) );
+
+		return $replacement . $stripped;
+	}
+
+	/**
+	 * Convert an iterator to an array.
+	 *
+	 * @param iterable $iterator
+	 *
+	 * @return array
+	 */
+	public static function iterator_to_array( $iterator ) {
+
+		if ( is_array( $iterator ) ) {
+			return $iterator;
+		}
+
+		// Available since PHP 5.1, but SPL which isn't guaranteed.
+		if ( function_exists( 'iterator_to_array' ) ) {
+			return iterator_to_array( $iterator );
+		}
+
+		$array = array();
+
+		foreach ( $iterator as $key => $value ) {
+			$array[ $key ] = $value;
+		}
+
+		return $array;
+	}
+
+	/**
+	 * Insert an element after a given key.
+	 *
+	 * @param string|int $key
+	 * @param array      $array
+	 * @param string|int $new_key
+	 * @param mixed      $new_value
+	 *
+	 * @return array
+	 */
+	public static function array_insert_after( $key, $array, $new_key, $new_value ) {
+		if ( array_key_exists( $key, $array ) ) {
+			$new = array();
+			foreach ( $array as $k => $value ) {
+				$new[ $k ] = $value;
+				if ( $k === $key ) {
+					$new[ $new_key ] = $new_value;
+				}
+			}
+
+			return $new;
+		}
+
+		$array[ $new_key ] = $new_value;
+
+		return $array;
+	}
+
+	/**
+	 * Array unique implementation that allows for non-scalar values.
+	 *
+	 * Will compare elements using `serialize()`.
+	 *
+	 * Keys are preserved. If a numeric array is given, the array will be re-indexed.
+	 *
+	 * @param array $array
+	 *
+	 * @return array
+	 */
+	public static function non_scalar_array_unique( $array ) {
+
+		$is_numeric = wp_is_numeric_array( $array );
+
+		$hashes = array();
+
+		foreach ( $array as $key => $value ) {
+			$hash = serialize( $value );
+
+			if ( isset( $hashes[ $hash ] ) ) {
+				unset( $array[ $key ] );
+			} else {
+				$hashes[ $hash ] = 1;
+			}
+		}
+
+		if ( $is_numeric ) {
+			return array_values( $array );
+		}
+
+		return $array;
+	}
+
+	/**
+	 * Parse a complex header that has attributes like quality values.
+	 *
+	 * @example Parsing the Accept-Language header.
+	 *
+	 * "en-US,en;q=0.9,de;q=0.8" transforms to:
+	 *
+	 * [
+	 *     'en-US' => [],
+	 *     'en'    => [ 'q' => 0.9 ],
+	 *     'de'    => [ 'q' => 0.8' ],
+	 * ]
+	 *
+	 * @param string $header
+	 *
+	 * @return string[]
+	 */
+	public static function parse_header_with_attributes( $header ) {
+
+		$parsed = array();
+		$list   = explode( ',', $header );
+
+		foreach ( $list as $value ) {
+
+			$attrs = array();
+			$parts = explode( ';', trim( $value ) );
+			$main  = $parts[0];
+
+			foreach ( $parts as $part ) {
+				if ( false === strpos( $part, '=' ) ) {
+					continue;
+				}
+
+				list( $key, $value ) = array_map( 'trim', explode( '=', $part, 2 ) );
+
+				$attrs[ $key ] = $value;
+			}
+
+			$parsed[ $main ] = $attrs;
+		}
+
+		return $parsed;
+	}
+
+	/**
+	 * Is a particular function allowed to be called.
+	 *
+	 * Checks disabled functions and the function blacklist.
+	 *
+	 * @param string $func
+	 *
+	 * @return bool
+	 */
+	public static function is_func_allowed( $func ) {
+
+		static $cache = array();
+		static $disabled;
+		static $suhosin;
+
+		if ( isset( $cache[ $func ] ) ) {
+			return $cache[ $func ];
+		}
+
+		if ( $disabled === null ) {
+			$disabled = preg_split( '/\s*,\s*/', (string) ini_get( 'disable_functions' ) );
+		}
+
+		if ( $suhosin === null ) {
+			$suhosin = preg_split( '/\s*,\s*/', (string) ini_get( 'suhosin.executor.func.blacklist' ) );
+		}
+
+		if ( ! is_callable( $func ) ) {
+			return $cache[ $func ] = false;
+		}
+
+		if ( in_array( $func, $disabled, true ) ) {
+			return $cache[ $func ] = false;
+		}
+
+		if ( in_array( $func, $suhosin, true ) ) {
+			return $cache[ $func ] = false;
+		}
+
+		return $cache[ $func ] = true;
+	}
+
+	/**
+	 * Get whatever backup plugin is being used on this site.
+	 *
+	 * @return string
+	 */
+	public static function get_backup_plugin() {
+
+		$possible = array(
+			'backupbuddy/backupbuddy.php',
+			'updraftplus/updraftplus.php',
+			'backwpup/backwpup.php',
+			'xcloner-backup-and-restore/xcloner.php',
+			'duplicator/duplicator.php',
+			'backup/backup.php',
+			'wp-db-backup/wp-db-backup.php',
+			'backupwordpress/backupwordpress.php',
+			'blogvault-real-time-backup/blogvault.php',
+			'wp-all-backup/wp-all-backup.php',
+			'vaultpress/vaultpress.php',
+		);
+
+		/**
+		 * Filter the list of possible backup plugins.
+		 *
+		 * @param string[] List of Backup Plugin __FILE__.
+		 */
+		$possible = apply_filters( 'itsec_possible_backup_plugins', $possible );
+
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+		}
+
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			return '';
+		}
+
+		foreach ( $possible as $file ) {
+			if ( is_plugin_active( $file ) ) {
+				return $file;
+			}
+		}
+
+		return '';
+	}
+
+	/**
+	 * Generate a random token.
+	 *
+	 * @return string Hex token.
+	 */
+	public static function generate_token() {
+
+		$length = 64;
+
+		try {
+			$random = bin2hex( random_bytes( $length / 2 ) );
+		} catch ( Exception $e ) {
+			$unpacked = unpack( 'H*', wp_generate_password( $length / 2, true, true ) );
+			$random   = reset( $unpacked );
+		}
+
+		return $random;
+	}
+
+	/**
+	 * Generate a hash of the token for storage.
+	 *
+	 * @param string $token
+	 *
+	 * @return false|string
+	 */
+	public static function hash_token( $token ) {
+		return hash_hmac( self::get_hash_algo(), $token, wp_salt() );
+	}
+
+	/**
+	 * Check if the provided token matches the stored hashed token.
+	 *
+	 * @param string $provided_token
+	 * @param string $hashed_token
+	 *
+	 * @return bool
+	 */
+	public static function verify_token( $provided_token, $hashed_token ) {
+
+		if ( ! $hashed_token || ! $provided_token ) {
+			return false;
+		}
+
+		return hash_equals( self::hash_token( $provided_token ), $hashed_token );
+	}
+
+	/**
+	 * Get the hash algorithm to use.
+	 *
+	 * PHP can be compiled without the hash extension and the supported hash algos can be variable. WordPress shims
+	 * support for md5 and sha1 hashes with hash_hmac.
+	 *
+	 * @return string
+	 */
+	public static function get_hash_algo() {
+
+		if ( ! function_exists( 'hash_algos' ) ) {
+			return 'sha1';
+		}
+
+		$algos = hash_algos();
+
+		if ( in_array( 'sha256', $algos, true ) ) {
+			return 'sha256';
+		}
+
+		return 'sha1';
+	}
+
+	public static function get_url_from_file( $file, $auto_ssl = true, $prevent_recursion = false ) {
+		$file = str_replace( '\\', '/', $file );
+
+		$url = '';
+
+		$upload_dir            = ITSEC_Core::get_wp_upload_dir();
+		$upload_dir['basedir'] = str_replace( '\\', '/', $upload_dir['basedir'] );
+
+		if ( is_array( $upload_dir ) && ( false === $upload_dir['error'] ) ) {
+			if ( 0 === strpos( $file, $upload_dir['basedir'] ) ) {
+				$url = str_replace( $upload_dir['basedir'], $upload_dir['baseurl'], $file );
+			} elseif ( false !== strpos( $file, 'wp-content/uploads' ) ) {
+				$path_pattern = 'wp-content/uploads';
+				$url_base     = $upload_dir['baseurl'];
+
+				if ( is_multisite() && ! ( is_main_network() && is_main_site() && defined( 'MULTISITE' ) ) ) {
+					if ( defined( 'MULTISITE' ) ) {
+						$mu_path = '/sites/' . get_current_blog_id();
+					} else {
+						$mu_path = '/' . get_current_blog_id();
+					}
+
+					if ( false === strpos( $file, "$path_pattern$mu_path" ) ) {
+						$url_base = substr( $url_base, 0, - strlen( $mu_path ) );
+					} else {
+						$path_pattern .= $mu_path;
+					}
+				}
+
+				$url = $url_base . substr( $file, strpos( $file, $path_pattern ) + strlen( $path_pattern ) );
+			}
+		}
+
+		if ( empty( $url ) ) {
+			if ( ! isset( $GLOBALS['__itsec_cache_wp_content_dir'] ) ) {
+				$GLOBALS['__itsec_cache_wp_content_dir'] = rtrim( str_replace( '\\', '/', WP_CONTENT_DIR ), '/' );
+			}
+			if ( ! isset( $GLOBALS['__itsec_cache_abspath'] ) ) {
+				$GLOBALS['__itsec_cache_abspath'] = rtrim( str_replace( '\\', '/', ABSPATH ), '/' );
+			}
+
+			if ( 0 === strpos( $file, $GLOBALS['__itsec_cache_wp_content_dir'] ) ) {
+				$url = WP_CONTENT_URL . str_replace( '\\', '/', preg_replace( '/^' . preg_quote( $GLOBALS['__itsec_cache_wp_content_dir'], '/' ) . '/', '', $file ) );
+			} elseif ( 0 === strpos( $file, $GLOBALS['__itsec_cache_abspath'] ) ) {
+				$url = get_option( 'siteurl' ) . str_replace( '\\', '/', preg_replace( '/^' . preg_quote( $GLOBALS['__itsec_cache_abspath'], '/' ) . '/', '', $file ) );
+			}
+		}
+
+		if ( empty( $url ) && ! $prevent_recursion ) {
+			$url = self::get_url_from_file( realpath( $file ), $auto_ssl, true );
+		}
+
+		if ( empty( $url ) ) {
+			return '';
+		}
+
+		if ( $auto_ssl ) {
+			$url = self::fix_url( $url );
+		}
+
+		return $url;
+	}
+
+	public static function get_file_from_url( $url ) {
+		$url = preg_replace( '/^https/', 'http', $url );
+		$url = preg_replace( '/\?.*$/', '', $url );
+
+		$file = '';
+
+		$upload_dir = ITSEC_Core::get_wp_upload_dir();
+
+		if ( is_array( $upload_dir ) && ( false === $upload_dir['error'] ) ) {
+			if ( 0 === strpos( $url, $upload_dir['baseurl'] ) ) {
+				$file = str_replace( $upload_dir['baseurl'], $upload_dir['basedir'], $url );
+			} elseif ( false !== strpos( $url, 'wp-content/uploads' ) ) {
+				$path_pattern = 'wp-content/uploads';
+				$file_base    = $upload_dir['basedir'];
+
+				if ( is_multisite() && ! ( is_main_network() && is_main_site() && defined( 'MULTISITE' ) ) ) {
+					if ( defined( 'MULTISITE' ) ) {
+						$mu_path = '/sites/' . get_current_blog_id();
+					} else {
+						$mu_path = '/' . get_current_blog_id();
+					}
+
+					if ( false === strpos( $url, "$path_pattern$mu_path" ) ) {
+						$file_base = substr( $file_base, 0, - strlen( $mu_path ) );
+					} else {
+						$path_pattern .= $mu_path;
+					}
+				}
+
+				$file = $file_base . substr( $url, strpos( $url, $path_pattern ) + strlen( $path_pattern ) );
+			}
+		}
+
+		if ( empty( $file ) ) {
+			if ( ! isset( $GLOBALS['__itsec_cache_wp_content_url'] ) ) {
+				$GLOBALS['__itsec_cache_wp_content_url'] = preg_replace( '/^https/', 'http', WP_CONTENT_URL );
+			}
+			if ( ! isset( $GLOBALS['__itsec_cache_siteurl'] ) ) {
+				$GLOBALS['__itsec_cache_siteurl'] = preg_replace( '/^https/', 'http', get_option( 'siteurl' ) );
+			}
+
+			if ( 0 === strpos( $url, $GLOBALS['__itsec_cache_wp_content_url'] ) ) {
+				$file = rtrim( WP_CONTENT_DIR, '\\\/' ) . preg_replace( '/^' . preg_quote( $GLOBALS['__itsec_cache_wp_content_url'], '/' ) . '/', '', $url );
+			} elseif ( 0 === strpos( $url, $GLOBALS['__itsec_cache_siteurl'] ) ) {
+				$file = rtrim( ABSPATH, '\\\/' ) . preg_replace( '/^' . preg_quote( $GLOBALS['__itsec_cache_siteurl'], '/' ) . '/', '', $url );
+			}
+		}
+
+		return $file;
+	}
+
+	public static function fix_url( $url ) {
+		if ( is_ssl() ) {
+			$url = preg_replace( '|^http://|', 'https://', $url );
+		} else {
+			$url = preg_replace( '|^https://|', 'http://', $url );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * Set a cookie.
+	 *
+	 * @param string $name
+	 * @param string $value
+	 * @param array  $args
+	 */
+	public static function set_cookie( $name, $value, $args = array() ) {
+
+		$args = wp_parse_args( array(
+			'length'    => 0,
+			'http_only' => true,
+		), $args );
+
+		$expires = $args['length'] ? ITSEC_Core::get_current_time_gmt() + $args['length'] : 0;
+
+		setcookie( $name, $value, $expires, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), $args['http_only'] );
+	}
+
+	/**
+	 * Clear a cookie.
+	 *
+	 * @param string $name
+	 */
+	public static function clear_cookie( $name ) {
+		setcookie( $name, ' ', ITSEC_Core::get_current_time_gmt() - YEAR_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN, false, false );
+	}
+
+	/**
+	 * Is the current request a loopback request.
+	 *
+	 * @return bool
+	 */
+	public static function is_loopback_request() {
+		return in_array( self::get_ip(), ITSEC_Modules::get_setting( 'global', 'server_ips' ), true );
+	}
+
+	/**
+	 * Version of {@see wp_slash()} that won't cast numbers to strings.
+	 *
+	 * @param array|string $value
+	 *
+	 * @return array|string
+	 */
+	public static function slash( $value ) {
+		if ( is_array( $value ) ) {
+			foreach ( $value as $k => $v ) {
+				if ( is_array( $v ) ) {
+					$value[ $k ] = self::slash( $v );
+				} elseif ( is_string( $v ) ) {
+					$value[ $k ] = addslashes( $v );
+				}
+			}
+		} elseif ( is_string( $value ) ) {
+			$value = addslashes( $value );
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Format as a ISO 8601 date.
+	 *
+	 * @param int|string $date Epoch or strtotime compatible date.
+	 *
+	 * @return string|false
+	 */
+	public static function to_rest_date( $date = 0 ) {
+		if ( ! $date ) {
+			$date = ITSEC_Core::get_current_time_gmt();
+		} elseif ( ! is_int( $date ) ) {
+			$date = strtotime( $date );
+		}
+
+		return gmdate( 'Y-m-d\TH:i:sP', $date );
+	}
+
+	/**
+	 * Flatten an array.
+	 *
+	 * @param array $array
+	 *
+	 * @return array
+	 */
+	public static function flatten( $array ) {
+		if ( ! is_array( $array ) ) {
+			return array( $array );
+		}
+
+		$merge = array();
+
+		foreach ( $array as $value ) {
+			$merge[] = self::flatten( $value );
+		}
+
+		return $merge ? call_user_func_array( 'array_merge', $merge ) : array();
+	}
+
+	/**
+	 * Preload REST API requests.
+	 *
+	 * @param array $requests
+	 *
+	 * @return array
+	 */
+	public static function preload_rest_requests( $requests ) {
+		$preload = array();
+
+		foreach ( $requests as $key => $config ) {
+			if ( is_string( $config ) ) {
+				$key    = $config;
+				$config = array( 'route' => $config );
+			}
+
+			$request = new WP_REST_Request(
+				isset( $config['method'] ) ? $config['method'] : 'GET',
+				$config['route']
+			);
+
+			if ( ! empty( $config['query'] ) ) {
+				$request->set_query_params( $config['query'] );
+			}
+
+			$response = rest_do_request( $request );
+
+			if ( $response->get_status() >= 200 && $response->get_status() < 300 ) {
+				rest_send_allow_header( $response, rest_get_server(), $request );
+
+				$preload[ $key ] = array(
+					'body'    => rest_get_server()->response_to_data( $response, ! empty( $config['embed'] ) ),
+					'headers' => $response->get_headers()
+				);
+			}
+		}
+
+		return $preload;
 	}
 }

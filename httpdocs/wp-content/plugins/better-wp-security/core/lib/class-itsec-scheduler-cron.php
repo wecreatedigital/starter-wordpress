@@ -12,15 +12,19 @@ class ITSEC_Scheduler_Cron extends ITSEC_Scheduler {
 
 	public function register_cron_schedules( $schedules ) {
 
-		$schedules[ 'itsec-' . self::S_FOUR_DAILY ] = array(
+		$schedules[ 'itsec-' . self::S_TWICE_HOURLY ] = array(
+			'display'  => esc_html__( 'Twice Hourly', 'better-wp-security' ),
+			'interval' => HOUR_IN_SECONDS / 2,
+		);
+		$schedules[ 'itsec-' . self::S_FOUR_DAILY ]   = array(
 			'display'  => esc_html__( 'Four Times per Day', 'better-wp-security' ),
 			'interval' => DAY_IN_SECONDS / 4,
 		);
-		$schedules[ 'itsec-' . self::S_WEEKLY ]     = array(
+		$schedules[ 'itsec-' . self::S_WEEKLY ]       = array(
 			'display'  => esc_html__( 'Weekly', 'better-wp-security' ),
 			'interval' => WEEK_IN_SECONDS,
 		);
-		$schedules[ 'itsec-' . self::S_MONTHLY ]    = array(
+		$schedules[ 'itsec-' . self::S_MONTHLY ]      = array(
 			'display'  => esc_html__( 'Monthly', 'better-wp-security' ),
 			'interval' => MONTH_IN_SECONDS,
 		);
@@ -62,23 +66,74 @@ class ITSEC_Scheduler_Cron extends ITSEC_Scheduler {
 		$this->run_single_event_by_hash( $id, $this->hash_data( $data ) );
 	}
 
-	/**
-	 * Run a single event.
-	 *
-	 * @param string $id
-	 * @param string $hash
-	 */
-	private function run_single_event_by_hash( $id, $hash ) {
+	public function run_single_event_by_hash( $id, $hash ) {
 
 		$opts = array( 'single' => true );
 
 		$storage = $this->get_options();
-		$data    = $storage['single'][ $id ][ $hash ]['data'];
 
-		$job = $this->make_job( $id, $data, $opts );
+		if ( ! isset( $storage['single'][ $id ][ $hash ] ) ) {
+			return;
+		}
 
-		$this->call_action( $job );
+		$data = $storage['single'][ $id ][ $hash ]['data'];
+		$job  = $this->make_job( $id, $data, $opts );
+
 		$this->unschedule_single( $id, $data );
+		$this->call_action( $job );
+	}
+
+	public function run_due_now( $now = 0 ) {
+
+		if ( ! ITSEC_Lib::get_lock( 'scheduler', 120 ) ) {
+			return;
+		}
+
+		if ( ! $crons = _get_cron_array() ) {
+			ITSEC_Lib::release_lock( 'scheduler' );
+
+			return;
+		}
+
+		if ( ! is_main_site() ) {
+			// This is currently never run from a non main site context, but just in case.
+			switch_to_blog( get_network()->site_id );
+		}
+
+		if ( get_transient( 'doing_cron' ) ) {
+			ITSEC_Lib::release_lock( 'scheduler' );
+			is_multisite() && restore_current_blog();
+
+			return;
+		}
+
+		if ( ITSEC_Lib::get_uncached_option( '_transient_doing_cron' ) ) {
+			ITSEC_Lib::release_lock( 'scheduler' );
+			is_multisite() && restore_current_blog();
+
+			return;
+		}
+
+		$now = $now ? $now : ITSEC_Core::get_current_time_gmt();
+
+		foreach ( $crons as $timestamp => $hooks ) {
+			if ( $timestamp > $now || ! isset( $hooks[ self::HOOK ] ) ) {
+				continue;
+			}
+
+			foreach ( $hooks[ self::HOOK ] as $event ) {
+
+				if ( $schedule = $event['schedule'] ) {
+					wp_reschedule_event( $timestamp, $schedule, self::HOOK, $event['args'] );
+				}
+
+				wp_unschedule_event( $timestamp, self::HOOK, $event['args'] );
+				call_user_func_array( array( $this, 'process' ), $event['args'] );
+			}
+		}
+
+		ITSEC_Lib::release_lock( 'scheduler' );
+		is_multisite() && restore_current_blog();
 	}
 
 	public function is_recurring_scheduled( $id ) {
@@ -183,19 +238,37 @@ class ITSEC_Scheduler_Cron extends ITSEC_Scheduler {
 	}
 
 	public function unschedule_single( $id, $data = array() ) {
-		$data_hash = $this->hash_data( $data );
-		$hash      = $this->make_cron_hash( $id, $data );
 
-		if ( $this->unschedule_by_hash( $hash ) ) {
+		$options = $this->get_options();
 
-			$options = $this->get_options();
-			unset( $options['single'][ $id ][ $data_hash ] );
-			$this->set_options( $options );
+		if ( empty( $options['single'][ $id ] ) ) {
+			return false;
+		}
+
+		if ( null === $data ) {
+			$all_events = $options['single'][ $id ];
+
+			foreach ( $all_events as $data_hash => $event ) {
+				$cron_hash = md5( serialize( array( $id, $data_hash ) ) );
+				unset( $all_events[ $data_hash ] );
+				$this->unschedule_by_hash( $cron_hash );
+			}
 
 			return true;
 		}
 
-		return false;
+		$data_hash = $this->hash_data( $data );
+		$hash      = $this->make_cron_hash( $id, $data );
+
+		$unscheduled = $this->unschedule_by_hash( $hash );
+
+		if ( isset( $options['single'][ $id ][ $data_hash ] ) ) {
+			unset( $options['single'][ $id ][ $data_hash ] );
+			$this->set_options( $options );
+			$unscheduled = true;
+		}
+
+		return $unscheduled;
 	}
 
 	private function unschedule_by_hash( $hash ) {
@@ -280,6 +353,7 @@ class ITSEC_Scheduler_Cron extends ITSEC_Scheduler {
 					'id'      => $id,
 					'data'    => $options['single'][ $id ][ $hash ]['data'],
 					'fire_at' => $timestamp,
+					'hash'    => $hash,
 				);
 			}
 		}
@@ -311,9 +385,15 @@ class ITSEC_Scheduler_Cron extends ITSEC_Scheduler {
 
 			unset( $maybe_data['retry_count'] );
 
-			if ( $this->hash_data( $maybe_data ) === $this->hash_data( $data ) ) {
-				return true;
+			if ( $this->hash_data( $maybe_data ) !== $this->hash_data( $data ) ) {
+				continue;
 			}
+
+			if ( ! wp_next_scheduled( self::HOOK, array( $id, $hash ) ) ) {
+				continue;
+			}
+
+			return true;
 		}
 
 		return false;

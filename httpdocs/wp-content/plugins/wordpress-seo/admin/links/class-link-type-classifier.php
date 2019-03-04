@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Admin\Links
  */
 
@@ -8,10 +10,14 @@
  */
 class WPSEO_Link_Type_Classifier {
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	protected $base_host = '';
 
-	/** @var string */
+	/**
+	 * @var string
+	 */
 	protected $base_path = '';
 
 	/**

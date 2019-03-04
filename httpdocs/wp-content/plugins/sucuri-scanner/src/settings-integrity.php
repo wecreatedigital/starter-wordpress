@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -28,14 +28,14 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * Generates the HTML code to display a list of options in the settings page to
  * allow the website owner to configure the functionality of the WordPress core
  * integrity scanner and the optional Unix diff utility. This also includes some
- * options to configure the website installation language and the false/positive
+ * options to configure the website installation language and the false positive
  * cache file.
  *
  * @category   Library
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -62,23 +62,23 @@ class SucuriScanSettingsIntegrity extends SucuriScanSettings
 
             if ($status) {
                 if (!SucuriScanCommand::exists('diff')) {
-                    SucuriScanInterface::error('Your hosting provider has blocked the execution of external commands.');
+                    SucuriScanInterface::error(__('Your hosting provider has blocked the execution of external commands.', 'sucuri-scanner'));
                 } else {
                     $status = $status . 'd'; /* add past tense */
-                    $message = 'Integrity diff utility has been <code>' . $status . '</code>';
+                    $message = sprintf(__('Integrity diff utility has been <code>%s</code>', 'sucuri-scanner'), $status);
 
                     SucuriScanOption::updateOption(':diff_utility', $status);
                     SucuriScanEvent::reportInfoEvent($message);
                     SucuriScanEvent::notifyEvent('plugin_change', $message);
-                    SucuriScanInterface::info('The status of the integrity diff utility has been changed');
+                    SucuriScanInterface::info(__('The status of the integrity diff utility has been changed', 'sucuri-scanner'));
                 }
             }
         }
 
         if (SucuriScanOption::isEnabled(':diff_utility')) {
             $params['DiffUtility.StatusNum'] = 1;
-            $params['DiffUtility.Status'] = 'Enabled';
-            $params['DiffUtility.SwitchText'] = 'Disable';
+            $params['DiffUtility.Status'] = __('Enabled', 'sucuri-scanner');
+            $params['DiffUtility.SwitchText'] = __('Disable', 'sucuri-scanner');
             $params['DiffUtility.SwitchValue'] = 'disable';
         }
 
@@ -101,7 +101,7 @@ class SucuriScanSettingsIntegrity extends SucuriScanSettings
             $deletedFiles = array();
             $files = SucuriScanRequest::post(':corefile_path', '_array');
 
-            foreach ($files as $path) {
+            foreach ((array) $files as $path) {
                 if ($cache->delete(md5($path))) {
                     $deletedFiles[] = $path;
                 }
@@ -109,10 +109,9 @@ class SucuriScanSettingsIntegrity extends SucuriScanSettings
 
             if (!empty($deletedFiles)) {
                 SucuriScanEvent::reportDebugEvent(
-                    'Core files that will not be ignored anymore: (mul'
-                    . 'tiple entries): ' . implode(',', $deletedFiles)
+                    sprintf(__('Core files that will not be ignored anymore: (multiple entries): %s', 'sucuri-scanner'), implode(',', $deletedFiles))
                 );
-                SucuriScanInterface::info('The selected files have been successfully processed.');
+                SucuriScanInterface::info(__('The selected files have been successfully processed.', 'sucuri-scanner'));
             }
         }
 

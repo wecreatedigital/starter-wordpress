@@ -2,7 +2,7 @@
 
 class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page {
 
-	private $version = 1;
+	private $version = 3;
 
 	/** @var ITSEC_Notification_Center_Validator */
 	private $validator;
@@ -19,7 +19,7 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 
 		$this->validator = ITSEC_Modules::get_validator( 'notification-center' );
 
-		if ( ITSEC_Core::get_notification_center()->get_mail_errors() ) {
+		if ( ITSEC_Modules::get_setting( 'notification-center', 'last_mail_error' ) ) {
 			$this->status = 'warning';
 		}
 
@@ -39,15 +39,8 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 
 		switch ( $data['method'] ) {
 			case 'dismiss-mail-error':
-
-				if ( ! empty( $data['mail_error'] ) ) {
-					ITSEC_Core::get_notification_center()->dismiss_mail_error( $data['mail_error'] );
-
-					if ( ! ITSEC_Core::get_notification_center()->get_mail_errors() ) {
-						ITSEC_Response::set_response( array( 'status' => 'all-cleared' ) );
-					}
-				}
-
+				ITSEC_Modules::set_setting( 'notification-center', 'last_mail_error', '' );
+				ITSEC_Response::set_success( true );
 				break;
 		}
 	}
@@ -72,9 +65,30 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 
 		<table class="form-table itsec-settings-section">
 			<tbody>
+			<tr>
+				<th><label for="itsec-notification-center-from_email"><?php esc_html_e( 'From Email', 'better-wp-security' ); ?></label></th>
+				<td>
+					<?php $form->add_text( 'from_email' ); ?>
+					<p class="description">
+						<?php esc_html_e( 'iThemes Security will send notifications from this email address. Leave blank to use the WordPress default.', 'better-wp-security' ); ?>
+					</p>
+				</td>
+			</tr>
+			<tr class="itsec-email-contacts-setting">
+				<th><label for="itsec-notification-center-default_recipients"><?php esc_html_e( 'Default Recipients', 'better-wp-security' ); ?></label></th>
+				<td>
+					<?php
+					$form->add_input_group( 'default_recipients' );
+					$this->render_user_list_fieldset( $form, ITSEC_Notification_Center::R_USER_LIST );
+					$form->remove_input_group();
+					?>
+					<p class="description">
+						<?php esc_html_e( 'Set the default recipients for any admin-facing notifications.', 'better-wp-security' ); ?>
+					</p>
+				</td>
+			</tr>
 			</tbody>
 		</table>
-
 
 		<?php
 
@@ -89,30 +103,20 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 	}
 
 	protected function render_mail_errors() {
-		$errors = ITSEC_Core::get_notification_center()->get_mail_errors();
-
-		if ( ! $errors ) {
+		if ( ! $message = ITSEC_Modules::get_setting( 'notification-center', 'last_mail_error' ) ) {
 			return;
 		}
 
+		$link = esc_url( ITSEC_Core::get_logs_page_url( 'notification_center', 'error' ) );
 		?>
 		<div class="itsec-notification-center-mail-errors-container">
-			<?php foreach ( $errors as $id => $error ):
-				$strings = ITSEC_Core::get_notification_center()->get_notification_strings( $error['notification'] );
-				$details = $error['error'];
-
-				if ( is_wp_error( $details ) ) {
-					$message = $details->get_error_message();
-				} elseif ( is_array( $error ) && isset( $details['message'] ) && is_string( $details['message'] ) ) {
-					$message = $details['message'];
-				} else {
-					$message = __( 'Unknown error encountered while sending.', 'better-wp-security' );
-				}
-				?>
-				<div class="notice notice-alt notice-error below-h2 itsec-is-dismissible itsec-notification-center-mail-error" data-id="<?php echo esc_attr( $id ); ?>">
-					<p><?php printf( esc_html__( 'Error while sending %1$s notification at %2$s: %3$s', 'better-wp-security' ), '<b>' . $strings['label'] . '</b>', '<b>' . ITSEC_Lib::date_format_i18n_and_local_timezone( $error['time'] ) . '</b>', $message ); ?></p>
-				</div>
-			<?php endforeach; ?>
+			<div class="notice notice-alt notice-error below-h2 itsec-is-dismissible itsec-notification-center-mail-error">
+				<?php if ( 'file' !== ITSEC_Modules::get_setting( 'global', 'log_type' ) ): ?>
+					<p><?php printf( esc_html__( 'Error while sending notification: %1$s. %2$sView All%3$s.', 'better-wp-security' ), $message, "<a href=\"{$link}\">", '</a>' ); ?></p>
+				<?php else: ?>
+					<p><?php printf( esc_html__( 'Error while sending notification: %1$s.', 'better-wp-security' ), $message ); ?></p>
+				<?php endif; ?>
+			</div>
 		</div>
 		<?php
 	}
@@ -245,6 +249,34 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 	 * @param string     $type
 	 */
 	protected function render_user_list( $slug, $form, $type ) {
+		?>
+
+		<tr class="itsec-email-contacts-setting">
+			<th><?php esc_html_e( 'Recipient', 'better-wp-security' ); ?></th>
+			<td>
+				<?php $form->add_select( 'recipient_type', array(
+						'class' => 'itsec-notification-center-user-list-type',
+						'value' => array(
+							'default' => esc_html__( 'Default Recipients', 'better-wp-security' ),
+							'custom'  => esc_html__( 'Custom', 'better-wp-security' )
+						),
+					)
+				); ?>
+				<div class="<?php 'default' === $form->get_option( 'recipient_type' ) ? print( 'hidden' ) : null; ?>">
+					<?php $this->render_user_list_fieldset( $form, $type ); ?>
+				</div>
+			</td>
+		</tr>
+		<?php
+	}
+
+	/**
+	 * Render the User List fieldset control.
+	 *
+	 * @param ITSEC_Form $form
+	 * @param string $type
+	 */
+	private function render_user_list_fieldset( $form, $type ) {
 
 		$users_and_roles = $this->validator->get_available_admin_users_and_roles();
 
@@ -252,59 +284,55 @@ class ITSEC_Notification_Center_Settings_Page extends ITSEC_Module_Settings_Page
 		$roles = $users_and_roles['roles'];
 
 		natcasesort( $users );
+
 		?>
+		<fieldset>
+			<legend class="screen-reader-text"><?php esc_html_e( 'Recipients for this email.', 'better-wp-security' ); ?></legend>
+			<p><?php esc_html_e( 'Select which users should be emailed.', 'better-wp-security' ); ?></p>
 
-		<tr class="itsec-email-contacts-setting">
-			<th><?php esc_html_e( 'Recipient', 'better-wp-security' ); ?></th>
-			<td>
-				<fieldset>
-					<legend class="screen-reader-text"><?php esc_html_e( 'Recipients for this email.', 'better-wp-security' ); ?></legend>
-					<p><?php esc_html_e( 'Select which users should be emailed.', 'better-wp-security' ); ?></p>
+			<ul>
+				<?php foreach ( $roles as $role => $name ) : ?>
+					<li>
+						<label>
+							<?php $form->add_multi_checkbox( 'user_list', $role ); ?>
+							<?php echo esc_html( sprintf( _x( 'All %s users', 'role', 'better-wp-security' ), $name ) ); ?>
+						</label>
+					</li>
+				<?php endforeach; ?>
+			</ul>
 
+			<ul>
+				<?php foreach ( $users as $id => $name ) : ?>
+					<li>
+						<label>
+							<?php $form->add_multi_checkbox( 'user_list', $id ); ?>
+							<?php echo esc_html( $name ); ?>
+						</label>
+					</li>
+				<?php endforeach; ?>
+			</ul>
+
+			<?php if ( ITSEC_Notification_Center::R_USER_LIST_ADMIN_UPGRADE === $type && $form->get_option( 'previous_emails' ) ): ?>
+
+				<div class="itsec-notification-center--deprecated-recipients">
+					<span><?php esc_html_e( 'Deprecated Recipients', 'better-wp-security' ); ?></span>
+					<p class="description">
+						<?php esc_html_e( 'The following email recipients are deprecated. Please create new users for these email addresses or remove them.', 'better-wp-security' ); ?>
+					</p>
 					<ul>
-						<?php foreach ( $roles as $role => $name ) : ?>
+						<?php foreach ( $form->get_option( 'previous_emails' ) as $email ): ?>
 							<li>
 								<label>
-									<?php $form->add_multi_checkbox( 'user_list', $role ); ?>
-									<?php echo esc_html( sprintf( _x( 'All %s users', 'role', 'better-wp-security' ), $name ) ); ?>
+									<?php $form->add_multi_checkbox( 'previous_emails', $email ); ?>
+									<?php echo esc_html( $email ); ?>
 								</label>
 							</li>
 						<?php endforeach; ?>
 					</ul>
+				</div>
+			<?php endif; ?>
+		</fieldset>
 
-					<ul>
-						<?php foreach ( $users as $id => $name ) : ?>
-							<li>
-								<label>
-									<?php $form->add_multi_checkbox( 'user_list', $id ); ?>
-									<?php echo esc_html( $name ); ?>
-								</label>
-							</li>
-						<?php endforeach; ?>
-					</ul>
-
-					<?php if ( ITSEC_Notification_Center::R_USER_LIST_ADMIN_UPGRADE === $type && $form->get_option( 'previous_emails' ) ): ?>
-
-						<div class="itsec-notification-center--deprecated-recipients">
-							<span><?php esc_html_e( 'Deprecated Recipients', 'better-wp-security' ); ?></span>
-							<p class="description">
-								<?php esc_html_e( 'The following email recipients are deprecated. Please create new users for these email addresses or remove them.', 'better-wp-security' ); ?>
-							</p>
-							<ul>
-								<?php foreach ( $form->get_option( 'previous_emails' ) as $email ): ?>
-									<li>
-										<label>
-											<?php $form->add_multi_checkbox( 'previous_emails', $email ); ?>
-											<?php echo esc_html( $email ); ?>
-										</label>
-									</li>
-								<?php endforeach; ?>
-							</ul>
-						</div>
-					<?php endif; ?>
-				</fieldset>
-			</td>
-		</tr>
 		<?php
 	}
 

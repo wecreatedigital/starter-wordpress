@@ -122,15 +122,33 @@ class ITSEC_Notify {
 				break;
 		}
 
-		$mail = $nc->mail();
+		$data_proxy = new ITSEC_Notify_Data_Proxy( $data );
 
+		$mail = $nc->mail( 'digest' );
 		$mail->add_header( $title, $banner_title );
+		$mail->start_group( 'intro' );
 		$mail->add_info_box( sprintf( esc_html__( 'The following is a summary of security related activity on your site: %s', 'better-wp-security' ), '<b>' . $mail->get_display_url() . '</b>' ) );
+		$mail->end_group();
+
+		$content = $mail->get_content();
+
+		/**
+		 * Fires before the main content of the Security Digest is added.
+		 *
+		 * @param ITSEC_Mail              $mail
+		 * @param ITSEC_Notify_Data_Proxy $data_proxy
+		 * @param int                     $last_sent
+		 */
+		do_action( 'itsec_security_digest_before', $mail, $data_proxy, $last_sent );
+
+		if ( $content !== $mail->get_content() ) {
+			$send_email = true;
+		}
 
 		$mail->add_section_heading( esc_html__( 'Lockouts', 'better-wp-security' ), 'lock' );
 
-		$user_count = $itsec_lockout->get_lockouts( 'user', array( 'after' => $last_sent, 'return' => 'count' ) );
-		$host_count = $itsec_lockout->get_lockouts( 'host', array( 'after' => $last_sent, 'return' => 'count' ) );
+		$user_count = $itsec_lockout->get_lockouts( 'user', array( 'after' => $last_sent, 'current' => false, 'return' => 'count' ) );
+		$host_count = $itsec_lockout->get_lockouts( 'host', array( 'after' => $last_sent, 'current' => false, 'return' => 'count' ) );
 
 		if ( $host_count > 0 || $user_count > 0 ) {
 			$mail->add_lockouts_summary( $user_count, $host_count );
@@ -138,8 +156,6 @@ class ITSEC_Notify {
 		} else {
 			$mail->add_text( esc_html__( 'No lockouts since the last email check.', 'better-wp-security' ) );
 		}
-
-		$data_proxy = new ITSEC_Notify_Data_Proxy( $data );
 
 		if ( $data_proxy->has_message( 'file-change' ) ) {
 			$mail->add_section_heading( esc_html__( 'File Changes', 'better-wp-security' ), 'folder' );
@@ -189,10 +205,13 @@ class ITSEC_Notify {
 			'<a href="' . ITSEC_Mail::filter_admin_page_url( ITSEC_Core::get_logs_page_url() ) . '"><b>',
 			'</b></a>'
 		) );
-		$mail->add_divider();
-		$mail->add_large_text( esc_html__( 'Is your site as secure as it could be?', 'better-wp-security' ) );
-		$mail->add_text( esc_html__( 'Ensure your site is using recommended settings and features with a security check.', 'better-wp-security' ) );
-		$mail->add_button( esc_html__( 'Run a Security Check ✓', 'better-wp-security' ), ITSEC_Mail::filter_admin_page_url( ITSEC_Core::get_security_check_page_url() ) );
+
+		if ( apply_filters( 'itsec_security_digest_include_security_check', true ) ) {
+			$mail->add_divider();
+			$mail->add_large_text( esc_html__( 'Is your site as secure as it could be?', 'better-wp-security' ) );
+			$mail->add_text( esc_html__( 'Ensure your site is using recommended settings and features with a security check.', 'better-wp-security' ) );
+			$mail->add_button( esc_html__( 'Run a Security Check ✓', 'better-wp-security' ), ITSEC_Mail::filter_admin_page_url( ITSEC_Core::get_security_check_page_url() ) );
+		}
 
 		$mail->add_footer();
 
@@ -236,101 +255,6 @@ class ITSEC_Notify {
 	public function register_file_change() {
 		_deprecated_function( __METHOD__, '3.9.0', 'ITSEC_Notification_Center::enqueue_data' );
 		ITSEC_Core::get_notification_center()->enqueue_data( 'digest', array( 'type' => 'file-change' ) );
-	}
-
-	/**
-	 * Enqueue or send notification accordingly
-	 *
-	 * @since 4.5
-	 *
-	 * @param null|array $body Custom message information to send
-	 *
-	 * @return bool whether the message was successfully enqueue or sent
-	 */
-	public function notify( $body = null ) {
-
-		_deprecated_function( __METHOD__, '3.9.0', 'ITSEC_Notification_Center' );
-
-		if ( empty( $body ) || ! is_array( $body ) ) {
-			return true;
-		}
-
-		$allowed_tags = array(
-			'a'      => array(
-				'href' => array(),
-			),
-			'em'     => array(),
-			'p'      => array(),
-			'strong' => array(),
-			'table'  => array(
-				'border' => array(),
-				'style'  => array(),
-			),
-			'tr'     => array(),
-			'td'     => array(
-				'colspan' => array(),
-			),
-			'th'     => array(),
-			'br'     => array(),
-			'h4'     => array(),
-		);
-
-		$subject = trim( sanitize_text_field( $body['subject'] ) );
-		$message = wp_kses( $body['message'], $allowed_tags );
-
-		if ( isset( $body['headers'] ) ) {
-
-			$headers = $body['headers'];
-
-		} else {
-
-			$headers = '';
-
-		}
-
-		return $this->send_mail( $subject, $message, $headers );
-	}
-
-	/**
-	 * Sends email to recipient
-	 *
-	 * @since 4.5
-	 *
-	 * @param string       $subject     Email subject
-	 * @param string       $message     Message contents
-	 * @param string|array $headers     Optional. Additional headers.
-	 *
-	 * @return bool Whether the email contents were sent successfully.
-	 */
-	private function send_mail( $subject, $message, $headers = '' ) {
-
-		$recipients  = ITSEC_Modules::get_setting( 'global', 'notification_email' );
-		$all_success = true;
-
-		add_filter( 'wp_mail_content_type', array( $this, 'wp_mail_content_type' ) );
-
-		foreach ( $recipients as $recipient ) {
-
-			if ( is_email( trim( $recipient ) ) ) {
-
-				if ( defined( 'ITSEC_DEBUG' ) && ITSEC_DEBUG === true ) {
-					$message .= '<p>' . __( 'Debug info (source page): ' . esc_url( $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"] ) ) . '</p>';
-				}
-
-				$success = wp_mail( trim( $recipient ), $subject, '<html>' . $message . '</html>', $headers );
-
-				if ( $all_success === true && $success === false ) {
-					$all_success = false;
-				}
-
-			}
-
-		}
-
-		remove_filter( 'wp_mail_content_type', array( $this, 'wp_mail_content_type' ) );
-
-		return $all_success;
-
 	}
 
 	/**

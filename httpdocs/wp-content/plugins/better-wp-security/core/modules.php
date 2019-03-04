@@ -17,9 +17,6 @@ final class ITSEC_Modules {
 	private $_settings_files_loaded = false;
 
 	protected function __construct() {
-		require_once( dirname( __FILE__ ) . '/lib/settings.php' );
-		require_once( dirname( __FILE__ ) . '/lib/storage.php' );
-
 		// Action triggered from another part of Security which runs when the settings page is loaded.
 		add_action( 'itsec-settings-page-init', array( $this, 'load_settings_page' ) );
 		add_action( 'itsec-logs-page-init', array( $this, 'load_settings_page' ) );
@@ -471,7 +468,9 @@ final class ITSEC_Modules {
 			$was_active = $self->_active_modules[ $module_id ];
 		}
 
-		self::load_module_file( 'activate.php', $module_id );
+		if ( is_wp_error( $error = self::load_module_file( 'activate.php', $module_id ) ) ) {
+			return $error;
+		}
 
 		$self->_active_modules[ $module_id ] = true;
 		self::set_active_modules( $self->_active_modules );
@@ -559,7 +558,7 @@ final class ITSEC_Modules {
 	 *                                 module slugs, ':all' to load the files from all modules, or ':active' to load the
 	 *                                 files from active modules.
 	 *
-	 * @return bool True if a module matching the $modules parameter is found, false otherwise.
+	 * @return bool|WP_Error True if a module matching the $modules parameter is found, false otherwise.
 	 */
 	public static function load_module_file( $file, $modules = ':all' ) {
 		$self = self::get_instance();
@@ -583,7 +582,11 @@ final class ITSEC_Modules {
 
 		foreach ( $modules as $module ) {
 			if ( ! empty( $self->_module_paths[$module] ) && file_exists( "{$self->_module_paths[$module]}/{$file}" ) ) {
-				include_once( "{$self->_module_paths[$module]}/{$file}" );
+				$returned = include_once( "{$self->_module_paths[$module]}/{$file}" );
+
+				if ( is_wp_error( $returned ) ) {
+					return $returned;
+				}
 			}
 		}
 

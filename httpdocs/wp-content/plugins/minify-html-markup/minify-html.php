@@ -3,7 +3,7 @@
 Plugin Name: Minify HTML
 Plugin URI: https://wordpress.org/plugins/minify-html-markup/
 Description: Minify your HTML for faster downloading and cleaning up sloppy looking markup.
-Version: 1.98
+Version: 1.99
 Author: Tim Eckel
 Author URI: https://www.dogblocker.com
 License: GPLv3 or later
@@ -12,7 +12,7 @@ Text Domain:minify-html
 */
 
 /*
-	Copyright 2017  Tim Eckel  (email : tim@leethost.com)
+	Copyright 2018  Tim Eckel  (email : tim@leethost.com)
 
 	Minify HTML is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by
@@ -147,11 +147,17 @@ function minify_html_menu_options() {
 #minify_html input[type="radio"] {margin-left:15px}
 #minify_html input[type="radio"]:first-child {margin-left:0}
 #minify_html .value {display:inline-block;min-width:50px}
+#minify_html .notice p {font-size:1.1em;font-weight:600}
 @media screen and (max-width: 500px) {#minify_html label {white-space:normal}}
 </style>
-<div class="wrap">
+<div class="wrap" id="minify_html">
+	<blockquote class="update-nag notice">
+		<p>Do you know it's also important for SEO to have your images optimized?</p>
+		<p>We recommend you use the <a href="https://shortpixel.com/wp/af/1SFO1HD28044" target="_blank">ShortPixel Image Optimization</a> plugin for that.</p>
+		<p>Use this <a href="https://shortpixel.com/wp/af/1SFO1HD28044" target="_blank">special link</a> to get 50% more credits!</p>
+	</blockquote>
 	<h2>Minify HTML Settings</h2>
-	<form name="form1" id="minify_html" method="post" action="">
+	<form name="form1" method="post" action="">
 		<input type="hidden" name="minify_html_submit_hidden" value="Y">
 		<table class="form-table">
 			<tbody>

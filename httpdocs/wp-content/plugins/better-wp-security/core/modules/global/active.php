@@ -7,9 +7,6 @@ add_action( 'itsec_white_ips', 'itsec_global_filter_whitelisted_ips', 0 );
 
 
 function itsec_global_add_notice() {
-	if ( ITSEC_Modules::get_setting( 'global', 'show_new_dashboard_notice' ) && current_user_can( ITSEC_Core::get_required_cap() ) ) {
-		ITSEC_Core::add_notice( 'itsec_global_show_new_dashboard_notice' );
-	}
 
 	if ( ! defined( 'ITSEC_USE_CRON' ) && ITSEC_Core::current_user_can_manage() ) {
 		ITSEC_Core::add_notice( 'itsec_show_disable_cron_constants_notice' );
@@ -21,24 +18,6 @@ function itsec_global_add_notice() {
 
 }
 add_action( 'admin_init', 'itsec_global_add_notice', 0 );
-
-function itsec_global_show_new_dashboard_notice() {
-	echo '<div class="updated itsec-notice"><span class="it-icon-itsec"></span>'
-		 . __( 'New! The iThemes Security dashboard just got a new look.', 'better-wp-security' )
-		 . '<a class="itsec-notice-button" href="' . esc_url( 'https://ithemes.com/security/new-ithemes-security-dashboard/' ) . '">' . esc_html( __( "See what's new", 'better-wp-security' ) ) . '</a>'
-		 . '<button class="itsec-notice-hide" data-nonce="' . wp_create_nonce( 'dismiss-new-dashboard-notice' ) . '" data-source="new_dashboard">&times;</button>'
-		 . '</div>';
-}
-
-function itsec_global_dismiss_new_dashboard_notice() {
-	if ( wp_verify_nonce( $_REQUEST['notice_nonce'], 'dismiss-new-dashboard-notice' ) ) {
-		ITSEC_Modules::set_setting( 'global', 'show_new_dashboard_notice', false );
-		wp_send_json_success();
-	}
-	wp_send_json_error();
-}
-add_action( 'wp_ajax_itsec-dismiss-notice-new_dashboard', 'itsec_global_dismiss_new_dashboard_notice' );
-
 
 function itsec_network_brute_force_add_notice() {
 	if ( ITSEC_Modules::get_setting( 'network-brute-force', 'api_nag' ) && current_user_can( ITSEC_Core::get_required_cap() ) ) {
@@ -164,3 +143,37 @@ function itsec_cron_test_callback( $time ) {
 }
 
 add_action( 'itsec_cron_test', 'itsec_cron_test_callback' );
+
+/**
+ * Record that a user has logged-in.
+ *
+ * @param string  $username
+ * @param WP_User $user
+ */
+function itsec_record_first_login( $username, $user ) {
+
+	if ( ! get_user_meta( $user->ID, '_itsec_has_logged_in', true ) ) {
+		update_user_meta( $user->ID, '_itsec_has_logged_in', ITSEC_Core::get_current_time_gmt() );
+	}
+}
+
+add_action( 'wp_login', 'itsec_record_first_login', 15, 2 );
+
+/**
+ * Basename the 'thumb' for attachments to prevent directory traversal
+ * when deleting the main attachment.
+ *
+ * @param array $data
+ *
+ * @return array
+ */
+function itsec_basename_attachment_thumbs( $data ) {
+
+	if ( isset( $data['thumb'] ) && ITSEC_Modules::get_setting( 'wordpress-tweaks', 'patch_thumb_file_traversal' ) ) {
+		$data['thumb'] = basename( $data['thumb'] );
+	}
+
+	return $data;
+}
+
+add_filter( 'wp_update_attachment_metadata', 'itsec_basename_attachment_thumbs' );

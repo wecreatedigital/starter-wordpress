@@ -2,8 +2,6 @@
 
 
 final class ITSEC_Logs_Page {
-	private $version = 1.8;
-
 	private $self_url = '';
 	private $modules = array();
 	private $widgets = array();
@@ -39,6 +37,8 @@ final class ITSEC_Logs_Page {
 	}
 
 	public function add_scripts() {
+		ITSEC_Lib::enqueue_util();
+
 		foreach ( $this->modules as $id => $module ) {
 			$module->enqueue_scripts_and_styles();
 		}
@@ -54,12 +54,12 @@ final class ITSEC_Logs_Page {
 			'translations'  => $this->translations,
 		);
 
-		wp_enqueue_script( 'itsec-logs-page-script', plugins_url( 'js/logs.js', __FILE__ ), array( 'jquery-ui-dialog' ), $this->version, true );
+		wp_enqueue_script( 'itsec-logs-page-script', plugins_url( 'js/logs.js', __FILE__ ), array( 'jquery-ui-dialog' ), ITSEC_Core::get_plugin_build(), true );
 		wp_localize_script( 'itsec-logs-page-script', 'itsec_page', $vars );
 	}
 
 	public function add_styles() {
-		wp_enqueue_style( 'itsec-settings-page-style', plugins_url( 'css/style.css', __FILE__ ), array(), $this->version );
+		wp_enqueue_style( 'itsec-settings-page-style', plugins_url( 'css/style.css', __FILE__ ), array(), ITSEC_Core::get_plugin_build() );
 		wp_enqueue_style( 'wp-jquery-ui-dialog' );
 	}
 
@@ -260,38 +260,56 @@ final class ITSEC_Logs_Page {
 					$username = '';
 				}
 
+				if ( 'wp-cli' === $entry['url'] ) {
+					$url = esc_html__( 'WP-CLI Command', 'better-wp-security' );
+				} else if ( 'wp-cron' === $entry['url'] ) {
+					$url = esc_html__( 'WP-Cron Scheduled Task', 'better-wp-security' );
+				} else if ( 'unknown' === $entry['url'] ) {
+					$url = esc_html__( 'Unknown', 'better-wp-security' );
+				} else {
+					$url = esc_html( $entry['url'] );
+				}
+
 				$details = array(
 					'module'      => array(
 						'header'  => esc_html__( 'Module', 'better-wp-security' ),
 						'content' => esc_html( $entry['module'] ),
+						'order'   => 0,
 					),
 					'type'        => array(
 						'header'  => esc_html__( 'Type', 'better-wp-security' ),
 						'content' => $type,
+						'order'   => 10,
 					),
 					'description' => array(
 						'header'  => esc_html__( 'Description', 'better-wp-security' ),
 						'content' => esc_html( $code ),
+						'order'   => 20,
 					),
 					'timestamp'   => array(
 						'header'  => esc_html__( 'Timestamp', 'better-wp-security' ),
 						'content' => esc_html( $datetime ),
+						'order'   => 30,
 					),
 					'host'        => array(
 						'header'  => esc_html__( 'Host', 'better-wp-security' ),
 						'content' => '<code>' . esc_html( $entry['remote_ip'] ) . '</code>',
+						'order'   => 40,
 					),
 					'user'        => array(
 						'header'  => esc_html__( 'User', 'better-wp-security' ),
 						'content' => esc_html( $username ),
+						'order'   => 50,
 					),
 					'url'         => array(
 						'header'  => esc_html__( 'URL', 'better-wp-security' ),
-						'content' => '<code>' . esc_html( $entry['url'] ) . '</code>',
+						'content' => '<code>' . $url . '</code>',
+						'order'   => 60,
 					),
 					'raw-details'    => array(
 						'header'  => esc_html__( 'Raw Details', 'better-wp-security' ),
 						'content' => true,
+						'order'   => PHP_INT_MAX,
 					),
 				);
 
@@ -319,11 +337,32 @@ final class ITSEC_Logs_Page {
 
 					$details['raw-details']['content'] = '<p><a class="itsec-log-raw-details-toggle" href="#">' . $this->translations['show_raw_details'] . '</a></p><div class="itsec-log-raw-details">' . $details['raw-details']['content'] . '</div>';
 				}
+
+				$i = 1;
+
+				foreach ( $details as $column => $detail ) {
+					if ( ! isset( $detail['order'] ) ) {
+						$details[ $column ]['order'] = PHP_INT_MAX - 10 * $i;
+						$i ++;
+					}
+				}
+
+				$details = wp_list_sort( $details, 'order', 'ASC', true );
+				$messages = ITSEC_Lib_Remote_Messages::get_messages_for_placement( array( 'logs' => array( 'module' => $entry['module'], 'code' => $entry['code'] ) ) );
 			}
 
 			ob_start();
 
 ?>
+	<?php if ( $messages ) : ?>
+		<div class="itsec-logs-service-status">
+			<?php foreach ( $messages as $message ): ?>
+				<div class="notice notice-alt notice-<?php echo esc_attr( $message['type'] ); ?> below-h2">
+					<p><?php echo $message['message']; ?></p>
+				</div>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 	<table class="form-table">
 		<?php foreach ( $details as $row ) : ?>
 			<tr>
@@ -458,6 +497,7 @@ final class ITSEC_Logs_Page {
 								$list->prepare_items();
 								$list->views();
 								$form->start_form( array( 'method' => 'GET' ) );
+								$form->add_hidden( 'page', 'itsec-logs' );
 								$list->display();
 								$form->end_form();
 							?>

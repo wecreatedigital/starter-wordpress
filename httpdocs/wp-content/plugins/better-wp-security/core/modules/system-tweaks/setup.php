@@ -81,14 +81,9 @@ if ( ! class_exists( 'ITSEC_System_Tweaks_Setup' ) ) {
 					$current_options['write_permissions']        = isset( $itsec_bwps_options['st_fileperm'] ) && $itsec_bwps_options['st_fileperm'] == 1 ? true : false;
 
 					update_site_option( 'itsec_tweaks', $current_options );
-					ITSEC_Response::regenerate_server_config();
 					ITSEC_Response::regenerate_wp_config();
 				}
 
-			}
-
-			if ( $itsec_old_version < 4035 ) {
-				ITSEC_Response::regenerate_server_config();
 			}
 
 			if ( $itsec_old_version < 4041 ) {
@@ -120,6 +115,10 @@ if ( ! class_exists( 'ITSEC_System_Tweaks_Setup' ) ) {
 
 					ITSEC_Modules::set_settings( 'system-tweaks', $current_options );
 				}
+			}
+
+			if ( $itsec_old_version < 4095 ) {
+				ITSEC_Response::regenerate_server_config();
 			}
 		}
 

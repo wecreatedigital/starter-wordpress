@@ -465,6 +465,20 @@ class ITSEC_Lib_Config_File {
 			return $contents;
 		}
 
+		if ( ! $contents && in_array( $type, array( 'apache', 'wp-config' ), true ) ) {
+			$display_file = str_replace( '\\', '/', $file );
+			$abspath = str_replace( '\\', '/', ABSPATH );
+			$display_file = preg_replace( '/^' . preg_quote( $abspath, '/' ) . '/', '', $display_file );
+			$display_file = ltrim( $display_file, '/' );
+
+			$error = new WP_Error( "itsec-config-file-update-empty::{$type}", sprintf(
+				__( 'Empty file encountered when attempting to update <code>%1$s</code>. Manual configuration for the <code>%1$s</code> file can be found on the Security > Settings page in the Advanced section.', 'better-wp-security' ),
+				$display_file
+			) );
+			ITSEC_Log::add_critical_issue( 'core', $error->get_error_code(), $error );
+
+			return $error;
+		}
 
 		$modification = ltrim( $modification, "\x0B\r\n\0" );
 		$modification = rtrim( $modification, " \t\x0B\r\n\0" );

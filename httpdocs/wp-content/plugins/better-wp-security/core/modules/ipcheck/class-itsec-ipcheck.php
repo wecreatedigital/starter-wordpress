@@ -25,6 +25,7 @@ class ITSEC_IPCheck {
 	}
 
 	public function filter_authenticate( $user, $username, $password ) {
+		/** @var $itsec_lockout ITSEC_Lockout */
 		global $itsec_lockout;
 
 		if ( is_wp_error( $user ) && $user->get_error_codes() == array( 'empty_username', 'empty_password' ) ) {

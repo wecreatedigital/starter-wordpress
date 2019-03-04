@@ -158,6 +158,14 @@ final class ITSEC_WordPress_Tweaks_Settings_Page extends ITSEC_Module_Settings_P
 				</ul>
 			</td>
 		</tr>
+		<tr>
+			<th scope="row"><label for="itsec-wordpress-tweaks-patch_thumb_file_traversal"><?php esc_html_e( 'Mitigate Attachment File Traversal Attack', 'better-wp-security' ); ?></label></th>
+			<td>
+				<?php $form->add_checkbox( 'patch_thumb_file_traversal' ); ?>
+				<label for="itsec-wordpress-tweaks-patch_thumb_file_traversal"><?php esc_html_e( 'Prevent attachment thumbnails from traversing to other files.', 'better-wp-security' ); ?></label>
+				<p class="description"><?php esc_html_e( 'Disabling this feature is not recommended. This helps mitigate an attack where users with the "author" role or higher could delete any file in your WordPress installation including sensitive files like wp-config.php.', 'better-wp-security' ); ?></p>
+			</td>
+		</tr>
 	</table>
 <?php
 

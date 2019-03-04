@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -39,7 +39,7 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -80,8 +80,9 @@ class SucuriScanCache extends SucuriScan
     /**
      * Initializes the cache library.
      *
-     * @param string $datastore   Name of the storage file.
-     * @param bool   $auto_create Forces the creation of the storage file.
+     * @param  string $datastore   Name of the storage file.
+     * @param  bool   $auto_create Forces the creation of the storage file.
+     * @return void
      */
     public function __construct($datastore = '', $auto_create = true)
     {
@@ -287,7 +288,37 @@ class SucuriScanCache extends SucuriScan
 
         $finfo['info']['fpath'] = $this->datastore_path;
 
+        if (!isset($finfo['info']['created_on'])) {
+            $finfo['info']['created_on'] = time();
+        }
+
+        if (!isset($finfo['info']['updated_on'])) {
+            $finfo['info']['updated_on'] = time();
+        }
+
         return $finfo['info'];
+    }
+
+    /**
+     * Returns the Unix timestamp when the cache was created.
+     *
+     * @return int Unix timestamp when the cache was created.
+     */
+    public function createdAt()
+    {
+        $info = $this->getDatastoreInfo();
+        return (int) $info['created_on'];
+    }
+
+    /**
+     * Returns the Unix timestamp when the cache was updated.
+     *
+     * @return int Unix timestamp when the cache was updated.
+     */
+    public function updatedAt()
+    {
+        $info = $this->getDatastoreInfo();
+        return (int) $info['updated_on'];
     }
 
     /**
@@ -358,7 +389,7 @@ class SucuriScanCache extends SucuriScan
     public function set($key = '', $data = '')
     {
         if (!$this->validKeyName($key)) {
-            return self::throwException('Invalid cache key name');
+            return self::throwException(__('Invalid cache key name', 'sucuri-scanner'));
         }
 
         $finfo = $this->getDatastoreInfo();
@@ -378,7 +409,7 @@ class SucuriScanCache extends SucuriScan
     public function get($key = '', $lifetime = 0, $assoc = '')
     {
         if (!$this->validKeyName($key)) {
-            return self::throwException('Invalid cache key name');
+            return self::throwException(__('Invalid cache key name', 'sucuri-scanner'));
         }
 
         $finfo = $this->getDatastoreContent($assoc === 'array');
@@ -419,7 +450,7 @@ class SucuriScanCache extends SucuriScan
     public function exists($key = '')
     {
         if (!$this->validKeyName($key)) {
-            return self::throwException('Invalid cache key name');
+            return self::throwException(__('Invalid cache key name', 'sucuri-scanner'));
         }
 
         $finfo = $this->getDatastoreContent(true);
@@ -436,7 +467,7 @@ class SucuriScanCache extends SucuriScan
     public function delete($key = '')
     {
         if (!$this->validKeyName($key)) {
-            return self::throwException('Invalid cache key name');
+            return self::throwException(__('Invalid cache key name', 'sucuri-scanner'));
         }
 
         $finfo = $this->getDatastoreContent(true);

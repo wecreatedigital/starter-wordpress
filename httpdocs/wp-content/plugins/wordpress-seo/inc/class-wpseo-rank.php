@@ -1,5 +1,7 @@
 <?php
 /**
+ * WPSEO plugin file.
+ *
  * @package WPSEO\Internals
  */
 
@@ -8,10 +10,29 @@
  */
 class WPSEO_Rank {
 
-	const BAD      = 'bad';
-	const OK       = 'ok';
-	const GOOD     = 'good';
+	/**
+	 * @var string
+	 */
+	const BAD = 'bad';
+
+	/**
+	 * @var string
+	 */
+	const OK = 'ok';
+
+	/**
+	 * @var string
+	 */
+	const GOOD = 'good';
+
+	/**
+	 * @var string
+	 */
 	const NO_FOCUS = 'na';
+
+	/**
+	 * @var string
+	 */
 	const NO_INDEX = 'noindex';
 
 	/**
@@ -115,7 +136,7 @@ class WPSEO_Rank {
 	 */
 	public function get_drop_down_label() {
 		$labels = array(
-			self::NO_FOCUS => __( 'SEO: No Focus Keyword', 'wordpress-seo' ),
+			self::NO_FOCUS => __( 'SEO: No Focus Keyphrase', 'wordpress-seo' ),
 			self::BAD      => __( 'SEO: Needs improvement', 'wordpress-seo' ),
 			self::OK       => __( 'SEO: OK', 'wordpress-seo' ),
 			self::GOOD     => __( 'SEO: Good', 'wordpress-seo' ),

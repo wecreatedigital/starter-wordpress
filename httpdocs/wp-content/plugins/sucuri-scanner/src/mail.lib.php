@@ -9,7 +9,7 @@
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -34,7 +34,7 @@ if (!defined('SUCURISCAN_INIT') || SUCURISCAN_INIT !== true) {
  * @package    Sucuri
  * @subpackage SucuriScanner
  * @author     Daniel Cid <dcid@sucuri.net>
- * @copyright  2010-2017 Sucuri Inc.
+ * @copyright  2010-2018 Sucuri Inc.
  * @license    https://www.gnu.org/licenses/gpl-2.0.txt GPL2
  * @link       https://wordpress.org/plugins/sucuri-scanner
  */
@@ -77,7 +77,7 @@ class SucuriScanMail extends SucuriScanOption
         }
 
         if (self::emailsPerHourReached() && !$force) {
-            return self::throwException('Maximum number of emails per hour reached');
+            return self::throwException(__('Maximum number of emails per hour reached', 'sucuri-scanner'));
         }
 
         /* check if we need to load a template file to wrap the message */
@@ -122,9 +122,16 @@ class SucuriScanMail extends SucuriScanOption
     {
         $subject = self::getOption(':email_subject');
         $subject = strip_tags((string) $subject);
+        $ip = self::getRemoteAddr();
+
         $subject = str_replace(':event', $event, $subject);
         $subject = str_replace(':domain', self::getDomain(), $subject);
-        $subject = str_replace(':remoteaddr', self::getRemoteAddr(), $subject);
+        $subject = str_replace(':remoteaddr', $ip, $subject);
+
+        if (strpos($subject, ':hostname') !== false) {
+            /* expensive operation; reverse user ip address if requested */
+            $subject = str_replace(':hostname', gethostbyaddr($ip), $subject);
+        }
 
         /* include data from the user in session, if necessary */
         if (strpos($subject, ':username') !== false
@@ -174,7 +181,7 @@ class SucuriScanMail extends SucuriScanOption
             && !empty($user->user_login)
         ) {
             $display_name = sprintf(
-                'User: %s (%s)',
+                __('User: %s (%s)', 'sucuri-scanner'),
                 $user->display_name,
                 $user->user_login
             );
@@ -200,10 +207,11 @@ class SucuriScanMail extends SucuriScanOption
             }
         }
 
-        $params['TemplateTitle'] = 'Sucuri Alert';
+        $params['TemplateTitle'] = __('Sucuri Alert', 'sucuri-scanner');
         $params['Subject'] = $subject;
         $params['Website'] = $website;
         $params['RemoteAddress'] = self::getRemoteAddr();
+        $params['ReverseAddress'] = gethostbyaddr($params['RemoteAddress']);
         $params['Message'] = $message;
         $params['User'] = $display_name;
         $params['Time'] = SucuriScan::datetime();

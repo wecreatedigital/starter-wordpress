@@ -123,6 +123,76 @@ final class ITSEC_Lib_Canonical_Roles {
 	}
 
 	/**
+	 * Get the canonical role from any WordPress role.
+	 *
+	 * @param string $role
+	 *
+	 * @return string
+	 */
+	public static function get_canonical_role_from_role( $role ) {
+		return self::get_role_from_caps( array_keys( array_filter( wp_roles()->get_role( $role )->capabilities ) ) );
+	}
+
+	/**
+	 * Retrieve a canonical role for a user and a role.
+	 *
+	 * @param string  $role
+	 * @param WP_User $user
+	 *
+	 * @return string
+	 */
+	public static function get_canonical_role_from_role_and_user( $role, $user ) {
+		$user = ITSEC_Lib::get_user( $user );
+
+		if ( empty( $role ) ) {
+			$role_caps = array();
+		} else {
+			$role_caps = array_keys( array_filter( wp_roles()->get_role( $role )->capabilities ) );
+		}
+
+		$user_caps = array();
+
+		if ( isset( $user->caps ) ) {
+			$wp_roles = wp_roles();
+
+			foreach ( $user->caps as $cap => $has ) {
+				if ( $has && ! $wp_roles->is_role( $cap ) ) {
+					$user_caps[] = $has;
+				}
+			}
+		}
+
+		return self::get_role_from_caps( array_merge( $role_caps, $user_caps ) );
+	}
+
+	/**
+	 * Get all users that have the given canonical role.
+	 *
+	 * @param string|string[] $canonical
+	 * @param array           $additional_args
+	 *
+	 * @return WP_User[]
+	 */
+	public static function get_users_with_canonical_role( $canonical, $additional_args = array() ) {
+
+		$canonical = (array) $canonical;
+
+		$roles = array();
+
+		foreach ( wp_roles()->roles as $role => $_ ) {
+			if ( in_array( self::get_canonical_role_from_role( $role ), $canonical, true ) ) {
+				$roles[] = $role;
+			}
+		}
+
+		if ( empty( $roles ) ) {
+			return array();
+		}
+
+		return get_users( array_merge( $additional_args, array( 'role__in' => $roles ) ) );
+	}
+
+	/**
 	 * Get a list of all of the capabilities that are unique to each role.
 	 *
 	 * @return array

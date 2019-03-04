@@ -2,11 +2,8 @@
 
 
 final class ITSEC_Admin_Page_Loader {
-	private $version = 2.0;
-
 	private $page_refs = array();
 	private $page_id;
-	private $translations = array();
 
 
 	public function __construct() {
@@ -19,6 +16,7 @@ final class ITSEC_Admin_Page_Loader {
 		add_action( 'wp_ajax_itsec_settings_page', array( $this, 'handle_ajax_request' ) );
 		add_action( 'wp_ajax_itsec_logs_page', array( $this, 'handle_ajax_request' ) );
 		add_action( 'wp_ajax_itsec_help_page', array( $this, 'handle_ajax_request' ) );
+		add_action( 'wp_ajax_itsec_debug_page', array( $this, 'handle_ajax_request' ) );
 		add_action( 'wp_ajax_itsec-set-user-setting', array( $this, 'handle_user_setting' ) );
 
 		// Filters for validating user settings
@@ -26,45 +24,11 @@ final class ITSEC_Admin_Page_Loader {
 	}
 
 	public function add_scripts() {
-		$this->set_translation_strings();
 
-		$vars = array(
-			'ajax_action'  => 'itsec_settings_page',
-			'ajax_nonce'   => wp_create_nonce( 'itsec-settings-nonce' ),
-			'translations' => $this->translations,
-		);
-
-		wp_enqueue_script( 'itsec-util-script', plugins_url( 'js/util.js', __FILE__ ), array(), $this->version, true );
-		wp_localize_script( 'itsec-util-script', 'itsec_util', $vars );
 	}
 
 	public function add_styles() {
-		wp_enqueue_style( 'itsec-settings-page-style', plugins_url( 'css/style.css', __FILE__ ), array(), $this->version );
-	}
-
-	private function set_translation_strings() {
-		$this->translations = array(
-			'ajax_invalid'      => new WP_Error( 'itsec-settings-page-invalid-ajax-response', __( 'An "invalid format" error prevented the request from completing as expected. The format of data returned could not be recognized. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_forbidden'    => new WP_Error( 'itsec-settings-page-forbidden-ajax-response: %1$s "%2$s"',  __( 'A "request forbidden" error prevented the request from completing as expected. The server returned a 403 status code, indicating that the server configuration is prohibiting this request. This could be due to a plugin/theme conflict or a server configuration issue. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings or server configuration that could account for this AJAX request being blocked.', 'better-wp-security' ) ),
-
-			'ajax_not_found'    => new WP_Error( 'itsec-settings-page-not-found-ajax-response: %1$s "%2$s"', __( 'A "not found" error prevented the request from completing as expected. The server returned a 404 status code, indicating that the server was unable to find the requested admin-ajax.php file. This could be due to a plugin/theme conflict, a server configuration issue, or an incomplete WordPress installation. Please try refreshing the page and trying again. If the request continues to fail, you may have to alter plugin settings, alter server configurations, or reinstall WordPress.', 'better-wp-security' ) ),
-
-			'ajax_server_error' => new WP_Error( 'itsec-settings-page-server-error-ajax-response: %1$s "%2$s"', __( 'A "internal server" error prevented the request from completing as expected. The server returned a 500 status code, indicating that the server was unable to complete the request due to a fatal PHP error or a server problem. This could be due to a plugin/theme conflict, a server configuration issue, a temporary hosting issue, or invalid custom PHP modifications. Please check your server\'s error logs for details about the source of the error and contact your hosting company for assistance if required.', 'better-wp-security' ) ),
-
-			'ajax_unknown'      => new WP_Error( 'itsec-settings-page-ajax-error-unknown: %1$s "%2$s"', __( 'An unknown error prevented the request from completing as expected. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_timeout'      => new WP_Error( 'itsec-settings-page-ajax-error-timeout: %1$s "%2$s"', __( 'A timeout error prevented the request from completing as expected. The site took too long to respond. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-
-			'ajax_parsererror'  => new WP_Error( 'itsec-settings-page-ajax-error-parsererror: %1$s "%2$s"', __( 'A parser error prevented the request from completing as expected. The site sent a response that jQuery could not process. This could be due to a plugin/theme conflict or a server configuration issue.', 'better-wp-security' ) ),
-		);
-
-		foreach ( $this->translations as $key => $message ) {
-			if ( is_wp_error( $message ) ) {
-				$messages = ITSEC_Response::get_error_strings( $message );
-				$this->translations[$key] = $messages[0];
-			}
-		}
+		wp_enqueue_style( 'itsec-settings-page-style', plugins_url( 'css/style.css', __FILE__ ), array(), ITSEC_Core::get_plugin_build() );
 	}
 
 	public function add_admin_pages() {
@@ -74,10 +38,17 @@ final class ITSEC_Admin_Page_Loader {
 		add_menu_page( __( 'Settings', 'better-wp-security' ), __( 'Security', 'better-wp-security' ), $capability, 'itsec', array( $this, 'show_page' ) );
 		$page_refs[] = add_submenu_page( 'itsec', __( 'iThemes Security Settings', 'better-wp-security' ), __( 'Settings', 'better-wp-security' ), $capability, 'itsec', array( $this, 'show_page' ) );
 		$page_refs[] = add_submenu_page( 'itsec', '', __( 'Security Check', 'better-wp-security' ), $capability, 'itsec-security-check', array( $this, 'show_page' ) );
+
+		$page_refs = apply_filters( 'itsec-admin-page-refs', $page_refs, $capability, array( $this, 'show_page' ) );
+
 		$page_refs[] = add_submenu_page( 'itsec', __( 'iThemes Security Logs', 'better-wp-security' ), __( 'Logs', 'better-wp-security' ), $capability, 'itsec-logs', array( $this, 'show_page' ) );
 
 		if ( ! ITSEC_Core::is_pro() ) {
 			$page_refs[] = add_submenu_page( 'itsec', '', '<span style="color:#2EA2CC">' . __( 'Go Pro', 'better-wp-security' ) . '</span>', $capability, 'itsec-go-pro', array( $this, 'show_page' ) );
+		}
+
+		if ( defined( 'ITSEC_DEBUG' ) && ITSEC_DEBUG ) {
+			$page_refs[] = add_submenu_page( 'itsec', __( 'iThemes Security Debug', 'better-wp-security' ), __( 'Debug' ), $capability, 'itsec-debug', array( $this, 'show_page' ) );
 		}
 
 		foreach ( $page_refs as $page_ref ) {
@@ -148,6 +119,7 @@ final class ITSEC_Admin_Page_Loader {
 		$id = str_replace( '_', '-', $id );
 
 		$file = dirname( __FILE__ ) . '/' . sprintf( $file, $id );
+		$file = apply_filters( "itsec-admin-page-file-path-$id", $file );
 
 		if ( is_file( $file ) ) {
 			require_once( $file );
