@@ -107,6 +107,7 @@ Comes with the following plugins:
 - JSON for typical ACF option fields
 - Helpful URLs for generating CPT and taxonomies
 - Registered nav menu for footer
+
 **08/03/2019**
 - Updated Roots theme 
 ## To do
