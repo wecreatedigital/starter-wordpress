@@ -1,4 +1,4 @@
-# A starter WordPress (Version 4.8.2)
+# A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
 ## This uses/compromised of:
@@ -107,7 +107,8 @@ Comes with the following plugins:
 - JSON for typical ACF option fields
 - Helpful URLs for generating CPT and taxonomies
 - Registered nav menu for footer
-
+**08/03/2019**
+- Updated Roots theme 
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Add more customisation!
