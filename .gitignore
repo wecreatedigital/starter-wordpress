@@ -18,5 +18,3 @@ wp-content/plugins/hello.php
 .env
 *.DS_Store
 composer.lock
-
-httpdocs/wp-content/uploads

@@ -30,6 +30,75 @@ function acf_esc_html( $string = '' ) {
 }
 
 
+/**
+*  acf_clean_atts
+*
+*  This function will remove empty attributes
+*
+*  @date	3/10/17
+*  @since	5.6.3
+*
+*  @param	array $atts
+*  @return	array
+*/
+
+function acf_clean_atts( $atts = array() ) {
+	
+	// loop
+	foreach( $atts as $k => $v ) {
+		if( $v === '' ) unset( $atts[ $k ] );
+	}
+	
+	
+	// return
+	return $atts;
+}
+
+
+/**
+*  acf_get_atts
+*
+*  This function will return an array of HTML attributes
+*
+*  @date	2/10/17
+*  @since	5.6.3
+*
+*  @param	n/a
+*  @return	n/a
+*/
+
+/*
+function acf_get_atts( $array, $keys ) {
+	
+	// vars
+	$atts = array();
+	
+	
+	// append attributes
+	foreach( $keys as $k ) {
+		if( isset($array[ $k ]) ) $atts[ $k ] = $array[ $k ];
+	}
+	
+	
+	// modify special attributes
+	foreach( array('readonly', 'disabled', 'required') as $k ) {
+		$atts[ $k ] = $atts[ $k ] ? $k : '';
+	}
+	
+	
+	// clean up blank attributes
+	foreach( $atts as $k => $v ) {
+		if( $v === '' ) unset( $atts[ $k ] );
+	}
+	
+	
+	// return
+	return $atts;
+	
+}
+*/
+
+
 /*
 *  acf_esc_atts
 *
@@ -55,7 +124,8 @@ function acf_esc_atts( $atts = array() ) {
 		// string
 		if( is_string($v) ) {
 			
-			$v = trim($v);
+			// don't trim value
+			if( $k !== 'value') $v = trim($v);
 			
 		// boolean	
 		} elseif( is_bool($v) ) {
@@ -241,8 +311,9 @@ function acf_textarea_input( $atts = array() ) {
 function acf_get_checkbox_input( $atts = array() ) {
 	
 	$label = acf_extract_var( $atts, 'label', '' );
+	$checked = acf_maybe_get( $atts, 'checked', '' );
 	$atts['type'] = acf_maybe_get( $atts, 'type', 'checkbox' );
-	return '<label><input ' . acf_esc_attr( $atts ) . '/>' . acf_esc_html( $label ) . '</label>';
+	return '<label' . ($checked ? ' class="selected"' : '') . '><input ' . acf_esc_attr( $atts ) . '/>' . acf_esc_html( $label ) . '</label>';
 		
 }
 
@@ -330,7 +401,7 @@ function acf_get_select_input( $atts = array() ) {
 	
 	// html
 	$html = '';
-	$html .= '<select ' . acf_esc_atts( $atts ) . '>' . "\n";
+	$html .= '<select ' . acf_esc_atts( $atts ) . '>';
 	$html .= acf_walk_select_input( $choices, $value );
 	$html .= '</select>' . "\n";
 	
@@ -376,7 +447,7 @@ function acf_walk_select_input( $choices = array(), $values = array(), $depth = 
 		// optgroup
 		if( is_array($label) ){
 			
-			$html .= '<optgroup label="' . esc_attr($value) . '">' . "\n";
+			$html .= '<optgroup label="' . esc_attr($value) . '">';
 			$html .= acf_walk_select_input( $label, $values, $depth+1 );
 			$html .= '</optgroup>';
 		
@@ -396,7 +467,7 @@ function acf_walk_select_input( $choices = array(), $values = array(), $depth = 
 			
 			
 			// append
-			$html .= '<option ' . acf_esc_attr($atts) . '>' . esc_html($label) . '</option>' . "\n";
+			$html .= '<option ' . acf_esc_attr($atts) . '>' . esc_html($label) . '</option>';
 			
 		}
 		

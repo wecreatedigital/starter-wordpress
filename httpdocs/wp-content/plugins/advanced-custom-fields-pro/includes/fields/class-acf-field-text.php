@@ -51,7 +51,7 @@ class acf_field_text extends acf_field {
 		// vars
 		$atts = array();
 		$keys = array( 'type', 'id', 'class', 'name', 'value', 'placeholder', 'maxlength', 'pattern' );
-		$keys2 = array( 'readonly', 'disabled' );
+		$keys2 = array( 'readonly', 'disabled', 'required' );
 		$html = '';
 		
 		
@@ -73,16 +73,20 @@ class acf_field_text extends acf_field {
 		}
 		
 		
-		// atts
+		// atts (value="123")
 		foreach( $keys as $k ) {
 			if( isset($field[ $k ]) ) $atts[ $k ] = $field[ $k ];
 		}
 		
 		
-		// atts2
+		// atts2 (disabled="disabled")
 		foreach( $keys2 as $k ) {
 			if( !empty($field[ $k ]) ) $atts[ $k ] = $k;
 		}
+		
+		
+		// remove empty atts
+		$atts = acf_clean_atts( $atts );
 		
 		
 		// render
@@ -156,6 +160,30 @@ class acf_field_text extends acf_field {
 		
 	}
 	
+	/**
+	 * validate_value
+	 *
+	 * Validates a field's value.
+	 *
+	 * @date	29/1/19
+	 * @since	5.7.11
+	 *
+	 * @param	(bool|string) Whether the value is vaid or not.
+	 * @param	mixed $value The field value.
+	 * @param	array $field The field array.
+	 * @param	string $input The HTML input name.
+	 * @return	(bool|string)
+	 */
+	function validate_value( $valid, $value, $field, $input ){
+		
+		// Check maxlength
+		if( $field['maxlength'] && mb_strlen(wp_unslash($value)) > $field['maxlength'] ) {
+			return sprintf( __('Value must not exceed %d characters', 'acf'), $field['maxlength'] );
+		}
+		
+		// Return.
+		return $valid;
+	}
 }
 
 
