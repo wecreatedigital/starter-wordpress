@@ -1,0 +1,245 @@
+/* ==========================================================================
+   Addons Styles
+   ========================================================================== */
+#timeline-express-addons .the-list {
+	display: inline-block;
+}
+
+#timeline-express-addons hr {
+	display: block;
+	width: 100%;
+	margin: 2em 0;
+}
+
+#timeline-express-addons .timeline-express-clear:before {
+	content: " ";
+	display: table;
+}
+
+#timeline-express-addons .timeline-express-clear:after {
+	clear: both;
+	content: " ";
+	display: table;
+}
+
+#timeline-express-addons .intro {
+	margin-bottom: 10px;
+}
+
+#timeline-express-addons h2.widefat {
+	margin: 1.5em 0;
+	margin-bottom: 8px;
+}
+
+	#timeline-express-addons h2.widefat:first-child {
+		margin-top: 0;
+	}
+
+	#timeline-express-addons h2.widefat + p {
+		margin-bottom: 1rem;
+	}
+
+#timeline-express-addons a.view-all-addons.button-primary {
+	position: absolute;
+	margin-right: 10px;
+}
+
+.timeline-express-addons-basic-message {
+	border: 1px solid #ddd;
+	padding: 20px;
+}
+
+.timeline-express-addons-basic-message h5 {
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 0 15px 0;
+}
+
+.timeline-express-addons-basic-message p {
+	margin: 0;
+}
+
+.timeline-express-addons-unlock {
+	margin: 35px 0 25px;
+}
+
+.timeline-express-addons-unlock h4 {
+	font-size: 23px;
+	font-weight: 400;
+	margin: 0 0 6px 0;
+	line-height: 29px;
+}
+
+.timeline-express-addons-unlock p {
+	margin: 0;
+}
+
+.timeline-express-addon-item {
+	background-color: #fff;
+	border: 1px solid #ddd;
+}
+
+.timeline-express-addon-image {
+	float: right;
+	height: 92px;
+	width: 92px;
+	border: 1px solid #ddd;
+	margin: 12px 12px 0 0;
+	border-radius: 3px;
+}
+
+.timeline-express-addon-image img {
+	display: block;
+	margin: 0 auto;
+	max-width: 100%;
+	border-radius: 3px;
+}
+
+.timeline-express-addon-item .icons {
+	display: block;
+}
+
+	.timeline-express-addon-item .icons .badge:first-child {
+		margin-top: 0.5em;
+	}
+
+	.timeline-express-addon-item .icons .badge {
+		border: 1px solid transparent;
+		border-radius: 0.25rem;
+		padding: 2px 5px;
+		box-sizing:border-box;
+		-moz-box-sizing:border-box;
+		-webkit-box-sizing:border-box;
+		-ms-box-sizing:border-box;
+		display: block;
+		width: 100%;
+		margin: 3px 0;
+	}
+
+	.timeline-express-addon-item .icons .badge .dashicons {
+		font-size: 15px;
+		line-height: 20px;
+		opacity: 0.75;
+	}
+
+	.timeline-express-addon-item .icons .badge.free {
+		background-color: #dff0d8;
+		border-color: #d0e9c6;
+		color: #3c763d;
+	}
+
+	.timeline-express-addon-item .icons .badge.popular {
+		background-color: #d9edf7;
+		border-color: #bcdff1;
+		color: #31708f;
+	}
+
+.timeline-express-addon-text {
+	margin: 0 126px 0 12px;
+	padding: 13px 0;
+}
+
+.timeline-express-addon-text h4 {
+	margin: 0;
+	font-size: 16px;
+	font-weight: 700;
+	margin: 0 0 8px 0;
+}
+
+.timeline-express-addon-text p {
+	margin: 0;
+}
+
+.timeline-express-addon-action {
+	text-align: center;
+	margin: -3em 0 1em 0;
+}
+
+.timeline-express-addon-action a,
+.timeline-express-addon-action button {
+	font-size: 14px;
+	color: #fff;
+	background-color: #0085ba;
+	border: 1px solid #006d98;
+	text-decoration: none;
+	width: 130px;
+	margin: 40px auto 0 auto;
+	display: block;
+	border-radius: 5px;
+	padding: 10px 0;
+	cursor: pointer;
+}
+
+.timeline-express-addon-action a:hover,
+.timeline-express-addon-action button:hover {
+	background-color: #006d98;
+}
+
+.timeline-express-addon-installed-container a:hover {
+	background-color: #0085ba;
+}
+
+.timeline-express-addon-status-active .timeline-express-addon-action {
+	background-color: #edfaff;
+}
+
+.timeline-express-addon-status-inactive .timeline-express-addon-action {
+	background-color: #f5f6f7;
+}
+
+.timeline-express-error {
+	color: #b94a48;
+	background-color: #f2dede;
+	padding: 8px;
+}
+
+.timeline-express-success {
+	color: #468847;
+	background-color: #dff0d8;
+	padding: 8px;
+}
+
+	.timeline-express-addon-installed-container,
+	.timeline-express-addon-action .button-addon-installed,
+	.timeline-express-addon-action .button-addon-installed:hover {
+		opacity: .5;
+	}
+
+	.timeline-express-addon-action .button-addon-installed[href="#"]:hover {
+		cursor: no-drop;
+	}
+
+/*  Grid SETUP  */
+#timeline-express-addons .section {
+	clear: both;
+	padding: 0px;
+	margin: 0px;
+}
+
+#timeline-express-addons .col {
+	display: block;
+	float: right;
+	margin: 1% 1.6% 1% 0;
+}
+
+#timeline-express-addons .col:first-child { margin-right: 0; }
+
+/*  GROUPING  */
+#timeline-express-addons .group:before,
+#timeline-express-addons .group:after { content:""; display:table; }
+#timeline-express-addons .group:after { clear:both;}
+#timeline-express-addons .group { zoom:1; /* For IE 6/7 */ }
+
+/*  GRID OF THREE  */
+#timeline-express-addons .span_3_of_3 { width: 100%; }
+#timeline-express-addons .span_2_of_3 { width: calc( 66.13% - 2px ); }
+#timeline-express-addons .span_1_of_3 { width: calc( 32.26% - 2px ); }
+
+/*  GO FULL WIDTH BELOW 480 PIXELS */
+@media only screen and (max-width: 960px) {
+	#timeline-express-addons .col {  margin: 1% 0% 1% 0; }
+	#timeline-express-addons .span_3_of_3,
+	#timeline-express-addons .span_2_of_3,
+	#timeline-express-addons .span_1_of_3 { width: 100%; }
+}
+/** End Grid **/

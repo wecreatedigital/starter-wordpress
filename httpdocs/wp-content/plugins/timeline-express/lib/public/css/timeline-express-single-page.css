@@ -1,0 +1,29 @@
+body.single-te_announcements .timeline-express-content-area {
+	width: 100%;
+}
+
+	body.single-te_announcements .timeline-express-main {
+		max-width: 960px;
+	}
+
+	body.single-te_announcements .announcement-banner-image {
+		width: auto;
+	}
+
+body.single-te_announcements .timeline-express-single-page-announcement-date {
+	display: block;
+	margin: .5em 0;
+	font-style: italic;
+}
+
+body.single-te_announcements .timeline-express-single-page-content {
+	margin: .5em 0 1em 0;
+}
+
+body.single-te_announcements nav.navigation.post-navigation {
+	display: none;
+}
+
+body.single-te_announcements .content-area.twentyfifteen article.te_announcements .entry-header h1 {
+	margin-top: 0;
+}
