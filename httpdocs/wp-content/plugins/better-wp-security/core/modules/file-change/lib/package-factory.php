@@ -29,7 +29,7 @@ class ITSEC_File_Change_Package_Factory {
 			}
 		}
 
-		$core_files        = '@' . preg_quote( ABSPATH, '@' ) . '[\w-_]+\.@';
+		$core_files        = '@' . preg_quote( ABSPATH, '@' ) . '[\w\-_]+\.@';
 		$sp[ $core_files ] = 'core';
 
 		uksort( $sp, array( $this, '_sort' ) );

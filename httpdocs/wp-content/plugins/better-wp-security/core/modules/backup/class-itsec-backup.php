@@ -83,6 +83,10 @@ class ITSEC_Backup {
 		$result = $this->execute_backup( $one_time );
 		ITSEC_Lib::release_lock( 'backup' );
 
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+
 		switch ( $this->settings['method'] ) {
 			case 0:
 				$message = __( 'Backup complete. The backup was sent to the selected email recipients and was saved locally.', 'better-wp-security' );

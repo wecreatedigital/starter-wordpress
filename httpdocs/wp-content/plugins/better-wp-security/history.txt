@@ -828,3 +828,11 @@
 7.3.1 - 2019-02-21 - Chris Jean & Timothy Jacobs
 	Enhancement: When ITSEC_DISABLE_MODULES is set, prevent hide backend from running.
 	Bug Fix: Tabnapping: Apply noopener to links instead of using blankshield script when available to prevent new pop-up blocker behavior from killing the links.
+7.3.2 - 2019-03-19 - Chris Jean & Timothy Jacobs
+	Tweak: Allow the log description column to word break for URLs or other strings with no spaces.
+	Bug Fix: Hide Backend bypass on certain Apache configurations.
+	Bug Fix: Properly return error that occurs during a backup.
+	Bug Fix: Regex warning on PHP 7.3 in the File Change module.
+	Bug Fix: Resolve warning when a user is set to "No Role".
+7.3.3 - 2019-03-25 - Chris Jean & Timothy Jacobs
+	Bug Fix: Hide backend bypass.

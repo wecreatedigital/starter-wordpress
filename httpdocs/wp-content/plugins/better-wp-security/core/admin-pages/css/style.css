@@ -827,6 +827,7 @@ ul.itsec-settings-contacts li input[type="checkbox"] {
 }
 .itsec-log-entries .column-description {
 	max-width: 30%;
+	word-break: break-all;
 }
 .tablenav .actions {
 	overflow: visible;

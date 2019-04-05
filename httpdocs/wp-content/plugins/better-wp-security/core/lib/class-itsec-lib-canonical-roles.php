@@ -130,7 +130,12 @@ final class ITSEC_Lib_Canonical_Roles {
 	 * @return string
 	 */
 	public static function get_canonical_role_from_role( $role ) {
-		return self::get_role_from_caps( array_keys( array_filter( wp_roles()->get_role( $role )->capabilities ) ) );
+		// Handle invalid roles or roles that do not exist anymore.
+		if ( ! $role_object = wp_roles()->get_role( $role ) ) {
+			return '';
+		}
+
+		return self::get_role_from_caps( array_keys( array_filter( $role_object->capabilities ) ) );
 	}
 
 	/**

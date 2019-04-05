@@ -1685,4 +1685,20 @@ final class ITSEC_Lib {
 
 		return $preload;
 	}
+
+	/**
+	 * Check if the given string starts with the given needle.
+	 *
+	 * @param string $haystack
+	 * @param string $needle
+	 *
+	 * @return bool
+	 */
+	public static function str_starts_with( $haystack, $needle ) {
+		return 0 === strpos( $haystack, $needle );
+	}
+
+	public static function str_ends_with( $haystack, $needle ) {
+		return '' === $needle || substr_compare( $haystack, $needle, - strlen( $needle ) ) === 0;
+	}
 }
