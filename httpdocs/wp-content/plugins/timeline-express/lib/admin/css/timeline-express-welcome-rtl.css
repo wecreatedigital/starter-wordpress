@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Welcome / Getting Started page
+   ========================================================================== */
+
+.timeline-express-about-wrap .timeline-express-badge { float: left; border-radius: 4px; margin: 0 15px 15px 0; max-width: 100%; }
+.timeline-express-about-wrap #timeline-express-header { margin-bottom: 15px; }
+.timeline-express-about-wrap #timeline-express-header h1 { margin-bottom: 15px !important; }
+.timeline-express-about-wrap .about-text { margin: 0 0 15px; max-width: 670px; }
+.timeline-express-about-wrap .feature-section { margin-top: 20px; }
+.timeline-express-about-wrap .feature-section-content,
+.timeline-express-about-wrap .feature-section-media { width: 50%; box-sizing: border-box; }
+.timeline-express-about-wrap .feature-section-content { float: right; padding-left: 50px; }
+.timeline-express-about-wrap .feature-section-content h4 { margin: 0 0 1em; }
+.timeline-express-about-wrap .feature-section-media { float: left; text-align: left; margin-bottom: 20px; }
+.timeline-express-about-wrap img { border: none; }
+.timeline-express-about-wrap .feature-section:not(.under-the-hood) .col { margin-top: 0; }
+
+/* responsive */
+@media all and ( max-width: 782px ) {
+	.timeline-express-about-wrap .feature-section-content,
+	.timeline-express-about-wrap .feature-section-media { float: none; padding-left: 0; width: 100%; text-align: right; }
+	.timeline-express-about-wrap .feature-section-media img { float: none; margin: 0 0 20px; }
+}
+
+.about-wrap .timeline-express-badge {
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: #999;
+	font-size: 14px;
+	text-align: center;
+	margin: 5px 0 0;
+	width: 150px;
+}
+
+.about-wrap .timeline-express-badge .version {
+	display: block;
+	margin: 0 auto;
+	margin: 5px auto 0 auto;
+}
+
+.about-wrap .feature-section p {
+	font-size: 15px;
+}
+
+.about-wrap .feature-section.two-col .col {
+	vertical-align: top;
+}
+
+.about-wrap .feature-section.two-col .col:nth-child(1) {
+	width: calc(65% - 4px);
+}
+
+.about-wrap .feature-section.two-col .col:nth-child(2) {
+	width: calc(30% - 4px);
+	text-align: center;
+	float: left;
+}
+
+.about-wrap .timeline-express-features-button {
+	font-size: 14px;
+	height: auto;
+	padding: 5px 15px;
+	margin-top: 15px;
+}
