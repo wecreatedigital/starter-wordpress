@@ -3,6 +3,9 @@
 /** Import everything from autoload */
 @import "./autoload/**/*";
 
+/** Slick Slider **/
+@import "~slick-carousel/slick/slick.scss";
+@import "~slick-carousel/slick/slick-theme.scss";
 /**
  * Import npm dependencies
  *
