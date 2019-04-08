@@ -110,6 +110,7 @@ Container::getInstance()
      'lib/security.php',   // WP security bits and pieces
      'lib/general.php',     // Everything else...
      'lib/scripts.php',
+     'lib/media.php',
  ];
  foreach ($sage_includes as $file) {
      if ( ! $filepath = locate_template($file)) {
