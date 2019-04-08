@@ -55,3 +55,28 @@ function remove_excess_links_etc()
     add_filter('rest_jsonp_enabled', '__return_false');
 }
 add_action('after_setup_theme', 'remove_excess_links_etc');
+
+/**
+ * Disable pingback http://marketingwithvladimir.com/3-methods-disable-xmlrpc-pingback-wordpress/
+ */
+ add_filter('xmlrpc_methods', function ($methods) {
+     unset($methods['pingback.ping']);
+
+     return $methods;
+ });
+
+/**
+ * Remove RSS feeds
+ */
+function itsme_disable_feed()
+{
+    wp_die(__('No feed available'));
+}
+
+add_action('do_feed', 'itsme_disable_feed', 1);
+add_action('do_feed_rdf', 'itsme_disable_feed', 1);
+add_action('do_feed_rss', 'itsme_disable_feed', 1);
+add_action('do_feed_rss2', 'itsme_disable_feed', 1);
+add_action('do_feed_atom', 'itsme_disable_feed', 1);
+add_action('do_feed_rss2_comments', 'itsme_disable_feed', 1);
+add_action('do_feed_atom_comments', 'itsme_disable_feed', 1);
