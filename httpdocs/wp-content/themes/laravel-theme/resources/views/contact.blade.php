@@ -9,7 +9,14 @@
     @include('partials.page-header')
      @include('partials.content-page')
 
+     <p class="test">Here is some text</p>
+
      {{-- @include('partials.google-map') --}}
 
   @endwhile
+  <script>
+    document.addEventListener( 'wpcf7mailsent', function( event ) {
+        location = '<?php echo the_field('contact_form_redirect_url'); ?>' ;
+    }, false );
+    </script>
 @endsection
