@@ -9,7 +9,7 @@
     @include('partials.page-header')
      @include('partials.content-page')
 
-     {{-- @include('partials.google-map') --}}
-     
+     {{-- @include('partials.google-maps') --}}
+
   @endwhile
 @endsection
