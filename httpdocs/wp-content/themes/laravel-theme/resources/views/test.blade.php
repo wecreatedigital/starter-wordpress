@@ -14,7 +14,8 @@
  * Code for this is used in test.js
  * @type {String}
  */ --}}
-
+<p class="display-4">Timeline Express Example</p>
+<p>The above timeline is created by placing `[timeline-express]` in the page content</p>
 <hr>
 <p class="display-4">Slick Slider Example</p>
 <div class="main">
