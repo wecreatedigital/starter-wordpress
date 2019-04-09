@@ -1,8 +1,4 @@
-<?php
-if ( function_exists('yoast_breadcrumb') ) {
-  yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
-}
-?>
+
 <header class="banner">
   <div class="container">
     <a class="brand" href="{{ home_url('/') }}">{{ get_bloginfo('name', 'display') }}</a>
@@ -12,4 +8,9 @@ if ( function_exists('yoast_breadcrumb') ) {
       @endif
     </nav>
   </div>
+  <?php
+  if ( function_exists('yoast_breadcrumb') ) {
+    yoast_breadcrumb( '<p id="breadcrumbs">','</p>' );
+  }
+  ?>
 </header>
