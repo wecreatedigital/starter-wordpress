@@ -1,23 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="row d-flex justify-content-center">
+    <div class="jumbotron">
+        <h1 class="display-4">404</h1>
 
-  <h1 class="display-1 jumbotron w-100 text-center">404</h1>
-  </div>
   @if (!have_posts())
-      <div class="row">
-          <div class="col-md">
-                <div class="h3 alert alert-warning">
-                  {{ __('Sorry, an error has occured, Requested page not found!', 'sage') }}
-                </div>
-            </div>
 
-    </div>
-    <div class="row">
-        <div class="col-md-4 offset-md-6 mt-3">
-            {!! get_search_form(false) !!}
-        </div>
-    </div>
+      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+
+
+      {!! get_search_form(false) !!}
+
+      </div>
+
   @endif
+  </div>
 @endsection
