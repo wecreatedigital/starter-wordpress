@@ -1,25 +1,21 @@
 <?php $__env->startSection('content'); ?>
-    <div class="row d-flex justify-content-center">
+    <div class="jumbotron">
+        <h1 class="display-4">404</h1>
 
-  <h1 class="display-1 jumbotron w-100 text-center">404</h1>
-  </div>
   <?php if(!have_posts()): ?>
-      <div class="row">
-          <div class="col-md">
-                <div class="h3 alert alert-warning">
-                  <?php echo e(__('Sorry, an error has occured, Requested page not found!', 'sage')); ?>
 
-                </div>
-            </div>
+      <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+      <hr class="my-4">
+      <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
 
-    </div>
-    <div class="row">
-        <div class="col-md-4 offset-md-6 mt-3">
-            <?php echo get_search_form(false); ?>
 
-        </div>
-    </div>
+      <?php echo get_search_form(false); ?>
+
+
+      </div>
+
   <?php endif; ?>
+  </div>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
