@@ -111,6 +111,7 @@ Container::getInstance()
      'lib/general.php',     // Everything else...
      'lib/scripts.php',
      'lib/media.php',
+     'lib/admin.php',
  ];
  foreach ($sage_includes as $file) {
      if ( ! $filepath = locate_template($file)) {
