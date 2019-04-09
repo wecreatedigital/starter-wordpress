@@ -11,7 +11,7 @@
 
      <p class="test">Here is some text</p>
 
-     {{-- @include('partials.google-map') --}}
+     
 
   @endwhile
   <script>

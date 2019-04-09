@@ -1,9 +1,8 @@
-@import "common/variables";
 
 /** Import everything from autoload */
 @import "./autoload/**/*";
 
-/** Slick Slider **/
+// Import Slick
 @import "~slick-carousel/slick/slick.scss";
 @import "~slick-carousel/slick/slick-theme.scss";
 
@@ -17,6 +16,7 @@
 
 /** Import theme styles */
 @import "common/global";
+@import "common/variables";
 @import "components/buttons";
 @import "components/comments";
 @import "components/forms";
@@ -27,6 +27,15 @@
 @import "layouts/pages";
 @import "layouts/posts";
 @import "layouts/tinymce";
+@import "global";
+@import "archive";
+@import "common";
+@import "contact";
+@import "footer";
+@import "header";
+@import "home";
+@import "single";
+@import "test";
 
 /** Google Maps */
-// @import "google-map";
+@import "google-maps";
