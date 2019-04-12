@@ -8,7 +8,7 @@
       "./scripts/customizer.js"
     ]
   },
-  "publicPath": "/app/themes/laravel-theme",
+  "publicPath": "/wp-content/themes/laravel-theme",
   "devUrl": "http://starter.test:8888",
   "proxyUrl": "http://localhost:3000",
   "cacheBusting": "[name]_[hash:8]",

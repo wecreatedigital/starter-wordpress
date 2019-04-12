@@ -52,10 +52,10 @@ if ( ! empty($_SERVER['HTTPS'])) {
 /**
  * Content-Security-Policy
  */
-function add_csp_header($headers)
-{
-    $headers['content-security-policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';";
-
-    return $headers;
-}
-add_filter('wp_headers', 'add_csp_header');
+// function add_csp_header($headers)
+// {
+//     $headers['content-security-policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';";
+//
+//     return $headers;
+// }
+// add_filter('wp_headers', 'add_csp_header');
