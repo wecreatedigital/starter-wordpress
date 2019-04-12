@@ -99,7 +99,12 @@ Comes with the following plugins:
 - To sync our field changes we have now included `acf-json` directory within the theme folder. JSON is automatically populated here when fields are created/updated, [read more](https://www.advancedcustomfields.com/resources/local-json/)
 - The build includes includes typical fields for the options page such as phone number, email address and social media URLs
 
-## Log of changes
+### 5. Set up
+- Clone build
+- run `composer install` && `yarn install` within the theme directory
+- run `yarn build`
+
+## Changelog
 **03/09/2017**
 - Included latest version of Bootstrap in bower.json
 - Included Slick in bower.json
@@ -109,7 +114,7 @@ Comes with the following plugins:
 - Registered nav menu for footer
 
 **08/03/2019**
-- Updated Roots theme 
+- Updated Roots theme
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Add more customisation!
