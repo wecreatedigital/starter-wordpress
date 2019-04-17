@@ -1,0 +1,130 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Zedna WP Image Lazy Load\n"
+"POT-Creation-Date: 2018-01-31 12:05+0100\n"
+"PO-Revision-Date: 2018-01-31 13:30+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: cs_CZ\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: image_lazy_load.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: image_lazy_load.php:111
+msgid "WP Image Lazy Load Settings page"
+msgstr "WP Image Lazy Load nastavení"
+
+#: image_lazy_load.php:111 image_lazy_load.php:142
+msgid "WP Image Lazy Load Settings"
+msgstr "WP Image Lazy Load Nastavení"
+
+#: image_lazy_load.php:144
+msgid "Setting of your WP Image Lazy Load plugin"
+msgstr "Nastavení vašeho pluginu WP Image Lazy Load"
+
+#: image_lazy_load.php:150
+msgid "Skip iframes:"
+msgstr "Přeskočit vnořené rámce:"
+
+#: image_lazy_load.php:155 image_lazy_load.php:158 image_lazy_load.php:171
+#: image_lazy_load.php:174 image_lazy_load.php:217 image_lazy_load.php:220
+msgid "No"
+msgstr "Ne"
+
+#: image_lazy_load.php:156 image_lazy_load.php:159 image_lazy_load.php:172
+#: image_lazy_load.php:175 image_lazy_load.php:218 image_lazy_load.php:221
+msgid "Yes"
+msgstr "Ano"
+
+#: image_lazy_load.php:166
+msgid "Skip videos:"
+msgstr "Přeskočit videa:"
+
+#: image_lazy_load.php:182
+msgid ""
+"Skip images in parent element (<strong>css class without dot \".\"</strong>):"
+msgstr ""
+"Přeskočit obrázky v nadřazeném elementu (<strong>css třída bez tečky \".\"</"
+"strong>):"
+
+#: image_lazy_load.php:183 image_lazy_load.php:187
+msgid "For no skipping, leave empty. Multiple classes split by semicolon (e.g. classOne;classTwo)"
+msgstr "Ponechte prázdné pro žádné vynechání. Více css tříd oddělte středníkem (např. tridaJedna;tridaDve)"
+
+#: image_lazy_load.php:186
+msgid ""
+"Skip iframes in parent element (<strong>css class without dot \".\"</"
+"strong>):"
+msgstr ""
+"Přeskočit vnořené rámce v nadřazeném elementu (<strong>css třída bez tečky \".\"</"
+"strong>):"
+
+#: image_lazy_load.php:190
+msgid "Example of use parent element:"
+msgstr "Příklad použití nadřazeného elementu:"
+
+#: image_lazy_load.php:199
+msgid " In options field insert <code class=\"html\">parent</code>"
+msgstr " V poli nastavení vložte <code class=\"html\">nadřazený</code>"
+
+#: image_lazy_load.php:204
+msgid "Load elements on custom position:"
+msgstr "Načíst elementy na vlastní pozici:"
+
+#: image_lazy_load.php:212
+msgid "Use animations:"
+msgstr "Použít animace:"
+
+#: image_lazy_load.php:223
+msgid "(excluding background images)"
+msgstr "(kromě obrázků na pozadí)"
+
+#: image_lazy_load.php:227
+msgid "Animation duration:"
+msgstr "Dobra trvání animace:"
+
+#: image_lazy_load.php:231
+msgid "Animation timing:"
+msgstr "Časování animace:"
+
+#: image_lazy_load.php:273
+msgid "If you like this plugin, please donate us for faster upgrade"
+msgstr "Pokud se vám plugin líbí, můžete nám přispět na další vývoj"
+
+#. Plugin Name of the plugin/theme
+msgid "Zedna WP Image Lazy Load"
+msgstr "Zedna WP Image Lazy Load"
+
+#. Plugin URI of the plugin/theme
+msgid "https://profiles.wordpress.org/zedna#content-plugins"
+msgstr "https://profiles.wordpress.org/zedna#content-plugins"
+
+#. Description of the plugin/theme
+msgid ""
+"Image lazy load plugin to boost page load time and save bandwidth by "
+"removing all the images, background-images, responsive images, iframes and "
+"videos. Elements will load just when reach visible part of screen."
+msgstr ""
+"Image lazy load plugin pro zrychlení načítání stránky a úsporu načtených dat "
+"odstraněním obrázků, obrázků na pozadí, responsivních obrázků, vnořených "
+"rámců a videí. Elementy se budou načítat pouze tehdy, pokud uživatel dosáhne "
+"úrovně na viditelném místě obrazovky."
+
+#. Author of the plugin/theme
+msgid "Radek Mezulanik"
+msgstr "Radek Mezuláník"
+
+#. Author URI of the plugin/theme
+msgid "https://cz.linkedin.com/in/radekmezulanik"
+msgstr "https://cz.linkedin.com/in/radekmezulanik"

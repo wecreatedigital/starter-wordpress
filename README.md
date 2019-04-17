@@ -133,7 +133,7 @@ Comes with the following plugins:
 - Added placeholder favicons
 - updated security.php and general.php in lib folder
 - Added redirection.me plugins
-- Added lib/media.pgp file 
+- Added lib/media.pgp file
 
 **09/04/2019**
 - Included Merge + Minify + Refresh plugins
@@ -144,8 +144,11 @@ Comes with the following plugins:
 **12/04/2019**
 - Changes to build to allow Yarn start
 
-**16/04/19**
+**16/04/2019**
 - Included Google fonts script
+
+**17/04/2019**
+- Added Lazy load plugin
 
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
