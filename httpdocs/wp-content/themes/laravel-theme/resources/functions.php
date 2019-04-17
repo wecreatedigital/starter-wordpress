@@ -112,6 +112,7 @@ Container::getInstance()
      'lib/scripts.php',
      'lib/media.php',
      'lib/admin.php',
+     'lib/speed.php',
  ];
  foreach ($sage_includes as $file) {
      if ( ! $filepath = locate_template($file)) {
