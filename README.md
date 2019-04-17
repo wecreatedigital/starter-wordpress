@@ -101,10 +101,11 @@ Comes with the following plugins:
 
 ### 5. Set up
 - Clone build
-- run `composer install` && `yarn install` within the theme directory
-- run `yarn build`
+- Run `composer install` && `yarn install` within the theme directory
+- Run `yarn build`
 
 ## Changelog
+
 **03/09/2017**
 - Included latest version of Bootstrap in bower.json
 - Included Slick in bower.json
@@ -115,6 +116,40 @@ Comes with the following plugins:
 
 **08/03/2019**
 - Updated Roots theme
+
+**05/04/2019**
+- Removed old theme folder
+- Included Timeline Express plugins
+- Created header, footer, home, single, archive, global and common scss files
+- Added frontpage.blade.php
+- Added ACF Pro
+- Created folders for partials, pages, layouts and svgs in Views
+- Added Dist folder to .gitignore
+- Included Slick Slider auto loaded to build
+- Added Cookie Control plugin
+- added simple 404 page with Bootstrap 4
+
+**08/04/2019**
+- Added placeholder favicons
+- updated security.php and general.php in lib folder
+- Added redirection.me plugins
+- Added lib/media.pgp file 
+
+**09/04/2019**
+- Included Merge + Minify + Refresh plugins
+- Included Page Builder plugins
+- Edited lib folder to suite new Roots Build
+- Included Yoast Breadcrumbs
+
+**12/04/2019**
+- Changes to build to allow Yarn start
+
+**16/04/19**
+- Included Google fonts script
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
+- Flexible content setup
+- Pro security plugin
+- Create sample WooCommerce, SASS and blade code
 - Add more customisation!
