@@ -206,3 +206,16 @@ function siteName()
          return '<img src="'.$url.'" size="'.$image_size.'" class="'.$image_class.'" height="'.$height.'" width="'.$width.'" alt="'.$image['alt'].'">';
      }
  }
+
+/**
+ * Custom is page template
+ * @author Brandon Hull
+ * @param  string  $template [description]
+ * @return boolean
+ */
+ function page_template($template = '')
+ {
+     $template = 'views/'.$template.'.blade.php';
+
+     return is_page_template($template);
+ }

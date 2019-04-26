@@ -4,6 +4,18 @@ import 'jquery';
 // slickSlider
 import 'slick-carousel/slick/slick.min';
 
+import { library, dom } from '@fortawesome/fontawesome-svg-core';
+// import the Facebook and Twitter icons
+import { faFacebookF, faFacebook, faTwitter, faPinterestP, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
+import { faClock, faMap } from '@fortawesome/free-regular-svg-icons';
+import { faEnvelope, faPhone, faHome, faSearch} from '@fortawesome/free-solid-svg-icons';
+// add the imported icons to the library
+library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin,  faEnvelope, faPhone, faSearch, faHome, faClock, faMap);
+
+// tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
+dom.watch();
+
+
 // Import everything from autoload
 import './autoload/**/*'
 

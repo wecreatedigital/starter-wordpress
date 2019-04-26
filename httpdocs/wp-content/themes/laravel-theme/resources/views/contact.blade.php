@@ -10,10 +10,13 @@
      @include('partials.content-page')
 
      <p class="test">Here is some text</p>
-
-     
+     <!-- Facebook icon -->
+     <i class="fab fa-facebook"></i>
+     <!-- Twitter icon -->
+     <i class="fab fa-twitter"></i>
 
   @endwhile
+  @include('partials.google-maps')
   <script>
     document.addEventListener( 'wpcf7mailsent', function( event ) {
         location = '<?php echo the_field('contact_form_redirect_url'); ?>' ;
