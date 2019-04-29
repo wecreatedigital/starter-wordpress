@@ -75,3 +75,10 @@ add_action('do_feed_rss2', 'itsme_disable_feed', 1);
 add_action('do_feed_atom', 'itsme_disable_feed', 1);
 add_action('do_feed_rss2_comments', 'itsme_disable_feed', 1);
 add_action('do_feed_atom_comments', 'itsme_disable_feed', 1);
+
+/**
+ * ACF filter to speed up backend loading time
+ * https://awesomeacf.com/snippets/speed-acf-backend-loading-time/
+ * @var [type]
+ */
+// add_filter('acf/settings/remove_wp_meta_box', '__return_true');
