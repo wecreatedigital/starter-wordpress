@@ -150,6 +150,20 @@ Comes with the following plugins:
 **17/04/2019**
 - Added Lazy load plugin
 
+**26/04/2019**
+- Added new customised helper function to simplify is template function
+- Added Fontawesome to the Build
+
+**29/04/2019**
+- Added ACF awesome snippet for backend loading
+- Added Autoptimization plugins
+- Removed JS & CSS Script Optimizer
+- Removed Merge + Minify + Refresh
+- Removed Minify HTML
+- Updated Redirection
+- Updated Yoast
+- Updated WordPress 5.1 -> 5.1.1
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup
