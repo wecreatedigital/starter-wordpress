@@ -4,10 +4,13 @@
      <?php echo $__env->make('partials.content-page', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
      <p class="test">Here is some text</p>
-
-     
+     <!-- Facebook icon -->
+     <i class="fab fa-facebook"></i>
+     <!-- Twitter icon -->
+     <i class="fab fa-twitter"></i>
 
   <?php endwhile; ?>
+  <?php echo $__env->make('partials.google-maps', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
   <script>
     document.addEventListener( 'wpcf7mailsent', function( event ) {
         location = '<?php echo the_field('contact_form_redirect_url'); ?>' ;
