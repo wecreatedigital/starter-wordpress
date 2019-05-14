@@ -1,0 +1,267 @@
+#itsec-2fa-on-board {
+	padding: 26px
+}
+
+.screen-reader-text,
+.screen-reader-text span,
+.ui-helper-hidden-accessible {
+	border: 0;
+	clip: rect(1px, 1px, 1px, 1px);
+	-webkit-clip-path: inset(50%);
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	width: 1px;
+	word-wrap: normal !important; /* many screen reader and browser combinations announce broken words as they would appear visually */
+}
+
+#itsec-2fa-on-board noscript {
+	background-color: #fbeaea;
+	border-left: 4px solid #dc3232;
+	padding: 6px 12px;
+	display: block;
+	margin: 0 0 1.5em 0;
+}
+
+#itsec-2fa-on-board .itsec-screen__content h2 {
+	margin-bottom: .5em;
+}
+
+#itsec-2fa-on-board .itsec-screen__content p {
+	margin-bottom: 1em;
+}
+
+#itsec-2fa-on-board .itsec-screen__actions .button-link {
+	margin-top: 5px;
+}
+
+.itsec-screen--providers h2 + p {
+	border-bottom: 1px solid #EDEEF1;
+	padding-bottom: 1em;
+	margin-bottom: 1.25em;
+}
+
+.itsec-provider {
+	position: relative;
+	padding: 1em 0;
+}
+
+.itsec-provider:first-child {
+	padding-top: 0;
+}
+
+.itsec-provider:last-child {
+	padding-bottom: 0;
+}
+
+#itsec-2fa-on-board .itsec-provider p {
+	width: calc(100% - 20px);
+	padding-top: .5em;
+	margin-bottom: 0;
+}
+
+.itsec-provider__configure {
+	position: absolute;
+	right: 0;
+	/* Position in the middle, offsetting half of the height of the icon and account for top padding */
+	top: calc(50% - 10px + 1em);
+	cursor: pointer;
+
+	/* Reset */
+	border: none;
+	margin: 0;
+	padding: 0;
+	width: auto;
+	overflow: visible;
+	background: transparent;
+	color: inherit;
+	font: inherit;
+	line-height: normal;
+	-webkit-font-smoothing: inherit;
+	-moz-osx-font-smoothing: inherit;
+	-webkit-appearance: none;
+}
+
+.itsec-provider:first-child .itsec-provider__configure {
+	top: calc(50% - 10px);
+}
+
+.itsec-provider__configure::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+}
+
+.itsec-provider__configure:before {
+	content: "\f345";
+}
+
+.itsec-provider__configure:hover:before {
+	opacity: .7;
+}
+
+.itsec-provider h3 {
+	display: inline-block;
+}
+
+.itsec-provider__status-actions-container {
+	display: inline-block;
+	padding-left: 5px;
+}
+
+.itsec-provider__status {
+	padding: 2px 4px;
+	border-radius: 3px;
+	font-size: .9em;
+}
+
+.itsec-provider__status--disabled {
+	background: #82878C;
+	color: white;
+}
+
+.itsec-provider__status--enabled {
+	background: #46b450;
+	color: white;
+}
+
+.itsec-provider__status--not-configured {
+	background: #F56E28;
+	color: white;
+}
+
+.itsec-provider__status-actions-container .itsec-provider__action {
+	padding-left: 5px;
+}
+
+.itsec-provider--Two_Factor_Email p {
+	-ms-word-break: break-all;
+	word-break: break-all;
+	word-break: break-word;
+
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+}
+
+.itsec-screen__actions {
+	margin-top: 1em;
+}
+
+#itsec-2fa-on-board .itsec-screen__actions--cancel {
+	color: #a00;
+}
+
+#itsec-2fa-on-board .itsec-screen__actions--cancel:hover {
+	color: #dc3232;
+	border: none;
+}
+
+.itsec-screen--totp img {
+	max-width: 100%;
+}
+
+#itsec-2fa-on-board .itsec-totp__view-secret {
+	display: block;
+	margin: 6px auto 9px auto;
+	font-size: .9em;
+}
+
+.itsec-totp__secret {
+	font-size: .9em;
+	text-align: center;
+	width: 100%;
+	display: block;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+.itsec-totp__device-switcher {
+	text-align: center;
+	margin: 1em 0;
+}
+
+.itsec-totp__device-switcher .button-primary {
+	float: none;
+}
+
+.itsec-totp__device-switcher .itsec-totp__device-switcher-button--ios {
+	border-radius: 3px 0 0 3px;
+}
+
+.itsec-totp__device-switcher .itsec-totp__device-switcher-button--android {
+	border-radius: 0 3px 3px 0;
+	margin-left: -1px;
+}
+
+.itsec-backup-codes__code-list {
+	list-style-type: none;
+	/* Code list list elements have their own 1em margin at the end that we can't clear. */
+	margin: 2em 0 1em 0;
+}
+
+.itsec-backup-codes__code-list:after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+.itsec-backup-codes__code-list li {
+	float: left;
+	display: inline;
+	width: 50%;
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 1em;
+	color: #82878C;
+}
+
+#itsec-2fa-on-board .itsec-screen--backup-codes p {
+	margin-bottom: 0;
+}
+
+#itsec-2fa-on-board .itsec-backup-codes__generate-codes {
+	margin: 2em auto;
+	display: block;
+}
+
+.itsec-screen__actions-primary {
+	float: right;
+}
+
+#itsec-2fa-on-board .itsec-screen__actions--download {
+	margin-right: 1em;
+}
+
+#itsec-backup-codes__warning-message,
+#itsec-two-factor-required {
+	border-left-color: #F56E28;
+}
+
+.itsec-notice {
+	border-left: 4px solid transparent;
+	padding: 12px;
+	margin-left: 0;
+	margin-bottom: 20px;
+	background-color: #fff;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.itsec-notice-info {
+	border-left-color: #00a0d2;
+}
+
+.itsec-notice-warning {
+	border-left-color: #F56E28;
+}
+
+.itsec-notice-error {
+	border-left-color: #dc3232;
+}
+
+.itsec-notice-success {
+	border-left-color: #46b450;
+}

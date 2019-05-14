@@ -1,0 +1,402 @@
+#wpadminbar .itsec-login-alert-bubble {
+	display: inline-block;
+	vertical-align: top;
+	margin: 8px 0 0 2px;
+	padding: 0 5px;
+	min-width: 7px;
+	height: 17px;
+	border-radius: 11px;
+	font-size: 9px;
+	line-height: 17px;
+	text-align: center;
+	z-index: 26;
+}
+
+#wpadminbar .itsec-login-alert-bubble--level-info {
+	background-color: #00b9eb;
+	color: #fff;
+}
+
+#wpadminbar .itsec-login-alert-bubble--level-warning {
+	background-color: #ca4a1f;
+	color: #fff;
+}
+
+#wpadminbar .itsec-login-alert-bubble__count {
+	line-height: 17px;
+	font-size: 9px;
+}
+
+#wpadminbar #wp-admin-bar-itsec-fingerprinting .ab-sub-wrapper {
+	background: none;
+}
+
+#wpadminbar #wp-admin-bar-itsec-fingerprinting-default {
+	padding: 0;
+}
+
+#wp-admin-bar-itsec-fingerprinting-cards * {
+	line-height: 1.4em;
+}
+
+#wpadminbar #wp-admin-bar-itsec-fingerprinting-cards {
+	width: 255px;
+}
+
+#wpadminbar .itsec-fingerprint-card {
+	background: white;
+	position: relative;
+}
+
+#wpadminbar .itsec-fingerprint-card__launch-modal {
+	-webkit-appearance: none;
+	background: none;
+	border: none;
+	position: absolute;
+	z-index: 100;
+	opacity: .9;
+	margin: 0;
+	padding: 0;
+	left: .25em;
+	top: .25em;
+	cursor: pointer;
+	color: #32373C;
+
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+	font-family: dashicons;
+	text-decoration: inherit;
+	font-weight: normal;
+	font-style: normal;
+	vertical-align: top;
+	text-align: center;
+	transition: color .1s ease-in;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+#wpadminbar .itsec-fingerprint-card__launch-modal::after {
+	content: "\f223";
+}
+
+#wpadminbar .itsec-fingerprint-card__launch-modal:hover,
+#wpadminbar .itsec-fingerprint-card__launch-modal:focus {
+	opacity: .5;
+}
+
+#wpadminbar .itsec-fingerprint-card--no-map .itsec-fingerprint-card__launch-modal {
+	right: .25em;
+	left: revert;
+}
+
+#wpadminbar .itsec-fingerprint-card__header .itsec-fingerprint-header {
+	width: 255px;
+	height: 115px;
+}
+
+.itsec-fingerprint-header {
+	position: relative;
+	background-size: contain;
+}
+
+#wpadminbar .itsec-fingerprint-card__header {
+	position: relative;
+	cursor: pointer;
+	transition: all;
+}
+
+.itsec-fingerprint-card__header .itsec-fingerprint-header:after {
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
+	opacity: 0;
+	transition: all 0.5s;
+	-webkit-transition: all 0.5s;
+	-moz-transition: all 0.5s;
+}
+
+.itsec-fingerprint-card__header .itsec-fingerprint-header:hover:after {
+	opacity: .5;
+}
+
+#wpadminbar .itsec-fingerprint-card__header .itsec-fingerprint-header__info-container {
+	cursor: text;
+	z-index: 100000;
+}
+
+#wpadminbar .itsec-fingerprint-header__info-container,
+.itsec-fingerprint-header__info-container {
+	position: absolute;
+	right: 1rem;
+	top: .75rem;
+}
+
+#wpadminbar .itsec-fingerprint-header__date,
+.itsec-fingerprint-header .itsec-fingerprint-header__date {
+	display: block;
+	margin-bottom: -6px;
+	color: #23282d;
+	text-align: center;
+	line-height: 1.4em;
+}
+
+#wpadminbar .itsec-fingerprint-header__time,
+.itsec-fingerprint-header .itsec-fingerprint-header__time {
+	color: #23282d;
+	font-size: 2em;
+	line-height: 1.4em;
+}
+
+#wpadminbar .itsec-fingerprint-card__body {
+	padding: .5em 1em;
+	line-height: 1.4em;
+}
+
+#wpadminbar .itsec-fingerprint-card__title {
+	line-height: 1.4em;
+	font-size: 1.2em;
+	margin-bottom: .5em;
+}
+
+#wpadminbar .itsec-fingerprint-card__info {
+	margin-bottom: .5em;
+}
+
+.itsec-fingerprint-info dt {
+	color: #606A73;
+}
+
+.itsec-fingerprint-info dd {
+	color: #7E8993;
+	margin: 0;
+}
+
+#wpadminbar .itsec-fingerprint-info dt::after {
+	content: ':';
+}
+
+#wpadminbar .itsec-fingerprint-info dt {
+	display: inline;
+}
+
+#wpadminbar .itsec-fingerprint-info dd {
+	display: inline;
+}
+
+#wpadminbar .itsec-fingerprint-info dd::after {
+	content: '';
+	display: table;
+	clear: both;
+}
+
+#wpadminbar .itsec-fingerprint-card__credit,
+.itsec-fingerprint-modal__credit {
+	font-size: .75em;
+	color: #7E8993;
+	font-style: oblique;
+	text-align: right;
+	line-height: 1.4em;
+	margin-top: .5em;
+}
+
+#wpadminbar .itsec-fingerprint-card__credit a {
+	font-size: .75em;
+	font-style: oblique;
+	line-height: 1.4em;
+	color: #0073aa !important;
+	padding: 0 !important;
+	margin: 0 !important;
+	height: auto !important;
+	display: inline !important;
+}
+
+#wpadminbar .itsec-fingerprint-footer,
+.itsec-fingerprint-footer {
+	display: flex;
+}
+
+#wpadminbar .itsec-fingerprint-footer__action,
+.itsec-fingerprint-footer .itsec-fingerprint-footer__action {
+	flex-grow: 1;
+	flex-basis: 0;
+	padding: .5em;
+	height: auto;
+}
+
+.itsec-fingerprint-modal {
+	display: none;
+}
+
+.itsec-fingerprint-modal.is-open {
+	display: block;
+}
+
+.itsec-fingerprint-modal__overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 100000;
+}
+
+.itsec-fingerprint-modal__container {
+	background: white;
+	max-width: 600px;
+	border-radius: 4px;
+	overflow-y: auto;
+	box-sizing: border-box;
+	position: relative;
+}
+
+.itsec-fingerprint-modal__notices-container .notice {
+	margin: 0;
+}
+
+.itsec-fingerprint-modal__close {
+	-webkit-appearance: none;
+	background: none;
+	border: none;
+	position: absolute;
+	z-index: 100;
+	opacity: .5;
+	margin: 0;
+	padding: 0;
+	left: .25em;
+	top: .25em;
+	cursor: pointer;
+	color: #32373C;
+
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+	font-family: dashicons;
+	text-decoration: inherit;
+	font-weight: normal;
+	font-style: normal;
+	vertical-align: top;
+	text-align: center;
+	transition: color .1s ease-in;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.itsec-fingerprint-modal__close:before {
+	content: "\f158";
+}
+
+.itsec-fingerprint-modal__close:hover,
+.itsec-fingerprint-modal__close:focus {
+	opacity: .9;
+	background: none;
+}
+
+.itsec-fingerprint-modal--no-map .itsec-fingerprint-modal__close {
+	right: .25em;
+	left: revert;
+}
+
+.itsec-fingerprint-modal__header {
+	position: relative;
+}
+
+.itsec-fingerprint-modal__header .itsec-fingerprint-header {
+	width: 100%;
+	height: 200px;
+}
+
+.itsec-fingerprint-modal__header .itsec-fingerprint-header__info-container {
+	background: white;
+	border: 1px solid #ccc;
+	padding: 1em;
+}
+
+.itsec-fingerprint-modal__title {
+	color: #23282d;
+	font-size: 1.3em;
+	padding: 0 1em;
+	margin: 1em 0;
+}
+
+.itsec-fingerprint-modal__body {
+	padding: 0 1em .5em;
+}
+
+.itsec-fingerprint-info {
+	margin-top: 0;
+}
+
+.itsec-fingerprint-modal .itsec-fingerprint-info dd {
+	margin-bottom: .5em;
+	text-overflow: ellipsis;
+	max-width: 150px;
+	overflow: hidden;
+}
+
+.itsec-fingerprint-modal__body main {
+	display: flex;
+}
+
+.itsec-fingerprint-modal__body aside {
+	border-right: 1px solid #CCD0D4;
+	padding-right: 1em;
+	margin-right: 1em;
+}
+
+.itsec-fingerprint-modal__body article {
+	flex-grow: 1;
+}
+
+.itsec-fingerprint-modal__body article p:first-child {
+	margin-top: 0;
+}
+
+.itsec-fingerprint-footer__action-deny.button {
+	color: #a00;
+	text-decoration: none;
+	border-radius: 0 0 0 4px;
+}
+
+.itsec-fingerprint-footer__action-deny.button:hover {
+	background: #d54e21;
+	color: #fff;
+	border-color: #a1411e;
+}
+
+.itsec-fingerprint-footer__action-approve.button {
+	border-radius: 0 0 4px 0;
+}
+
+#wpadminbar .itsec-fingerprint-empty-state {
+	background: white;
+	padding: .5em;
+}
+
+.itsec-fingerprint-empty-state-container {
+	display: none;
+}
+
+.itsec-fingerprint-cards:empty + .itsec-fingerprint-empty-state-container {
+	display: block !important;
+}
+
+#wpadminbar .itsec-fingerprint-empty-state h3 {
+	font-size: 1.4em;
+}
+
+#wpadminbar .itsec-fingerprint-empty-state p {
+	color: #7E8993;
+}

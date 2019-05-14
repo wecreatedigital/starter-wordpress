@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183 169.855">
+    <defs>
+        <style>.a{fill:#e5eaee;}.b{fill:#e1f2fc;}.b,.f{stroke:#0083e3;}.c,.f{fill:#0083e3;}.d{fill:#fff;}.e{fill:none;}</style>
+    </defs>
+    <g transform="translate(-221 -1346.145)">
+        <ellipse class="a" cx="91.5" cy="21.5" rx="91.5" ry="21.5" transform="translate(221 1473)"></ellipse>
+        <path class="b" d="M348.982,304.5a4.479,4.479,0,0,0-4.482,4.475v79.981a2.985,2.985,0,0,0,2.988,2.983H471.514a2.985,2.985,0,0,0,2.988-2.983V308.975a4.479,4.479,0,0,0-4.482-4.475Z" transform="translate(-94.187 1757.656) rotate(-79)"></path>
+        <path class="c" d="M371,409.152H492.632V334H371Z" transform="translate(-122.145 1774.41) rotate(-79)"></path>
+        <path class="d" d="M373,410.439H493.919V336H373Z" transform="translate(-124.072 1775.71) rotate(-79)"></path>
+        <path class="e" d="M271.875,797.1a14.793,14.793,0,0,1-5.537-1.7c-.151-.073-.258-.125-.338-.16V793H423.961v2.239c-.08.037-.187.087-.338.16a14.6,14.6,0,0,1-5.494,1.7H271.875Z" transform="translate(-476.005 1617.71) rotate(-79)"></path>
+        <path class="b" d="M424,792.5H265.5v2.694c.183,0,3.565,1.936,6.153,1.936H417.885c2.57,0,5.927-1.941,6.1-1.941.005,0,.007-.016.007-.016Z" transform="translate(-475.523 1617.385) rotate(-79)"></path>
+        <path class="c" d="M266.348,805l-.178.356H423.953l.178-.356Z" transform="translate(-485.714 1615.965) rotate(-79)"></path>
+        <path class="c" d="M664.768,793.781H646.735A1.749,1.749,0,0,1,645,792.018V792h21.548v.018a1.749,1.749,0,0,1-1.736,1.763" transform="translate(-534.637 1923.65) rotate(-79)"></path>
+        <path class="c" d="M703.417,318.953a.623.623,0,1,1-.623-.623.624.624,0,0,1,.623.623" transform="translate(-391.406 1027.815)"></path>
+        <circle class="c" cx="1.817" cy="1.817" r="1.817" transform="translate(317.878 1408.665) rotate(-79)"></circle>
+        <path class="f" d="M.116,2.313c.255-.49,4.387-4.951,7.662,0,0,.627-.254.874-1.159-.232-.34-.391-2.476-3.24-6.208,1.1C.056,3.166-.139,2.8.116,2.313Z" transform="matrix(0.545, -0.839, 0.839, 0.545, 309.03, 1406.401)"></path>
+        <path class="c" d="M17.445,0C32.163-4.819,34.89,2.647,34.89,5.911S27.08,3.783,17.445,3.783,0,9.176,0,5.911,2.728,4.819,17.445,0Z" transform="translate(334.823 1440.232) rotate(-95)"></path>
+        <ellipse class="a" cx="9" cy="6.5" rx="9" ry="6.5" transform="translate(305.491 1439.176) rotate(-73)"></ellipse>
+        <ellipse class="c" cx="3.317" cy="0.817" rx="3.317" ry="0.817" transform="translate(316.071 1435.373) rotate(-98)"></ellipse>
+        <path class="f" d="M-.229,7.487l.487-.6C5.733-.22,1.515,1.932,10.034-3.762a4.111,4.111,0,0,0,.424,1.48A22.715,22.715,0,0,0,3.344,3.547C1.6,4.715-.484,7.978-.229,7.487Z" transform="matrix(0.545, -0.839, 0.839, 0.545, 306.953, 1437.137)"></path>
+    </g>
+</svg>

@@ -1,0 +1,33 @@
+@import "colors.scss";
+
+@mixin sticky-table($spacing: 1em) {
+    & thead th {
+        position: sticky;
+        top: 0;
+        padding-top: $spacing;
+        padding-bottom: $spacing;
+        background: white;
+        color: $dark-gray-500;
+        text-transform: uppercase;
+        font-weight: normal;
+        border-bottom: 1px solid $light-gray-500;
+        border-top: 1px solid $light-gray-500;
+    }
+
+    & th,
+    & td {
+        text-align: left;
+        padding: $spacing;
+
+        &:first-child {
+        }
+
+        &:last-child {
+            text-align: right;
+        }
+    }
+
+    & tbody th {
+        font-weight: normal;
+    }
+}

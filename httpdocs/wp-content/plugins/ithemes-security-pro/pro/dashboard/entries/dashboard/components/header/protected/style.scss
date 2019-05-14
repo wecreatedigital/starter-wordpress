@@ -1,0 +1,17 @@
+@import "colors.scss";
+
+.itsec-header-protected {
+    grid-area: protected;
+
+    .itsec-header-protected__text {
+        display: block;
+        font-size: 1.2em;
+        color: $dark-gray-900;
+    }
+
+    .itsec-header-protected__url {
+        display: block;
+        color: $dark-gray-500;
+        font-size: .75em;
+    }
+}

@@ -1,0 +1,72 @@
+#itsec-module-card-fingerprinting h5 {
+	margin-bottom: 0;
+}
+
+#itsec-module-card-fingerprinting hr {
+	margin: 2em;
+}
+
+.itsec-fingerprinting-maxmind-api-settings {
+	display: flex;
+}
+
+.itsec-fingerprinting-maxmind-api-settings__field {
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.itsec-fingerprinting-maxmind-api-settings__field label {
+	font-weight: bold;
+	font-size: 14px;
+}
+
+.itsec-fingerprinting-maxmind-api-settings__field label::after {
+	content: '';
+	clear: both;
+	display: table;
+}
+
+.itsec-fingerprinting-static-image-map-api-settings {
+	border-top: none;
+}
+
+.itsec-fingerprinting-maxmind-db-download-downloaded-message {
+	display: none;
+}
+
+.itsec-fingerprinting-maxmind-db-downloaded .itsec-fingerprinting-maxmind-db-download-downloaded-message {
+	display: block;
+}
+
+.itsec-fingerprinting-maxmind-db-downloaded .itsec-fingerprinting-maxmind-db-download-warning-message {
+	display: none;
+}
+
+#itsec-fingerprinting-maxmind-db-download-container {
+	display: flex;
+	align-items: center;
+}
+
+#itsec-fingerprinting-download {
+	margin-right: .5em;
+}
+
+.itsec-fingerprinting-maxmind-db-downloaded #itsec-fingerprinting-download::after {
+	content: "\f147";
+	color: #46b450;
+	margin: 3px -5px 0 0;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+	font-family: dashicons;
+	text-decoration: inherit;
+	font-weight: normal;
+	font-style: normal;
+	vertical-align: top;
+	text-align: center;
+	transition: color .1s ease-in;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,113 @@
+@import "colors.scss";
+
+.itsec-share-dashboard-add {
+    padding: 1em;
+    background: #E5EAEE;
+    width: 330px;
+    box-sizing: border-box;
+
+    & .itsec-share-dashboard-add__header {
+        h3 {
+            color: $main-blue;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-style: oblique;
+        }
+    }
+
+    & .itsec-share-dashboard-add__tab-panel {
+
+        & .components-tab-panel__tabs {
+            border-bottom: 1px solid $light-blue;
+            margin-bottom: 1em;
+
+            button {
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                cursor: pointer;
+                height: 50px;
+                padding: 3px 15px; // Use padding to offset the is-active border, this benefits Windows High Contrast mode
+                margin-left: 0;
+                font-weight: 400;
+                outline-offset: -1px;
+
+                &:focus {
+                    color: $dark-gray-900;
+                    outline: 1px solid $dark-gray-300;
+                    box-shadow: none;
+                }
+
+                &.is-active {
+                    padding-bottom: 0;
+                    border-bottom: 3px solid $main-blue;
+                    font-weight: 600;
+                    outline: none;
+                }
+            }
+        }
+
+        & legend {
+            font-weight: bold;
+            margin: 1em 0;
+        }
+
+        & ul {
+            margin: 0;
+        }
+
+        & fieldset {
+            margin-bottom: 1em;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    & .itsec-share-dashboard__add-users-fields {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    & .itsec-share-dashboard__add-users-select-dropdown {
+        flex-grow: 1;
+    }
+
+    & .itsec-share-dashboard__add-users-trigger {
+        height: 38px;
+        margin-left: .5em;
+
+        & .components-button {
+            height: 38px;
+        }
+    }
+
+    & .itsec-share-dashboard-add__footer {
+        border-top: 1px solid $light-blue;
+        margin-top: 1em;
+        padding-top: 1em;
+        text-align: right;
+    }
+
+    & .itsec-share-dashboard-add__summary {
+        padding-right: .5em;
+        font-style: oblique;
+    }
+
+    .is-mobile & {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        overflow-x: auto;
+
+        & .itsec-share-dashboard-add__footer {
+           margin-top: auto;
+        }
+    }
+}

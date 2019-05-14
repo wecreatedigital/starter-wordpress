@@ -1,0 +1,42 @@
+.itsec-email-contacts-setting ul {
+    margin: 1em 0;
+    padding-left: 0;
+}
+
+.itsec-email-contacts-setting ul + ul,
+.itsec-notification-center--deprecated-recipients {
+    padding-top: 1em;
+    border-top: 1px solid #ddd;
+}
+
+.itsec-email-contacts-setting ul li {
+    list-style: none;
+}
+
+.itsec-email-contacts-setting ul li input[type="checkbox"] {
+    margin-top: 0;
+}
+
+#itsec-module-card-notification-center h4 {
+    margin: .25em 0;
+}
+
+.itsec-notification-center-notification-settings .itsec-settings-section {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.itsec-notification-center-notification-settings {
+    border-top: 1px solid #ddd;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.itsec-notification-center-notification-settings input[type="text"] {
+    width: 25em;
+}
+
+.itsec-notification-center-tags dt {
+    font-family: monospace;
+}

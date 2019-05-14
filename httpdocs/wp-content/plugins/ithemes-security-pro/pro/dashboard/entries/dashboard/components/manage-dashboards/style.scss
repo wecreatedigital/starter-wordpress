@@ -1,0 +1,107 @@
+@import "colors.scss";
+
+.itsec-admin-bar-manage-dashboards__content.components-popover::after {
+    border-color: #E5EAEE !important;
+}
+
+.itsec-manage-dashboards {
+    padding: 1em;
+    background: #E5EAEE;
+    width: 420px;
+    box-sizing: border-box;
+
+    & .itsec-manage-dashboards__header {
+        border-bottom: 1px solid $light-blue;
+        margin-bottom: 1em;
+
+        h3 {
+            color: $main-blue;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-style: oblique;
+        }
+    }
+
+    & .itsec-manage-dashboards__dashboard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1em;
+        margin: .5em 0;
+        background: white;
+
+        &.itsec-manage-dashboard__dashboard--deleting {
+            @keyframes itsec-fade-pulse {
+                0% {
+                    opacity: .5;
+                }
+
+                25% {
+                    opacity: 1;
+                }
+
+                60% {
+                    opacity: .5;
+                }
+
+                100% {
+                    opacity: .5;
+                }
+            }
+
+            animation: itsec-fade-pulse 3s ease-out infinite normal;
+        }
+
+        & h4 {
+            display: flex;
+            align-items: center;
+            margin: 0 0 .25em;
+            min-height: 20px;
+
+            & .itsec-manage-dashboards__primary {
+                font-style: oblique;
+                margin-left: .25em;
+                color: $dark-gray-150;
+
+                &::before {
+                    content: "\2022";
+                    margin-right: .2em;
+                }
+            }
+        }
+
+        & .itsec-manage-dashboards__dashboard-meta {
+            display: block;
+            font-size: .8em;
+            font-style: oblique;
+        }
+
+        & .itsec-manage-dashboards__dashboard-actions {
+            display: flex;
+            align-items: center;
+
+            & > .itsec-manage-dashboards__dashboard-action {
+                margin: 0 .25em;
+            }
+        }
+    }
+
+    .is-mobile & {
+        width: 100%;
+        overflow-x: auto;
+        height: 100%;
+
+        & .itsec-manage-dashboards__header {
+            & h3 {
+                display: none;
+            }
+
+            & p {
+                margin-top: 0;
+            }
+        }
+    }
+}

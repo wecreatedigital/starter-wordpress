@@ -1,0 +1,106 @@
+@import "colors.scss";
+@import "breakpoints.scss";
+
+.itsec-create-dashboard {
+    display: grid;
+    grid-template: auto / 1fr 1fr;
+    grid-gap: 1em;
+    margin-top: 3em;
+
+    & .itsec-create-dashboard__start--default {
+        border-right: 1px solid $light-gray-500;
+    }
+
+    & .itsec-create-dashboard__start {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5em 0;
+
+        & header {
+            color: $dark-gray-300;
+            text-align: center;
+            margin-bottom: 2em;
+
+            & h2 {
+                color: $dark-gray-300;
+                font-size: 2em;
+                font-weight: normal;
+                line-height: 1;
+                margin-bottom: .5em;
+            }
+
+            & p {
+                font-style: oblique;
+                margin-bottom: 0;
+            }
+        }
+
+        & .itsec-create-dashboard__name {
+            max-width: 350px;
+            margin: 0 auto;
+
+            & .components-text-control__input::placeholder {
+                font-style: oblique;
+            }
+
+            .components-base-control__label {
+                border: 0;
+                clip: rect(1px, 1px, 1px, 1px);
+                clip-path: inset(50%);
+                height: 1px;
+                margin: -1px;
+                overflow: hidden;
+                padding: 0;
+                position: absolute;
+                width: 1px;
+                word-wrap: normal !important;
+            }
+        }
+
+        & .itsec-create-dashboard__trigger-container {
+            text-align: center;
+            margin-top: 2em;
+        }
+
+        & .itsec-create-dashboard__trigger {
+            padding: .5em 1em;
+            background: #E1F2FC;
+            color: $main-blue;
+            border: 1px solid $main-blue;
+            transition: background-color 300ms, color 150ms;
+
+            &:hover {
+                background: $main-blue;
+                color: white;
+            }
+
+            &.is-busy {
+                animation: components-button__busy-animation 2500ms infinite linear;
+                background-size: 100px 100%;
+                background-image: repeating-linear-gradient(-45deg, #E1F2FC, #fff 11px, #fff 10px, #E1F2FC 20px);
+                opacity: 1;
+
+                &:hover {
+                    color: $main-blue;
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: $medium) {
+        grid-template: 1fr 1fr / auto;
+
+        & .itsec-create-dashboard__start {
+            padding: 0;
+        }
+
+        & .itsec-create-dashboard__start--default {
+            border-right: none;
+            border-bottom: 1px solid $light-gray-500;
+            margin-bottom: 1em;
+            padding-bottom: 2em;
+        }
+
+    }
+}

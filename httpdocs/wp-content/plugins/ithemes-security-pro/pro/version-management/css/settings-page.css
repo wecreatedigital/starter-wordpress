@@ -1,0 +1,204 @@
+.itsec-vm-app {
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: separate;
+}
+
+.itsec-vm-app thead::before,
+.itsec-vm-app thead::after,
+.itsec-vm-app tbody::after {
+	position: absolute;
+	width: 100%;
+	height: 1px;
+	background: #DEDCDC;
+	left: 0;
+	content: '';
+}
+
+.itsec-vm-app tr th,
+.itsec-vm-app tr td {
+	margin: 0 !important;
+	height: 30px;
+}
+
+.itsec-vm-app tr td:first-child,
+.itsec-vm-app tr th:first-child {
+	padding-left: 5px !important;
+}
+
+.itsec-vm-app tr td:last-child,
+.itsec-vm-app tr th:last-child {
+	padding-right: 5px !important;
+}
+
+.itsec-vm-app thead tr.itsec-vm-header th {
+	vertical-align: middle;
+	padding: 10px 0;
+}
+
+.itsec-vm-app .itsec-vm-package td,
+.itsec-vm-app .itsec-vm-package th {
+	padding: 1em 0 !important;
+	border-bottom: 1px #DEDCDC solid;
+}
+
+.itsec-vm-app .itsec-vm-package:last-child td,
+.itsec-vm-app .itsec-vm-package:last-child th {
+	border-bottom: none;
+}
+
+.itsec-vm-column__bulk {
+	padding: 0 !important;
+	margin: 0 !important;
+	width: 16px !important;
+}
+
+.itsec-vm-column__bulk input {
+	margin: -2px 0 0 0 !important
+}
+
+.itsec-vm-column__days input {
+	width: 100px;
+	min-width: 0;
+}
+
+.itsec-vm-column__enabled,
+.itsec-vm-column__disabled,
+.itsec-vm-column__delay,
+.itsec-vm-column__days {
+	width: 1% !important;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.itsec-vm-app tr th.itsec-vm-column__name {
+	width: 100% !important;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	max-width: 300px;
+	vertical-align: middle !important;
+	font-weight: normal !important;
+	padding-left: 5px !important;
+}
+
+.itsec-vm-header__button {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 13px;
+	line-height: 26px;
+	height: 28px;
+	margin: 0 7px;
+	padding: 0 10px 1px;
+	border: none;
+	cursor: pointer;
+	-webkit-appearance: none;
+	border-radius: 3px;
+	white-space: nowrap;
+	box-sizing: border-box;
+	color: #555;
+	background: #ECECEC;
+	vertical-align: top;
+
+	transition-property: background, color;
+	transition-duration: .05s;
+	transition-timing-function: ease-in-out;
+}
+
+.itsec-vm-header__button:hover {
+	background: #c9c9c9;
+}
+
+.itsec-vm-header__button:active {
+	background: #aaaaaa;
+}
+
+.itsec-vm-header__button::before {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+	font-family: dashicons;
+	margin-top: 3px;
+	margin-right: 3px;
+	text-decoration: inherit;
+	font-weight: normal;
+	font-style: normal;
+	vertical-align: top;
+	text-align: center;
+	transition: color .1s ease-in;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.itsec-vm-header__button--enable::before {
+	content: "\f147";
+	color: #009800;
+}
+
+.itsec-vm-header__button--disable::before {
+	content: "\f158";
+	color: #E70000;
+}
+
+.itsec-vm-header__button--delay::before {
+	content: "\f469";
+	color: #008FF7;
+}
+
+.itsec-vm-package__type input[type="radio"] {
+	opacity: 0;
+	position: absolute;
+}
+
+.itsec-vm-package__type input[type="radio"] + label:before {
+	opacity: 0;
+	font-family: dashicons;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	font-size: 20px;
+	line-height: 1;
+	transition: opacity .05s ease-in-out;
+}
+
+.itsec-vm-package:hover input[type="radio"]:not(:checked) + label:before {
+	opacity: .2;
+}
+
+.itsec-vm-package:hover input[type="radio"]:not(:checked):hover + label:before,
+.itsec-vm-package input[type="radio"]:not(:checked):focus + label:before,
+.itsec-vm-package--focused input[type="radio"]:not(:checked) + label:before {
+	opacity: .5;
+}
+
+.itsec-vm-package input[type="radio"]:focus + label:before {
+	outline-color: #BFDFFF;
+	outline-color: -webkit-focus-ring-color;
+	outline-style: auto;
+	outline-width: 5px;
+}
+
+.itsec-vm-package input[type="radio"]:checked + label:before {
+	opacity: 1;
+}
+
+.itsec-vm-package__type--enabled input[type="radio"] + label:before {
+	content: "\f147";
+	color: #009800;
+}
+
+.itsec-vm-package__type--disabled input[type="radio"] + label:before {
+	content: "\f158";
+	color: #E70000;
+}
+
+.itsec-vm-package__type--delay input[type="radio"] + label:before {
+	content: "\f469";
+	color: #008FF7;
+}
+
+.list #itsec-module-card-version-management {
+	position: relative;
+}

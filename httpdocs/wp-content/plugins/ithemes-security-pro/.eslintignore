@@ -1,0 +1,7 @@
+core
+node_modules
+lib
+tests
+pro/**/js/*.js
+pro/grade-report/admin-page/js
+vendor/

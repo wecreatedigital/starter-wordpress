@@ -1,0 +1,73 @@
+@import "colors.scss";
+
+.itsec-dashboard-widget-carousel {
+    background: #EFEFEF;
+    padding: 1em 0;
+    margin-left: -12px;
+    margin-right: -12px;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: hidden;
+    border-top: 1px solid #e5e5e5;
+
+    &.itsec-dashboard-widget-carousel--loaded {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    // Overflow doesn't account for the margin, so add a spacer
+    &::before,
+    &::after {
+        content: "";
+        flex: 0 0 40px;
+    }
+
+    & .itsec-card {
+        margin: 20px;
+        flex: 0 0 auto;
+    }
+
+    & .itsec-dashboard-widget-carousel__loader {
+        margin: 20px;
+        opacity: 1;
+        flex-shrink: 0;
+    }
+
+    & .itsec-carousel-load-cards--enter {
+        opacity: 0.01;
+    }
+
+    & .itsec-carousel-load-cards--enter.itsec-carousel-load-cards--enter-active {
+        opacity: 1;
+        transition: opacity 500ms ease-in;
+    }
+
+    & .itsec-carousel-load-cards--exit {
+        opacity: 1;
+    }
+
+    & .itsec-carousel-load-cards--exit.itsec-carousel-load-cards--exit-active {
+        opacity: 0.01;
+        transition: opacity 300ms ease-in;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+    .itsec-dashboard-widget-carousel {
+        & .itsec-card {
+            margin: 20px 10px;
+        }
+
+        &.itsec-dashboard-widget-carousel--loaded {
+            overflow-x: scroll;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            flex: 0 0 20px;
+        }
+    }
+}
