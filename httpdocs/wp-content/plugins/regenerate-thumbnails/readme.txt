@@ -2,9 +2,9 @@
 Contributors: Viper007Bond
 Tags: thumbnail, thumbnails, post thumbnail, post thumbnails
 Requires at least: 4.7
-Tested up to: 5.0
+Tested up to: 5.1.1
 Requires PHP: 5.2.4
-Stable tag: trunk
+Stable tag: 3.1.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,6 +67,10 @@ This plugin does not log nor transmit any user data. Infact it doesn't even do a
 5. They can also be regenerated from the edit attachment screen.
 
 == ChangeLog ==
+
+= Version 3.1.1 =
+
+* Minor fix to avoid a divide by zero error when displaying thumbnail filenames.
 
 = Version 3.1.0 =
 
@@ -168,3 +172,6 @@ Lots of new features!
 = Version 1.0.0 =
 
 * Initial release.
+
+= Upgrade Notice =
+Bugfix release

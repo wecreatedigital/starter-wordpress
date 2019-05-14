@@ -1,6 +1,8 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
+Version 1.0.1
+
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
 - Why? *"Number three on this list is to store the config in the environment because configuration varies substantially across deploys, code does not."*
@@ -163,6 +165,23 @@ Comes with the following plugins:
 - Updated Redirection
 - Updated Yoast
 - Updated WordPress 5.1 -> 5.1.1
+
+**30/04/2019**
+- Added robot.txt function in admin.php
+
+**08/05/2019**
+- Added favicon code to header
+
+**09/05/2019**
+- Added Rocket-Lazy-Load plugin
+- Removed WP-Image-Lazy-Load plugin
+
+**14/05/2019**
+- Updated ACF PRO
+- Updated Regenerate Thumbnails
+- Updated Sucuri Security
+- Updated WP Super Cache
+- Yoast SEO
 
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
