@@ -1,0 +1,101 @@
+@import "breakpoints.scss";
+@import "colors.scss";
+
+.itsec-static-bar {
+    margin-left: 2em;
+
+    & .itsec-static-bar__stats-container {
+        display: flex;
+    }
+
+    & .itsec-static-bar__stat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 1em 1em 1em 3em;
+        border-left: 1px solid $light-gray-500;
+        margin-left: 3em;
+
+        &:first-child {
+            margin-left: 1em;
+        }
+
+        & .itsec-static-bar__stat-label {
+            color: $dark-gray-500;
+            margin: .5em 0 0 0;
+            font-size: 1em;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        & .itsec-static-bar__stat-data {
+            color: $main-blue;
+            font-size: 1.5em;
+            margin-top: .5em;
+        }
+    }
+
+    @media screen and (max-width: $large) {
+        & .itsec-static-bar__stat {
+            padding: .5em .5em .5em 1.5em;
+            margin-left: 1.5em;
+            border-left: none;
+
+            &:first-child {
+                margin-left: .5em;
+            }
+        }
+    }
+
+    @media screen and (max-width: $medium) {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1em;
+        border-top: 1px solid $light-gray-500;
+
+        & .itsec-static-bar__stats-container {
+            display: grid;
+            padding: 1em;
+            grid-template: auto / 1fr 1fr 1fr 1fr;
+        }
+
+        & .itsec-static-bar__stat {
+            border: none;
+            margin: 0;
+            padding: 1em;
+            box-sizing: border-box;
+            border-left: 1px solid $light-gray-500;
+
+            &:first-child {
+                border-left: none;
+                margin-left: 0;
+            }
+        }
+    }
+
+    @media screen and (max-width: $mobile) {
+        & .itsec-static-bar__stats-container {
+            grid-template: auto / 1fr 1fr;
+
+            & .itsec-static-bar__stat {
+                border-left: none;
+
+                &:nth-child(1) {
+                    border-right: 1px solid $light-gray-500;
+                    border-bottom: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(2) {
+                    border-bottom: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(3) {
+                    border-right: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(4) {
+                }
+            }
+        }
+    }
+}

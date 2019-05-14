@@ -1,0 +1,51 @@
+@import "colors.scss";
+
+.itsec-card-header {
+    display: flex;
+    align-items: center;
+    cursor: move;
+
+    & button {
+        cursor: pointer;
+    }
+
+    & .itsec-card-header-title {
+        font-size: 1em;
+        margin: 0;
+    }
+
+    & .itsec-card-header-status {
+        margin-left: auto;
+
+        & .itsec-card-header-status__label::after {
+            content: ':';
+            padding-right: .5em;
+        }
+
+        & .itsec-card-header-status__status {
+            text-transform: uppercase;
+            color: $main-blue;
+        }
+    }
+
+    & .itsec-card-header-date {
+        & .components-button {
+            align-items: center;
+            color: $main-blue;
+            margin: 0 .5em;
+            padding: 0 .5em;
+
+            &:hover {
+                color: lighten($main-blue, 20%);
+            }
+        }
+
+        & .itsec-card-header-date__period {
+            margin-right: .5em;
+        }
+    }
+}
+
+.react-grid-item.static .itsec-card-header {
+    cursor: default;
+}

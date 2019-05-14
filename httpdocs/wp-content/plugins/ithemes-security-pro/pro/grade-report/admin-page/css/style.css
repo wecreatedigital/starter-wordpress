@@ -1,0 +1,548 @@
+/*
+ * Webfonts
+ */
+@font-face {
+	font-family: 'Font Awesome';
+	font-style: normal;
+	font-weight: 900;
+	src: url("../webfonts/fontawesome/fa-solid-900.eot");
+	src: url("../webfonts/fontawesome/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../webfonts/fontawesome/fa-solid-900.woff2") format("woff2"), url("../webfonts/fontawesome/fa-solid-900.woff") format("woff"), url("../webfonts/fontawesome/fa-solid-900.ttf") format("truetype"), url("../webfonts/fontawesome/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+
+#itsec-grade-report-cards {
+	display: -ms-grid;
+	display: grid;
+	-ms-grid-columns: (1fr)[3];
+	grid-template-columns: repeat(3, 1fr);
+	-ms-grid-rows: auto;
+	grid-template-rows: auto;
+	grid-row-gap: 15px;
+	grid-column-gap: 15px;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+#itsec-grade-report .itsec-card {
+	background: #FFF;
+	box-shadow: 1px 1px 3px 2px #E0E0E0;
+	list-style-type: none;
+	margin: 0;
+	padding-bottom: 55px;
+	position: relative;
+}
+#itsec-grade-report .itsec-section-card {
+	padding-bottom: 0;
+}
+.itsec-card-summary {
+	-ms-grid-column-span: 2;
+	grid-column-end: span 2;
+}
+#itsec-grade-report .itsec-card .itsec-card-header {
+	border-bottom: 1px solid #E1E8EE;
+	height: 58px;
+	padding-bottom: 12px;
+	margin-bottom: 12px;
+}
+#itsec-grade-report .itsec-card .itsec-card-footer {
+	border-top: 1px solid #E1E8EE;
+	bottom: 0;
+	height: 43px;
+	width: 100%;
+	position: absolute;
+}
+#itsec-grade-report .button-secondary {
+	background-color: #FFFFFF;
+	border-color: #E1E8EE;
+}
+#itsec-grade-report .itsec-card-grade {
+	border-left: 10px solid black;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 58px;
+	font-weight: bold;
+	float: left;
+	height: 70px;
+	line-height: 67px;
+	padding: 0 0 0 5px;
+	position: relative;
+	width: 73px;
+}
+#itsec-grade-report .itsec-card-header .itsec-grade-a {
+	padding-left: 10px;
+	width: 68px;
+}
+#itsec-grade-report .itsec-card-grade-modifier {
+	display: block;
+	font-size: 25px;
+	font-weight: normal;
+	position: absolute;
+	top: -11px;
+	left: 38px;
+}
+#itsec-grade-report .itsec-card-grade-modifier-minus {
+	top: -14px;
+	left: 40px;
+}
+#itsec-grade-report .itsec-grade-d .itsec-card-grade-modifier {
+	left: 42px;
+}
+#itsec-grade-report .itsec-grade-d .itsec-card-grade-modifier-minus {
+	left: 44px;
+}
+#itsec-grade-report .itsec-grade-a {
+	border-color: #00C778;
+	color: #00C778;
+}
+#itsec-grade-report .itsec-grade-b {
+	border-color: #00A0D2;
+	color: #00A0D2;
+}
+#itsec-grade-report .itsec-grade-c {
+	border-color: #FA9408;
+	color: #FA9408;
+}
+#itsec-grade-report .itsec-grade-d {
+	border-color: #E7635D;
+	color: #E7635D;
+}
+#itsec-grade-report .itsec-grade-f {
+	border-color: #98030E;
+	color: #98030E;
+}
+#itsec-grade-report .itsec-card h2 {
+	font-size: 23px;
+	padding: 8px 12px 2px;
+}
+#itsec-grade-report .itsec-section-card h2,
+#itsec-resolve-issues-container h2 {
+	font-size: 17px;
+	padding: 15px 12px 0;
+}
+#itsec-grade-report .itsec-card-subheading {
+	color: #9A9DAA;
+	height: 1.4em;
+	line-height: 1.4em;
+	overflow: hidden;
+	padding: 0 12px;
+}
+#itsec-grade-report .itsec-section-card .itsec-card-subheading {
+	padding-left: 0;
+}
+#itsec-grade-report .itsec-card-security-score .itsec-card-subheading {
+	color: inherit;
+}
+#itsec-grade-report #itsec-security-score-graph {
+	float: left;
+	width: 200px;
+	height: 200px;
+	padding: 0 12px;
+	position: relative;
+}
+#itsec-grade-report #itsec-security-score-graph .itsec-grade {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 58px;
+	font-weight: bold;
+	line-height: 200px;
+	position: absolute;
+	text-align: center;
+	width: 200px;
+	height: 200px;
+}
+.itsec-card-security-score #itsec-security-score-graph-legend {
+	display: flex;
+	flex-direction: column;
+	font-size: 15px;
+	height: 200px;
+	justify-content: center;
+}
+.itsec-card-security-score #itsec-security-score-graph-legend ul {
+	list-style: none;
+	padding: 0;
+}
+.itsec-card-security-score #itsec-security-score-graph-legend li {
+	padding: 6px 6px 6px 0;
+	margin: 0;
+}
+.itsec-card-security-score #itsec-security-score-graph-legend .itsec-grade {
+	font-size: 14px;
+	padding-right: 2px;
+}
+#itsec-grade-report .itsec-card-summary .button-primary {
+	float: right;
+	margin: 22px 39px 0 0;
+}
+#itsec-grade-report .itsec-card-summary .itsec-bar-chart-legend  {
+	font-size: 14px;
+	float: left;
+	padding: 12px;
+}
+#itsec-grade-report .itsec-card-summary .itsec-bar-chart-legend .itsec-bar-chart-color {
+	font-size: 12px;
+	vertical-align: bottom;
+}
+#itsec-grade-report .itsec-card-summary .itsec-bar-chart-legend .itsec-bar-chart-label {
+	padding: 0 12px 0 2px;
+}
+#itsec-grade-report .itsec-card-summary .itsec-bar-chart-color-current {
+	border-color: #00A0D2;
+	color: #00A0D2;
+}
+#itsec-grade-report .itsec-card-summary .itsec-bar-chart-color-potential {
+	border-color: #B2E8DA;
+	color: #B2E8DA;
+}
+#itsec-grade-report #itsec-summary-footer-buttons {
+	float: right;
+	margin-right: 39px;
+}
+#itsec-grade-report #itsec-summary-footer-buttons .button-secondary {
+	margin-left: 10px;
+}
+#itsec-grade-report #itsec-summary {
+	padding: 6px 24px 0;
+}
+#itsec-grade-donut {
+	transform: rotate(-90deg);
+	width: 200px;
+	height: 200px;
+}
+#itsec-grade-report #itsec-summary-canvas-captions {
+	float: left;
+	font-size: 16px;
+	line-height: 50px;
+	list-style: none;
+	padding: 0 24px 0 0;
+	text-align: right;
+}
+#itsec-grade-report #itsec-summary-canvas-captions li {
+	margin: 0;
+	padding: 0;
+}
+#itsec-grade-report #itsec-summary-canvas-container {
+	overflow: hidden;
+}
+.itsec-card-security-score .itsec-letter-grade-legend  {
+	font-size: 14px;
+	float: left;
+	padding: 12px;
+}
+.itsec-card-security-score .itsec-letter-grade-legend .itsec-grade {
+	font-size: 12px;
+	vertical-align: bottom;
+}
+.itsec-card-security-score .itsec-letter-grade-legend .itsec-letter {
+	padding: 0 12px 0 2px;
+}
+#itsec-grade-report .itsec-score-calculation {
+	color: #9A9DAA;
+	font-style: italic;
+}
+.itsec-card-security-score .itsec-score-calculation {
+	float: right;
+	padding: 12px;
+}
+#itsec-grade-report .itsec-section-card .itsec-card-footer {
+	background-color: #E4F4FA;
+	height: 53px;
+}
+#itsec-grade-report .itsec-section-card .itsec-card-footer button {
+	margin: 12px;
+}
+
+#itsec-grade-report .itsec-section-icon {
+	background-repeat: no-repeat;
+	background-size: 100%;
+	float: left;
+	margin: 9px 0 0 21px;
+	width: 46px;
+	height: 100%;
+	min-height: 50px;
+}
+#itsec-grade-report .itsec-card-software .itsec-section-icon {
+	background-image: url('../images/versions.svg');
+}
+#itsec-grade-report .itsec-card-performance .itsec-section-icon {
+	background-image: url('../images/performance.svg');
+}
+#itsec-grade-report .itsec-card-security_settings .itsec-section-icon {
+	background-image: url('../images/configuration.svg');
+}
+#itsec-grade-report .itsec-section-list {
+	margin: 0 12px 12px 88px;
+	max-height: 243px;
+	min-height: 243px;
+	overflow: auto;
+	padding-right: 12px;
+}
+#itsec-grade-report .itsec-section-list ul {
+	list-style: none;
+	padding: 0;
+}
+#itsec-grade-report .itsec-section-list li {
+	border-bottom: 1px solid #E3E3E3;
+	display: table;
+	padding-bottom: 5px;
+	width: 100%;
+}
+#itsec-grade-report .itsec-section-list .itsec-grade {
+	display: table-cell;
+	padding-left: 5px;
+	text-align: right;
+	vertical-align: middle;
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade::before {
+	font-family: 'Font Awesome';
+	font-style: normal;
+	font-weight: 900;
+	text-decoration: inherit;
+	font-size: 16px;
+	line-height: 16px;
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade-a::before {
+	color: #00C778;
+	content: "\f058";
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade-b::before {
+	color: #00A0D2;
+	content: "\f058";
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade-c::before {
+	color: #FA9408;
+	content: "\f056";
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade-d::before {
+	color: #E7635D;
+	content: "\f057";
+}
+#itsec-grade-report .itsec-section-list span.itsec-grade-f::before {
+	color: #98030E;
+	content: "\f057";
+}
+#itsec-resolve-issues-container {
+	display: none;
+}
+#itsec-resolve-issues-container .itsec-module-messages-container {
+	margin: 0 30px;
+}
+#itsec-resolve-issues-container .itsec-modal-navigation {
+	height: 70px;
+}
+#itsec-resolve-issues-container .itsec-module-settings-content-container {
+	top: 70px;
+}
+#itsec-resolve-issues-container .itsec-modal-navigation button {
+	font-height: 40px;
+	width: 70px;
+	height: 70px;
+}
+#itsec-resolve-issues-container .itsec-module-settings-content-container {
+	bottom: 0;
+	padding: 12px 0;
+	margin-bottom: 71px;
+}
+#itsec-resolve-issues-container .itsec-report-content {
+	margin-left: 88px;
+}
+#itsec-resolve-issues-container.grid .itsec-module-settings-content {
+	max-width: none;
+}
+#itsec-resolve-issues-container.grid .itsec-module-settings-content pre {
+	overflow: auto;
+}
+#itsec-resolve-issues-container.grid .itsec-modal-title .itsec-card-grade {
+	padding: 0 0 0 18px;
+	width: 60px;
+}
+#itsec-resolve-issues-container.grid .itsec-modal-title .itsec-grade-a {
+	padding-left: 23px;
+	width: 55px;
+}
+#itsec-resolve-issues-container.grid .itsec-modal-title .itsec-card-grade-modifier {
+	left: 55px;
+}
+#itsec-resolve-issues-sections {
+	padding: 0 1em;
+}
+#itsec-resolve-issues-sections .itsec-card {
+	box-shadow: none;
+}
+#itsec-resolve-issues-sections .itsec-card .itsec-card-header {
+	border-top: 1px solid #AAADAE;
+	border-bottom: 1px solid #AAADAE;
+	height: 50px;
+	margin: 0 0 0 75px;
+	padding: 0;
+}
+#itsec-resolve-issues-sections .itsec-card-grade {
+	font-size: 50px;
+	height: 50px;
+	line-height: 46px;
+	width: 55px;
+}
+#itsec-resolve-issues-sections .itsec-section-icon {
+	margin: 9px 0 0 18px;
+	position: absolute;
+	top: 0;
+	width: 35px;
+}
+#itsec-resolve-issues-sections .itsec-section-list {
+	margin-left: 74px;
+	max-height: 150px;
+	min-height: 150px;
+}
+#itsec-resolve-issues-sections .itsec-section-list table {
+	border-collapse: collapse;
+	width: 100%;
+}
+#itsec-resolve-issues-sections .itsec-section-list table thead {
+	text-transform: uppercase;
+}
+#itsec-resolve-issues-sections .itsec-section-list table thead tr {
+	border-bottom: 1px solid #AAADAE;
+}
+#itsec-resolve-issues-sections .itsec-section-list table th {
+	padding: 5px 10px;
+	text-align: left;
+}
+#itsec-resolve-issues-sections .itsec-section-list table td {
+	border-bottom: 1px solid #E1E8EE;
+	padding: 5px 10px;
+	vertical-align: middle;
+}
+#itsec-resolve-issues-sections .itsec-section-list .itsec-criterion-grade,
+#itsec-resolve-issues-sections .itsec-section-list span.itsec-grade::before {
+	line-height: 16px;
+}
+#itsec-resolve-issues-sections .itsec-section-list .itsec-criterion-grade .itsec-grade {
+	display: inline;
+	float: right;
+}
+#itsec-resolve-issues-sections .itsec-section-list .itsec-criterion-fix-container {
+	display: block;
+	float: left;
+	width: 24px;
+	min-height: 18px;
+}
+#itsec-resolve-issues-sections .itsec-section-list .itsec-criterion-name {
+	display: block;
+	margin-left: 25px;
+}
+#itsec-resolve-issues-container .itsec-modal-footer {
+	border-top: 1px solid #E1E8EE;
+	bottom: 0;
+	height: 30px;
+	width: 100%;
+	padding: 20px 0;
+	position: absolute;
+}
+#itsec-resolve-issues-container .itsec-modal-footer input[type="submit"] {
+	float: right;
+	margin-right: 1em;
+}
+#itsec-resolve-issues-container .itsec-modal-footer label {
+	line-height: 28px;
+	margin-left: 96px;
+}
+
+@media screen and (min-width: 783px) AND (max-width: 1200px) {
+	#itsec-grade-report-cards {
+		-ms-grid-columns: (1fr)[2];
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.itsec-card-summary {
+		-ms-grid-column-span: 1;
+		grid-column-end: span 1;
+	}
+	.itsec-assessed-on-label {
+		display: none;
+	}
+	#itsec-grade-report #itsec-summary {
+		padding: 6px 12px;
+	}
+	#itsec-grade-report .itsec-card-summary .button-primary {
+		margin-right: 25px;
+	}
+	#itsec-grade-report #itsec-summary-canvas-captions {
+		padding-right: 12px;
+	}
+	#itsec-grade-report .itsec-card-subheading {
+		height: 1.4em;
+		line-height: 1.4em;
+		overflow: hidden;
+	}
+}
+@media screen and (max-width: 782px) {
+	#itsec-grade-report-cards {
+		display: block;
+	}
+	#itsec-grade-report-cards .itsec-card {
+		margin-bottom: 1em;
+	}
+	#itsec-grade-report #itsec-summary {
+		padding: 6px 12px;
+	}
+	#itsec-grade-report #itsec-summary-canvas-captions {
+		padding-right: 12px;
+	}
+}
+
+/* Fix IE and Edge */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+		float: left;
+		width: 32%;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-security-score {
+		margin: 0 15px 15px 0;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-summary {
+		margin-bottom: 15px;
+		width: 64%;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-software {
+		clear: both;
+		margin-right: 15px;
+	}
+}
+@media all and (-ms-high-contrast: none) and (min-width: 783px) AND (max-width: 1200px), (-ms-high-contrast: active) and (min-width: 783px) AND (max-width: 1200px) {
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+		width: 48%;
+	}
+}
+@media all and (-ms-high-contrast: none) and (max-width: 782px), (-ms-high-contrast: active) and (max-width: 782px) {
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+		float: none;
+		margin: 0 0 15px 0;
+		width: auto;
+	}
+}
+@supports (-ms-ime-align: auto) {
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+		float: left;
+		width: 32%;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-security-score {
+		margin: 0 15px 15px 0;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-summary {
+		margin-bottom: 15px;
+		width: 64%;
+	}
+	#itsec-grade-report #itsec-grade-report-cards .itsec-card-software {
+		clear: both;
+		margin-right: 15px;
+	}
+
+	@media screen and (min-width: 783px) AND (max-width: 1200px) {
+		#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+			width: 48%;
+		}
+	}
+	@media screen and (max-width: 782px) {
+		#itsec-grade-report #itsec-grade-report-cards .itsec-card {
+			float: none;
+			margin: 0 0 15px 0;
+			width: auto;
+		}
+	}
+}

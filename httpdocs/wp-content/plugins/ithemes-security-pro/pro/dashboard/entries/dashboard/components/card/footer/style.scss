@@ -1,0 +1,35 @@
+@import "colors.scss";
+
+.itsec-card-footer__actions {
+    display: flex;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+    align-items: center;
+    padding: .5em 1em;
+    border-top: 1px solid $light-gray-500;
+
+    & .itsec-card-footer__action {
+        margin: .5em;
+
+        &:first-child {
+            margin-left: 0;
+        }
+
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+
+    /*& .itsec-card-footer__action::after {
+        content: '|';
+        color: $light-gray-500;
+        margin: 0 .25em;
+        padding: 0 .25em;
+    }
+
+    & .itsec-card-footer__action:last-child::after {
+        content: none;
+        margin: 0;
+        padding: 0;
+    }*/
+}

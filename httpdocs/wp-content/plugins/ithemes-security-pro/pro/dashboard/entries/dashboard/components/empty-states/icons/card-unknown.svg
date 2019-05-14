@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 183 112.818">
+    <defs>
+        <style>.a{fill:#e5eaee;}.b{fill:#e1f2fc;}.b,.f{stroke:#0083e3;}.c,.f{fill:#0083e3;}.d{fill:#fff;}.e{fill:none;}</style>
+    </defs>
+    <g transform="translate(-1004 -1748.182)">
+        <ellipse class="a" cx="91.5" cy="21.5" rx="91.5" ry="21.5" transform="translate(1004 1818)"></ellipse>
+        <g transform="translate(0 -38)">
+            <g transform="translate(-1349.994 -1592.818)">
+                <path class="b" d="M348.982,304.5a4.479,4.479,0,0,0-4.482,4.475v79.981a2.985,2.985,0,0,0,2.988,2.983H471.514a2.985,2.985,0,0,0,2.988-2.983V308.975a4.479,4.479,0,0,0-4.482-4.475Z" transform="translate(2035.563 3075)"></path>
+                <path class="c" d="M371,409.152H492.632V334H371Z" transform="translate(2013.782 3050.753)"></path>
+                <path class="d" d="M373,410.439H493.919V336H373Z" transform="translate(2012.138 3049.11)"></path>
+                <path class="e" d="M271.875,797.1a14.793,14.793,0,0,1-5.537-1.7c-.151-.073-.258-.125-.338-.16V793H423.961v2.239c-.08.037-.187.087-.338.16a14.6,14.6,0,0,1-5.494,1.7H271.875Z" transform="translate(2100.083 2673.494)"></path>
+                <path class="b" d="M424,792.5H265.5v2.694c.183,0,3.565,1.936,6.153,1.936H417.885c2.57,0,5.927-1.941,6.1-1.941.005,0,.007-.016.007-.016Z" transform="translate(2100.494 2673.906)"></path>
+                <path class="c" d="M266.348,805l-.178.356H423.953l.178-.356Z" transform="translate(2099.944 2663.631)"></path>
+                <path class="c" d="M664.768,793.781H646.735A1.749,1.749,0,0,1,645,792.018V792h21.548v.018a1.749,1.749,0,0,1-1.736,1.763" transform="translate(1788.577 2674.316)"></path>
+                <path class="c" d="M703.417,318.953a.623.623,0,1,1-.623-.623.624.624,0,0,1,.623.623" transform="translate(1741.588 3063.633)"></path>
+                <g transform="translate(2424.293 3403.787)">
+                    <circle class="c" cx="1.817" cy="1.817" r="1.817" transform="translate(4.217 9.117)"></circle>
+                    <circle class="c" cx="1.817" cy="1.817" r="1.817" transform="translate(32.475 9.117)"></circle>
+                    <path class="f" d="M.116,2.313c.255-.49,4.387-4.951,7.662,0,0,.627-.254.874-1.159-.232-.34-.391-2.476-3.24-6.208,1.1C.056,3.166-.139,2.8.116,2.313Z" transform="matrix(0.839, -0.545, 0.545, 0.839, 0, 4.321)"></path>
+                    <path class="f" d="M.116,2.313c.255-.49,4.387-4.951,7.662,0,0,.627-.254.874-1.159-.232-.34-.391-2.476-3.24-6.208,1.1C.056,3.166-.139,2.8.116,2.313Z" transform="translate(33.008 0) rotate(22)"></path>
+                    <path class="c" d="M10.867,0c6,0,10.867,4.609,10.867,10.294S16.869,6.587,10.867,6.587,0,15.979,0,10.294,4.865,0,10.867,0Z" transform="translate(10.309 19.787)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

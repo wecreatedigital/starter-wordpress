@@ -1,0 +1,16 @@
+.itsec-close-button.components-icon-button {
+    padding: 0;
+    height: 20px;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+
+    &:hover {
+        opacity: .5;
+        box-shadow: none !important;
+    }
+
+    .components-popover.is-mobile & {
+        display: none;
+    }
+}

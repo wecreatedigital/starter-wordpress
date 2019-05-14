@@ -1,0 +1,25 @@
+@import "colors.scss";
+
+.itsec-header-user {
+    grid-area: user;
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: 5em 1fr;
+    grid-template-areas: "avatar greeting";
+    align-items: center;
+
+    & .itsec-header-user__avatar {
+        grid-area: avatar;
+        border-radius: 50%;
+        margin-right: 1em;
+        height: 5em;
+    }
+
+    & .itsec-header-user__greeting {
+        grid-area: greeting;
+        color: $main-blue;
+        font-size: 1.4em;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+}

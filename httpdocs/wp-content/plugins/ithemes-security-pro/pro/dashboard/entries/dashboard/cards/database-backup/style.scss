@@ -1,0 +1,171 @@
+@import "colors.scss";
+@import "mixins";
+
+.itsec-card--type-database-backup {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    overflow: hidden;
+
+    & .itsec-card-header {
+        flex-shrink: 0;
+    }
+
+    & .itsec-card-database-backup__total {
+        border: 5px solid #0081E3;
+        border-radius: 50%;
+        height: 150px;
+        width: 150px;
+        margin: 0 auto 1em auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        flex-shrink: 0;
+        flex-grow: 0;
+    }
+
+    & .itsec-card-database-backup__total-count {
+        position: absolute;
+        top: 25%;
+        color: $dark-gray-900;
+        font-size: 4.5em;
+        font-weight: bold;
+        letter-spacing: -3.8px;
+        line-height: 1em;
+
+        & sup {
+            position: absolute;
+            font-size: .5em;
+            line-height: 1;
+        }
+    }
+
+    & .itsec-card-database-backup__total-label {
+        position: absolute;
+        bottom: 25%;
+        margin-top: auto;
+        color: $dark-gray-500;
+        text-transform: uppercase;
+    }
+
+    & h3 {
+        margin: .5em 0 0;
+        padding: 0 1em;
+        color: grey;
+        font-size: 1.1em;
+        font-weight: normal;
+        text-transform: uppercase;
+    }
+
+    & .itsec-card-database-backup__recent-backups-section {
+        flex-shrink: 1;
+        overflow-y: scroll;
+        position: relative;
+
+        & .itsec-card-database-backup__recent-backups {
+            width: 100%;
+            border-spacing: 0;
+
+            @include sticky-table();
+        }
+    }
+
+    &.itsec-card-database-backup--no-data {
+        justify-content: flex-start;
+
+        & .itsec-card-footer__actions {
+            border: none;
+            flex-grow: 1;
+            align-self: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        & .itsec-card-footer__action {
+            margin: .25em 0;
+        }
+    }
+
+    .itsec-card[max-width~="300px"] &.itsec-card-database-backup--source-files .itsec-card-database-backup__col-size {
+        display: none;
+    }
+
+    .itsec-card[max-width~="250px"] &.itsec-card-database-backup--source-files .itsec-card-database-backup__backup-time {
+        display: none;
+    }
+
+    .itsec-card[max-height~="300px"] &:not(.itsec-card-database-backup--no-data) {
+        display: grid;
+        grid-template-areas: "header header" "left right";
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: minmax(max-content, auto) 1fr;
+        padding: 0 1em;
+        align-items: start;
+
+        & .itsec-card-header {
+            grid-area: header;
+            padding: 1em 0 0;
+        }
+
+        & .itsec-card-database-backup__total {
+            grid-area: left;
+            margin: 0 auto;
+            width: 100px;
+            height: 100px;
+            align-self: center;
+        }
+
+        & .itsec-card-database-backup__total-count {
+            font-size: 3em;
+            letter-spacing: -2px;
+        }
+
+        & .itsec-card-database-backup__total-label {
+            font-size: .75em;
+        }
+
+        & .itsec-card-footer__actions {
+            grid-area: right;
+            margin: 0;
+            border: none;
+            align-items: center;
+            flex-direction: column;
+            flex-shrink: 1;
+            justify-content: center;
+            height: 100%;
+        }
+
+        & .itsec-card-footer__actions .itsec-card-footer__action {
+            margin: .25em 0;
+        }
+
+        & .itsec-card-database-backup__recent-backups-section {
+            display: none;
+        }
+    }
+
+    .itsec-card[max-height~="300px"][max-width~="250px"] &:not(.itsec-card-database-backup--no-data) {
+        grid-template-areas: "header header" "left left";
+
+        & .itsec-card-database-backup__total {
+            height: 125px;
+            width: 125px;
+        }
+
+        & .itsec-card-database-backup__total-count {
+            font-size: 4em;
+            letter-spacing: -3.5px;
+        }
+
+        & .itsec-card-database-backup__total-label {
+            font-size: .75em;
+            bottom: 20%;
+        }
+
+        & .itsec-card-footer__actions {
+            display: none;
+        }
+    }
+}

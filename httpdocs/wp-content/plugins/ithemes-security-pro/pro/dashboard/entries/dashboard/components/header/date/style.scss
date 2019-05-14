@@ -1,0 +1,21 @@
+@import "colors.scss";
+
+.itsec-header-date {
+    grid-area: date;
+
+    & .itsec-header-date__day {
+        font-size: 3em;
+        display: block;
+        text-align: center;
+        line-height: 1em;
+        color: $dark-gray-900;
+        font-weight: bold;
+    }
+
+    & .itsec-header-date__month {
+        display: block;
+        text-transform: uppercase;
+        font-size: .75em;
+        text-align: center;
+    }
+}

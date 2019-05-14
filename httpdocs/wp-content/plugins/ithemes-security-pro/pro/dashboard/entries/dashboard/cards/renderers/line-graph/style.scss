@@ -1,0 +1,14 @@
+.itsec-card--type-line-graph {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+
+    & .itsec-card-header {
+        flex-shrink: 0;
+    }
+
+    & .recharts-responsive-container {
+        flex-grow: 1;
+    }
+}

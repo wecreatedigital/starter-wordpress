@@ -1,0 +1,43 @@
+@import "colors.scss";
+
+.itsec-card-grid-empty-state {
+    display: flex;
+    justify-content: center;
+    height: 250px;
+    width: 300px;
+    margin: 20px 0 0 10px;
+    padding: 2em;
+    border: 5px dashed $light-gray-700;
+    border-radius: 5px;
+
+    & .components-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: $dark-gray-150;
+        font-size: 2em;
+        transition: color 150ms;
+
+        &:hover {
+            color: $dark-gray-500;
+        }
+    }
+
+    & .dashicon {
+        margin-bottom: .5em;
+    }
+}
+
+.react-grid-layout {
+    transform: translateX(-10px) translateY(-10px);
+}
+
+.itsec-card-grid--moving .itsec-card {
+    user-select: none;
+}
+
+.react-grid-item.react-grid-placeholder {
+    background: rgb(211, 211, 211);
+    opacity: .35;
+}

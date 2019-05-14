@@ -1,0 +1,18 @@
+.itsec-recaptcha-opt-in {
+	background: #f9f9f9;
+	border: 1px solid #d3d3d3;
+	border-radius: 3px;
+	box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.08);
+	-webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.08);
+	-moz-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.08);
+	margin-bottom: 1em;
+	padding: 1em;
+}
+
+.itsec-recaptcha-opt-in.itsec-recaptcha-opt-in--loading {
+	opacity: .5;
+}
+
+.itsec-recaptcha-opt-in p + p {
+	margin-top: 1em;
+}

@@ -1,0 +1,22 @@
+@import "breakpoints.scss";
+
+.itsec-header {
+    display: flex;
+    //overflow-y: auto; // Fallback
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+
+    & .itsec-header__welcome {
+        display: grid;
+        grid-gap: 1em 2em;
+        grid-template-columns: 5em 1fr;
+        grid-template-rows: auto;
+        grid-template-areas: "user user" "date protected";
+    }
+
+    @media screen and (max-width: $medium) {
+        flex-direction: column;
+        align-items: start;
+    }
+}

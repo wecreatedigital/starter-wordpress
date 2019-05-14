@@ -1,0 +1,105 @@
+@import "colors.scss";
+
+.itsec-admin-bar-edit-cards__content.components-popover::after {
+    border-color: #E5EAEE !important;
+}
+
+.itsec-edit-cards {
+    padding: 1em;
+    background: #E5EAEE;
+    width: 420px;
+    box-sizing: border-box;
+
+    & header {
+        border-bottom: 1px solid $light-blue;
+        margin-bottom: 1em;
+
+        h3 {
+            color: $main-blue;
+            text-align: center;
+        }
+
+        p {
+            text-align: center;
+            font-style: oblique;
+        }
+    }
+
+    & .itsec-edit-cards__bulk-control {
+        display: flex;
+        align-items: center;
+        margin: 0 1em;
+
+        & .components-base-control__field {
+            margin-bottom: 0;
+        }
+    }
+
+    & .itsec-edit-cards__card-choices {
+        list-style: none;
+
+        & .itsec-edit-cards__card-choice {
+            display: flex;
+            align-items: center;
+            background: white;
+            margin: .5em 0;
+
+            &.itsec-edit-cards__card-choice--add {
+                padding-left: 1em;
+            }
+
+            &.itsec-edit-cards__card-choice--remove {
+                color: $dark-gray-400;
+                background: $light-gray-200;
+                padding-right: 1em;
+            }
+
+            & .itsec-edit-cards__action {
+                border-radius: 0;
+                height: 4em;
+                width: 4em;
+                justify-content: center;
+
+                &:hover {
+                    box-shadow: none !important;
+                }
+
+                &.itsec-edit-cards__action--add {
+                    color: $main-blue;
+                    margin-left: auto;
+
+                    &:hover {
+                        background: $light-gray-200;
+                        color: darken( $main-blue, 50 );
+                    }
+                }
+
+                &.itsec-edit-cards__action--remove {
+                    color: #ececec;
+                    background: $light-gray-800;
+                    margin-right: .5em;
+
+                    &:hover {
+                        background: $light-gray-900;
+                    }
+                }
+            }
+        }
+    }
+
+    .is-mobile & {
+        width: 100%;
+        overflow-x: auto;
+        height: 100%;
+
+        & header {
+            & h3 {
+                display: none;
+            }
+
+            & p {
+                margin-top: 0;
+            }
+        }
+    }
+}

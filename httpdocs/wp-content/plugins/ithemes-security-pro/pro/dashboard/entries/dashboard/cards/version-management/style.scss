@@ -1,0 +1,105 @@
+@import "colors.scss";
+
+.itsec-card--type-version-management {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    & .itsec-card-header {
+        flex-shrink: 0;
+    }
+
+    & .itsec-card-version-management__updates {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: calc(130px + 130px + 4em + 2px);
+    }
+
+    & .itsec-card-version-management__update {
+        width: 130px;
+        height: 130px;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 1em;
+
+        &:nth-child(1) {
+            border-right: 1px solid $light-gray-500;
+            border-bottom: 1px solid $light-gray-500;
+        }
+
+        &:nth-child(2) {
+            border-bottom: 1px solid $light-gray-500;
+        }
+
+        &:nth-child(3) {
+
+        }
+
+        &:nth-child(4) {
+            background: $light-gray-200;
+            border-left: 1px solid $light-gray-500;
+
+            & .itsec-card-version-management__update-count {
+                color: #0081E3;
+            }
+        }
+
+        & .itsec-card-version-management__update-count {
+            font-size: 4.5em;
+            font-weight: bold;
+            letter-spacing: -3.8px;
+            line-height: 1em;
+            color: $dark-gray-900;
+        }
+
+        & .itsec-card-version-management__update-label {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: lighter;
+            text-transform: uppercase;
+            color: $dark-gray-500;
+        }
+    }
+
+    & .itsec-card-footer__actions {
+        border-top: none;
+        margin-top: auto;
+    }
+}
+
+.itsec-card[max-width~="355px"] .itsec-card--type-version-management {
+    & .itsec-card-header-date__period {
+        display: none;
+    }
+
+    & .itsec-card-version-management__updates {
+        display: block;
+        margin: 0;
+        max-width: none;
+    }
+
+    & .itsec-card-version-management__update {
+        width: auto;
+        border: none !important;
+        padding: .5em 1em;
+        margin: 0;
+        flex-direction: row;
+        height: 4.5em;
+        justify-content: space-between;
+
+
+        & .itsec-card-version-management__update-label {
+            text-align: left;
+        }
+
+        & .itsec-card-version-management__update-count {
+            text-align: left;
+            padding-left: .25em;
+        }
+    }
+}

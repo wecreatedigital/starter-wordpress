@@ -1,0 +1,79 @@
+@import "colors.scss";
+
+#itsec-dashboard-widget {
+    // The static bar is originally styled with page based responsive styles
+    // Force the compact view in the dashboard widget.
+    & .itsec-static-bar {
+        width: 100%;
+        margin-left: 0;
+        margin-top: 1em;
+
+        & .itsec-static-bar__stats-container {
+            display: grid;
+            padding: 1em;
+            grid-template: auto / 1fr 1fr;
+
+            & .itsec-static-bar__stat {
+                border: none;
+                margin: 0;
+                padding: 1em;
+                box-sizing: border-box;
+
+                &:nth-child(1) {
+                    border-left: none;
+                    margin-left: .5em;
+                    border-right: 1px solid $light-gray-500;
+                    border-bottom: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(2) {
+                    border-bottom: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(3) {
+                    border-right: 1px solid $light-gray-500;
+                }
+
+                &:nth-child(4) {
+                }
+            }
+        }
+    }
+
+    & .itsec-card-header {
+        cursor: auto;
+    }
+
+    & .inside {
+        padding-bottom: 0;
+    }
+
+    // Fix WP's override of header styles in dashboard widgets.
+    &.postbox .inside {
+        & h2.itsec-card-header-title {
+            font-size: 1em;
+            margin: 0;
+            padding: 0;
+            font-weight: 600;
+            line-height: 1.4em;
+        }
+
+        & h3 {
+            margin: 1em 0;
+        }
+
+        & .itsec-empty-state-card h3 {
+            color: $dark-gray-500;
+        }
+    }
+
+    & .components-notice-list {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+
+        & .components-notice {
+            margin: 0 11px 0 -12px;
+        }
+    }
+}
