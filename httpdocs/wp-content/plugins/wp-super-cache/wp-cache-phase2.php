@@ -52,11 +52,6 @@ function wp_cache_serve_cache_file() {
 		return false;
 	}
 
-	if ( wp_cache_user_agent_is_rejected() ) {
-		wp_cache_debug( 'No wp-cache file served as user agent rejected.', 5 );
-		return false;
-	}
-
 	if ( $wp_cache_no_cache_for_get && false == empty( $_GET ) ) {
 		wp_cache_debug( 'Non empty GET request. Caching disabled on settings page. ' . wpsc_dump_get_request(), 1 );
 		return false;
@@ -226,10 +221,11 @@ function wp_cache_serve_cache_file() {
 	} else {
 		$ungzip = false;
 	}
-	foreach ($meta[ 'headers' ] as $t => $header) {
+	foreach ( $meta['headers'] as $t => $header ) {
 		// godaddy fix, via http://blog.gneu.org/2008/05/wp-supercache-on-godaddy/ and http://www.littleredrails.com/blog/2007/09/08/using-wp-cache-on-godaddy-500-error/
-		if( strpos( $header, 'Last-Modified:' ) === false )
-			header($header);
+		if ( strpos( $header, 'Last-Modified:' ) === false ) {
+			header( $header );
+		}
 	}
 	if ( isset( $wpsc_served_header ) && $wpsc_served_header ) {
 		header( 'X-WP-Super-Cache: Served WPCache cache file' );
@@ -825,7 +821,7 @@ function get_oc_key( $url = false ) {
 	global $wp_cache_gzip_encoding, $WPSC_HTTP_HOST;
 
 	if ( $url ) {
-		$key = intval( $_SERVER[ 'SERVER_PORT' ] ) . strtolower( preg_replace( '/:.*$/', '',  $WPSC_HTTP_HOST ) ) . $url;
+		$key = intval( $_SERVER[ 'SERVER_PORT' ] ) . preg_replace( '/:.*$/', '',  $WPSC_HTTP_HOST ) . $url;
 	} else {
 		$key = get_current_url_supercache_dir();
 	}
@@ -1109,13 +1105,23 @@ function wp_cache_replace_line( $old, $new, $my_file ) {
 		}
 	}
 	foreach( (array) $lines as $line ) {
-		if ( preg_match("/$old/", $line)) {
+		if (
+			trim( $new ) != '' &&
+			trim( $new ) == trim( $line )
+		) {
+			wp_cache_debug( "wp_cache_replace_line: setting not changed - $new" );
+			return false;
+		} elseif ( preg_match( "/$old/", $line ) ) {
+			wp_cache_debug( "wp_cache_replace_line: changing line " . trim( $line ) . " to *$new*" );
 			$found = true;
-			break;
 		}
 	}
 
-	$fd = fopen( $my_file, 'w' );
+	$tmp_config_filename = tempnam( $GLOBALS['cache_path'], 'wpsc' );
+	rename( $tmp_config_filename, $tmp_wpcache_filename . ".php" );
+	$tmp_config_filename .= ".php";
+	wp_cache_debug( 'wp_cache_replace_line: writing to ' . $tmp_config_filename );
+	$fd = fopen( $tmp_config_filename, 'w' );
 	if ( ! $fd ) {
 		if ( function_exists( 'set_transient' ) ) {
 			set_transient( 'wpsc_config_error', 'config_file_ro', 10 );
@@ -1144,6 +1150,8 @@ function wp_cache_replace_line( $old, $new, $my_file ) {
 		}
 	}
 	fclose( $fd );
+	rename( $tmp_config_filename, $my_file );
+	wp_cache_debug( 'wp_cache_replace_line: moved ' . $tmp_config_filename . ' to ' . $my_file );
 
 	if ( function_exists( "opcache_invalidate" ) ) {
 		@opcache_invalidate( $my_file );
@@ -1157,6 +1165,11 @@ function wp_cache_phase2() {
 
 	if ( $cache_enabled == false ) {
 		wp_cache_debug( 'Caching disabled! quiting!', 1 );
+		return false;
+	}
+
+	if ( wp_cache_user_agent_is_rejected() ) {
+		wp_cache_debug( 'wp_cache_phase2: No caching to do as user agent rejected.' );
 		return false;
 	}
 
@@ -1374,79 +1387,83 @@ function wp_cache_user_agent_is_rejected() {
 
 function wp_cache_get_response_headers() {
 	static $known_headers = array(
-						'Access-Control-Allow-Origin',
-						'Accept-Ranges',
-						'Age',
-						'Allow',
-						'Cache-Control',
-						'Connection',
-						'Content-Encoding',
-						'Content-Language',
-						'Content-Length',
-						'Content-Location',
-						'Content-MD5',
-						'Content-Disposition',
-						'Content-Range',
-						'Content-Type',
-						'Date',
-						'ETag',
-						'Expires',
-						'Last-Modified',
-						'Link',
-						'Location',
-						'P3P',
-						'Pragma',
-						'Proxy-Authenticate',
-						"Referrer-Policy",
-						'Refresh',
-						'Retry-After',
-						'Server',
-						'Status',
-						'Strict-Transport-Security',
-						'Trailer',
-						'Transfer-Encoding',
-						'Upgrade',
-						'Vary',
-						'Via',
-						'Warning',
-						'WWW-Authenticate',
-						'X-Frame-Options',
-						'Public-Key-Pins',
-						'X-XSS-Protection',
-						'Content-Security-Policy',
-						"X-Pingback",
-						'X-Content-Security-Policy',
-						'X-WebKit-CSP',
-						'X-Content-Type-Options',
-						'X-Powered-By',
-						'X-UA-Compatible',
-						'X-Robots-Tag',
-					);
+		'Access-Control-Allow-Origin',
+		'Accept-Ranges',
+		'Age',
+		'Allow',
+		'Cache-Control',
+		'Connection',
+		'Content-Encoding',
+		'Content-Language',
+		'Content-Length',
+		'Content-Location',
+		'Content-MD5',
+		'Content-Disposition',
+		'Content-Range',
+		'Content-Type',
+		'Date',
+		'ETag',
+		'Expires',
+		'Last-Modified',
+		'Link',
+		'Location',
+		'P3P',
+		'Pragma',
+		'Proxy-Authenticate',
+		'Referrer-Policy',
+		'Refresh',
+		'Retry-After',
+		'Server',
+		'Status',
+		'Strict-Transport-Security',
+		'Trailer',
+		'Transfer-Encoding',
+		'Upgrade',
+		'Vary',
+		'Via',
+		'Warning',
+		'WWW-Authenticate',
+		'X-Frame-Options',
+		'Public-Key-Pins',
+		'X-XSS-Protection',
+		'Content-Security-Policy',
+		'X-Pingback',
+		'X-Content-Security-Policy',
+		'X-WebKit-CSP',
+		'X-Content-Type-Options',
+		'X-Powered-By',
+		'X-UA-Compatible',
+		'X-Robots-Tag',
+	);
+
+	if ( ! function_exists( 'headers_list' ) ) {
+		return array();
+	}
 
 	$known_headers = apply_filters( 'wpsc_known_headers', $known_headers );
 
-	if ( ! isset( $known_headers[ 'age' ] ) ) {
+	if ( ! isset( $known_headers['age'] ) ) {
 		$known_headers = array_map( 'strtolower', $known_headers );
 	}
 
 	$headers = array();
-	if ( function_exists( 'apache_response_headers' ) ) {
-		$headers = apache_response_headers();
-	}
-	if ( empty( $headers ) && function_exists( 'headers_list' ) ) {
-		$headers = array();
-		foreach( headers_list() as $hdr ) {
-			$header_parts = explode( ':', $hdr, 2 );
-			$header_name  = isset( $header_parts[0] ) ? trim( $header_parts[0] ) : '';
-			$header_value = isset( $header_parts[1] ) ? trim( $header_parts[1] ) : '';
+	foreach ( headers_list() as $hdr ) {
+		$ptr = strpos( $hdr, ':' );
 
-			$headers[$header_name] = $header_value;
+		if ( empty( $ptr ) ) {
+			continue;
 		}
-	}
 
-	foreach( $headers as $key => $value ) {
-		if ( ! in_array( strtolower( $key ), $known_headers ) ) {
-			unset( $headers[ $key ] );
+		$hdr_key = rtrim( substr( $hdr, 0, $ptr ) );
+
+		if ( in_array( strtolower( $hdr_key ), $known_headers, true ) ) {
+			$hdr_val = ltrim( substr( $hdr, $ptr + 1 ) );
+
+			if ( ! empty( $headers[ $hdr_key ] ) ) {
+				$hdr_val = $headers[ $hdr_key ] . ', ' . $hdr_val;
+			}
+
+			$headers[ $hdr_key ] = $hdr_val;
 		}
 	}
 
@@ -2760,7 +2777,7 @@ function wp_cache_post_edit( $post_id ) {
 
 	// Some users are inexplicibly seeing this error on scheduled posts.
 	// define this constant to disable the post status check.
-	if ( false == defined( 'WPSCFORCEUPDATE' ) && !in_array($post->post_status, array( 'publish', 'private' ) ) ) {
+	if ( ! defined( 'WPSCFORCEUPDATE' ) && ! in_array( get_post_status( $post ), array( 'publish', 'private' ), true ) ) {
 		wp_cache_debug( 'wp_cache_post_edit: draft post, not deleting any cache files. status: ' . $post->post_status, 4 );
 		return $post_id;
 	}
@@ -2825,17 +2842,24 @@ function wp_cache_post_change( $post_id ) {
 		wp_cache_debug( "wp_cache_post_change(${action}): Already processed post $post_id.", 4 );
 		return $post_id;
 	}
-	$post = get_post( $post_id );
+
+	$post  = get_post( $post_id );
+	$ptype = is_object( $post ) ? get_post_type_object( $post->post_type ) : null;
+	if ( empty( $ptype ) || ! $ptype->public ) {
+		return $post_id;
+	}
+
 	// Some users are inexplicibly seeing this error on scheduled posts.
 	// define this constant to disable the post status check.
-	if ( false == defined( 'WPSCFORCEUPDATE' ) && is_object( $post ) && !in_array($post->post_status, array( 'publish', 'private' ) ) ) {
+	if ( ! defined( 'WPSCFORCEUPDATE' ) && ! in_array( get_post_status( $post ), array( 'publish', 'private' ), true ) ) {
 		wp_cache_debug( 'wp_cache_post_change: draft post, not deleting any cache files.', 4 );
 		return $post_id;
 	}
 	$last_processed = $post_id;
 
-	if( !wp_cache_writers_entry() )
+	if ( ! wp_cache_writers_entry() ) {
 		return $post_id;
+	}
 
 	if (
 		isset( $wp_cache_refresh_single_only ) &&
