@@ -9,8 +9,10 @@ import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF, faFacebook, faTwitter, faPinterestP, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
 import { faClock, faMap } from '@fortawesome/free-regular-svg-icons';
 import { faEnvelope, faPhone, faHome, faSearch} from '@fortawesome/free-solid-svg-icons';
+import {faAcorn} from  '@fortawesome/pro-regular-svg-icons';
+import {} from '@fortawesome/pro-solid-svg-icons';
 // add the imported icons to the library
-library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin,  faEnvelope, faPhone, faSearch, faHome, faClock, faMap);
+library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin,  faEnvelope, faPhone, faSearch, faHome, faClock, faMap, faAcorn);
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
