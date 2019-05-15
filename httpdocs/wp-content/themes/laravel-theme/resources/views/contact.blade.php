@@ -14,6 +14,8 @@
      <i class="fab fa-facebook"></i>
      <!-- Twitter icon -->
      <i class="fab fa-twitter"></i>
+     {{--  Pro Icon --}}
+     <i class="far fa-acorn"></i>
 
   @endwhile
   @include('partials.google-maps')

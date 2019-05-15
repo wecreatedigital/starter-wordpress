@@ -8,6 +8,8 @@
      <i class="fab fa-facebook"></i>
      <!-- Twitter icon -->
      <i class="fab fa-twitter"></i>
+     
+     <i class="far fa-acorn"></i>
 
   <?php endwhile; ?>
   <?php echo $__env->make('partials.google-maps', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
