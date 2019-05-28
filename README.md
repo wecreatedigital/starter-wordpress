@@ -1,7 +1,7 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
-Version 1.0.1
+Version 1.1.0
 
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
@@ -186,6 +186,12 @@ Comes with the following plugins:
 
 **15/05/2019**
 - Build now includes FontAwesome Pro
+
+**28/05/2019**
+- Added Child theme
+- Added Bootstrap Nav Walekr
+- Added excerpt function
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup

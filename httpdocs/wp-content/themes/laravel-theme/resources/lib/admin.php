@@ -121,3 +121,23 @@ function surbma_yoast_seo_sitemap_to_robotstxt_function($output)
     return $output;
 }
 add_filter('robots_txt', 'surbma_yoast_seo_sitemap_to_robotstxt_function', 9999, 1);
+
+/**
+ * Limits the amount of characters to be displayed in an excerpt and appends
+ * trailing periods.
+ * @author Brandon Hull
+ * @date 2019-05-28
+ */
+function excerpt($limit)
+{
+    $excerpt = explode(' ', get_the_excerpt(), $limit);
+    if (count($excerpt) >= $limit) {
+        array_pop($excerpt);
+        $excerpt = implode(' ', $excerpt).'...';
+    } else {
+        $excerpt = implode(' ', $excerpt);
+    }
+    $excerpt = preg_replace('`\[[^\]]*\]`', '', $excerpt);
+
+    return $excerpt;
+}
