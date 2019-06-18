@@ -1,7 +1,6 @@
 
 <header class="banner">
   <div class="container">
-    <a class="brand" href="<?php echo e(home_url('/')); ?>"><?php echo e(get_bloginfo('name', 'display')); ?></a>
     <nav class="navbar navbar-expand-md navbar-light bg-light" role="navigation">
       <div class="container">
         <!-- Brand and toggle get grouped for better mobile display -->
