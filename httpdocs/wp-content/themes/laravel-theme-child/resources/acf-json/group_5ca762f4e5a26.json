@@ -1,0 +1,40 @@
+{
+    "key": "group_5ca762f4e5a26",
+    "title": "Contact Form Redirect",
+    "fields": [
+        {
+            "key": "field_5ca7631a090c6",
+            "label": "contact form redirect url",
+            "name": "contact_form_redirect_url",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "page"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1554712948
+}
