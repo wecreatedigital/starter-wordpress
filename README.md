@@ -1,7 +1,7 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
-Version 1.2.0
+Version 1.2.1
 
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
@@ -197,6 +197,9 @@ Comes with the following plugins:
 
 **18/16/2019**
 - Added Child theme
+
+**02/07/2019**
+- Added acf-json folder to child theme
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup
