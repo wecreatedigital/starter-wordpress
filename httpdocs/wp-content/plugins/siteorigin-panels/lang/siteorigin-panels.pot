@@ -374,7 +374,7 @@ msgstr ""
 msgid "New Row"
 msgstr ""
 
-#: inc/admin.php:460, inc/admin.php:468, inc/styles.php:184, tpl/js-templates.php:62
+#: inc/admin.php:460, inc/admin.php:468, inc/styles.php:185, tpl/js-templates.php:62
 msgid "Row"
 msgstr ""
 
@@ -394,7 +394,7 @@ msgstr ""
 msgid "Add a {{%= items[0] %}}, {{%= items[1] %}} or {{%= items[2] %}} to get started."
 msgstr ""
 
-#: inc/admin.php:467, inc/styles.php:318, tpl/js-templates.php:61
+#: inc/admin.php:467, inc/styles.php:319, tpl/js-templates.php:61
 msgid "Widget"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 msgid "Theme"
 msgstr ""
 
-#: inc/styles-admin.php:187, inc/styles.php:254, inc/styles.php:283
+#: inc/styles-admin.php:187, inc/styles.php:255, inc/styles.php:284
 msgid "Top"
 msgstr ""
 
@@ -833,7 +833,7 @@ msgstr ""
 msgid "Right"
 msgstr ""
 
-#: inc/styles-admin.php:195, inc/styles.php:256, inc/styles.php:285
+#: inc/styles-admin.php:195, inc/styles.php:257, inc/styles.php:286
 msgid "Bottom"
 msgstr ""
 
@@ -934,150 +934,154 @@ msgid "Centered, with original size"
 msgstr ""
 
 #: inc/styles.php:156
-msgid "Fixed"
+msgid "Contain"
 msgstr ""
 
 #: inc/styles.php:157
-msgid "Parallax"
+msgid "Fixed"
 msgstr ""
 
 #: inc/styles.php:158
+msgid "Parallax"
+msgstr ""
+
+#: inc/styles.php:159
 msgid "Parallax (Original Size)"
 msgstr ""
 
-#: inc/styles.php:160
+#: inc/styles.php:161
 msgid "How the background image is displayed."
 msgstr ""
 
-#: inc/styles.php:165
+#: inc/styles.php:166
 msgid "Border Color"
 msgstr ""
 
-#: inc/styles.php:168
+#: inc/styles.php:169
 msgid "Border color of the %s."
 msgstr ""
 
-#: inc/styles.php:187
+#: inc/styles.php:188
 msgid "Cell Class"
 msgstr ""
 
-#: inc/styles.php:190
+#: inc/styles.php:191
 msgid "Class added to all cells in this row."
 msgstr ""
 
-#: inc/styles.php:197
+#: inc/styles.php:198
 msgid "Bottom Margin"
 msgstr ""
 
-#: inc/styles.php:200
+#: inc/styles.php:201
 msgid "Space below the row. Default is %spx."
 msgstr ""
 
-#: inc/styles.php:205
+#: inc/styles.php:206
 msgid "Gutter"
 msgstr ""
 
-#: inc/styles.php:208
+#: inc/styles.php:209
 msgid "Amount of space between cells. Default is %spx."
 msgstr ""
 
-#: inc/styles.php:213
+#: inc/styles.php:214
 msgid "Row Layout"
 msgstr ""
 
-#: inc/styles.php:217, inc/styles.php:230
+#: inc/styles.php:218, inc/styles.php:231
 msgid "Standard"
 msgstr ""
 
-#: inc/styles.php:218
+#: inc/styles.php:219
 msgid "Full Width"
 msgstr ""
 
-#: inc/styles.php:219
+#: inc/styles.php:220
 msgid "Full Width Stretched"
 msgstr ""
 
-#: inc/styles.php:220
+#: inc/styles.php:221
 msgid "Full Width Stretched Padded"
 msgstr ""
 
-#: inc/styles.php:226
+#: inc/styles.php:227
 msgid "Collapse Behaviour"
 msgstr ""
 
-#: inc/styles.php:231
+#: inc/styles.php:232
 msgid "No Collapse"
 msgstr ""
 
-#: inc/styles.php:237
+#: inc/styles.php:238
 msgid "Collapse Order"
 msgstr ""
 
-#: inc/styles.php:241, inc/widgets/post-loop.php:325, widgets/widgets.php:635, widgets/widgets.php:757
+#: inc/styles.php:242, inc/widgets/post-loop.php:325, widgets/widgets.php:635, widgets/widgets.php:757
 msgid "Default"
 msgstr ""
 
-#: inc/styles.php:242
+#: inc/styles.php:243
 msgid "Left on Top"
 msgstr ""
 
-#: inc/styles.php:243
+#: inc/styles.php:244
 msgid "Right on Top"
 msgstr ""
 
-#: inc/styles.php:250
+#: inc/styles.php:251
 msgid "Cell Vertical Alignment"
 msgstr ""
 
-#: inc/styles.php:255, inc/styles.php:284, widgets/widgets/button/button.php:31
+#: inc/styles.php:256, inc/styles.php:285, widgets/widgets/button/button.php:31
 msgid "Center"
 msgstr ""
 
-#: inc/styles.php:257, inc/styles.php:286
+#: inc/styles.php:258, inc/styles.php:287
 msgid "Stretch"
 msgstr ""
 
-#: inc/styles.php:275
+#: inc/styles.php:276
 msgid "Cell"
 msgstr ""
 
-#: inc/styles.php:278
+#: inc/styles.php:279
 msgid "Vertical Alignment"
 msgstr ""
 
-#: inc/styles.php:282
+#: inc/styles.php:283
 msgid "Use row setting"
 msgstr ""
 
-#: inc/styles.php:292, inc/styles.php:332
+#: inc/styles.php:293, inc/styles.php:333
 msgid "Font Color"
 msgstr ""
 
-#: inc/styles.php:295
+#: inc/styles.php:296
 msgid "Color of text inside this cell."
 msgstr ""
 
-#: inc/styles.php:300, inc/styles.php:340
+#: inc/styles.php:301, inc/styles.php:341
 msgid "Links Color"
 msgstr ""
 
-#: inc/styles.php:303
+#: inc/styles.php:304
 msgid "Color of links inside this cell."
 msgstr ""
 
-#: inc/styles.php:321
+#: inc/styles.php:322
 msgid "Margin"
 msgstr ""
 
-#: inc/styles.php:324
+#: inc/styles.php:325
 msgid "Margins around the widget."
 msgstr ""
 
-#: inc/styles.php:335
+#: inc/styles.php:336
 msgid "Color of text inside this widget."
 msgstr ""
 
-#: inc/styles.php:343
+#: inc/styles.php:344
 msgid "Color of links inside this widget."
 msgstr ""
 
@@ -1090,11 +1094,11 @@ msgstr ""
 msgid "A complete SiteOrigin Page Builder layout as a widget."
 msgstr ""
 
-#: inc/widgets/layout.php:83
+#: inc/widgets/layout.php:84
 msgid "This widget can currently only be used in the WordPress admin interface."
 msgstr ""
 
-#: inc/widgets/layout.php:108
+#: inc/widgets/layout.php:109
 msgid "Open Builder"
 msgstr ""
 

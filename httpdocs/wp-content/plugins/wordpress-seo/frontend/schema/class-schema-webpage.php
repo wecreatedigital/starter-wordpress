@@ -11,6 +11,7 @@
  * @since 10.2
  */
 class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
+
 	/**
 	 * A value object with context variables.
 	 *
@@ -19,7 +20,7 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 	private $context;
 
 	/**
-	 * WPSEO_Schema_Breadcrumb constructor.
+	 * WPSEO_Schema_WebPage constructor.
 	 *
 	 * @param WPSEO_Schema_Context $context A value object with context variables.
 	 */
@@ -58,18 +59,13 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 		);
 
 		if ( is_front_page() ) {
-			$about_id = WPSEO_Schema_IDs::ORGANIZATION_HASH;
-			if ( $this->context->site_represents === 'person' ) {
-				$about_id = WPSEO_Schema_IDs::PERSON_HASH;
+			if ( $this->context->site_represents_reference ) {
+				$data['about'] = $this->context->site_represents_reference;
 			}
-
-			$data['about'] = array(
-				'@id' => $this->context->site_url . $about_id,
-			);
 		}
 
 		if ( is_singular() ) {
-			$data = $this->add_featured_image( $data );
+			$this->add_image( $data );
 
 			$post                  = get_post( $this->context->id );
 			$data['datePublished'] = mysql2date( DATE_W3C, $post->post_date_gmt, false );
@@ -135,24 +131,13 @@ class WPSEO_Schema_WebPage implements WPSEO_Graph_Piece {
 	}
 
 	/**
-	 * Adds a featured image to the schema if there is one.
+	 * If we have an image, make it the primary image of the page.
 	 *
-	 * @param array $data WebPage Schema.
-	 *
-	 * @return array $data WebPage Schema.
+	 * @param array $data WebPage schema data.
 	 */
-	private function add_featured_image( $data ) {
-		if ( ! has_post_thumbnail( $this->context->id ) ) {
-			return $data;
+	public function add_image( &$data ) {
+		if ( $this->context->has_image ) {
+			$data['primaryImageOfPage'] = array( '@id' => $this->context->canonical . WPSEO_Schema_IDs::PRIMARY_IMAGE_HASH );
 		}
-
-		$id                         = $this->context->canonical . WPSEO_Schema_IDs::PRIMARY_IMAGE_HASH;
-		$schema_image               = new WPSEO_Schema_Image( $id );
-		$data['image']              = $schema_image->generate_from_attachment_id( get_post_thumbnail_id() );
-		$data['primaryImageOfPage'] = array(
-			'@id' => $id,
-		);
-
-		return $data;
 	}
 }

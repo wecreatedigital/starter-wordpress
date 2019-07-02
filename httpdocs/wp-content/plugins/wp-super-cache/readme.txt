@@ -1,8 +1,8 @@
 # WP Super Cache #
 * Contributors: donncha, automattic, kraftbj
 * Tags: performance, caching, wp-cache, wp-super-cache, cache
-* Tested up to: 5.1.1
-* Stable tag: 1.6.5
+* Tested up to: 5.2.2
+* Stable tag: 1.6.8
 * Requires at least: 3.1
 * Requires PHP: 5.2.4
 * License: GPLv2 or later
@@ -265,6 +265,22 @@ Your theme is probably responsive which means it resizes the page to suit whatev
 
 
 ## Changelog ##
+
+### 1.6.8 ###
+* Added new constants, WPSC_SERVE_DISABLED (disable serving of cached files) and WPSC_SUPERCACHE_ONLY (only serve supercache cache files). #682 and #672
+* Hide get_post() warning on some sites. #684
+* Check if WPCACHEHOME is set correctly before maybe updating it. #683
+* Remove object cache support as it never worked properly. #681
+* Add "logged in users" to the  "do not cache for users" setting and rename that setting to "Cache Restrictions" #657
+
+### 1.6.7 ###
+* wp_cache_setting() can now save boolean values since many of the settings are bools. #676
+* Check if $super_cache_enabled is true in a less strict way because it might be '1' rather than true. #677
+
+### 1.6.6 ###
+* Fix problems with saving settings. Returns false ONLY when there's an issue with the config file, not when the setting isn't changed. Change other code to cope with that, including updating WPCACHEHOME (#670)
+* When saving settings rename the temporary config file correctly, and delete wp-admin/.php if it exists. (#673)
+* Fix adding WPCACHEHOME to wp-config.php when advanced-cache.php is not found and wp-config.php is RO. (#674)
 
 ### 1.6.5 ###
 * Check advanced-cache.php was created by the plugin before modifying/deleting it. (#666)
@@ -713,4 +729,4 @@ Your theme is probably responsive which means it resizes the page to suit whatev
 
 
 ## Upgrade Notice ##
-Many bug fixes
+Bug fixes and changes to settings page.

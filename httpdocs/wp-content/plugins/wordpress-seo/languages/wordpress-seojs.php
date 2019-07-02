@@ -1,19 +1,19 @@
 <?php
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $generated_i18n_strings = array(
-	// Reference: js/src/components/AnalysisUpsell.js:54
+	// Reference: js/src/components/AnalysisUpsell.js:55
 	__( 'Did you know %s also analyzes the different word forms of your keyphrase, like plurals and past tenses?', 'wordpress-seo' ),
 
-	// Reference: js/src/components/AnalysisUpsell.js:62
+	// Reference: js/src/components/AnalysisUpsell.js:63
 	__( 'Go %s!', 'wordpress-seo' ),
 
-	// Reference: js/src/components/CollapsibleCornerstone.js:25
+	// Reference: js/src/components/CollapsibleCornerstone.js:23
 	__( 'Cornerstone content', 'wordpress-seo' ),
 
-	// Reference: js/src/components/CollapsibleCornerstone.js:27
+	// Reference: js/src/components/CollapsibleCornerstone.js:25
 	__( 'Cornerstone content should be the most important and extensive articles on your site.', 'wordpress-seo' ),
 
-	// Reference: js/src/components/CollapsibleCornerstone.js:29
+	// Reference: js/src/components/CollapsibleCornerstone.js:27
 	__( 'Learn more about Cornerstone Content.', 'wordpress-seo' ),
 
 	// Reference: js/src/components/CornerstoneToggle.js:26
@@ -28,7 +28,7 @@ $generated_i18n_strings = array(
 	// Reference: js/src/components/LocalSEOUpsell.js:92
 	__( 'Get the %s plugin now', 'wordpress-seo' ),
 
-	// Reference: js/src/components/Metabox.js:48
+	// Reference: js/src/components/Metabox.js:57
 	__( 'Snippet Preview', 'wordpress-seo' ),
 
 	// Reference: js/src/components/PrimaryTaxonomyFilter.js:78
@@ -43,10 +43,10 @@ $generated_i18n_strings = array(
 	// Reference: js/src/components/SettingsReplacementVariableEditor.js:35
 	__( 'Modify your meta description by editing it right here', 'wordpress-seo' ),
 
-	// Reference: js/src/components/SnippetPreviewModal.js:39
+	// Reference: js/src/components/SnippetPreviewModal.js:52
 	__( 'Snippet preview', 'wordpress-seo' ),
 
-	// Reference: js/src/components/SnippetPreviewModal.js:44
+	// Reference: js/src/components/SnippetPreviewModal.js:57
 	// Reference: js/src/components/modals/Modal.js:78
 	__( 'Close', 'wordpress-seo' ),
 
@@ -68,84 +68,87 @@ $generated_i18n_strings = array(
 	// Reference: js/src/components/WordPressUserSelectorSearchAppearance.js:93
 	__( 'You have selected the user %1$s as the person this site represents. Their user profile information will now be used in search results. %2$sUpdate their profile to make sure the information is correct.%3$s', 'wordpress-seo' ),
 
+	// Reference: js/src/components/contentAnalysis/KeywordInput.js:38
+	__( 'Help on choosing the perfect focus keyphrase', 'wordpress-seo' ),
+
+	// Reference: js/src/components/contentAnalysis/KeywordInput.js:57
+	// Reference: js/src/values/defaultReplaceVariables.js:50
+	__( 'Focus keyphrase', 'wordpress-seo' ),
+
 	// Reference: js/src/components/contentAnalysis/ReadabilityAnalysis.js:50
 	__( 'Readability analysis', 'wordpress-seo' ),
 
 	// Reference: js/src/components/contentAnalysis/ReadabilityAnalysis.js:57
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:241
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:211
 	__( 'Analysis results', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/ReadabilityAnalysis.js:64
+	// Reference: js/src/components/contentAnalysis/ReadabilityAnalysis.js:63
 	__( 'Learn more about the readability analysis', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:104
-	// Reference: js/src/components/modals/KeywordSynonyms.js:63
-	// Reference: js/src/components/modals/MultipleKeywords.js:63
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:102
+	// Reference: js/src/components/modals/KeywordSynonyms.js:62
+	// Reference: js/src/components/modals/MultipleKeywords.js:61
 	// Reference: js/src/components/modals/RedirectUpsell.js:89
 	__( 'Get %s', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:123
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:121
 	__( 'Would you like to add a related keyphrase?', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:154
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:152
 	__( 'Add related keyphrase', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:178
-	__( 'Help on choosing the perfect focus keyphrase', 'wordpress-seo' ),
-
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:210
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:189
 	__( 'Enter a focus keyphrase to calculate the SEO score', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:229
-	// Reference: js/src/values/defaultReplaceVariables.js:50
-	__( 'Focus keyphrase', 'wordpress-seo' ),
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:197
+	__( 'SEO analysis', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:48
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:46
 	__( 'Add synonyms', 'wordpress-seo' ),
 
-	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:75
+	// Reference: js/src/components/contentAnalysis/SeoAnalysis.js:73
 	__( 'Would you like to add keyphrase synonyms?', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:22
-	__( 'Great news: you can, with %s!', 'wordpress-seo' ),
+	// Reference: js/src/components/modals/KeywordSynonyms.js:21
+	__( 'Great news: you can, with %1$s!', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:32
+	// Reference: js/src/components/modals/KeywordSynonyms.js:31
 	__( 'Rank better with synonyms & related keyphrases', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:35
-	// Reference: js/src/components/modals/MultipleKeywords.js:29
+	// Reference: js/src/components/modals/KeywordSynonyms.js:34
+	// Reference: js/src/components/modals/MultipleKeywords.js:27
 	__( '%1$sNo more dead links%2$s: easy redirect manager', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:39
-	// Reference: js/src/components/modals/MultipleKeywords.js:33
-	__( 'Superfast internal links suggestions', 'wordpress-seo' ),
+	// Reference: js/src/components/modals/KeywordSynonyms.js:38
+	// Reference: js/src/components/modals/MultipleKeywords.js:31
+	__( 'Superfast internal linking suggestions', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:42
-	// Reference: js/src/components/modals/MultipleKeywords.js:36
+	// Reference: js/src/components/modals/KeywordSynonyms.js:41
+	// Reference: js/src/components/modals/MultipleKeywords.js:34
 	__( '%1$sSocial media preview%2$s: Facebook & Twitter', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:46
-	// Reference: js/src/components/modals/MultipleKeywords.js:40
-	__( '24/7 support', 'wordpress-seo' ),
+	// Reference: js/src/components/modals/KeywordSynonyms.js:45
+	// Reference: js/src/components/modals/MultipleKeywords.js:38
+	__( '24/7 email support', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:47
-	// Reference: js/src/components/modals/MultipleKeywords.js:41
+	// Reference: js/src/components/modals/KeywordSynonyms.js:46
+	// Reference: js/src/components/modals/MultipleKeywords.js:39
 	__( 'No ads!', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:52
-	// Reference: js/src/components/modals/MultipleKeywords.js:52
+	// Reference: js/src/components/modals/KeywordSynonyms.js:51
+	// Reference: js/src/components/modals/MultipleKeywords.js:50
 	__( 'Other benefits of %s for you:', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/KeywordSynonyms.js:72
-	// Reference: js/src/components/modals/MultipleKeywords.js:72
+	// Reference: js/src/components/modals/KeywordSynonyms.js:71
+	// Reference: js/src/components/modals/MultipleKeywords.js:70
 	// Reference: js/src/components/modals/RedirectUpsell.js:131
 	__( '1 year free support and updates included!', 'wordpress-seo' ),
 
 	// Reference: js/src/components/modals/Modal.js:76
 	__( 'Open', 'wordpress-seo' ),
 
-	// Reference: js/src/components/modals/MultipleKeywords.js:22
-	__( 'Great news: you can, with %1$s!', 'wordpress-seo' ),
+	// Reference: js/src/components/modals/MultipleKeywords.js:20
+	__( 'Great news: you can, with %s!', 'wordpress-seo' ),
 
 	// Reference: js/src/components/modals/RedirectUpsell.js:101
 	__( 'To be able to create a redirect and fix this issue, you need %1$s. ', 'wordpress-seo' ),
@@ -156,10 +159,10 @@ $generated_i18n_strings = array(
 	// Reference: js/src/components/modals/RedirectUpsell.js:95
 	__( 'Creating redirects is a %s feature', 'wordpress-seo' ),
 
-	// Reference: js/src/containers/SnippetEditor.js:107
+	// Reference: js/src/containers/SnippetEditor.js:105
 	__( 'Please provide a meta description by editing the snippet below.', 'wordpress-seo' ),
 
-	// Reference: js/src/courses-overview.js:112
+	// Reference: js/src/courses-overview.js:114
 	__( 'Free', 'wordpress-seo' ),
 
 	// Reference: js/src/structured-data-blocks/faq/block.js:13
@@ -347,6 +350,15 @@ $generated_i18n_strings = array(
 	__( 'Tag description', 'wordpress-seo' ),
 
 	// Reference: js/src/values/defaultReplaceVariables.js:95
-	__( 'Term description', 'wordpress-seo' )
+	__( 'Term description', 'wordpress-seo' ),
+
+	// Reference: js/src/wp-seo-help-center.js:142
+	__( 'Video tutorial', 'wordpress-seo' ),
+
+	// Reference: js/src/wp-seo-help-center.js:154
+	__( 'Knowledge base', 'wordpress-seo' ),
+
+	// Reference: js/src/wp-seo-help-center.js:40
+	__( 'Get support', 'wordpress-seo' )
 );
 /* THIS IS THE END OF THE GENERATED FILE */

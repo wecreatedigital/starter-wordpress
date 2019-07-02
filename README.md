@@ -200,6 +200,14 @@ Comes with the following plugins:
 
 **02/07/2019**
 - Added acf-json folder to child theme
+- Updated WordPress version to 5.2.2
+- Updated ACF PRO -> 5.8.1
+- Updated Autoptimize -> 2.5.1
+- Updated Contact Form 7 -> 5.1.3
+- Updated Page Builder by SiteOrigin -> 2.10.6
+- Updated Redirection -> 4.3.1
+- Updated WP Super Cache -> 1.6.8
+- Updated Yoast SEO -> 11.5
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup
