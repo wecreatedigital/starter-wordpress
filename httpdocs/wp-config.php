@@ -2,10 +2,10 @@
 
 // BEGIN iThemes Security - Do not modify or remove this line
 // iThemes Security Config Details: 2
-define( 'DISALLOW_FILE_EDIT', true ); // Disable File Editor - Security > Settings > WordPress Tweaks > File Editor
+define('DISALLOW_FILE_EDIT', true); // Disable File Editor - Security > Settings > WordPress Tweaks > File Editor
 // END iThemes Security - Do not modify or remove this line
 
-require_once(__DIR__ . '/../vendor/autoload.php');
+require_once(__DIR__.'/../vendor/autoload.php');
 (new \Dotenv\Dotenv(__DIR__.'/../'))->load();
 
 /**
@@ -55,14 +55,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         getenv('AUTH_KEY'));
-define('SECURE_AUTH_KEY',  getenv('SECURE_AUTH_KEY'));
-define('LOGGED_IN_KEY',    getenv('LOGGED_IN_KEY'));
-define('NONCE_KEY',        getenv('NONCE_KEY'));
-define('AUTH_SALT',        getenv('AUTH_SALT'));
+define('AUTH_KEY', getenv('AUTH_KEY'));
+define('SECURE_AUTH_KEY', getenv('SECURE_AUTH_KEY'));
+define('LOGGED_IN_KEY', getenv('LOGGED_IN_KEY'));
+define('NONCE_KEY', getenv('NONCE_KEY'));
+define('AUTH_SALT', getenv('AUTH_SALT'));
 define('SECURE_AUTH_SALT', getenv('SECURE_AUTH_SALT'));
-define('LOGGED_IN_SALT',   getenv('LOGGED_IN_SALT'));
-define('NONCE_SALT',       getenv('NONCE_SALT'));
+define('LOGGED_IN_SALT', getenv('LOGGED_IN_SALT'));
+define('NONCE_SALT', getenv('NONCE_SALT'));
 
 /**#@-*/
 
@@ -72,7 +72,7 @@ define('NONCE_SALT',       getenv('NONCE_SALT'));
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = getenv('DB_PREFIX');
+$table_prefix = getenv('DB_PREFIX');
 
 /**
  * For developers: WordPress debugging mode.
@@ -87,16 +87,23 @@ $table_prefix  = getenv('DB_PREFIX');
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 
-if( getenv('WP_DEBUG') == true ){
-	define('WP_DEBUG', true );
-	define('SAVEQUERIES', true );
+if (getenv('WP_DEBUG') == true) {
+    define('WP_DEBUG', true);
+    define('SAVEQUERIES', true);
 }
 
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
-if ( !defined('ABSPATH') )
-	define('ABSPATH', dirname(__FILE__) . '/');
+if ( ! defined('ABSPATH')) {
+    define('ABSPATH', dirname(__FILE__).'/');
+}
 
 /** Sets up WordPress vars and included files. */
-require_once(ABSPATH . 'wp-settings.php');
+require_once(ABSPATH.'wp-settings.php');
+
+/**
+ * [Removes `p` tags from automatically being placed in Contact Form 7]
+ * @var [type]
+ */
+define('WPCF7_AUTOP', false);

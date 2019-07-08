@@ -1,7 +1,7 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
-Version 1.2.1
+Version 1.2.2
 
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
@@ -208,6 +208,13 @@ Comes with the following plugins:
 - Updated Redirection -> 4.3.1
 - Updated WP Super Cache -> 1.6.8
 - Updated Yoast SEO -> 11.5
+
+**08/07/2019**
+- Added code to remove auto p tags from CF7
+- Deleted Page Builder by SiteOrigin Plugin
+- Deleted Sucuri Security - Auditing, Malware Scanner and    Hardening Plugin
+- Deleted Timeline Express Plugin
+- Updated WordPress translations
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup
