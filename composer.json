@@ -8,5 +8,8 @@
       "name": "We Create Digital",
       "email": "enquiries@wecreatedigital.co.uk"
     }
-  ]
+  ],
+  "require-dev": {
+    "symfony/var-dumper": "^4.3"
+  }
 }
