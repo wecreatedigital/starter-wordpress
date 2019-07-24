@@ -1,7 +1,7 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
-Version 1.2.2
+Version 1.2.3
 
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)
@@ -215,6 +215,10 @@ Comes with the following plugins:
 - Deleted Sucuri Security - Auditing, Malware Scanner and    Hardening Plugin
 - Deleted Timeline Express Plugin
 - Updated WordPress translations
+
+** 24/07/2019**
+- Updated scss
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Flexible content setup

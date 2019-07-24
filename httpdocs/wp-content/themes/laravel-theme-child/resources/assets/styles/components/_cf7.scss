@@ -1,0 +1,35 @@
+.wpcf7-response-output {
+  clear: both;
+  float: left;
+  width: 100%;
+}
+
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing,
+div.wpcf7-mail-sent-ok {
+  border-radius: 5px;
+  padding: 8px 15px 10px;
+}
+
+div.wpcf7-validation-errors,
+div.wpcf7-acceptance-missing {
+  background-color: #f7e700;
+  border-bottom: 2px solid #e3d400;
+  color: #000;
+}
+
+div.wpcf7-mail-sent-ok {
+  background-color: #398f14;
+  border-bottom: 2px solid #285d0d;
+  color: #fff;
+}
+
+.wpcf7 .wpcf7-form.invalid .wpcf7-form-control-wrap .wpcf7-not-valid {
+  border-color: red;
+}
+
+span.wpcf7-not-valid-tip {
+  display: block;
+  clear: both;
+  text-align: right;
+}

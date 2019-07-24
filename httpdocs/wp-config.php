@@ -92,6 +92,12 @@ if (getenv('WP_DEBUG') == true) {
     define('SAVEQUERIES', true);
 }
 
+/**
+ * [Removes `p` tags from automatically being placed in Contact Form 7]
+ * @var [type]
+ */
+define('WPCF7_AUTOP', false);
+
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
@@ -101,9 +107,3 @@ if ( ! defined('ABSPATH')) {
 
 /** Sets up WordPress vars and included files. */
 require_once(ABSPATH.'wp-settings.php');
-
-/**
- * [Removes `p` tags from automatically being placed in Contact Form 7]
- * @var [type]
- */
-define('WPCF7_AUTOP', false);
