@@ -125,6 +125,7 @@ Container::getInstance()
      'lib/media.php',
      'lib/admin.php',
      'lib/speed.php',
+     'lib/woocommerce.php',
      // 'lib/navwalker.php',
  ];
  foreach ($sage_includes as $file) {
