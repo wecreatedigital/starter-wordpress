@@ -93,8 +93,13 @@ if (getenv('WP_DEBUG') == true) {
 }
 
 /**
+ * Override WordPress URLs
+ */
+define('WP_HOME', getenv('DOMAIN'));
+define('WP_SITEURL', getenv('DOMAIN'));
+
+/**
  * [Removes `p` tags from automatically being placed in Contact Form 7]
- * @var [type]
  */
 define('WPCF7_AUTOP', false);
 
