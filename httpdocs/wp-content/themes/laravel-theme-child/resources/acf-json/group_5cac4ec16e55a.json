@@ -1,10 +1,10 @@
 {
     "key": "group_5cac4ec16e55a",
-    "title": "options",
+    "title": "Site wide",
     "fields": [
         {
-            "key": "field_5cac4f6be0e96",
-            "label": "Site",
+            "key": "field_5d5e856f8cb36",
+            "label": "Global",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -17,6 +17,195 @@
             },
             "placement": "top",
             "endpoint": 0
+        },
+        {
+            "key": "field_5d5e85938cb37",
+            "label": "Email",
+            "name": "email",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_5d5e85ab8cb38",
+            "label": "Telephone",
+            "name": "telephone",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e85d18cb39",
+            "label": "Facebook",
+            "name": "facebook",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e85de8cb3a",
+            "label": "Twitter",
+            "name": "twitter",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e868d9c341",
+            "label": "Address 1",
+            "name": "address_1",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e86999c342",
+            "label": "Address 2",
+            "name": "address_2",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e869c9c343",
+            "label": "Town",
+            "name": "town",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e86a39c344",
+            "label": "County",
+            "name": "county",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e86aa9c345",
+            "label": "Postcode",
+            "name": "postcode",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d5e86b69c346",
+            "label": "Country",
+            "name": "country",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5cac4ec7e0e92",
@@ -77,7 +266,7 @@
         },
         {
             "key": "field_5cac4f14e0e94",
-            "label": "supporting text 1",
+            "label": "Supporting text 1",
             "name": "supporting_text_1",
             "type": "wysiwyg",
             "instructions": "",
@@ -96,7 +285,7 @@
         },
         {
             "key": "field_5cac4f51e0e95",
-            "label": "supporting text 2",
+            "label": "Supporting text 2",
             "name": "supporting_text_2",
             "type": "wysiwyg",
             "instructions": "",
@@ -114,8 +303,8 @@
             "delay": 0
         },
         {
-            "key": "field_5cac4f93e0e97",
-            "label": "Home",
+            "key": "field_5d5e862b69245",
+            "label": "Footer",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -130,10 +319,10 @@
             "endpoint": 0
         },
         {
-            "key": "field_5cac4ffae0e98",
-            "label": "Contacts",
-            "name": "",
-            "type": "tab",
+            "key": "field_5d5e863a69246",
+            "label": "Company name",
+            "name": "company_name",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -142,14 +331,17 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
-            "key": "field_5cac5014e0e99",
-            "label": "Gallery",
-            "name": "",
-            "type": "tab",
+            "key": "field_5d5e864a69247",
+            "label": "VAT number",
+            "name": "vat_number",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -158,14 +350,17 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
-            "key": "field_5cac501fe0e9a",
-            "label": "Course",
-            "name": "",
-            "type": "tab",
+            "key": "field_5d5e865469248",
+            "label": "Company number",
+            "name": "company_number",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -174,40 +369,11 @@
                 "class": "",
                 "id": ""
             },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5cac5057e0e9b",
-            "label": "Stripe",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5cac506fe0e9c",
-            "label": "Voucher\/Course Form",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         }
     ],
     "location": [
@@ -227,5 +393,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1554796942
+    "modified": 1566476017
 }

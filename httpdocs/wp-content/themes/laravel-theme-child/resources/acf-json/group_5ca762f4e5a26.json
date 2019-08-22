@@ -4,7 +4,7 @@
     "fields": [
         {
             "key": "field_5ca7631a090c6",
-            "label": "contact form redirect url",
+            "label": "Contact form redirect",
             "name": "contact_form_redirect_url",
             "type": "url",
             "instructions": "",
@@ -36,5 +36,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1554712948
+    "modified": 1566476042
 }
