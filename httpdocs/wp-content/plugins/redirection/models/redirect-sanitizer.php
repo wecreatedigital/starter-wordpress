@@ -73,7 +73,7 @@ class Red_Item_Sanitize {
 		$data['match_data'] = array_filter( $data['match_data'] );
 
 		if ( empty( $data['match_data'] ) ) {
-			unset( $data['match_data'] );
+			$data['match_data'] = null;
 		}
 
 		// Parse URL
@@ -218,6 +218,13 @@ class Red_Item_Sanitize {
 		}
 
 		// Ensure we URL decode any i10n characters
-		return rawurldecode( $url );
+		$url = rawurldecode( $url );
+
+		// Try and remove bad decoding
+		if ( function_exists( 'iconv' ) ) {
+			$url = @iconv( 'UTF-8', 'UTF-8//IGNORE', $url );
+		}
+
+		return $url;
 	}
 }

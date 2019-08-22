@@ -15,7 +15,7 @@ class Assets
     /**
      * Inserts the lazyload script in the HTML
      *
-     * @param array $args Array of arguments to populate the lazyload script options.
+     * @param array $args Array of arguments to populate the lazyload script tag.
      * @return void
      */
     public function insertLazyloadScript($args = [])
@@ -24,22 +24,19 @@ class Assets
     }
 
     /**
-     * Returns the lazyload inline script
+     * Gets the inline lazyload script configuration
      *
      * @param array $args Array of arguments to populate the lazyload script options.
-     * @return string
+     * @return void
      */
-    public function getLazyloadScript($args = [])
+    public function getInlineLazyloadScript($args = [])
     {
         $defaults = [
-            'base_url'  => '',
             'elements'  => [
                 'img',
                 'iframe',
             ],
             'threshold' => 300,
-            'version'   => '',
-            'polyfill'  => false,
             'options'   => [],
         ];
 
@@ -59,17 +56,11 @@ class Assets
         ];
 
         $args   = wp_parse_args($args, $defaults);
-        $min    = ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min';
         $script = '';
 
         $args['options'] = array_intersect_key($args['options'], $allowed_options);
 
-        if (isset($args['polyfill']) && $args['polyfill']) {
-            $script .= '<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2CIntersectionObserver%2CIntersectionObserverEntry"></script>';
-        }
-
-        $script .= '<script>
-            window.lazyLoadOptions = {
+        $script .= 'window.lazyLoadOptions = {
                 elements_selector: "' . esc_attr(implode(',', $args['elements'])) . '",
                 data_src: "lazy-src",
                 data_srcset: "lazy-srcset",
@@ -107,6 +98,10 @@ class Assets
         
             if (window.MutationObserver) {
                 var observer = new MutationObserver(function(mutations) {
+                    var image_count = 0;
+                    var iframe_count = 0;
+                    var rocketlazy_count = 0;
+
                     mutations.forEach(function(mutation) {
                         for (i = 0; i < mutation.addedNodes.length; i++) {
                             if (typeof mutation.addedNodes[i].getElementsByTagName !== \'function\') {
@@ -117,17 +112,29 @@ class Assets
                                 return;
                             }
 
-                            imgs = mutation.addedNodes[i].getElementsByTagName(\'img\');
+                            images = mutation.addedNodes[i].getElementsByTagName(\'img\');
+                            is_image = mutation.addedNodes[i].tagName == "IMG";
                             iframes = mutation.addedNodes[i].getElementsByTagName(\'iframe\');
+                            is_iframe = mutation.addedNodes[i].tagName == "IFRAME";
                             rocket_lazy = mutation.addedNodes[i].getElementsByClassName(\'rocket-lazyload\');
 
-                            if ( 0 === imgs.length && 0 === iframes.length && 0 === rocket_lazy.length ) {
-                                return;
+                            image_count += images.length;
+			                iframe_count += iframes.length;
+			                rocketlazy_count += rocket_lazy.length;
+                            
+                            if(is_image){
+                                image_count += 1;
                             }
 
-                            lazyLoadInstance.update();
+                            if(is_iframe){
+                                iframe_count += 1;
+                            }
                         }
                     } );
+
+                    if(image_count > 0 || iframe_count > 0 || rocketlazy_count > 0){
+                        lazyLoadInstance.update();
+                    }
                 } );
                 
                 var b      = document.getElementsByTagName("body")[0];
@@ -135,8 +142,32 @@ class Assets
                 
                 observer.observe(b, config);
             }
-        }, false);
-        </script>';
+        }, false);';
+
+        return $script;
+    }
+
+    /**
+     * Returns the lazyload inline script
+     *
+     * @param array $args Array of arguments to populate the lazyload script options.
+     * @return string
+     */
+    public function getLazyloadScript($args = [])
+    {
+        $defaults = [
+            'base_url' => '',
+            'version'  => '',
+            'polyfill' => false,
+        ];
+
+        $args   = wp_parse_args($args, $defaults);
+        $min    = ( defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ) ? '' : '.min';
+        $script = '';
+
+        if (isset($args['polyfill']) && $args['polyfill']) {
+            $script .= '<script crossorigin="anonymous" src="https://polyfill.io/v3/polyfill.min.js?flags=gated&features=default%2CIntersectionObserver%2CIntersectionObserverEntry"></script>';
+        }
 
         /**
          * Filters the script tag for the lazyload script
@@ -202,10 +233,10 @@ class Assets
 
         $args = wp_parse_args($args, $defaults);
 
-        $image = '<img src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '">';
+        $image = '<img src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" alt="" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '">';
 
         if (isset($args['lazy_image']) && $args['lazy_image']) {
-            $image = '<img data-lazy-src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '"><noscript><img src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '"></noscript>';
+            $image = '<img data-lazy-src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" alt="" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '"><noscript><img src="https://i.ytimg.com/vi/ID/' . $args['resolution'] . '.jpg" alt="" width="' . $allowed_resolutions[ $args['resolution'] ]['width'] . '" height="' . $allowed_resolutions[ $args['resolution'] ]['height'] . '"></noscript>';
         }
 
         return "<script>function lazyLoadThumb(e){var t='{$image}',a='<div class=\"play\"></div>';return t.replace(\"ID\",e)+a}function lazyLoadYoutubeIframe(){var e=document.createElement(\"iframe\"),t=\"https://www.youtube.com/embed/ID?autoplay=1\";t+=0===this.dataset.query.length?'':'&'+this.dataset.query;e.setAttribute(\"src\",t.replace(\"ID\",this.dataset.id)),e.setAttribute(\"frameborder\",\"0\"),e.setAttribute(\"allowfullscreen\",\"1\"),this.parentNode.replaceChild(e,this)}document.addEventListener(\"DOMContentLoaded\",function(){var e,t,a=document.getElementsByClassName(\"rll-youtube-player\");for(t=0;t<a.length;t++)e=document.createElement(\"div\"),e.setAttribute(\"data-id\",a[t].dataset.id),e.setAttribute(\"data-query\", a[t].dataset.query),e.innerHTML=lazyLoadThumb(a[t].dataset.id),e.onclick=lazyLoadYoutubeIframe,a[t].appendChild(e)});</script>";

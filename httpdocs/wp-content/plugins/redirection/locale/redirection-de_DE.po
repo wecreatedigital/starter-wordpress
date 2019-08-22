@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Redirection - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2019-05-10 09:36:14+0000\n"
+"PO-Revision-Date: 2019-07-31 08:13:26+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -860,7 +860,7 @@ msgstr ""
 
 #: redirection-strings.php:158
 msgid "Role"
-msgstr ""
+msgstr "Rolle"
 
 #: redirection-strings.php:156
 msgid "Match against this browser referrer text"
@@ -888,11 +888,11 @@ msgstr "DSGVO / Datenschutzinformationen"
 
 #: redirection-strings.php:322
 msgid "Add New"
-msgstr ""
+msgstr "Neue hinzufügen"
 
 #: redirection-strings.php:91 matches/user-role.php:9
 msgid "URL and role/capability"
-msgstr ""
+msgstr "URL und Rolle / Berechtigung"
 
 #: redirection-strings.php:96 matches/server.php:9
 msgid "URL and server"
@@ -900,11 +900,11 @@ msgstr "URL und Server"
 
 #: models/fixer.php:101
 msgid "Site and home protocol"
-msgstr ""
+msgstr "Site- und Home-Protokoll"
 
 #: models/fixer.php:94
 msgid "Site and home are consistent"
-msgstr ""
+msgstr "Site und Home sind konsistent"
 
 #: redirection-strings.php:149
 msgid "Note it is your responsibility to pass HTTP headers to PHP. Please contact your hosting provider for support about this."
@@ -968,7 +968,7 @@ msgstr "URL und Cookie"
 
 #: redirection-strings.php:541
 msgid "404 deleted"
-msgstr ""
+msgstr "404 gelöscht"
 
 #: redirection-strings.php:257 redirection-strings.php:488
 msgid "REST API"
@@ -992,7 +992,7 @@ msgstr ""
 
 #: redirection-admin.php:402
 msgid "Please see the <a href=\"https://redirection.me/support/problems/\">list of common problems</a>."
-msgstr ""
+msgstr "Informationen findest Du in der <a href=\"https://redirection.me/support/problems/\">Liste häufiger Probleme</a>."
 
 #: redirection-admin.php:396
 msgid "Unable to load Redirection ☹️"
@@ -1069,23 +1069,23 @@ msgstr "(IP-Protokollierungsstufe wählen)"
 #: redirection-strings.php:372 redirection-strings.php:399
 #: redirection-strings.php:410
 msgid "Geo Info"
-msgstr ""
+msgstr "Geo Info"
 
 #: redirection-strings.php:373 redirection-strings.php:411
 msgid "Agent Info"
-msgstr ""
+msgstr "Agenteninfo"
 
 #: redirection-strings.php:374 redirection-strings.php:412
 msgid "Filter by IP"
-msgstr ""
+msgstr "Nach IP filtern"
 
 #: redirection-strings.php:368 redirection-strings.php:381
 msgid "Referrer / User Agent"
-msgstr ""
+msgstr "Referrer / User Agent"
 
 #: redirection-strings.php:46
 msgid "Geo IP Error"
-msgstr ""
+msgstr "Geo-IP-Fehler"
 
 #: redirection-strings.php:47 redirection-strings.php:66
 #: redirection-strings.php:216
@@ -1381,11 +1381,11 @@ msgstr "Hilfe benötigt?"
 
 #: redirection-strings.php:516
 msgid "Please note that any support is provide on as-time-is-available basis and is not guaranteed. I do not provide paid support."
-msgstr ""
+msgstr "Bitte beachte, dass Support nur möglich ist, wenn Zeit vorhanden ist und nicht garantiert wird. Ich biete keine bezahlte Unterstützung an."
 
 #: redirection-strings.php:493
 msgid "Pos"
-msgstr ""
+msgstr "Pos"
 
 #: redirection-strings.php:115
 msgid "410 - Gone"
@@ -1493,11 +1493,11 @@ msgstr "404 Fehler"
 
 #: redirection-strings.php:321
 msgid "Please mention {{code}}%s{{/code}}, and explain what you were doing at the time"
-msgstr ""
+msgstr "Bitte erwähne {{code}}%s{{/code}} und erkläre, was du gerade gemacht hast"
 
 #: redirection-strings.php:422
 msgid "I'd like to support some more."
-msgstr ""
+msgstr "Ich möchte etwas mehr unterstützen."
 
 #: redirection-strings.php:425
 msgid "Support 💰"
@@ -1521,7 +1521,7 @@ msgstr "Gruppe gespeichert"
 
 #: redirection-strings.php:272
 msgid "Are you sure you want to delete this item?"
-msgid_plural "Are you sure you want to delete these items?"
+msgid_plural "Are you sure you want to delete the selected items?"
 msgstr[0] "Bist du sicher, dass du diesen Eintrag löschen möchtest?"
 msgstr[1] "Bist du sicher, dass du diese Einträge löschen möchtest?"
 
@@ -1563,7 +1563,7 @@ msgstr "Titel"
 
 #: redirection-strings.php:123
 msgid "When matched"
-msgstr ""
+msgstr "Wenn übereinstimmend"
 
 #: redirection-strings.php:79
 msgid "with HTTP code"
@@ -1599,11 +1599,11 @@ msgstr "Ungültige Umleitungsaktion"
 
 #: models/redirect-sanitizer.php:108
 msgid "Invalid redirect matcher"
-msgstr ""
+msgstr "Ungültiger Redirect-Matcher"
 
 #: models/redirect.php:261
 msgid "Unable to add new redirect"
-msgstr ""
+msgstr "Es konnte keine neue Weiterleitung hinzugefügt werden"
 
 #: redirection-strings.php:35 redirection-strings.php:317
 msgid "Something went wrong 🙁"
@@ -1620,11 +1620,11 @@ msgstr "Suche nach IP"
 
 #: redirection-strings.php:208
 msgid "Select bulk action"
-msgstr ""
+msgstr "Wähle Mehrfachaktion"
 
 #: redirection-strings.php:209
 msgid "Bulk Actions"
-msgstr ""
+msgstr "Mehrfachaktionen"
 
 #: redirection-strings.php:210
 msgid "Apply"
@@ -1644,7 +1644,7 @@ msgstr "Aktuelle Seite"
 
 #: redirection-strings.php:204
 msgid "of %(page)s"
-msgstr "von %(Seite)n"
+msgstr "von %(page)n"
 
 #: redirection-strings.php:205
 msgid "Next page"
@@ -1690,7 +1690,7 @@ msgstr "Nein! Lösche die Logs nicht"
 
 #: redirection-strings.php:428
 msgid "Thanks for subscribing! {{a}}Click here{{/a}} if you need to return to your subscription."
-msgstr ""
+msgstr "Danke fürs Abonnieren! {{a}}Klicke hier{{/a}}, wenn Du zu Deinem Abonnement zurückkehren möchtest."
 
 #: redirection-strings.php:427 redirection-strings.php:429
 msgid "Newsletter"
@@ -1698,7 +1698,7 @@ msgstr "Newsletter"
 
 #: redirection-strings.php:430
 msgid "Want to keep up to date with changes to Redirection?"
-msgstr ""
+msgstr "Möchtest Du über Änderungen an Redirection auf dem Laufenden bleiben?"
 
 #: redirection-strings.php:431
 msgid "Sign up for the tiny Redirection newsletter - a low volume newsletter about new features and changes to the plugin. Ideal if you want to test beta changes before release."

@@ -97,6 +97,8 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	protected $settings;
 
 	/**
+	 * Holds the pagination config.
+	 *
 	 * @var array
 	 */
 	protected $pagination = array();
@@ -186,7 +188,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * Will shown the navigation for the table like pagenavigation and pagefilter.
+	 * Will show the navigation for the table like pagenavigation and pagefilter.
 	 *
 	 * @param string $which Table nav location (such as top).
 	 */
@@ -257,7 +259,9 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	}
 
 	/**
-	 * @return array
+	 * Gets the views.
+	 *
+	 * @return array The views.
 	 */
 	public function get_views() {
 		global $wpdb;
@@ -342,6 +346,8 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	}
 
 	/**
+	 * Outputs extra table navigation.
+	 *
 	 * @param string $which Table nav location (such as top).
 	 */
 	public function extra_tablenav( $which ) {
@@ -403,11 +409,12 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 				);
 				printf(
 					'<select name="post_type_filter" id="%2$s">%1$s</select>',
+					// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: $options is properly escaped above.
 					$options,
 					esc_attr( 'post-type-filter-' . $instance_type )
 				);
 
-				submit_button( __( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
+				submit_button( esc_html__( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
 				echo '</div>';
 			}
 		}
@@ -764,7 +771,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		}
 
 		if ( ! empty( $class ) ) {
-			$attributes = 'class="' . implode( ' ', $class ) . '"';
+			$attributes = 'class="' . esc_attr( implode( ' ', $class ) ) . '"';
 		}
 
 		$attributes .= ' data-colname="' . esc_attr( $column_display_name ) . '"';
@@ -904,7 +911,11 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			$meta_value = $values[ $meta_value ];
 		}
 
-		return sprintf( '<td %2$s id="wpseo-existing-%4$s-%3$s">%1$s</td>', $meta_value, $attributes, $record_id, $this->target_db_field );
+		$id = "wpseo-existing-$record_id-$this->target_db_field";
+
+		// $attributes correctly escaped, verified by Alexander. See WPSEO_Bulk_Description_List_Table::parse_page_specific_column.
+		// phpcs:ignore WordPress.Security.EscapeOutput
+		return sprintf( '<td %2$s id="%3$s">%1$s</td>', esc_html( $meta_value ), $attributes, esc_attr( $id ) );
 	}
 
 	/**

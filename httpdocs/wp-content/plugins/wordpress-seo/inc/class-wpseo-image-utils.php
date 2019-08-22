@@ -201,7 +201,7 @@ class WPSEO_Image_Utils {
 		}
 
 		// Add the uploads basedir if the path does not start with it.
-		if ( empty( $uploads['error'] ) && strpos( $path, $uploads['basedir'] . DIRECTORY_SEPARATOR ) !== 0 ) {
+		if ( empty( $uploads['error'] ) && strpos( $path, $uploads['basedir'] ) !== 0 ) {
 			return $uploads['basedir'] . DIRECTORY_SEPARATOR . ltrim( $path, DIRECTORY_SEPARATOR );
 		}
 
@@ -396,9 +396,12 @@ class WPSEO_Image_Utils {
 	/**
 	 * Retrieves an attachment ID for an image uploaded in the settings.
 	 *
+	 * Due to self::get_attachment_by_url returning 0 instead of false.
+	 * 0 is also a possibility when no ID is available.
+	 *
 	 * @param string $setting The setting the image is stored in.
 	 *
-	 * @return int|bool The attachment id, or false if no id is available.
+	 * @return int|bool The attachment id, or false or 0 if no ID is available.
 	 */
 	public static function get_attachment_id_from_settings( $setting ) {
 		$image_id = WPSEO_Options::get( $setting . '_id', false );

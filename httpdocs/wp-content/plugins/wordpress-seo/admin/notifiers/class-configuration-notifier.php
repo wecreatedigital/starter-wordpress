@@ -11,16 +11,22 @@
 class WPSEO_Configuration_Notifier implements WPSEO_Listener {
 
 	/**
+	 * Option name use to determine whether the notice has been dismissed.
+	 *
 	 * @var string
 	 */
 	const META_NAME = 'wpseo-dismiss-configuration-notice';
 
 	/**
+	 * Default value.
+	 *
 	 * @var string
 	 */
 	const META_VALUE = 'yes';
 
 	/**
+	 * Should the notification be shown.
+	 *
 	 * @var bool
 	 */
 	protected $show_notification;
@@ -140,7 +146,7 @@ class WPSEO_Configuration_Notifier implements WPSEO_Listener {
 	private function notification( $title, $content, $show_dismissal = false ) {
 		$notification  = '<div class="yoast-container yoast-container__configuration-wizard">';
 		$notification .= sprintf(
-			'<img src="%1$s" height="%2$s" width="%3$d" />',
+			'<img src="%1$s" height="%2$s" width="%3$d" alt="" />',
 			esc_url( plugin_dir_url( WPSEO_FILE ) . 'images/new-to-configuration-notice.svg' ),
 			60,
 			60

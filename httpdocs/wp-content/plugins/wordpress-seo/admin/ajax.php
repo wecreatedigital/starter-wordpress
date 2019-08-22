@@ -12,15 +12,12 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
 }
 
 /**
- * @todo this whole thing should probably be a proper class.
- */
-
-/**
  * Convenience function to JSON encode and echo results and then die.
  *
  * @param array $results Results array for encoding.
  */
 function wpseo_ajax_json_echo_die( $results ) {
+	// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
 	echo WPSEO_Utils::format_json_encode( $results );
 	die();
 }
@@ -85,25 +82,6 @@ function wpseo_dismiss_tagline_notice() {
 }
 
 add_action( 'wp_ajax_wpseo_dismiss_tagline_notice', 'wpseo_dismiss_tagline_notice' );
-
-/**
- * Used in the editor to replace vars for the snippet preview.
- */
-function wpseo_ajax_replace_vars() {
-	global $post;
-	check_ajax_referer( 'wpseo-replace-vars' );
-
-	$post = get_post( intval( filter_input( INPUT_POST, 'post_id' ) ) );
-	global $wp_query;
-	$wp_query->queried_object    = $post;
-	$wp_query->queried_object_id = $post->ID;
-
-	$omit = array( 'excerpt', 'excerpt_only', 'title' );
-	echo wpseo_replace_vars( stripslashes( filter_input( INPUT_POST, 'string' ) ), $post, $omit );
-	die;
-}
-
-add_action( 'wp_ajax_wpseo_replace_vars', 'wpseo_ajax_replace_vars' );
 
 /**
  * Save an individual SEO title from the Bulk Editor.
@@ -297,6 +275,7 @@ function ajax_get_keyword_usage() {
 	}
 
 	wp_die(
+		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
 		WPSEO_Utils::format_json_encode( WPSEO_Meta::keyword_usage( $keyword, $post_id ) )
 	);
 }
@@ -327,6 +306,7 @@ function ajax_get_term_keyword_usage() {
 	$usage = $usage[ $keyword ];
 
 	wp_die(
+		// phpcs:ignore WordPress.Security.EscapeOutput -- Reason: WPSEO_Utils::format_json_encode is safe.
 		WPSEO_Utils::format_json_encode( $usage )
 	);
 }
@@ -401,4 +381,26 @@ function wpseo_add_fb_admin() {
 	}
 	_deprecated_function( __FUNCTION__, 'WPSEO 7.0', 'This method is deprecated.' );
 	wpseo_ajax_json_echo_die( '' );
+}
+
+/**
+ * Used in the editor to replace vars for the snippet preview.
+ *
+ * @deprecated 11.9
+ * @codeCoverageIgnore
+ */
+function wpseo_ajax_replace_vars() {
+	_deprecated_function( __METHOD__, 'WPSEO 11.9' );
+
+	global $post;
+	check_ajax_referer( 'wpseo-replace-vars' );
+
+	$post = get_post( intval( filter_input( INPUT_POST, 'post_id' ) ) );
+	global $wp_query;
+	$wp_query->queried_object    = $post;
+	$wp_query->queried_object_id = $post->ID;
+
+	$omit = array( 'excerpt', 'excerpt_only', 'title' );
+	echo wpseo_replace_vars( stripslashes( filter_input( INPUT_POST, 'string' ) ), $post, $omit );
+	die;
 }

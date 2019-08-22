@@ -15,7 +15,7 @@ if ( ! function_exists( 'add_filter' ) ) {
  * {@internal Nobody should be able to overrule the real version number as this can cause
  *            serious issues with the options, so no if ( ! defined() ).}}
  */
-define( 'WPSEO_VERSION', '11.5' );
+define( 'WPSEO_VERSION', '11.9' );
 
 
 if ( ! defined( 'WPSEO_PATH' ) ) {
@@ -342,10 +342,13 @@ function wpseo_init() {
 	$wpseo_onpage = new WPSEO_OnPage();
 	$wpseo_onpage->register_hooks();
 
-	// When namespaces are not available, stop further execution.
-	if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
-		require_once WPSEO_PATH . 'src/loaders/indexable.php';
-		// require_once WPSEO_PATH . 'src/loaders/oauth.php'; Temporarily disabled.
+	// Feature flag introduced to resolve problems with composer installation in 11.8.
+	if ( defined( 'YOAST_SEO_EXPERIMENTAL_PHP56' ) && YOAST_SEO_EXPERIMENTAL_PHP56 ) {
+		// When namespaces are not available, stop further execution.
+		if ( version_compare( PHP_VERSION, '5.6.0', '>=' ) ) {
+			require_once WPSEO_PATH . 'src/main.php';
+			// require_once WPSEO_PATH . 'src/loaders/oauth.php'; Temporarily disabled.
+		}
 	}
 }
 
@@ -373,7 +376,6 @@ function wpseo_init_rest_api() {
 	$endpoints[] = new WPSEO_Endpoint_Statistics( $statistics_service );
 	$endpoints[] = new WPSEO_Endpoint_MyYoast_Connect();
 
-	/** @var WPSEO_Endpoint[] $endpoints */
 	foreach ( $endpoints as $endpoint ) {
 		$endpoint->register();
 	}
