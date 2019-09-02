@@ -1,6 +1,6 @@
 {
     "key": "group_5cab10cf10ecd",
-    "title": "Contact Page",
+    "title": "Contact page",
     "fields": [
         {
             "key": "field_5cab10d86deb0",
@@ -19,6 +19,22 @@
             "center_lng": "",
             "zoom": "",
             "height": ""
+        },
+        {
+            "key": "field_5d6cfad6c6169",
+            "label": "Contact form redirect",
+            "name": "contact_form_redirect",
+            "type": "url",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
         }
     ],
     "location": [
@@ -27,13 +43,6 @@
                 "param": "page_template",
                 "operator": "==",
                 "value": "views\/contact.blade.php"
-            }
-        ],
-        [
-            {
-                "param": "page_template",
-                "operator": "==",
-                "value": "views\/test.blade.php"
             }
         ]
     ],
@@ -45,5 +54,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1566476111
+    "modified": 1567423281
 }

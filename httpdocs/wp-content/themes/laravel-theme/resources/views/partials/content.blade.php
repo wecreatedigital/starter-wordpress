@@ -6,7 +6,4 @@
   <div class="entry-summary">
     @php the_excerpt() @endphp
   </div>
-  <div class="">
-      @include('partials.acf-flexible')
-  </div>
 </article>

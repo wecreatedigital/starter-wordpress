@@ -37,8 +37,8 @@ if (version_compare('4.7.0', get_bloginfo('version'), '>=')) {
 /**
  * Ensure dependencies are loaded
  */
-if ( ! class_exists('Roots\\Sage\\Container')) {
-    if ( ! file_exists($composer = __DIR__.'/../vendor/autoload.php')) {
+if (!class_exists('Roots\\Sage\\Container')) {
+    if (!file_exists($composer = __DIR__.'/../vendor/autoload.php')) {
         $sage_error(
             __('You must run <code>composer install</code> from the Sage directory.', 'sage'),
             __('Autoloader not found.', 'sage')
@@ -55,7 +55,7 @@ if ( ! class_exists('Roots\\Sage\\Container')) {
  */
 array_map(function ($file) use ($sage_error) {
     $file = "../app/{$file}.php";
-    if ( ! locate_template($file, true, true)) {
+    if (!locate_template($file, true, true)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
 }, ['helpers', 'setup', 'filters', 'admin']);
@@ -90,47 +90,3 @@ Container::getInstance()
             'view' => require dirname(__DIR__).'/config/view.php',
         ]);
     }, true);
-
-    if ( ! file_exists(get_template_directory().'/class-wp-bootstrap-navwalker.php')) {
-        // file does not exist... return an error.
-        return new WP_Error('class-wp-bootstrap-navwalker-missing', __('It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker'));
-    }
-        // file exists... require it.
-        require_once get_template_directory().'/class-wp-bootstrap-navwalker.php';
-
-    register_nav_menus(array(
-        'primary' => __('Primary Menu', 'laravel-theme'),
-    ));
-
-/**
- *  Include files from lib folder
- */
- /**
-  * Sage includes
-  *
-  * The $sage_includes array determines the code library included in your theme.
-  * Add or remove files to the array as needed. Supports child theme overrides.
-  *
-  * Please note that missing files will produce a fatal error.
-  *
-  * @link https://github.com/roots/sage/pull/1042
-  */
- $sage_includes = [
-     //'lib/ajax.php',     // If custom AJAX is required
-     //'lib/form.php',     // If custom form is required
-     //'lib/cpt.php',      // Custom post types
-     'lib/security.php',   // WP security bits and pieces
-     'lib/general.php',     // Everything else...
-     'lib/scripts.php',
-     'lib/media.php',
-     'lib/admin.php',
-     'lib/speed.php',
-     // 'lib/navwalker.php',
- ];
- foreach ($sage_includes as $file) {
-     if ( ! $filepath = locate_template($file)) {
-         trigger_error(sprintf(__('Error locating %s for inclusion', 'sage'), $file), E_USER_ERROR);
-     }
-     require_once $filepath;
- }
- unset($file, $filepath);

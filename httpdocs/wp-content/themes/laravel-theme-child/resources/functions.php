@@ -4,9 +4,6 @@
  * Do not edit anything in this file unless you know what you're doing
  */
 
-use Roots\Sage\Config;
-use Roots\Sage\Container;
-
 /**
  * Helper function for prettying up errors
  * @param string $message
@@ -50,15 +47,36 @@ if ( ! class_exists('Roots\\Sage\\Container')) {
 /**
  * Sage required files
  *
- * The mapped array determines the code library included in your theme.
- * Add or remove files to the array as needed. Supports child theme overrides.
+ * This is the only modified code in this file
+ * This has been modified to include our custom code
+ * First four array values are Roots specific
+ *
  */
 array_map(function ($file) use ($sage_error) {
     $file = "../app/{$file}.php";
     if ( ! locate_template($file, true, true)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
-}, ['helpers', 'setup', 'filters', 'admin']);
+}, [
+    'helpers',
+    'setup',
+    'filters',
+    'admin',
+    'lib/acf',          // Extends the ACF functionality
+    'lib/admin',        // Includes WP admin code such as clone post, page, etc
+    //'lib/ajax',       // Custom AJAX
+    //'lib/cpt.php',    // Custom post types
+    //'lib/form',       // Custom form
+    'lib/general',      // Basic setup
+    'lib/helpers',      // Uses App namespace as per Roots parent theme
+    'lib/media',        // Allows SVG and custom image sizes
+    'lib/navwalker',    // Bootstrap 4 navigation
+    'lib/scripts',      // Enqueuing scripts and styles
+    'lib/security',     // Security bits and pieces
+    'lib/seo',          // Any SEO specific code
+    'lib/speed',        // htaccess code + removal of general WordPress crap
+    'lib/woocommerce',  // WooCommerce specific custom code here
+]);
 
 /**
  * Here's what's happening with these hooks:
@@ -82,56 +100,3 @@ array_map(
     ['theme_file_path', 'theme_file_uri', 'parent_theme_file_path', 'parent_theme_file_uri'],
     array_fill(0, 4, 'dirname')
 );
-Container::getInstance()
-    ->bindIf('config', function () {
-        return new Config([
-            'assets' => require dirname(__DIR__).'/config/assets.php',
-            'theme' => require dirname(__DIR__).'/config/theme.php',
-            'view' => require dirname(__DIR__).'/config/view.php',
-        ]);
-    }, true);
-
-    if ( ! file_exists(get_template_directory().'/class-wp-bootstrap-navwalker.php')) {
-        // file does not exist... return an error.
-        return new WP_Error('class-wp-bootstrap-navwalker-missing', __('It appears the class-wp-bootstrap-navwalker.php file may be missing.', 'wp-bootstrap-navwalker'));
-    }
-        // file exists... require it.
-        require_once get_template_directory().'/class-wp-bootstrap-navwalker.php';
-
-    register_nav_menus(array(
-        'primary' => __('Primary Menu', 'laravel-theme'),
-    ));
-
-/**
- *  Include files from lib folder
- */
- /**
-  * Sage includes
-  *
-  * The $sage_includes array determines the code library included in your theme.
-  * Add or remove files to the array as needed. Supports child theme overrides.
-  *
-  * Please note that missing files will produce a fatal error.
-  *
-  * @link https://github.com/roots/sage/pull/1042
-  */
- $sage_includes = [
-     //'lib/ajax.php',     // If custom AJAX is required
-     //'lib/form.php',     // If custom form is required
-     //'lib/cpt.php',      // Custom post types
-     'lib/security.php',   // WP security bits and pieces
-     'lib/general.php',     // Everything else...
-     'lib/scripts.php',
-     'lib/media.php',
-     'lib/admin.php',
-     'lib/speed.php',
-     'lib/woocommerce.php',
-     // 'lib/navwalker.php',
- ];
- foreach ($sage_includes as $file) {
-     if ( ! $filepath = locate_template($file)) {
-         trigger_error(sprintf(__('Error locating %s for inclusion', 'sage'), $file), E_USER_ERROR);
-     }
-     require_once $filepath;
- }
- unset($file, $filepath);

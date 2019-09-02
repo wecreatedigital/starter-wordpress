@@ -1,41 +1,25 @@
-//
-// /** Import everything from autoload */
-// @import "./autoload/**/*";
-//
-// // Import Slick
-// @import "~slick-carousel/slick/slick.scss";
-// @import "~slick-carousel/slick/slick-theme.scss";
-//
-// /**
-//  * Import npm dependencies
-//  *
-//  * Prefix your imports with `~` to grab from node_modules/
-//  * @see https://github.com/webpack-contrib/sass-loader#imports
-//  */
-// // @import "~some-node-module";
-//
-// /** Import theme styles */
-// @import "common/global";
-// @import "common/variables";
-// @import "components/buttons";
-// @import "components/comments";
-// @import "components/forms";
-// @import "components/wp-classes";
-// @import "layouts/header";
-// @import "layouts/sidebar";
-// @import "layouts/footer";
-// @import "layouts/pages";
-// @import "layouts/posts";
-// @import "layouts/tinymce";
-// @import "global";
-// @import "archive";
-// @import "common";
-// @import "contact";
-// @import "footer";
-// @import "header";
-// @import "home";
-// @import "single";
-// @import "test";
-//
-// /** Google Maps */
-// @import "google-maps";
+@import "common/variables";
+
+/** Import everything from autoload */
+@import "./autoload/**/*";
+
+/**
+ * Import npm dependencies
+ *
+ * Prefix your imports with `~` to grab from node_modules/
+ * @see https://github.com/webpack-contrib/sass-loader#imports
+ */
+// @import "~some-node-module";
+
+/** Import theme styles */
+@import "common/global";
+@import "components/buttons";
+@import "components/comments";
+@import "components/forms";
+@import "components/wp-classes";
+@import "layouts/header";
+@import "layouts/sidebar";
+@import "layouts/footer";
+@import "layouts/pages";
+@import "layouts/posts";
+@import "layouts/tinymce";

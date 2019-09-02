@@ -5,19 +5,22 @@
     @php do_action('get_header') @endphp
     @include('partials.header')
     <div role="document">
-      <div class="content">
-        <main class="main">
+      <main class="main">
+        <div class="container">
+          @include('layouts.breadcrumbs')
           @yield('content')
-        </main>
-        @if (App\display_sidebar())
-          <aside class="sidebar">
-            @include('partials.sidebar')
-          </aside>
-        @endif
-      </div>
+        </div>
+        @include('flexible._main')
+      </main>
+      @if (App\display_sidebar())
+        <aside class="sidebar">
+          @include('partials.sidebar')
+        </aside>
+      @endif
     </div>
     @php do_action('get_footer') @endphp
     @include('partials.footer')
-    @php wp_footer() @endphp
+    @include('plugins.cf7')
+    @wpfoot()
   </body>
 </html>
