@@ -216,9 +216,9 @@ Comes with the following plugins:
 - Deleted Timeline Express Plugin
 - Updated WordPress translations
 
-** 24/07/2019**
+**03/09/2019**
 - Updated scss
-- Added WooCommerce plugin
+- Updated resources\view directories
 
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
