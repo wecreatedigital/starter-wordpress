@@ -4,4 +4,4 @@
     location = '@field('contact_form_redirect')' ;
   }, false );
 </script>
-@endfield
+@endif
