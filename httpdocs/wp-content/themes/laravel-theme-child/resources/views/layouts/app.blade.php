@@ -1,9 +1,9 @@
 <!doctype html>
 <html {!! get_language_attributes() !!}>
-  @include('partials.head')
+  @include('layouts.head')
   <body @php body_class() @endphp>
     @php do_action('get_header') @endphp
-    @include('partials.header')
+    @include('layouts.header')
     <div role="document">
       <main class="main">
         <div class="container">
@@ -19,7 +19,7 @@
       @endif
     </div>
     @php do_action('get_footer') @endphp
-    @include('partials.footer')
+    @include('layouts.footer')
     @include('plugins.cf7')
     @wpfoot()
   </body>
