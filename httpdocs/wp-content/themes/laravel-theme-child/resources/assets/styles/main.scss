@@ -1,13 +1,13 @@
+/** Common styles */
+@import "common/global";
+@import "common/variables";
+
 // From autoload
 @import "./autoload/**/*";
 
 // Import Slick slider
 // @import "~slick-carousel/slick/slick.scss";
 // @import "~slick-carousel/slick/slick-theme.scss";
-
-/** Common styles */
-@import "common/global";
-@import "common/variables";
 
 /** Compement styles **/
 @import "components/buttons";
