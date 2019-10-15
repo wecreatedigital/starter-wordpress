@@ -1,5 +1,5 @@
 {{--
-  Template Name: Contact page
+  Template Name: Contact Page
 --}}
 
 @extends('layouts.app')

@@ -103,3 +103,17 @@ function rd_duplicate_post_link($actions, $post)
 add_filter('post_row_actions', 'rd_duplicate_post_link', 10, 2);
 add_filter('page_row_actions', 'rd_duplicate_post_link', 10, 2); /* for pages */
 add_filter('portfolio_row_actions', 'rd_duplicate_post_link', 10, 2); /* a custom post called portfolio */
+
+/**
+ * Remove the sample custom template declared in the parent theme
+ *
+ * @author Dean Appleton-Claydon
+ * @date   2019-10-15
+ * @param  array     $templates   an array of templates declared by both child and parent themes
+ * @return array                  return the modified array
+ */
+function tfc_remove_page_templates( $templates ) {
+    unset( $templates['views/template-custom.blade.php'] );
+    return $templates;
+}
+add_filter( 'theme_page_templates', 'tfc_remove_page_templates' );
