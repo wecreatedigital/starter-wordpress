@@ -1,11 +1,11 @@
-/*-------------------------------------------*\
+/* -------------------------------------------*\
   _margin.scss
 
   - File to demonstrates scss @mixin.
   - Generating classes on on set margin values,
   - each iteration of an array of margins will create specific set values that
   - can be used to get exact spacing between elements, such as sections.
-\*-------------------------------------------*/
+\*------------------------------------------- */
 
 // Strip any characters except numbers
 @function strip-unit($number) {

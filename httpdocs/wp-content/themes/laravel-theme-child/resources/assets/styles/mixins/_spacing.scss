@@ -1,11 +1,11 @@
-/*-------------------------------------------*\
+/* -------------------------------------------*\
   _spacing.scss
 
   - File to demonstrate scss @while loop.
   - Generating classes on Bootstrap 4 breakpoints,
   - each iteration sets a width and then on the breakpoint
   - the width is restored to 100%.
-\*-------------------------------------------*/
+\*------------------------------------------- */
 
 // Bootstrap 4 breakpoints
 $breakpoints : ("xs", "sm", "md", "lg", "xl");
