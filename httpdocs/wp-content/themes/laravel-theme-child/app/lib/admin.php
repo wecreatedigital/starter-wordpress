@@ -117,3 +117,16 @@ function tfc_remove_page_templates( $templates ) {
     return $templates;
 }
 add_filter( 'theme_page_templates', 'tfc_remove_page_templates' );
+
+/**
+ * Screen options display excerpt by default (new users only)
+ */
+function wpse_edit_post_show_excerpt( $user_login, $user ) {
+    $unchecked = get_user_meta( $user->ID, 'metaboxhidden_post', true );
+    $key = array_search( 'postexcerpt', $unchecked );
+    if ( FALSE !== $key ) {
+        array_splice( $unchecked, $key, 1 );
+        update_user_meta( $user->ID, 'metaboxhidden_post', $unchecked );
+    }
+}
+add_action( 'wp_login', 'wpse_edit_post_show_excerpt', 10, 2 );
