@@ -112,21 +112,38 @@ add_filter('portfolio_row_actions', 'rd_duplicate_post_link', 10, 2); /* a custo
  * @param  array     $templates   an array of templates declared by both child and parent themes
  * @return array                  return the modified array
  */
-function tfc_remove_page_templates( $templates ) {
-    unset( $templates['views/template-custom.blade.php'] );
+function tfc_remove_page_templates($templates)
+{
+    unset($templates['views/template-custom.blade.php']);
+
     return $templates;
 }
-add_filter( 'theme_page_templates', 'tfc_remove_page_templates' );
+add_filter('theme_page_templates', 'tfc_remove_page_templates');
 
 /**
  * Screen options display excerpt by default (new users only)
  */
-function wpse_edit_post_show_excerpt( $user_login, $user ) {
-    $unchecked = get_user_meta( $user->ID, 'metaboxhidden_post', true );
-    $key = array_search( 'postexcerpt', $unchecked );
-    if ( FALSE !== $key ) {
-        array_splice( $unchecked, $key, 1 );
-        update_user_meta( $user->ID, 'metaboxhidden_post', $unchecked );
+function wpse_edit_post_show_excerpt($user_login, $user)
+{
+    $unchecked = get_user_meta($user->ID, 'metaboxhidden_post', true);
+    $key = array_search('postexcerpt', $unchecked);
+    if (false !== $key) {
+        array_splice($unchecked, $key, 1);
+        update_user_meta($user->ID, 'metaboxhidden_post', $unchecked);
     }
 }
-add_action( 'wp_login', 'wpse_edit_post_show_excerpt', 10, 2 );
+add_action('wp_login', 'wpse_edit_post_show_excerpt', 10, 2);
+
+/**
+ * Force permalinks to be postname from the point of accepting child theme
+ *
+ * @author Dean Appleton-Claydon
+ * @date   2019-11-17
+ */
+function change_permalinks()
+{
+    global $wp_rewrite;
+    $wp_rewrite->set_permalink_structure('/%postname%/');
+    $wp_rewrite->flush_rules();
+}
+add_action('init', 'change_permalinks');
