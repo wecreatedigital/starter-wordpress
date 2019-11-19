@@ -687,11 +687,11 @@ class WPSEO_Frontend {
 	}
 
 	/**
-	 * Output the meta robots value.
+	 * Retrieves the meta robots value.
 	 *
 	 * @return string
 	 */
-	public function robots() {
+	public function get_robots() {
 		global $wp_query, $post;
 
 		$robots           = array();
@@ -777,12 +777,30 @@ class WPSEO_Frontend {
 		$robotsstr = preg_replace( '`^index,follow,?`', '', $robotsstr );
 		$robotsstr = str_replace( array( 'noodp,', 'noodp' ), '', $robotsstr );
 
+		if ( strpos( $robotsstr, 'noindex' ) === false && strpos( $robotsstr, 'nosnippet' ) === false ) {
+			if ( $robotsstr !== '' ) {
+				$robotsstr .= ', ';
+			}
+			$robotsstr .= 'max-snippet:-1, max-image-preview:large, max-video-preview:-1';
+		}
+
 		/**
 		 * Filter: 'wpseo_robots' - Allows filtering of the meta robots output of Yoast SEO.
 		 *
 		 * @api string $robotsstr The meta robots directives to be echoed.
 		 */
 		$robotsstr = apply_filters( 'wpseo_robots', $robotsstr );
+
+		return $robotsstr;
+	}
+
+	/**
+	 * Outputs the meta robots value.
+	 *
+	 * @return string
+	 */
+	public function robots() {
+		$robotsstr = $this->get_robots();
 
 		if ( is_string( $robotsstr ) && $robotsstr !== '' ) {
 			echo '<meta name="robots" content="', esc_attr( $robotsstr ), '"/>', "\n";

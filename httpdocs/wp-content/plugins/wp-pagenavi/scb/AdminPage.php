@@ -130,7 +130,6 @@ abstract class scbAdminPage {
 
 		if ( isset( $this->option_name ) ) {
 			add_action( 'admin_init', array( $this, 'option_init' ) );
-			add_action( 'admin_notices', 'settings_errors' );
 		}
 
 		add_action( 'admin_menu', array( $this, 'page_init' ), $this->args['admin_action_priority'] );

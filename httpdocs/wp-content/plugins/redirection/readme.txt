@@ -4,7 +4,7 @@ Donate link: https://redirection.me/donation/
 Tags: redirect, htaccess, 301, 404, seo, permalink, apache, nginx, post, admin
 Requires at least: 4.8
 Tested up to: 5.2.1
-Stable tag: 4.3.3
+Stable tag: 4.4.2
 Requires PHP: 5.4
 License: GPLv3
 
@@ -138,9 +138,6 @@ The plugin works in a similar manner to how WordPress handles permalinks and sho
 
 == Upgrade Notice ==
 
-= 2.4 =
-* Another database change. Please backup your data
-
 = 3.0 =
 * Upgrades the database to support IPv6. Please backup your data and visit the Redirection settings to perform the upgrade
 * Switches to the WordPress REST API
@@ -156,6 +153,26 @@ The plugin works in a similar manner to how WordPress handles permalinks and sho
 * Alters database to support case insensitivity, trailing slashes, and query params. Please backup your data
 
 == Changelog ==
+
+= 4.4.2 - 29th September 2019 =
+* Fix missing options for monitor group
+* Fix check redirect not appearing if position column not shown
+
+= 4.4.1 - 28th September 2019 =
+* Fix search highlighter causing problems with regex characters
+* Fix 'show all' link not working
+* Fix 'Request URI Too Long' error when switching pages after creating redirects
+
+= 4.4 - 22nd September 2019 =
+* Add 'URL and language' match
+* Add page display type for configurable information
+* Add 'search by' to search by different information
+* Add filter dropdown to filter data
+* Add warning about relative absolute URLs
+* Add 451, 500, 501, 502, 503, 504 error codes
+* Fix multiple 'URL and page type' redirects
+* Improve invalid nonce warning
+* Encode replaced values in regular expression targets
 
 = 4.3.3 - 8th August 2019 ==
 * Add back compatibility fix for URL sanitization
@@ -642,16 +659,12 @@ The plugin works in a similar manner to how WordPress handles permalinks and sho
 = 2.2.7 =
 * Better database compatibility
 
-= 2.2.6 =
+= < 2.2.6 =
 * Remove warning from VaultPress
-
-= 2.2.5 =
 * Add Turkish translation, thanks to Fatih Cevik
 * Fix search box
 * Fix 410 error code
 * Fix DB errors when MySQL doesn't auto-convert data types
-
-= < 2.2.4 =
 * Remove debug from htaccess module
 * Fix encoding of JS strings
 * Use fgetcsv for CSV importer - better handling
@@ -687,13 +700,10 @@ The plugin works in a similar manner to how WordPress handles permalinks and sho
 * Fix group edit and log add entry
 * Use WP Ajax
 * WP2.8 compatibility
-* Add icons
 * Disable category monitoring
-* Errors on some sites
 * Fix 'you do not permissions' error on some non-English sites
 * Fix category change 'quick edit'
 * Redirection loops
 * RSS feed token
 * Re-enable import feature
-* Force JS cache
 * Fix log deletion

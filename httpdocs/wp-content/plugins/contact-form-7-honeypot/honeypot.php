@@ -1,16 +1,16 @@
 <?php
 /*
-Plugin Name: Contact Form 7 Honeypot
+Plugin Name: Honeypot for Contact Form 7
 Plugin URI: http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-wordpress-plugin/
 Description: Add honeypot anti-spam functionality to the popular Contact Form 7 plugin.
 Author: Nocean
 Author URI: http://www.nocean.ca
-Version: 1.14
+Version: 1.14.1
 Text Domain: contact-form-7-honeypot
 Domain Path: /languages/
 */
 
-/*  Copyright 2015  Ryan McLaughlin  (email : hello@nocean.ca)
+/*  Copyright 2019  Ryan McLaughlin  (email : hello@nocean.ca)
 
 	This program is free software; you can redistribute it and/or modify
 	it under the terms of the GNU General Public License as published by

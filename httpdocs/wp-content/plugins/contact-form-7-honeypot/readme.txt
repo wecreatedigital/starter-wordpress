@@ -1,14 +1,14 @@
-=== Contact Form 7 Honeypot ===
+=== Honeypot for Contact Form 7 ===
 Tags: honeypot, antispam, captcha, spam, form, forms, contact form 7, contactform7, contact form, cf7, cforms, Contact Forms 7, Contact Forms, contacts
 Requires at least: 3.5
-Tested up to: 5.0
-Stable tag: 1.14
+Tested up to: 5.2.3
+Stable tag: 1.14.1
 Contributors: DaoByDesign
 Donate link: http://www.nocean.ca/buy-us-a-coffee/
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Contact Form 7 Honeypot - Adds honeypot anti-spam functionality to CF7 forms.
+Honeypot for Contact Form 7 - Adds honeypot anti-spam functionality to CF7 forms.
 
 == Description ==
 
@@ -20,7 +20,7 @@ Follow us on [Twitter](https://twitter.com/NoceanCA) and on [Facebook](https://w
 
 <strong>Support can be found [here](http://wordpress.org/support/plugin/contact-form-7-honeypot).</strong>
 
-Visit the [Contact Form 7 Honeypot plugin page](http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-wordpress-plugin/) for additional information or to [buy us a coffee](http://www.nocean.ca/buy-us-a-coffee/) to say thanks.
+Visit the [Honeypot for Contact Form 7 plugin page](http://www.nocean.ca/plugins/honeypot-module-for-contact-form-7-wordpress-plugin/) for additional information or to [buy us a coffee](http://www.nocean.ca/buy-us-a-coffee/) to say thanks.
 
 = Localization/Translation =
 If you'd like to translate this plugin, please visit the plugin's [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/contact-form-7-honeypot) page. As of v1.10, all translation is handled there. Thank you to the polyglots that contribute!
@@ -30,7 +30,7 @@ If you are using CF7 3.6+, use the latest version of this plugin. If you are usi
 
 == Installation ==
 
-1. Install using the Wordpress "Add Plugin" feature -- just search for "Contact Form 7 Honeypot".
+1. Install using the Wordpress "Add Plugin" feature -- just search for "Honeypot for Contact Form 7".
 1. Confirm that [Contact Form 7](https://wordpress.org/plugins/contact-form-7/) is installed and activated. Then activate this plugin.
 1. Edit a form in Contact Form 7.
 1. Choose "Honeypot" from the CF7 tag generator. <em>Recommended: change the honeypot element's ID.</em>
@@ -68,6 +68,9 @@ For examples of the above, please see this [recipe Gist](https://gist.github.com
 * This is by design, and we recommend leaving this validation error for enhanced improvement of the plugin. However, there is a simple work around. See [here](https://wordpress.org/support/topic/w3c-validation-in-1-11-explanation-and-work-arounds/) for details.
 
 == Changelog ==
+= 1.14.1 =
+Minor update to change name to comply with CF7 copyright notice.
+
 = 1.14 =
 Added do-not-store for when forms are stored in the DB (i.e. Flamingo). Improved wrapper ID masking and customization.
 

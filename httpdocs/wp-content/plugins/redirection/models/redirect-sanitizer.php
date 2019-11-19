@@ -148,9 +148,17 @@ class Red_Item_Sanitize {
 		return false;
 	}
 
+	public function is_valid_redirect_code( $code ) {
+		return in_array( $code, array( 301, 302, 303, 304, 307, 308 ), true );
+	}
+
+	public function is_valid_error_code( $code ) {
+		return in_array( $code, array( 400, 401, 403, 404, 410, 418, 451, 500, 501, 502, 503, 504 ), true );
+	}
+
 	protected function get_code( $action_type, $code ) {
 		if ( $action_type === 'url' || $action_type === 'random' ) {
-			if ( in_array( $code, array( 301, 302, 303, 304, 307, 308 ), true ) ) {
+			if ( $this->is_valid_redirect_code( $code ) ) {
 				return $code;
 			}
 
@@ -158,7 +166,7 @@ class Red_Item_Sanitize {
 		}
 
 		if ( $action_type === 'error' ) {
-			if ( in_array( $code, array( 400, 401, 403, 404, 410, 418 ), true ) ) {
+			if ( $this->is_valid_error_code( $code ) ) {
 				return $code;
 			}
 
@@ -222,7 +230,10 @@ class Red_Item_Sanitize {
 
 		// Try and remove bad decoding
 		if ( function_exists( 'iconv' ) ) {
-			$url = @iconv( 'UTF-8', 'UTF-8//IGNORE', $url );
+			$converted = @iconv( 'UTF-8', 'UTF-8//IGNORE', $url );
+			if ( $converted !== false ) {
+				$url = $converted;
+			}
 		}
 
 		return $url;

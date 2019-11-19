@@ -8,7 +8,7 @@
  * @apiParam {string} groupBy Group by 'ip' or 'url'
  * @apiParam {string} orderby
  * @apiParam {string} direction
- * @apiParam {string} filter
+ * @apiParam {string} filterBy
  * @apiParam {string} per_page
  * @apiParam {string} page
  */
@@ -19,7 +19,6 @@
  * @apiGroup 404
  *
  * @apiParam {string} items Array of log IDs
- * @apiParam {string} filter
  * @apiParam {string} filterBy
  * @apiParam {string} groupBy Group by 'ip' or 'url'
  */
@@ -31,15 +30,16 @@
  */
 class Redirection_Api_404 extends Redirection_Api_Filter_Route {
 	public function __construct( $namespace ) {
-		$filters = array( 'ip', 'url', 'url-exact', 'total' );
+		$orders = [ 'url', 'ip', 'total' ];
+		$filters = [ 'ip', 'url-exact', 'referrer', 'agent', 'url' ];
 
 		register_rest_route( $namespace, '/404', array(
-			'args' => $this->get_filter_args( $filters, $filters ),
+			'args' => $this->get_filter_args( $orders, $filters ),
 			$this->get_route( WP_REST_Server::READABLE, 'route_404' ),
 			$this->get_route( WP_REST_Server::EDITABLE, 'route_delete_all' ),
 		) );
 
-		$this->register_bulk( $namespace, '/bulk/404/(?P<bulk>delete)', $filters, $filters, 'route_bulk' );
+		$this->register_bulk( $namespace, '/bulk/404/(?P<bulk>delete)', $orders, 'route_bulk' );
 	}
 
 	public function route_404( WP_REST_Request $request ) {
@@ -75,26 +75,17 @@ class Redirection_Api_404 extends Redirection_Api_Filter_Route {
 
 	public function route_delete_all( WP_REST_Request $request ) {
 		$params = $request->get_params();
-		$filter = false;
-		$filter_by = false;
 
 		if ( isset( $params['items'] ) && is_array( $params['items'] ) ) {
 			foreach ( $params['items'] as $url ) {
 				RE_404::delete_all( $this->get_delete_group( $params ), $url );
 			}
 		} else {
-			if ( isset( $params['filter'] ) ) {
-				$filter = $params['filter'];
-			}
+			$first_filter = isset( $params['filterBy'] ) ? array_keys( $params['filterBy'] )[0] : false;
 
-			if ( isset( $params['filterBy'] ) ) {
-				$filter_by = $params['filterBy'];
-			}
-
-			RE_404::delete_all( $filter_by, $filter );
+			RE_404::delete_all( $first_filter ? $first_filter : false, $first_filter ? $params['filterBy'][ $first_filter ] : false );
 
 			unset( $params['filterBy'] );
-			unset( $params['filter'] );
 		}
 
 		unset( $params['page'] );
