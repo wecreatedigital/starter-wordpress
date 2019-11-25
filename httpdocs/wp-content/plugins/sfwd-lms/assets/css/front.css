@@ -1,0 +1,218 @@
+/* base styles - overright these in your theme stylesheet */
+.sfwd_module .error{
+text-align:center;
+}
+.content_article_style{
+min-width:600px;
+}
+.post2pdf_conv_image_align_center
+{
+text-align: center;
+}
+.slickQuizWrapper .button {
+    float: left;
+    width: auto;
+    padding: 5px 15px;
+    color:#ffffff;
+    background-color:darkcyan;
+    border: 1px solid #fff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-decoration: none;
+}
+.slickQuizWrapper .button:hover {
+    background-color:darkslategray;
+}
+
+.startQuiz {
+    margin-top: 20px;
+}
+
+.quizArea, .quizResults {
+    margin-bottom: 40px;
+}
+
+/* clearfix */
+.quizArea, .quizResults {
+    zoom: 1;
+}
+.quizArea:before, .quizArea:after, .quizResults:before, .quizResults:after {
+    content: "\0020";
+    display: block;
+    height: 0;
+    visibility: hidden;
+    font-size: 0;
+}
+.quizArea:after, .quizResults:after {
+    clear: both;
+}
+
+.questionCount {
+    font-size: 14px;
+    font-style: italic;
+}
+.questionCount span {
+    font-weight: bold;
+}
+
+ol.questions {
+    margin-top: 20px;
+    margin-left: 0;
+}
+ol.questions li {
+    margin-left: 0;
+}
+
+ul.answers {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+ul.responses li {
+    margin: 10px 20px 20px;
+}
+ul.responses li p span {
+    display: block;
+    font-weight: bold;
+    font-size: 18px;
+}
+ul.responses li.correct p span {
+    color: #6C9F2E;
+}ul.responses li.incorrect p span {
+    color: #B5121B;
+}
+
+.quizResults h3 {
+    margin: 0;
+}
+.quizResults h3 span {
+    font-weight: normal;
+    font-style: italic;
+}
+.quizResultsCopy {
+    margin-top: 20px;
+}
+
+.ppalholder {
+	display: none;
+}
+.ppalbtn {
+	border: 0 !important;
+}
+
+.user_has_no_access .is_not_sample a, .user_has_no_access .is_not_sample a span, .user_has_no_access #learndash_quizzes a{
+	color: gray !important;
+	text-decoration: none !important;
+}
+.widget .list-count {display: none;}
+
+ dd.course_progress { 
+    position: relative; 
+    display: block;                 
+    border: 1px solid black;
+    width: 100%; 
+    height: 16px; 
+    margin: 0 0 2px; 
+    background-color: white; 
+    padding:0;
+ }
+
+ dd.course_progress div.course_progress_blue { 
+    position: relative; 
+    background-color: blue; 
+    height: 16px; 
+    width: 75%; 
+    text-align:right; 
+    display:block;
+ }
+
+ .wpProQuiz_cloze > input[type=text] {
+    max-width: 99%;
+ }
+ 
+
+ /* Single Course Payment methods fancy dropdown */
+.checkout-dropdown-button button, 
+.checkout-dropdown-button input[type="submit"] {
+ border-radius: 0 !important;
+ font-size: 16px !important;
+ margin: 0;
+ text-align: center;
+ width: 100%;
+}
+
+.checkout-dropdown-button ul {
+	padding: 0 !important;
+	list-style: none !important;
+    list-style-type: none !important;
+	line-height: auto !important;
+}
+
+.checkout-dropdown-button ul.jq-dropdown-menu li {
+	list-style: none !important;
+    list-style-type: none !important;
+	margin: none !important;
+	padding: none !important;
+	line-height: auto !important;
+}
+
+.jq-dropdown .jq-dropdown-menu li {
+    list-style: none !important;
+    list-style-type: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.checkout-dropdown-button .btn-join,
+.checkout-dropdown-button #btn-join,
+.checkout-dropdown-button form input[type="submit"] {
+ background-color: #FFFFFF !important;
+ color: #333333 !important;
+}
+
+.checkout-dropdown-button .btn-join:hover,
+.checkout-dropdown-button #btn-join:hover,
+.checkout-dropdown-button form input[type="submit"]:hover {
+ background-color: #F5F5F5 !important;
+ color: #000000 !important;
+}
+
+/**
+* jQUery Dropdown
+*/
+
+body .jq-dropdown.jq-dropdown-tip:before {
+ position: absolute;
+ top: -7px;
+ left: 9px;
+ content: '';
+ border-left: 7px solid;
+ border-right: 7px solid;
+ border-bottom: 7px solid;
+ border-color: transparent transparent #DDD transparent;
+ display: inline-block;
+ z-index: 99;
+}
+
+body .jq-dropdown.jq-dropdown-tip:after {
+ position: absolute;
+ top: -5px;
+ left: 9px;
+ content: '';
+ border-left: 7px solid;
+ border-right: 7px solid;
+ border-bottom: 7px solid;
+ border-color: transparent transparent white transparent;
+ display: inline-block;
+ z-index: 99;
+}
+
+.jq-dropdown .jq-dropdown-menu, 
+.jq-dropdown .jq-dropdown-panel {
+ border-radius: 0;
+} 
+
+.jq-dropdown .jq-dropdown-menu form {
+	margin: 0;
+}

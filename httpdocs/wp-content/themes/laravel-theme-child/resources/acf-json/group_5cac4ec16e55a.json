@@ -320,46 +320,8 @@
         },
         {
             "key": "field_5d5e863a69246",
-            "label": "Company name",
-            "name": "company_name",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5d5e864a69247",
-            "label": "VAT number",
-            "name": "vat_number",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": "",
-            "maxlength": ""
-        },
-        {
-            "key": "field_5d5e865469248",
-            "label": "Company number",
-            "name": "company_number",
+            "label": "Copyright message",
+            "name": "copyright_message",
             "type": "text",
             "instructions": "",
             "required": 0,
@@ -393,5 +355,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1566476017
+    "modified": 1574503859
 }

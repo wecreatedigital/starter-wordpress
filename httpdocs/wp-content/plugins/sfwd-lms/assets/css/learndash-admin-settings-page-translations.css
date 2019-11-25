@@ -1,0 +1,71 @@
+.wrap-ld-translations {
+}
+
+.wrap-ld-translations table.ld-installed-translations th {
+	font-weight: bold;
+}
+
+.wrap-ld-translations table.ld-installed-translations th.column-locale {
+	width: 10%;
+}
+
+.wrap-ld-translations table.ld-installed-translations th.column-title {
+	width: 30%;
+}
+
+.wrap-ld-translations table.ld-installed-translations th.column-actions-local {
+	width: 30%;
+}
+
+.wrap-ld-translations table.ld-installed-translations th.column-actions-remote {
+	width: 30%;
+}
+
+.wrap-ld-translations table.ld-installed-translations td.column-actions-local a {
+	margin-right: 5px;
+}
+
+.wrap-ld-translations table.ld-installed-translations td.column-actions-remote a {
+	margin-right: 5px;
+}
+
+.wrap-ld-translations table.ld-installed-translations td.column-actions-local span.ld-translation-mtime {
+	margin-top: 5px;
+}
+
+.wrap-ld-translations table.ld-installed-translations td.column-actions-local a span.dashicons-download,
+.wrap-ld-translations table.ld-installed-translations td.column-actions-remote a span.dashicons-trash,
+a.learndash-translations-pot-file span.dashicons-download {
+	margin-top: 4px;
+}
+
+/*
+#learndash-translations-available {
+	width: 100%;
+}
+
+#learndash-translations-available #learndash-translations-available-items {
+	width: 50%;
+}
+
+#learndash-translations-available #learndash-translations-details {
+	width: 50%;
+}
+*/
+
+.learndash-settings-page-wrap #publishing-action {
+	width: 100%;
+}
+
+.learndash-settings-page-wrap #publishing-action p.learndash-translations-last-update span.label {
+	font-weight: bold;
+}
+
+.learndash-settings-page-wrap .error {
+	color: red;
+}
+
+.learndash-settings-page-wrap a.learndash-translations-install {
+	padding: 5px 10px;
+	display: none;
+}

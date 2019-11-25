@@ -65,7 +65,8 @@ array_map(function ($file) use ($sage_error) {
     'lib/acf',          // Extends the ACF functionality
     'lib/admin',        // Includes WP admin code such as clone post, page, etc
     //'lib/ajax',       // Custom AJAX
-    //'lib/cpt.php',    // Custom post types
+    //'lib/cpt',    // Custom post types
+    'lib/donate',   // Simple donate facility with Stripe Checkout
     //'lib/form',       // Custom form
     'lib/general',      // Basic setup
     'lib/helpers',      // Uses App namespace as per Roots parent theme

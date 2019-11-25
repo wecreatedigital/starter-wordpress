@@ -1,0 +1,40 @@
+This sample language includes the basics around what personal data your LMS may be collecting, storing and sharing, as well as who may have access to that data. Depending on what settings are enabled and which additional plugins are used, the specific information shared by your site will vary. We recommend consulting with a lawyer when deciding what information to disclose on your privacy policy.
+We collect information about you during the course purchase process (PayPal, Stripe, and/or 2Checkout), as well as information relating to your course progression and quiz performance.
+
+<h2>What we collect and store</h2>
+
+When you purchase from us, we’ll ask you to provide email address. We’ll use this information for purposes, such as, to:
+
+--Send you information about your account and order
+
+--Create your account for our LMS
+
+If you register a free account then we will store your email address.
+
+We store information about you for as long as your account exists. 
+
+We store course progress, including completion status, quiz scores, assignments and/or essay submissions (if applicable). 
+
+We will also store comments on courses, lessons, topics, assignments, and essays if you choose to leave them.
+
+<h2>Who on our team has access</h2>
+
+Members of our team have access to the information you provide us. For example, both Administrators and Group Leaders can access:
+
+--Order information such as your enrolled courses, course progress and username / email address. 
+
+Any additional information added in your WordPress User Profile can also be visible to the administrator(s). 
+
+<h2>What we share with others</h2>
+
+In this section you should list who you’re sharing data with, and for what purpose. This could include, but may not be limited to, analytics/reporting tools, marketing services (such as email services like MailChimp), payment gateways, gamification programs, and third party embeds.
+
+We share information with third parties who help us provide our orders and store services to you; for example – [insert third party platforms and short description of their purpose]
+
+<h2>Payments</h2>
+
+In this subsection you should list which third party payment processors you’re using to take payments on your store since these may handle customer data. We’ve included PayPal below as an example, but you should remove any of these if they are not in use on your site.
+
+We accept payments through PayPal. When processing payments, some of your data will be passed to PayPal, including information required to process or support the payment, such as the purchase total and billing information.
+
+Please see the <a href="https://www.paypal.com/us/webapps/mpp/ua/privacy-full">PayPal Privacy Policy</a> for more details.

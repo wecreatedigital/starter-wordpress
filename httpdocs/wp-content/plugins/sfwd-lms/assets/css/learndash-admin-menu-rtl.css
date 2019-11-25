@@ -1,0 +1,40 @@
+/* Admin Users */
+body.learndash-user-admin #adminmenumain .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-topics:after,
+body.learndash-user-admin #adminmenumain .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-assignments:after {
+	background: #b4b9be;
+	content: '';
+	display: block;
+	height: 1px; 
+	margin: 5px auto 0 auto;
+	width: calc( 100% - 24px );
+	opacity: 0.4;
+}
+
+body.learndash-user-admin #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-topics,
+body.learndash-user-admin #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-assignments {
+	padding-bottom: 1px;
+}
+
+body.learndash-user-admin #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-topics + li,
+body.learndash-user-admin #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-assignments + li {
+	padding-top: 1px;
+}
+
+/* Grouop Leader */
+body.learndash-user-group-leader #adminmenumain .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-essays:after {
+	background: #b4b9be;
+	content: '';
+	display: block;
+	height: 1px; 
+	margin: 5px auto 0 auto;
+	width: calc( 100% - 24px );
+	opacity: 0.4;
+}
+
+body.learndash-user-group-leader #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-essays {
+	padding-bottom: 1px;
+}
+
+body.learndash-user-group-leader #adminmenu .toplevel_page_learndash-lms .wp-submenu > li.submenu-ldlms-essays + li {
+	padding-top: 1px;
+}

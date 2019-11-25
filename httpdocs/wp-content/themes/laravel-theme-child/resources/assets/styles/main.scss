@@ -31,3 +31,15 @@
 @import "contact";
 @import "home";
 @import "single";
+
+/** Flexible content blocks **/
+@import "flexible/common/main";
+@import "flexible/contact";
+@import "flexible/donate";
+@import "flexible/gallery";
+@import "flexible/hero";
+@import "flexible/latest";
+@import "flexible/left-image-right-text";
+@import "flexible/text-center";
+@import "flexible/text-left";
+@import "flexible/text-right";

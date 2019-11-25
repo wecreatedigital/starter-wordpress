@@ -1,0 +1,90 @@
+.learndash-binary-selector {
+	clear: both;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+.learndash-binary-selector table.learndash-binary-selector-table {
+	width: 100%;
+}
+
+.learndash-binary-selector .learndash-binary-selector-section-left {
+	width: 47%;
+	float: left;
+}
+.learndash-binary-selector .learndash-binary-selector-section-middle {
+	width: 5%;
+	float: left;
+	text-align: center;
+	margin-top: 8%;
+}
+
+.learndash-binary-selector .learndash-binary-selector-section-right {
+	width: 47%;
+	float: left;
+}
+
+.learndash-binary-selector .learndash-binary-selector-section .learndash-binary-selector-items {
+	border: 1px solid #ccc;
+	padding: 5px;
+	width: 100%;
+	max-width: 100%;
+}
+
+.learndash-binary-selector .learndash-binary-selector-section .learndash-binary-selector-items > .learndash-binary-selector-item {
+	padding: 0.15em 0;
+	width: 100%;
+}
+
+/*
+.learndash-binary-selector .learndash-binary-selector-section .learndash-binary-selector-items > .learndash-binary-selector-item:hover,
+.learndash-binary-selector .learndash-binary-selector-section .learndash-binary-selector-items > .learndash-binary-selector-item-selected {
+	background-color: #ccc;
+}
+*/
+
+/*
+.learndash-binary-selector .learndash-binary-selector-section .learndash-binary-selector-items > .learndash-binary-selector-item-disabled:hover{
+	background-color: inherit;
+}
+*/
+.learndash-binary-selector .learndash-binary-selector-search {
+	width: 100%;
+	float: left;
+}
+
+
+.learndash-binary-selector .learndash-binary-selector-section-left option.learndash-binary-selector-item-disabled {
+	text-decoration: line-through;
+	/* color: #ccc; */
+}
+
+
+.learndash-binary-selector ul.learndash-binary-selector-pager {
+	width: 100%;
+}
+
+.learndash-binary-selector ul.learndash-binary-selector-pager li.learndash-binary-selector-pager-prev {
+	width: 30%;
+	float: left;
+	text-align: left;
+}
+.learndash-binary-selector ul.learndash-binary-selector-pager li.learndash-binary-selector-pager-info {
+	width: 40%;
+	float: left;
+	text-align: center;
+}
+.learndash-binary-selector ul.learndash-binary-selector-pager li.learndash-binary-selector-pager-next {
+	width: 30%;
+	float: left;
+	text-align: right;
+}
+.learndash-binary-selector ul.learndash-binary-selector-pager a {
+	text-decoration: none;
+	padding: 0 5px;
+	display: block;
+}
+.learndash-binary-selector ul.learndash-binary-selector-pager a:hover {
+	background-color: inherit;
+}
+
