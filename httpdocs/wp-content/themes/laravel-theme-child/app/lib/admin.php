@@ -147,3 +147,17 @@ function change_permalinks()
     $wp_rewrite->flush_rules();
 }
 add_action('init', 'change_permalinks');
+
+/**
+ * Dynamic year for the footer
+ *
+ * @author Dean Appleton-Claydon
+ * @date   2019-12-06
+ */
+function year_shortcode()
+{
+    $year = date('Y');
+
+    return $year;
+}
+add_shortcode('year', 'year_shortcode');
