@@ -4,7 +4,11 @@
  * ACF options https://www.advancedcustomfields.com/add-ons/options-page/
  */
 if (function_exists('acf_add_options_page')) {
-    acf_add_options_page();
+    acf_add_options_page([
+        'page_title' => 'Theme Settings',
+        'menu_slug' => 'acf-options',
+        'position' => '2.1',
+    ]);
 }
 
 /**
