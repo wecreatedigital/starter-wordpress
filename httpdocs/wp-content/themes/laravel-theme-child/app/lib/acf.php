@@ -66,3 +66,43 @@ add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
      return $field;
  }
  // add_filter('acf/load_field/name=color', 'acf_load_color_field_choices');
+
+ /**
+  * Increment an ACF field, whether an option field or a post ID
+  * Usage: increment_field('number_times_purchased', 'option');
+  *
+  * @author Dean Appleton-Claydon
+  * @date   2019-12-27
+  *
+  * @param  string     $name    ACF field reference
+  * @param  mixed      $post_id Either a post ID or 'option'
+  * @param  integer    $amount  a fixed number, no decimal
+  */
+ function increment_field($name, $post_id = false, $amount = 1)
+ {
+     $count = (int) get_field($name, $post_id);
+
+     $count = $count + $amount;
+
+     update_field($name, $count, $post_id);
+ }
+
+  /**
+   * Decrement an ACF field, whether an option field or a post ID
+   * Usage: decrement_field('stock_level', 'option', 3);
+   *
+   * @author Dean Appleton-Claydon
+   * @date   2019-12-27
+   *
+   * @param  string     $name    ACF field reference
+   * @param  mixed      $post_id Either a post ID or 'option'
+   * @param  integer    $amount  a fixed number, no decimal
+   */
+  function decrement_field($name, $post_id = false, $amount = 1)
+  {
+      $count = (int) get_field($name, $post_id);
+
+      $count = $count - $amount;
+
+      update_field($name, $count, $post_id);
+  }
