@@ -161,3 +161,20 @@ function year_shortcode()
     return $year;
 }
 add_shortcode('year', 'year_shortcode');
+
+/**
+ * Inspired from https://kinsta.com/blog/wordpress-maintenance-mode/#manually-enabling-wordpress-maintenance-mode-with-code
+ * Uses ACF field to trigger maintenance mode
+ *
+ * @author Dean Appleton-Claydon
+ * @date   2019-12-27
+ */
+function wp_maintenance_mode()
+{
+    if (filter_var(getenv('MAINTENANCE'), FILTER_VALIDATE_BOOLEAN)) {
+        if ( ! current_user_can('edit_themes') && ! is_user_logged_in()) {
+            wp_die('<h1>Website under maintenance</h1><br>We are performing scheduled maintenance. The website will be back online shortly.');
+        }
+    }
+}
+add_action('get_header', 'wp_maintenance_mode');
