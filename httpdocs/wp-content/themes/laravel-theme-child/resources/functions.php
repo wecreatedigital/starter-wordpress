@@ -76,6 +76,7 @@ array_map(function ($file) use ($sage_error) {
     'lib/security',     // Security bits and pieces
     'lib/seo',          // Any SEO specific code
     'lib/speed',        // htaccess code + removal of general WordPress crap
+    'lib/social',        // htaccess code + removal of general WordPress crap
     'lib/woocommerce',  // WooCommerce specific custom code here
 ]);
 
