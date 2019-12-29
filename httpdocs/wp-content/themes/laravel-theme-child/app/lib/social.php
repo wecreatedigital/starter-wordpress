@@ -2,6 +2,7 @@
 
 /**
  * Often requested, lightweight solution to quickly generate sharer URLs
+ * Example: sharer_links('https://wecreate.digital', 'This is short text', 'This is long text', 'https://wecreate.digital/image.jpg')
  *
  * @author Dean Appleton-Claydon
  * @date   2019-12-27

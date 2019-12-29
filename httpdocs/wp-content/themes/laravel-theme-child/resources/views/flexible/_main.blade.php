@@ -1,9 +1,5 @@
 @layouts('page_content_block')
 
-@foreach( sharer_links('https://wecreate.digital', 'This is a text page', 'This is the longer text...', 'https://wecreate.digital/images/blog/steven-background-thumb.jpg') as $link )
-  <a target="_blank" href="{{ $link }}">{{ $link }}</a><br>
-@endforeach
-
 @layout('text_left_block')
     @include('flexible.text-left-block')
 @endlayout
