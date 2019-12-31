@@ -87,7 +87,7 @@ $table_prefix = getenv('DB_PREFIX');
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
 
-if (getenv('WP_DEBUG') == true) {
+if (filter_var(getenv('WP_DEBUG'), FILTER_VALIDATE_BOOLEAN)) {
     define('WP_DEBUG', true);
     define('SAVEQUERIES', true);
 }
