@@ -836,7 +836,7 @@
         ]
     ],
     "menu_order": 0,
-    "position": "normal",
+    "position": "acf_after_title",
     "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
@@ -846,11 +846,10 @@
         "comments",
         "author",
         "format",
-        "categories",
         "tags",
         "send-trackbacks"
     ],
     "active": 1,
     "description": "",
-    "modified": 1574671412
+    "modified": 1578637302
 }
