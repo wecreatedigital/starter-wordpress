@@ -26,6 +26,11 @@ export default {
       event.preventDefault;
       scrollToHash($(this.getAttribute('data-target')));
     });
+
+    // Prevent image download
+    $('body:not(.development-mode)').on('contextmenu', 'img', function() {
+      return false;
+    });
   },
   finalize() {
     // JavaScript to be fired on all pages, after page specific JS is fired

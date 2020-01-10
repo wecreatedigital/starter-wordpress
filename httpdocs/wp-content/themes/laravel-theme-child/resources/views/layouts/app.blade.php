@@ -1,7 +1,11 @@
 <!doctype html>
 <html {!! get_language_attributes() !!}>
   @include('layouts.head')
-  <body @php body_class() @endphp>
+  @if (getenv('ENV') == 'local' || getenv('ENV') == 'dev')
+    <body @php body_class('development-mode') @endphp>
+  @else
+    <body @php body_class() @endphp>
+  @endif
     @php do_action('get_header') @endphp
     @include('layouts.header')
     <div role="document">
