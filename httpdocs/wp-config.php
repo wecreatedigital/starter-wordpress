@@ -89,7 +89,12 @@ $table_prefix = getenv('DB_PREFIX');
 
 if (filter_var(getenv('WP_DEBUG'), FILTER_VALIDATE_BOOLEAN)) {
     define('WP_DEBUG', true);
+    define('WP_DEBUG_DISPLAY', true);
     define('SAVEQUERIES', true);
+    define('SCRIPT_DEBUG', true);
+    define('WP_DEBUG_DISPLAY', false);
+    @ini_set('display_errors', 0);
+    define('WP_DEBUG_LOG', 'wp-errors.log');
 }
 
 /**
