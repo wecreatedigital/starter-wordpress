@@ -15,21 +15,33 @@ class WordPress_Module extends Red_Module {
 	}
 
 	public function start() {
-		// Setup the various filters and actions that allow Redirection to happen
-		add_action( 'init', array( $this, 'init' ) );
-		add_action( 'init', array( $this, 'force_https' ) );
-		add_action( 'send_headers', array( $this, 'send_headers' ) );
-		add_filter( 'wp_redirect', array( $this, 'wp_redirect' ), 1, 2 );
-		add_action( 'redirection_visit', array( $this, 'redirection_visit' ), 10, 3 );
-		add_action( 'redirection_do_nothing', array( $this, 'redirection_do_nothing' ) );
-		add_filter( 'redirect_canonical', array( $this, 'redirect_canonical' ), 10, 2 );
-		add_action( 'template_redirect', array( $this, 'template_redirect' ) );
+		// Only run redirect rules if we're not disabled
+		if ( ! red_is_disabled() ) {
+			// The main redirect loop
+			add_action( 'init', [ $this, 'init' ] );
 
-		// Remove WordPress 2.3 redirection
-		remove_action( 'template_redirect', 'wp_old_slug_redirect' );
+			// Force HTTPs code
+			add_action( 'init', [ $this, 'force_https' ] );
+
+			// Send site HTTP headers as well as 410 error codes
+			add_action( 'send_headers', [ $this, 'send_headers' ] );
+
+			// Redirect HTTP headers and server-specific overrides
+			add_filter( 'wp_redirect', [ $this, 'wp_redirect' ], 1, 2 );
+		}
+
+		// Setup the various filters and actions that allow Redirection to happen
+		add_action( 'redirection_visit', [ $this, 'redirection_visit' ], 10, 3 );
+		add_action( 'redirection_do_nothing', [ $this, 'redirection_do_nothing' ] );
+
+		// Prevent WordPress overriding a canonical redirect
+		add_filter( 'redirect_canonical', [ $this, 'redirect_canonical' ], 10, 2 );
+
+		// Log 404s and perform 'URL and WordPress page type' redirects
+		add_action( 'template_redirect', [ $this, 'template_redirect' ] );
 	}
 
-	/**
+	/*
 	 * This ensures that a matched URL is not overriddden by WordPress, if the URL happens to be a WordPress URL of some kind
 	 * For example: /?author=1 will be redirected to /author/name unless this returns false
 	 */
@@ -97,9 +109,14 @@ class WordPress_Module extends Red_Module {
 
 		if ( $options['https'] && ! is_ssl() ) {
 			$target = rtrim( parse_url( home_url(), PHP_URL_HOST ), '/' ) . esc_url_raw( Redirection_Request::get_request_url() );
+			add_filter( 'x_redirect_by', [ $this, 'x_redirect_by' ] );
 			wp_safe_redirect( 'https://' . $target, 301 );
 			die();
 		}
+	}
+
+	public function x_redirect_by() {
+		return 'redirection';
 	}
 
 	/**
@@ -134,7 +151,7 @@ class WordPress_Module extends Red_Module {
 		}
 	}
 
-	/**
+	/*
 	 * Protect certain URLs from being redirected. Note we don't need to protect wp-admin, as this code doesn't run there
 	 */
 	private function protected_url( $url ) {
@@ -160,16 +177,25 @@ class WordPress_Module extends Red_Module {
 
 	public function send_headers( $obj ) {
 		if ( ! empty( $this->matched ) && $this->matched->action->get_code() === 410 ) {
-			add_filter( 'status_header', array( $this, 'set_header_410' ) );
+			add_filter( 'status_header', [ $this, 'set_header_410' ] );
 		}
+
+		// Add any custom headers
+		$options = red_get_options();
+		$headers = new Red_Http_Headers( $options['headers'] );
+		$headers->run( $headers->get_site_headers() );
 	}
 
 	public function set_header_410() {
 		return 'HTTP/1.1 410 Gone';
 	}
 
-	public function wp_redirect( $url, $status ) {
+	public function wp_redirect( $url, $status = 302 ) {
 		global $wp_version, $is_IIS;
+
+		$options = red_get_options();
+		$headers = new Red_Http_Headers( $options['headers'] );
+		$headers->run( $headers->get_redirect_headers() );
 
 		if ( $is_IIS ) {
 			header( "Refresh: 0;url=$url" );
@@ -177,7 +203,7 @@ class WordPress_Module extends Red_Module {
 		}
 
 		if ( $status === 301 && php_sapi_name() === 'cgi-fcgi' ) {
-			$servers_to_check = array( 'lighttpd', 'nginx' );
+			$servers_to_check = [ 'lighttpd', 'nginx' ];
 
 			foreach ( $servers_to_check as $name ) {
 				if ( isset( $_SERVER['SERVER_SOFTWARE'] ) && stripos( $_SERVER['SERVER_SOFTWARE'], $name ) !== false ) {

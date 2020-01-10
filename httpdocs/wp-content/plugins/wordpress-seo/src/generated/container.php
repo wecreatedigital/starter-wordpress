@@ -91,6 +91,8 @@ class Cached_Container extends Container
             'Yoast\\WP\\Free\\Config\\Dependency_Management' => true,
             'Yoast\\WP\\Free\\Database\\Ruckusing_Framework' => true,
             'Yoast\\WP\\Free\\Exceptions\\Missing_Method' => true,
+            'Yoast\\WP\\Free\\Helpers\\Author_Archive_Helper' => true,
+            'Yoast\\WP\\Free\\Helpers\\Home_Url_Helper' => true,
             'Yoast\\WP\\Free\\Loggers\\Logger' => true,
             'Yoast\\WP\\Free\\Loggers\\Migration_Logger' => true,
             'Yoast\\WP\\Free\\Oauth\\Client' => true,

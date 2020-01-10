@@ -68,15 +68,9 @@ class WPSEO_Import_Settings {
 	 * @return void
 	 */
 	protected function parse_options( $raw_options ) {
-		// If we're not on > PHP 5.3, return, as we'll otherwise error out.
-		if ( ! defined( 'WPSEO_NAMESPACES' ) || ! WPSEO_NAMESPACES ) {
-			return;
-		}
+		$options = parse_ini_string( $raw_options, true, INI_SCANNER_RAW );
 
-		// @codingStandardsIgnoreLine
-		$options = parse_ini_string( $raw_options, true, INI_SCANNER_RAW ); // phpcs:ignore PHPCompatibility.FunctionUse.NewFunctions.parse_ini_stringFound -- We won't get to this function if PHP < 5.3 due to the WPSEO_NAMESPACES check above.
-
-		if ( is_array( $options ) && $options !== array() ) {
+		if ( is_array( $options ) && $options !== [] ) {
 			$this->import_options( $options );
 
 			return;
@@ -116,5 +110,8 @@ class WPSEO_Import_Settings {
 
 		$this->status->set_msg( __( 'Settings successfully imported.', 'wordpress-seo' ) );
 		$this->status->set_status( true );
+
+		// Reset the cached option values.
+		WPSEO_Options::fill_cache();
 	}
 }

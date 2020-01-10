@@ -1,48 +1,6 @@
 <?php
 /* THIS IS A GENERATED FILE. DO NOT EDIT DIRECTLY. */
 $generated_i18n_strings = array(
-	// Reference: node_modules/@yoast/algolia-search-box/AlgoliaSearcher.js:232
-	__( 'Something went wrong. Please try again later.', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/AlgoliaSearcher.js:247
-	__( 'Loading...', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchBar.js:139
-	__( 'Search the Yoast Knowledge Base for answers to your questions:', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchBar.js:140
-	__( 'Type here to search...', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchBar.js:161
-	__( 'Search', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:45
-	__( 'View in KB', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:46
-	__( 'Open the knowledge base article in a new window or read it in the iframe below', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:47
-	__( 'Go back', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:48
-	__( 'Go back to the search results', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:82
-	__( 'Search result', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResultDetail.js:89
-	__( 'Knowledge base article', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResults.js:113
-	__( 'No results found.', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResults.js:160
-	__( 'Number of results found: %d', 'wordpress-seo' ),
-
-	// Reference: node_modules/@yoast/algolia-search-box/SearchResults.js:167
-	__( 'Search results', 'wordpress-seo' ),
-
 	// Reference: node_modules/@yoast/analysis-report/AnalysisList.js:65
 	__( 'Marks are disabled in current view', 'wordpress-seo' ),
 
@@ -146,9 +104,6 @@ $generated_i18n_strings = array(
 	// Reference: node_modules/yoast-components/composites/Plugin/CornerstoneContent/components/CornerstoneToggle.js:26
 	__( 'Mark as cornerstone content', 'wordpress-seo' ),
 
-	// Reference: node_modules/yoast-components/composites/Plugin/HelpCenter/HelpCenter.js:78
-	__( 'Need help?', 'wordpress-seo' ),
-
 	// Reference: node_modules/yoast-components/composites/Plugin/Shared/components/KeywordInput.js:146
 	__( 'Are you trying to use multiple keyphrases? You should add them separately below.', 'wordpress-seo' ),
 
@@ -220,16 +175,16 @@ $generated_i18n_strings = array(
 	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/FixedWidthContainer.js:133
 	__( 'Scroll to see the preview content.', 'wordpress-seo' ),
 
-	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:473
+	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:474
 	__( 'Please provide a meta description by editing the snippet below. If you don’t, Google will try to find a relevant part of your post to show in the search results.', 'wordpress-seo' ),
 
-	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:589
+	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:590
 	__( 'Url preview', 'wordpress-seo' ),
 
-	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:769
+	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:770
 	__( 'SEO title preview', 'wordpress-seo' ),
 
-	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:788
+	// Reference: node_modules/@yoast/search-metadata-previews/snippet-preview/SnippetPreview.js:789
 	__( 'Meta description preview', 'wordpress-seo' ),
 
 	// Reference: js/src/components/MailchimpSignup.js:225

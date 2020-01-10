@@ -5,8 +5,8 @@ License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 Tags: SEO, XML sitemap, Content analysis, Readability
 Requires at least: 5.2
-Tested up to: 5.3
-Stable tag: 12.5
+Tested up to: 5.3.2
+Stable tag: 12.8
 Requires PHP: 5.6.20
 
 Improve your WordPress SEO: Write better content and have a fully optimized WordPress site using the Yoast SEO plugin.
@@ -209,39 +209,52 @@ Your question has most likely been answered on our knowledge base: [kb.yoast.com
 
 == Changelog ==
 
-= 12.5.0 =
-Release Date: November 13th, 2019
+= 12.8 =
+Release Date: January 7th, 2020
 
-These last couple of months here at Yoast SEO HQ have all been about building better things. Behind the scenes, we’re making good progress at getting our flagship plugins ready for the future. While we’re busy building the future, we also stick to our regular two-week release schedule, which means it’s time to introduce Yoast SEO 12.5. Find out more in [our 12.5 release post](https://yoa.st/release-12-5)!
+Welcome to another year of helping you achieve your goals with your site! Today, it’s time for the first in a long line of releases planned for 2020: Yoast SEO 12.8. In this release, you’ll find a number of bug fixes and performance enhancements. Find out more about this release in [our 12.8 release post](https://yoa.st/release-12-8)!
 
 Bugfixes:
 
-* Fixes a bug for terms where keywords and snippet preview data would be synced across all languages in a MultilingualPress multisite environment.
-* Fixes a bug where the visually hidden text in the snippet preview was misplaced.
-
-Other:
-
-* Deprecates the Google Search Console.
-
-= 12.4.0 =
-Release Date: October 29th, 2019
-
-After releasing several updates to our snippet preview in previous releases, Yoast SEO 12.4 now shows an image for your post in the mobile snippet preview, just like Google would. We have several other improvements and fixes for you in store with Yoast SEO 12.4. Find out more in [our 12.4 release post](https://yoa.st/release-12-4)!
+* Fixes a bug where clicking the notification center buttons would result in an incorrect icon and a misplaced focus style for the dismiss and restore buttons.
+* Fixes a bug where `create` and `update` actions would be done twice on multisite environments in combination with MultilingualPress.
+* Fixes a bug where an empty page title would cause the breadcrumbs schema to set a wrong url.
+* Fixes a bug where author archives for authors without post would show up in the search results, even though the "Show archives for authors without posts in search results?" option was enabled.
+* Fixes a bug where the styling was missing from admin error notices in WordPress 5.3.
+* Fixes a bug where the results of the images alt attribute SEO assessment in the Classic Editor were incorrect when the image did not have an alt attribute but did have a title attribute.
 
 Enhancements:
 
-* Adds "schema" as keyword to the structured data blocks to make them show up for that search term in the block search as well.
-* Adds an image to the mobile snippet preview for posts and terms.
-* Changes the readability score for empty content from "Needs Improvement" with a red icon to "Not Available" with a gray icon. Props to [emilyatmobtown](https://github.com/emilyatmobtown).
-* Updates the URLs used to ping Google and Bing about the location of a sitemap. Props to [@emilyatmobtown](https://github.com/emilyatmobtown).
-* Makes the notice about running an old WordPress version more specific by showing the installed WordPress version and the latest WordPress version.
-* Adds information about enabling Open Graph to the Twitter settings. Props to [@stevenfranks](https://github.com/stevenfranks).
+* Optimizes the options retrieval processes. Props to [Alex Bouma](https://alex.bouma.dev/) for his testing and suggestions.
+* Adds the possibility to declare an identifier when integrating with the Schema output.
+
+Other:
+
+* Fixes the documentation in the Schema HowTo file. Props to [timvaniersel](https://github.com/timvaniersel).
+* Fixes the documentation in the Breadcrumbs file. Props to [alfiosalanitri](https://github.com/alfiosalanitri).
+* Moves the paginated comments notice from the dashboard to WordPress' Site Health screen.
+
+= 12.7.1 =
+Release Date: December 12th, 2019
 
 Bugfixes:
 
-* Fixes a bug where no Twitter and Facebook image could be set for attachment pages.
-* Fixes a bug where a nested paragraph would be present in the "noindex" metabox warning.
-* Fixes a bug where Google+ data would still be exported in the settings export.
+* Fixes a bug where the metabox would be broken when a relative URL was configured as `WP_CONTENT_URL`. Props to [FPCSJames](https://github.com/FPCSJames).
+
+= 12.7.0 =
+Release Date: December 10th, 2019
+
+Yoast SEO 12.7 is out today — signalling the last release of 2019. This release is all about cleaning up and fixing bugs. Since we have a two-week release schedule, we can quickly respond to any bug we might find. Find out more about this release in [our 12.7 release post](https://yoa.st/release-12-7)!
+
+Bugfixes:
+
+* Fixes a bug where sub-sitemaps were rendered for non-public custom post types. Props to [@stodorovic](https://github.com/stodorovic).
+* Fixes a bug where nested gallery images were not included in the image count in the sitemap. Props to [@stodorovic](https://github.com/stodorovic).
+* Fixes a bug where the notification center 'dismiss' and 'restore' buttons had no focus style.
+
+Other:
+
+* Improves security by adding output escaping.
 
 = Earlier versions =
 For the changelog of earlier versions, please refer to [the changelog on yoast.com](https://yoa.st/yoast-seo-changelog).

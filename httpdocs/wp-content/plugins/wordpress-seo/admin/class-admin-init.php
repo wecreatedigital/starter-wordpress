@@ -34,22 +34,23 @@ class WPSEO_Admin_Init {
 
 		$this->asset_manager = new WPSEO_Admin_Asset_Manager();
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_dismissible' ) );
-		add_action( 'admin_init', array( $this, 'tagline_notice' ), 15 );
-		add_action( 'admin_init', array( $this, 'blog_public_notice' ), 15 );
-		add_action( 'admin_init', array( $this, 'permalink_notice' ), 15 );
-		add_action( 'admin_init', array( $this, 'page_comments_notice' ), 15 );
-		add_action( 'admin_init', array( $this, 'yoast_plugin_suggestions_notification' ), 15 );
-		add_action( 'admin_init', array( $this, 'recalculate_notice' ), 15 );
-		add_action( 'admin_init', array( $this, 'unsupported_php_notice' ), 15 );
-		add_action( 'admin_init', array( $this->asset_manager, 'register_assets' ) );
-		add_action( 'admin_init', array( $this, 'show_hook_deprecation_warnings' ) );
-		add_action( 'admin_init', array( 'WPSEO_Plugin_Conflict', 'hook_check_for_plugin_conflicts' ) );
-		add_action( 'admin_init', array( $this, 'handle_notifications' ), 15 );
-		add_action( 'admin_notices', array( $this, 'permalink_settings_notice' ) );
-		add_action( 'admin_enqueue_scripts', array( $this->asset_manager, 'register_wp_assets' ), PHP_INT_MAX );
+		add_action( 'admin_enqueue_scripts', [ $this, 'enqueue_dismissible' ] );
+		add_action( 'admin_init', [ $this, 'tagline_notice' ], 15 );
+		add_action( 'admin_init', [ $this, 'blog_public_notice' ], 15 );
+		add_action( 'admin_init', [ $this, 'permalink_notice' ], 15 );
+		add_action( 'admin_init', [ $this, 'yoast_plugin_suggestions_notification' ], 15 );
+		add_action( 'admin_init', [ $this, 'recalculate_notice' ], 15 );
+		add_action( 'admin_init', [ $this, 'unsupported_php_notice' ], 15 );
+		add_action( 'admin_init', [ $this->asset_manager, 'register_assets' ] );
+		add_action( 'admin_init', [ $this, 'show_hook_deprecation_warnings' ] );
+		add_action( 'admin_init', [ 'WPSEO_Plugin_Conflict', 'hook_check_for_plugin_conflicts' ] );
+		add_action( 'admin_init', [ $this, 'handle_notifications' ], 15 );
+		add_action( 'admin_notices', [ $this, 'permalink_settings_notice' ] );
 
-		$listeners   = array();
+		$page_comments = new WPSEO_Health_Check_Page_Comments();
+		$page_comments->register_test();
+
+		$listeners   = [];
 		$listeners[] = new WPSEO_Post_Type_Archive_Notification_Handler();
 
 		/**
@@ -80,7 +81,7 @@ class WPSEO_Admin_Init {
 		 *
 		 * @var WPSEO_Notification_Handler[] $handlers
 		 */
-		$handlers   = array();
+		$handlers   = [];
 		$handlers[] = new WPSEO_Post_Type_Archive_Notification_Handler();
 
 		$notification_center = Yoast_Notification_Center::get();
@@ -100,9 +101,9 @@ class WPSEO_Admin_Init {
 	 * Notify about the default tagline if the user hasn't changed it.
 	 */
 	public function tagline_notice() {
-		$query_args    = array(
+		$query_args    = [
 			'autofocus[control]' => 'blogdescription',
-		);
+		];
 		$customize_url = add_query_arg( $query_args, wp_customize_url() );
 
 		$info_message = sprintf(
@@ -112,11 +113,11 @@ class WPSEO_Admin_Init {
 			'</a>'
 		);
 
-		$notification_options = array(
+		$notification_options = [
 			'type'         => Yoast_Notification::ERROR,
 			'id'           => 'wpseo-dismiss-tagline-notice',
 			'capabilities' => 'wpseo_manage_options',
-		);
+		];
 
 		$tagline_notification = new Yoast_Notification( $info_message, $notification_options );
 
@@ -137,12 +138,12 @@ class WPSEO_Admin_Init {
 			'</a>'
 		);
 
-		$notification_options = array(
+		$notification_options = [
 			'type'         => Yoast_Notification::ERROR,
 			'id'           => 'wpseo-dismiss-blog-public-notice',
 			'priority'     => 1.0,
 			'capabilities' => 'wpseo_manage_options',
-		);
+		];
 
 		$notification = new Yoast_Notification( $info_message, $notification_options );
 
@@ -152,38 +153,6 @@ class WPSEO_Admin_Init {
 		}
 		else {
 			$notification_center->remove_notification( $notification );
-		}
-	}
-
-	/**
-	 * Display notice to disable comment pagination.
-	 */
-	public function page_comments_notice() {
-
-		$info_message  = __( 'Paging comments is enabled, this is not needed in 999 out of 1000 cases, we recommend to disable it.', 'wordpress-seo' );
-		$info_message .= '<br/>';
-
-		$info_message .= sprintf(
-			/* translators: %1$s resolves to the opening tag of the link to the comment setting page, %2$s resolves to the closing tag of the link */
-			__( 'To fix this uncheck the box in front of the "Break comments into pages..." on the %1$sComment settings page%2$s.', 'wordpress-seo' ),
-			'<a href="' . esc_url( admin_url( 'options-discussion.php' ) ) . '">',
-			'</a>'
-		);
-
-		$notification_options = array(
-			'type'         => Yoast_Notification::WARNING,
-			'id'           => 'wpseo-dismiss-page_comments-notice',
-			'capabilities' => 'wpseo_manage_options',
-		);
-
-		$tagline_notification = new Yoast_Notification( $info_message, $notification_options );
-
-		$notification_center = Yoast_Notification_Center::get();
-		if ( $this->has_page_comments() ) {
-			$notification_center->add_notification( $tagline_notification );
-		}
-		else {
-			$notification_center->remove_notification( $tagline_notification );
 		}
 	}
 
@@ -217,12 +186,12 @@ class WPSEO_Admin_Init {
 			'</a>'
 		);
 
-		$notification_options = array(
+		$notification_options = [
 			'type'         => Yoast_Notification::WARNING,
 			'id'           => 'wpseo-dismiss-permalink-notice',
 			'capabilities' => 'wpseo_manage_options',
 			'priority'     => 0.8,
-		);
+		];
 
 		$notification = new Yoast_Notification( $info_message, $notification_options );
 
@@ -233,15 +202,6 @@ class WPSEO_Admin_Init {
 		else {
 			$notification_center->remove_notification( $notification );
 		}
-	}
-
-	/**
-	 * Are page comments enabled.
-	 *
-	 * @return bool
-	 */
-	public function has_page_comments() {
-		return '1' === get_option( 'page_comments' );
 	}
 
 	/**
@@ -302,10 +262,10 @@ class WPSEO_Admin_Init {
 
 		return new Yoast_Notification(
 			$info_message,
-			array(
+			[
 				'id'   => 'wpseo-suggested-plugin-' . $name,
 				'type' => Yoast_Notification::WARNING,
-			)
+			]
 		);
 	}
 
@@ -338,11 +298,11 @@ class WPSEO_Admin_Init {
 					'<a href="' . admin_url( 'admin.php?page=wpseo_tools&recalculate=1' ) . '">',
 					'</a>'
 				),
-				array(
+				[
 					'type'  => 'updated yoast-dismissible',
 					'id'    => 'wpseo-dismiss-recalculate',
 					'nonce' => wp_create_nonce( 'wpseo-dismiss-recalculate' ),
-				)
+				]
 			)
 		);
 	}
@@ -363,7 +323,7 @@ class WPSEO_Admin_Init {
 	 * @return float The latest released major WordPress version. 0 The stable-check api doesn't respond.
 	 */
 	private function get_latest_major_wordpress_version() {
-		$core_updates = get_core_updates( array( 'dismissed' => true ) );
+		$core_updates = get_core_updates( [ 'dismissed' => true ] );
 
 		if ( $core_updates === false ) {
 			return 0;
@@ -440,7 +400,7 @@ class WPSEO_Admin_Init {
 	 * Loads admin page class for all admin pages starting with `wpseo_`.
 	 */
 	private function load_admin_user_class() {
-		if ( in_array( $this->pagenow, array( 'user-edit.php', 'profile.php' ), true )
+		if ( in_array( $this->pagenow, [ 'user-edit.php', 'profile.php' ], true )
 			&& current_user_can( 'edit_users' )
 		) {
 			new WPSEO_Admin_User_Profile();
@@ -494,11 +454,11 @@ class WPSEO_Admin_Init {
 	private function register_i18n_promo_class() {
 		// BC, because an older version of the i18n-module didn't have this class.
 		$i18n_module = new Yoast_I18n_WordPressOrg_v3(
-			array(
+			[
 				'textdomain'  => 'wordpress-seo',
 				'plugin_name' => 'Yoast SEO',
 				'hook'        => 'wpseo_admin_promo_footer',
-			),
+			],
 			false
 		);
 
@@ -512,10 +472,10 @@ class WPSEO_Admin_Init {
 
 		$notification = new Yoast_Notification(
 			$message,
-			array(
+			[
 				'type' => Yoast_Notification::WARNING,
 				'id'   => 'i18nModuleTranslationAssistance',
-			)
+			]
 		);
 
 		if ( $message ) {
@@ -556,12 +516,12 @@ class WPSEO_Admin_Init {
 		}
 
 		// WordPress hooks that have been deprecated since a Yoast SEO version.
-		$deprecated_filters = array(
-			'wpseo_genesis_force_adjacent_rel_home' => array(
+		$deprecated_filters = [
+			'wpseo_genesis_force_adjacent_rel_home' => [
 				'version'     => '9.4',
 				'alternative' => null,
-			),
-		);
+			],
+		];
 
 		// Determine which filters have been registered.
 		$deprecated_notices = array_intersect(
@@ -636,5 +596,29 @@ class WPSEO_Admin_Init {
 	 */
 	public function wordpress_upgrade_notice() {
 		_deprecated_function( __METHOD__, 'WPSEO 12.5' );
+	}
+
+	/**
+	 * Display notice to disable comment pagination.
+	 *
+	 * @deprecated 12.8
+	 * @codeCoverageIgnore
+	 */
+	public function page_comments_notice() {
+		_deprecated_function( __METHOD__, 'WPSEO 12.8' );
+	}
+
+	/**
+	 * Are page comments enabled.
+	 *
+	 * @deprecated 12.8
+	 * @codeCoverageIgnore
+	 *
+	 * @return bool
+	 */
+	public function has_page_comments() {
+		_deprecated_function( __METHOD__, 'WPSEO 12.8' );
+
+		return '1' === get_option( 'page_comments' );
 	}
 }

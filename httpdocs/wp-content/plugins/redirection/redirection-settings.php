@@ -17,7 +17,7 @@ function red_get_post_types( $full = true ) {
 	$types = get_post_types( array( 'public' => true ), 'objects' );
 	$types[] = (object) array(
 		'name' => 'trash',
-		'label' => __( 'Trash' ),
+		'label' => __( 'Trash', 'default' ),
 	);
 
 	$post_types = array();
@@ -54,6 +54,7 @@ function red_get_default_options() {
 		'last_group_id'       => 0,
 		'rest_api'            => REDIRECTION_API_JSON,
 		'https'               => false,
+		'headers'             => [],
 		'database'            => '',
 	];
 	$defaults = array_merge( $defaults, $flags->get_json() );
@@ -69,7 +70,7 @@ function red_set_options( array $settings = array() ) {
 		$options['database'] = $settings['database'];
 	}
 
-	if ( isset( $settings['rest_api'] ) && in_array( intval( $settings['rest_api'], 10 ), array( 0, 1, 2, 3, 4 ) ) ) {
+	if ( isset( $settings['rest_api'] ) && in_array( intval( $settings['rest_api'], 10 ), array( 0, 1, 2, 3, 4 ), true ) ) {
 		$options['rest_api'] = intval( $settings['rest_api'], 10 );
 	}
 
@@ -77,7 +78,7 @@ function red_set_options( array $settings = array() ) {
 		$allowed = red_get_post_types( false );
 
 		foreach ( $settings['monitor_types'] as $type ) {
-			if ( in_array( $type, $allowed ) ) {
+			if ( in_array( $type, $allowed, true ) ) {
 				$monitor_types[] = $type;
 			}
 		}
@@ -187,16 +188,32 @@ function red_set_options( array $settings = array() ) {
 		$options = array_merge( $options, $flags->get_json() );
 	}
 
+	if ( isset( $settings['headers'] ) ) {
+		$headers = new Red_Http_Headers( $settings['headers'] );
+		$options['headers'] = $headers->get_json();
+	}
+
 	update_option( REDIRECTION_OPTION, apply_filters( 'redirection_save_options', $options ) );
 	return $options;
 }
 
+function red_is_disabled() {
+	return ( defined( 'REDIRECTION_DISABLE' ) && REDIRECTION_DISABLE ) || file_exists( __DIR__ . '/redirection-disable.txt' );
+}
+
 function red_get_options() {
 	$options = get_option( REDIRECTION_OPTION );
+
+	if ( is_array( $options ) && red_is_disabled() ) {
+		$options['https'] = false;
+	}
+
 	if ( $options === false ) {
 		// Default flags for new installs - ignore case and trailing slashes
-		$options['flags_case'] = true;
-		$options['flags_trailing'] = true;
+		$options = [
+			'flags_case' => true,
+			'flags_trailing' => true,
+		];
 	}
 
 	$defaults = red_get_default_options();
