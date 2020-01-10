@@ -16,8 +16,10 @@ export default {
 
     // For accessibility reasons use button if target is on same page, see below function
     $('a[href^="#"]').on('click', function(event) {
-      event.preventDefault;
-      scrollToHash($(this.getAttribute('href')));
+      if( ! $(this).attr('data-toggle') ) {
+        event.preventDefault;
+        scrollToHash($(this.getAttribute('href')));
+      }
     });
 
     $('button[data-target]').on('click', function(event) {
