@@ -18,7 +18,7 @@ add_filter('mod_rewrite_rules', 'output_htaccess');
 /**
  * Enable SSL
  */
-if (getenv('SSL_ENABLED') === 'yes') {
+if (filter_var(getenv('SSL_ENABLED'), FILTER_VALIDATE_BOOLEAN)) {
     function enable_ssl_htaccess($rules)
     {
         $new_rules = '
