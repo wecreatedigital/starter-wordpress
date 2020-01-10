@@ -1,91 +1,145 @@
 <?php
+
 /**
- * Sample CPT - PLEASE UNCOMMENT function.php
+ * Register Custom Post types and their taxonomies here...
  *
- * Feel free to use:
- * - https://generatewp.com/taxonomy/
- * - https://generatewp.com/post-type/
+ * @author Christopher Kelker 10-01-2020
+ * @return array void
  */
-
-/**
- * A custom post type example with single posts
- */
-function services_post_type()
-{
-    $labels = array(
-        'name' => _x('Services', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('Service', 'Post Type Singular Name', 'text_domain'),
-        'menu_name' => __('Services', 'text_domain'),
-        'parent_item_colon' => __('Parent Service:', 'text_domain'),
-        'all_items' => __('All Services', 'text_domain'),
-        'view_item' => __('View Service', 'text_domain'),
-        'add_new_item' => __('Add New Service', 'text_domain'),
-        'add_new' => __('Add New', 'text_domain'),
-        'edit_item' => __('Edit Service', 'text_domain'),
-        'update_item' => __('Update Service', 'text_domain'),
-        'search_items' => __('Search Services', 'text_domain'),
-        'not_found' => __('Not found', 'text_domain'),
-        'not_found_in_trash' => __('Not found in Trash', 'text_domain'),
-    );
-    $args = array(
-        'label' => __('post_type', 'text_domain'),
-        'description' => __('Service', 'text_domain'),
-        'labels' => $labels,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'show_in_admin_bar' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
-        'menu_position' => 20,
-        'can_export' => true,
-        'has_archive' => true,
-        'exclude_from_search' => false,
-        'capability_type' => 'post',
-        'hierarchical' => false,
+$cpts = [
+    'testimonial' => [
         'public' => true,
-        'publicly_queryable' => true,
-    );
-    register_post_type('service', $args);
+        'taxonomies' => [
+            'author' => [
+                'public' => true,
+                'hierarchical' => true,
+            ],
+        ],
+    ],
+
+    'faq' => [
+        'public' => false,
+        'taxonomies' => [
+            'tag' => [
+                'public' => true,
+                'hierarchical' => true,
+            ],
+        ],
+    ],
+];
+
+foreach ($cpts as $cpt => $cpt_options) {
+
+    // Register Custom Post Type
+    add_action('init', function () use ($cpt, $cpt_options) {
+        $cpt_plural = str_plural($cpt);
+        $uc_post_type_plural = ucfirst($cpt_plural);
+        $uc_post_type_singular = ucfirst($cpt);
+
+        $labels = array(
+            'name' => _x($uc_post_type_plural, 'Post Type General Name', 'text_domain'),
+            'singular_name' => _x($uc_post_type_singular, 'Post Type Singular Name', 'text_domain'),
+            'menu_name' => __($uc_post_type_plural, 'text_domain'),
+            'name_admin_bar' => __($uc_post_type_singular, 'text_domain'),
+            'archives' => __("{$uc_post_type_singular} Archives", 'text_domain'),
+            'attributes' => __("{$uc_post_type_singular} Attributes", 'text_domain'),
+            'parent_item_colon' => __("Parent {$uc_post_type_singular}:", 'text_domain'),
+            'all_items' => __("All {$uc_post_type_plural}", 'text_domain'),
+            'add_new_item' => __("Add New {$uc_post_type_singular}", 'text_domain'),
+            'add_new' => __("Add New {$uc_post_type_singular}", 'text_domain'),
+            'new_item' => __("New {$uc_post_type_singular}", 'text_domain'),
+            'edit_item' => __("Edit {$uc_post_type_singular}", 'text_domain'),
+            'update_item' => __("Update {$uc_post_type_singular}", 'text_domain'),
+            'view_item' => __("View {$uc_post_type_singular}", 'text_domain'),
+            'view_items' => __("View {$uc_post_type_plural}", 'text_domain'),
+            'search_items' => __("Search {$uc_post_type_singular}", 'text_domain'),
+            'not_found' => __('Not found', 'text_domain'),
+            'not_found_in_trash' => __('Not found in Trash', 'text_domain'),
+            'featured_image' => __('Featured Image', 'text_domain'),
+            'set_featured_image' => __('Set featured image', 'text_domain'),
+            'remove_featured_image' => __('Remove featured image', 'text_domain'),
+            'use_featured_image' => __('Use as featured image', 'text_domain'),
+            'insert_into_item' => __("Insert into {$cpt}", 'text_domain'),
+            'uploaded_to_this_item' => __("Uploaded to this {$cpt}", 'text_domain'),
+            'items_list' => __("{$uc_post_type_plural} list", 'text_domain'),
+            'items_list_navigation' => __("{$uc_post_type_plural} list navigation", 'text_domain'),
+            'filter_items_list' => __("Filter {$cpt_plural} list", 'text_domain'),
+        );
+        $args = array(
+            'label' => __('post_type', 'text_domain'),
+            'description' => __($cpt, 'text_domain'),
+            'labels' => $labels,
+            'supports' => array(),
+            'show_ui' => true,
+            'show_in_menu' => true,
+            'query_var' => true,
+            'show_in_nav_menus' => true,
+            'show_in_admin_bar' => true,
+            'supports' => array('title', 'editor', 'thumbnail', 'comments', 'revisions', 'page-attributes'),
+            'taxonomies' => array('category'),
+            'menu_position' => 5,
+            'can_export' => true,
+            'has_archive' => true,
+            'rewrite' => array('with_front' => false),
+
+            // --- PUBLIC OPTIONS ---
+            'exclude_from_search' => isset($cpt_options['public']) ? $cpt_options['public'] : false,
+            'capability_type' => 'post',
+            'hierarchical' => false,
+            'public' => isset($cpt_options['public']) ? $cpt_options['public'] : true,
+            'publicly_queryable' => isset($cpt_options['public']) ? $cpt_options['public'] : true,
+        );
+        register_post_type($cpt, $args);
+    }, 0);
+
+    if ( ! isset($cpt_options['taxonomies'])) {
+        continue;
+    }
+
+    if (empty($cpt_options['taxonomies'])) {
+        continue;
+    }
+
+    foreach ($cpt_options['taxonomies'] as $taxonomy => $taxonomy_options) {
+        add_action('init', function () use ($cpt, $taxonomy, $taxonomy_options) {
+            $taxonomy_plural = str_plural($taxonomy);
+            $uc_taxonomy_plural = ucfirst($taxonomy_plural);
+            $uc_taxonomy_singular = ucfirst($taxonomy);
+
+            // Labels part for the GUI
+            $labels = array(
+                'name' => _x($uc_taxonomy_plural, 'taxonomy general name'),
+                'singular_name' => _x($uc_taxonomy_singular, 'taxonomy singular name'),
+                'search_items' => __("Search {$uc_taxonomy_plural}"),
+                'popular_items' => __("Popular {$uc_taxonomy_plural}"),
+                'all_items' => __("All {$uc_taxonomy_plural}"),
+                'parent_item' => null,
+                'parent_item_colon' => null,
+                'edit_item' => __("Edit {$uc_taxonomy_singular}"),
+                'update_item' => __("Update {$uc_taxonomy_singular}"),
+                'add_new_item' => __("Add New {$uc_taxonomy_singular}"),
+                'new_item_name' => __("New {$uc_taxonomy_singular} Name"),
+                'separate_items_with_commas' => __("Separate {$taxonomy_plural} with commas"),
+                'add_or_remove_items' => __("Add or remove {$taxonomy_plural}"),
+                'choose_from_most_used' => __("Choose from the most used {$taxonomy_plural}"),
+                'menu_name' => __($uc_taxonomy_plural),
+            );
+
+            // if ($cpt != 'testimonial') {
+            //     dd($cpt);
+            // }
+
+            // Now register the non-hierarchical taxonomy like tag
+            register_taxonomy($taxonomy_plural, $cpt, [
+                'hierarchical' => isset($taxonomy_options['hierarchical']) ? $taxonomy_options['hierarchical'] : false,
+                'public' => isset($taxonomy_options['public']) ? $taxonomy_options['public'] : true,
+                'labels' => $labels,
+                'show_ui' => true,
+                'show_admin_column' => true,
+                'update_count_callback' => '_update_post_term_count',
+                'query_var' => true,
+                'rewrite' => array('slug' => $taxonomy),
+            ]);
+        }, 0);
+    }
 }
-
-add_action('init', 'services_post_type', 0);
-
-/**
- * A custom post type example WITHOUT single posts
- */
-function testimonials_post_type()
-{
-    $labels = array(
-        'name' => _x('Testimonials', 'Post Type General Name', 'text_domain'),
-        'singular_name' => _x('Testimonial', 'Post Type Singular Name', 'text_domain'),
-        'menu_name' => __('Testimonials', 'text_domain'),
-        'parent_item_colon' => __('Parent Testimonial:', 'text_domain'),
-        'all_items' => __('All testimonials', 'text_domain'),
-        'view_item' => __('View Testimonial', 'text_domain'),
-        'add_new_item' => __('Add New Testimonial', 'text_domain'),
-        'add_new' => __('Add New', 'text_domain'),
-        'edit_item' => __('Edit Testimonial', 'text_domain'),
-        'update_item' => __('Update Testimonial', 'text_domain'),
-        'search_items' => __('Search testimonials', 'text_domain'),
-        'not_found' => __('Not found', 'text_domain'),
-        'not_found_in_trash' => __('Not found in Trash', 'text_domain'),
-    );
-    $args = array(
-        'label' => __('post_type', 'text_domain'),
-        'description' => __('Testimonial', 'text_domain'),
-        'labels' => $labels,
-        'show_ui' => true,
-        'show_in_menu' => true,
-        'show_in_nav_menus' => true,
-        'show_in_admin_bar' => true,
-        'supports' => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
-        'menu_position' => 20,
-        'can_export' => true,
-        'has_archive' => false,
-        'exclude_from_search' => false,
-        'capability_type' => 'post',
-    );
-    register_post_type('testimonial', $args);
-}
-
-add_action('init', 'testimonials_post_type', 0);

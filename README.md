@@ -1,7 +1,7 @@
 # A starter WordPress
 This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreatedigital.co.uk)
 
-Version 1.3.3
+Version 1.3.4
 
 ## This uses/compromised of:
 ### [1. phpdotenv](https://github.com/vlucas/phpdotenv)

@@ -62,22 +62,24 @@ array_map(function ($file) use ($sage_error) {
     'setup',
     'filters',
     'admin',
-    'lib/acf',          // Extends the ACF functionality
-    'lib/admin',        // Includes WP admin code such as clone post, page, etc
-    //'lib/ajax',       // Custom AJAX
-    'lib/cpt',          // Custom post types
-    'lib/donate',       // Simple donate facility with Stripe Checkout
-    //'lib/form',       // Custom form
-    'lib/general',      // Basic setup
-    'lib/helpers',      // Uses App namespace as per Roots parent theme
-    'lib/media',        // Allows SVG and custom image sizes
-    'lib/navwalker',    // Bootstrap 4 navigation
-    'lib/scripts',      // Enqueuing scripts and styles
-    'lib/security',     // Security bits and pieces
-    'lib/seo',          // Any SEO specific code
-    'lib/speed',        // htaccess code + removal of general WordPress crap
-    'lib/social',       // Sharer links
-    'lib/woocommerce',  // WooCommerce specific custom code here
+    'lib/acf',           // Extends the ACF functionality
+    'lib/admin',         // Includes WP admin code such as clone post, page, etc
+    //'lib/ajax',        // Custom AJAX
+    'lib/plural/plural', // Pluralize support
+    'lib/plural/en',     // Pluralize support
+    'lib/cpt',           // Custom post types
+    'lib/donate',        // Simple donate facility with Stripe Checkout
+    //'lib/form',        // Custom form
+    'lib/general',       // Basic setup
+    'lib/helpers',       // Uses App namespace as per Roots parent theme
+    'lib/media',         // Allows SVG and custom image sizes
+    'lib/navwalker',     // Bootstrap 4 navigation
+    'lib/scripts',       // Enqueuing scripts and styles
+    'lib/security',      // Security bits and pieces
+    'lib/seo',           // Any SEO specific code
+    'lib/speed',         // htaccess code + removal of general WordPress crap
+    'lib/social',        // Sharer links
+    'lib/woocommerce',   // WooCommerce specific custom code here
 ]);
 
 /**
