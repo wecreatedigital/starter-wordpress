@@ -1,6 +1,6 @@
 /** Common styles */
-@import "common/variables";
 @import "common/global";
+@import "common/variables";
 
 // From autoload
 @import "./autoload/**/*";
@@ -13,24 +13,26 @@
 @import "components/buttons";
 @import "components/comments";
 @import "components/forms";
-@import "components/wp-classes";
-@import "components/cf7";
 
-/** layouts styles **/
+/** Plugin styles **/
+@import "plugins/cf7";
+@import "plugins/tinymce";
+@import "plugins/wp-classes";
+
+/** Layouts styles **/
+@import "layouts/footer";
 @import "layouts/header";
 @import "layouts/sidebar";
-@import "layouts/footer";
-@import "layouts/pages";
-@import "layouts/posts";
-@import "layouts/tinymce";
 
-/** Other styles **/
-@import "global";
-@import "archive";
-@import "common";
-@import "contact";
-@import "home";
-@import "single";
+/** General styles **/
+@import "general/pages";
+@import "general/posts";
+@import "general/archive";
+@import "general/home";
+@import "general/single";
+
+/** Template styles **/
+@import "templates/contact";
 
 /** Flexible content blocks **/
 @import "flexible/common/main";

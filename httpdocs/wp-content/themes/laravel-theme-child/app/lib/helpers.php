@@ -61,7 +61,7 @@ function acf_image($field, $image_class, $image_size = '', $is_sub_field = false
             return $url;
         }
 
-        return '<img src="'.$url.'" size="'.$image_size.'" class="'.$image_class.'" height="'.$height.'" width="'.$width.'" alt="'.$image['alt'].'">';
+        return '<img src="'.$url.'" class="'.$image_class.'" height="'.$height.'" width="'.$width.'" alt="'.$image['alt'].'">';
     }
 }
 

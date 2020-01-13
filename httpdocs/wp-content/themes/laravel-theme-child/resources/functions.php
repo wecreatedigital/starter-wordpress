@@ -68,9 +68,9 @@ array_map(function ($file) use ($sage_error) {
     'lib/plural/plural', // Pluralize support
     'lib/plural/en',     // Pluralize support
     'lib/cpt',           // Custom post types
-    'lib/donate',        // Simple donate facility with Stripe Checkout
+    //'lib/donate',      // Simple donate facility with Stripe Checkout
     //'lib/form',        // Custom form
-    'lib/general',       // Basic setup
+    'lib/menu',          // Menu setup
     'lib/helpers',       // Uses App namespace as per Roots parent theme
     'lib/media',         // Allows SVG and custom image sizes
     'lib/navwalker',     // Bootstrap 4 navigation
