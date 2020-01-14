@@ -1,3 +1,4 @@
+@if (function_exists('dontate'))
 <section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-donate">
   <div class="row">
     <div class="offset-lg-2 col-lg-8">
@@ -7,24 +8,22 @@
   <div class="row text-center">
     <div class="offset-lg-2 col-lg-8">
 
-      @if (function_exists('dontate'))
-        @if( env('ENV') == 'local' )
-          {!! dontate([
-            'sku_1' => 5,
-            'sku_2' => 10,
-            'sku_3' => 20,
-            'sku_4' => 50,
-            'sku_5' => 100,
-            ]) !!}
-        @else
-          {!! dontate([
-            'sku_6' => 5,
-            'sku_7' => 10,
-            'sku_8' => 20,
-            'sku_9' => 50,
-            'sku_10' => 100,
-            ]) !!}
-        @endif
+      @if( env('ENV') == 'local' )
+        {!! dontate([
+          'sku_1' => 5,
+          'sku_2' => 10,
+          'sku_3' => 20,
+          'sku_4' => 50,
+          'sku_5' => 100,
+          ]) !!}
+      @else
+        {!! dontate([
+          'sku_6' => 5,
+          'sku_7' => 10,
+          'sku_8' => 20,
+          'sku_9' => 50,
+          'sku_10' => 100,
+          ]) !!}
       @endif
 
       <div id="error-message"></div>
@@ -55,3 +54,4 @@
     </div>
   </div>
 </section>
+@endif

@@ -152,6 +152,11 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Updated Custom Post Types setup
 - Updated child Roots Sage theme requirements from parent theme
 
+## 1.3.1.1 - 14-01-2020
+
+- Tweak to donate flexible blocks
+- Comment to help identify which lib files to exclude
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin
