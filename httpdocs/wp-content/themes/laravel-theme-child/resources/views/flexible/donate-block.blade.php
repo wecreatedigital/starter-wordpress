@@ -8,7 +8,7 @@
   <div class="row text-center">
     <div class="offset-lg-2 col-lg-8">
 
-      @if( env('ENV') == 'local' )
+      @if( getenv('ENV') == 'local' )
         {!! dontate([
           'sku_1' => 5,
           'sku_2' => 10,
@@ -30,7 +30,7 @@
 
       <script>
         (function() {
-          var stripe = Stripe('{{ env('STRIPE_PUBLIC') }}');
+          var stripe = Stripe('{{ getenv('STRIPE_PUBLIC') }}');
 
           jQuery(document).on('click', '.select-payment-amount', function () {
             stripe.redirectToCheckout({

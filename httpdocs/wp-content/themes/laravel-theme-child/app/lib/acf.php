@@ -28,7 +28,7 @@ if (function_exists('acf_add_options_page')) {
  */
 function my_acf_google_map_api($api)
 {
-    $api['key'] = getenv('GOOGLEMAPS');
+    $api['key'] = getenv('GOOGLE_API');
 
     return $api;
 }

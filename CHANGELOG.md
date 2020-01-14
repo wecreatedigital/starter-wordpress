@@ -157,6 +157,11 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Tweak to donate flexible blocks
 - Comment to help identify which lib files to exclude
 
+## 1.3.1.2 - 14-01-2020
+
+- Update README
+- Check all instances of `getenv`
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin
