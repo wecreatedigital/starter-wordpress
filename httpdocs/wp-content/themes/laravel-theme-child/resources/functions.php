@@ -1,5 +1,40 @@
 <?php
 
+function getDirContents($dir)
+{
+    $handle = opendir($dir);
+    if ( ! $handle) {
+        return array();
+    }
+    $contents = array();
+    while ($entry = readdir($handle)) {
+        if ($entry == '.' || $entry == '..') {
+            continue;
+        }
+
+        $entry = $dir.DIRECTORY_SEPARATOR.$entry;
+        if (is_file($entry)) {
+            $contents[] = $entry;
+        } elseif (is_dir($entry)) {
+            $contents = array_merge($contents, getDirContents($entry));
+        }
+    }
+    closedir($handle);
+
+    return $contents;
+}
+
+function str_contains($haystack, $needles)
+{
+    foreach ((array) $needles as $needle) {
+        if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 /**
  * Do not edit anything in this file unless you know what you're doing
  */
@@ -47,40 +82,21 @@ if ( ! class_exists('Roots\\Sage\\Container')) {
 /**
  * Sage required files
  *
- * This is the only modified code in this file
- * This has been modified to include our custom code
- * First four array values are Roots specific
- *
  */
-array_map(function ($file) use ($sage_error) {
-    $file = "../app/{$file}.php";
-    if ( ! locate_template($file, true, true)) {
+$parent_theme = getDirContents(dirname(__DIR__, 2).'/laravel-theme/app');
+$child_theme = getDirContents(dirname(__DIR__, 2).'/laravel-theme-child/app/lib');
+$files = array_merge($parent_theme, $child_theme);
+foreach ($files as $file) {
+    if (str_contains($file, ['ajax', 'donate', 'form', 'Controllers'])) {
+        continue;
+    }
+
+    if ( ! file_exists($file)) {
         $sage_error(sprintf(__('Error locating <code>%s</code> for inclusion.', 'sage'), $file), 'File not found');
     }
-}, [
-    'helpers',
-    'setup',
-    'filters',
-    'admin',
-    'lib/acf',           // Extends the ACF functionality
-    'lib/admin',         // Includes WP admin code such as clone post, page, etc
-    //'lib/ajax',        // Custom AJAX
-    'lib/plural/plural', // Pluralize support
-    'lib/plural/en',     // Pluralize support
-    'lib/cpt',           // Custom post types
-    //'lib/donate',      // Simple donate facility with Stripe Checkout
-    //'lib/form',        // Custom form
-    'lib/menu',          // Menu setup
-    'lib/helpers',       // Uses App namespace as per Roots parent theme
-    'lib/media',         // Allows SVG and custom image sizes
-    'lib/navwalker',     // Bootstrap 4 navigation
-    'lib/scripts',       // Enqueuing scripts and styles
-    'lib/security',      // Security bits and pieces
-    'lib/seo',           // Any SEO specific code
-    'lib/speed',         // htaccess code + removal of general WordPress crap
-    'lib/social',        // Sharer links
-    'lib/woocommerce',   // WooCommerce specific custom code here
-]);
+
+    load_template($file, true);
+}
 
 /**
  * Here's what's happening with these hooks:
