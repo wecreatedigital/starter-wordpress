@@ -52,6 +52,12 @@ After cloning the repo, copy the sample environment file:
 cp .env.sample .env
 ```
 
+To setup dotenv run in the project root:
+
+```bash
+composer install
+```
+
 Then cd into the child Sage theme:
 
 ```bash

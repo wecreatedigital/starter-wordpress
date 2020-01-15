@@ -170,6 +170,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Update loading .env
 
+## 1.3.1.5 - 15-01-2020
+
+- Stop committing vendor folder
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

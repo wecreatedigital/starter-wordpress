@@ -3,6 +3,8 @@
 *.log
 composer.lock
 
+vendor
+
 httpdocs/.htaccess
 httpdocs/license.txt
 httpdocs/readme.html
