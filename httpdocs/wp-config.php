@@ -109,7 +109,6 @@ define('WP_SITEURL', getenv('DOMAIN'));
  */
 define('WPCF7_AUTOP', false);
 
-define('WC_REMOVE_ALL_DATA', true);
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
