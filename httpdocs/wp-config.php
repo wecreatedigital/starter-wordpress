@@ -6,7 +6,8 @@ define('DISALLOW_FILE_EDIT', true); // Disable File Editor - Security > Settings
 // END iThemes Security - Do not modify or remove this line
 
 require_once(__DIR__.'/../vendor/autoload.php');
-(new \Dotenv\Dotenv(__DIR__.'/../'))->load();
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__, '../.env');
+$dotenv->load();
 
 /**
  * The base configuration for WordPress
@@ -108,6 +109,7 @@ define('WP_SITEURL', getenv('DOMAIN'));
  */
 define('WPCF7_AUTOP', false);
 
+define('WC_REMOVE_ALL_DATA', true);
 /* That's all, stop editing! Happy blogging. */
 
 /** Absolute path to the WordPress directory. */
