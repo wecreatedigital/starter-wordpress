@@ -1,27 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="jumbotron 404" >
-        <h1 class="display-4">404</h1>
+  <div class="jumbotron 404">
+    <h1 class="display-4">404</h1>
+    @option('supporting_text_1')
+    <hr class="my-4">
+    @option('supporting_text_2')
 
-  @if (!have_posts())
+    @php( $post_objects = get_field('commonly_used_pages', 'options') )
+      @if( $post_objects )
+        <ul>
+          @foreach( $post_objects as $post_object)
+            <li>
+              <a href="{{ get_permalink($post_object->ID) }}">
+                {{ get_the_title($post_object->ID)}}
+              </a>
+            </li>
+          @endforeach
+        </ul>
+      @endif
 
-      <p class="lead">@php(print_r(get_field('supporting_text_1','options')))</p>
-      <hr class="my-4">
-      <p>@php(print_r(get_field('supporting_text_2','options')))</p>
+    {!! get_search_form(false) !!}
 
-      @php($repeater = get_field('commonly_used_pages','options'))
-      <ul>
-
-
-      @foreach($repeater as $post_object)
-         <li> <a href="@php(print_r(($post_object['page']->guid)))">@php(print_r(($post_object['page']->post_title)))</a></li>
-      @endforeach
-      </ul>
-      {!! get_search_form(false) !!}
-
-      </div>
-
-  @endif
   </div>
 @endsection

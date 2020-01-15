@@ -227,7 +227,7 @@
             "key": "field_5cac4ee3e0e93",
             "label": "Commonly used pages",
             "name": "commonly_used_pages",
-            "type": "repeater",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -236,33 +236,12 @@
                 "class": "",
                 "id": ""
             },
-            "collapsed": "",
-            "min": 0,
-            "max": 0,
-            "layout": "table",
-            "button_label": "",
-            "sub_fields": [
-                {
-                    "key": "field_5cac514b50ba3",
-                    "label": "page",
-                    "name": "page",
-                    "type": "post_object",
-                    "instructions": "",
-                    "required": 0,
-                    "conditional_logic": 0,
-                    "wrapper": {
-                        "width": "",
-                        "class": "",
-                        "id": ""
-                    },
-                    "post_type": "",
-                    "taxonomy": "",
-                    "allow_null": 0,
-                    "multiple": 0,
-                    "return_format": "object",
-                    "ui": 1
-                }
-            ]
+            "post_type": "",
+            "taxonomy": "",
+            "allow_null": 0,
+            "multiple": 1,
+            "return_format": "object",
+            "ui": 1
         },
         {
             "key": "field_5cac4f14e0e94",
@@ -355,5 +334,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1574503859
+    "modified": 1579080671
 }
