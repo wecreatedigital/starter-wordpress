@@ -1,7 +1,7 @@
 {
   "name": "wecreatedigital/starter-wordpress",
   "require": {
-    "vlucas/phpdotenv": "^2.2"
+    "vlucas/phpdotenv": "^4.0"
   },
   "authors": [
     {

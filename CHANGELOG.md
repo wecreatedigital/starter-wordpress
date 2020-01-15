@@ -162,6 +162,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Update README
 - Check all instances of `getenv`
 
+## 1.3.1.3 - 15-01-2020
+
+- Update composer.json
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin
