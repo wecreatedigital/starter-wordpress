@@ -1,15 +1,106 @@
 {
-  "name": "wecreatedigital/starter-wordpress",
-  "require": {
-    "vlucas/phpdotenv": "^4.0"
-  },
+  "name": "roots/bedrock",
+  "type": "project",
+  "license": "MIT",
+  "description": "WordPress boilerplate with modern development tools, easier configuration, and an improved folder structure",
+  "homepage": "https://roots.io/bedrock/",
   "authors": [
     {
-      "name": "We Create Digital",
-      "email": "enquiries@wecreatedigital.co.uk"
+      "name": "Scott Walkinshaw",
+      "email": "scott.walkinshaw@gmail.com",
+      "homepage": "https://github.com/swalkinshaw"
+    },
+    {
+      "name": "Ben Word",
+      "email": "ben@benword.com",
+      "homepage": "https://github.com/retlehs"
     }
   ],
+  "keywords": [
+    "bedrock", "composer", "roots", "wordpress", "wp", "wp-config"
+  ],
+  "support": {
+    "issues": "https://github.com/roots/bedrock/issues",
+    "forum": "https://discourse.roots.io/category/bedrock"
+  },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    },
+    {
+      "type": "package",
+      "package": {
+        "name": "advanced-custom-fields/advanced-custom-fields-pro",
+        "version": "5.8.7",
+        "type": "wordpress-plugin",
+        "dist": {
+          "type": "zip",
+          "url": "https://connect.advancedcustomfields.com/index.php?p=pro&a=download&k=b3JkZXJfaWQ9NDIwNjR8dHlwZT1kZXZlbG9wZXJ8ZGF0ZT0yMDE0LTEwLTE0IDIxOjExOjQw"
+        }
+      }
+    }
+  ],
+  "require": {
+    "php": ">=7.1",
+    "composer/installers": "^1.7",
+    "vlucas/phpdotenv": "^3.4.0",
+    "oscarotero/env": "^1.2.0",
+    "roots/wordpress": "5.3.2",
+    "roots/wp-config": "1.0.0",
+    "roots/wp-password-bcrypt": "1.0.0",
+    "roots/soil": "^3.7",
+    "wpackagist-plugin/woocommerce": "3.8.1",
+    "wpackagist-plugin/autoptimize": "^2.6",
+    "wpackagist-plugin/better-wp-security": "^7.6",
+    "wpackagist-plugin/civic-cookie-control-8": "^1.19",
+    "wpackagist-plugin/contact-form-7": "^5.1",
+    "wpackagist-plugin/contact-form-7-honeypot": "^1.14",
+    "wpackagist-plugin/mailgun": "^1.7",
+    "wpackagist-plugin/redirection": "^4.6",
+    "wpackagist-plugin/regenerate-thumbnails": "^3.1",
+    "wpackagist-plugin/wordpress-seo": "^12.8",
+    "wpackagist-plugin/wp-super-cache": "^1.7",
+    "wpackagist-plugin/classic-editor":"1.5",
+    "advanced-custom-fields/advanced-custom-fields-pro": "^5.8.7"
+  },
   "require-dev": {
-    "symfony/var-dumper": "^4.3"
+    "squizlabs/php_codesniffer": "^3.4.2",
+    "roave/security-advisories": "dev-master"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "installer-paths": {
+      "web/app/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+      "web/app/plugins/{$name}/": ["type:wordpress-plugin"],
+      "web/app/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "web/wp"
+  },
+  "scripts": {
+    "post-root-package-install": [
+      "php -r \"copy('.env.sample', '.env');\""
+    ],
+    "post-update-cmd": [
+      "php -r \"symlink('web', 'public');\"",
+      "rm -rf web/wp/wp-content/themes/",
+      "rm -rf web/wp/wp-content/plugins/",
+      "yarn --cwd web/app/themes/laravel-theme-child/ install",
+      "wp plugin activate soil",
+      "wp plugin activate classic-editor",
+      "wp plugin activate advanced-custom-fields-pro",
+      "wp plugin activate contact-form-7",
+      "wp plugin activate contact-form-7-honeypot",
+      "wp plugin activate wordpress-seo"
+    ],
+    "test": [
+      "phpcs"
+    ]
   }
 }

@@ -178,6 +178,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - 404 page fixes
 
+## 2.0 - 16-01-2020
+
+- Implemented Roots Bedrock approach
+- Updated env inline with Bedrock
+- Fix: incorrect styling on hero FCB
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

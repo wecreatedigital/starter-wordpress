@@ -4,17 +4,14 @@ namespace Dotenv;
 
 use Dotenv\Exception\ValidationException;
 use Dotenv\Regex\Regex;
-use Dotenv\Repository\RepositoryInterface;
 
+/**
+ * This is the validator class.
+ *
+ * It's responsible for applying validations against a number of variables.
+ */
 class Validator
 {
-    /**
-     * The environment repository instance.
-     *
-     * @var \Dotenv\Repository\RepositoryInterface
-     */
-    protected $repository;
-
     /**
      * The variables to validate.
      *
@@ -23,20 +20,27 @@ class Validator
     protected $variables;
 
     /**
+     * The loader instance.
+     *
+     * @var \Dotenv\Loader
+     */
+    protected $loader;
+
+    /**
      * Create a new validator instance.
      *
-     * @param \Dotenv\Repository\RepositoryInterface $repository
-     * @param string[]                               $variables
-     * @param bool                                   $required
+     * @param string[]       $variables
+     * @param \Dotenv\Loader $loader
+     * @param bool           $required
      *
      * @throws \Dotenv\Exception\ValidationException
      *
      * @return void
      */
-    public function __construct(RepositoryInterface $repository, array $variables, $required = true)
+    public function __construct(array $variables, Loader $loader, $required = true)
     {
-        $this->repository = $repository;
         $this->variables = $variables;
+        $this->loader = $loader;
 
         if ($required) {
             $this->assertCallback(
@@ -46,6 +50,7 @@ class Validator
                 'is missing'
             );
         }
+
     }
 
     /**
@@ -146,14 +151,15 @@ class Validator
     public function allowedRegexValues($regex)
     {
         return $this->assertCallback(
-            function ($value) use ($regex) {
+            function ($value) use ($regex)
+            {
                 if ($value === null) {
                     return true;
                 }
 
                 return Regex::match($regex, $value)->success()->getOrElse(0) === 1;
             },
-            sprintf('does not match "%s"', $regex)
+            sprintf('does not match "%s"' , $regex)
         );
     }
 
@@ -172,7 +178,7 @@ class Validator
         $failing = [];
 
         foreach ($this->variables as $variable) {
-            if ($callback($this->repository->get($variable)) === false) {
+            if ($callback($this->loader->getEnvironmentVariable($variable)) === false) {
                 $failing[] = sprintf('%s %s', $variable, $message);
             }
         }

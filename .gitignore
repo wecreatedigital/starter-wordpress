@@ -1,25 +1,29 @@
-.env
+# MacOS
 *.DS_Store
+
+# Application
+web/app/plugins/*
+!web/app/plugins/.gitkeep
+web/app/mu-plugins/*/
+web/app/upgrade
+web/app/uploads/*
+!web/app/uploads/.gitkeep
+
+# WordPress
+web/wp
+web/.htaccess
+
+# Logs
 *.log
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor
 composer.lock
 
-vendor
-
-httpdocs/.htaccess
-httpdocs/license.txt
-httpdocs/readme.html
-httpdocs/sitemap.xml
-httpdocs/sitemap.xml.gz
-
-httpdocs/wp-content/advanced-cache.php
-httpdocs/wp-content/backup-db/
-httpdocs/wp-content/backups/
-httpdocs/wp-content/blogs.dir/
-
-httpdocs/wp-content/cache/
-httpdocs/wp-content/mmr
-httpdocs/wp-content/wp-cache-config.php
-httpdocs/wp-content/uploads/cache
-httpdocs/wp-content/uploads
-httpdocs/wp-content/upgrade/
-httpdocs/wp-content/plugins/hello.php
+# WP-CLI
+wp-cli.local.yml

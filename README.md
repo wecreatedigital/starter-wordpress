@@ -1,7 +1,7 @@
 
 # Starter WordPress theme by We Create digital
 
-Based on [Roots Sage](https://roots.io/sage/). This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreate.digital)
+Based on [Roots Sage](https://roots.io/sage/). This sets the standard for any WordPress build made internally by [We Create Digital](https://wecreate.digital). In version 2, we use Bedrock and Soil by Roots for a more secure and developer friendly approach.
 
 ## Table of Contents
 
@@ -14,14 +14,9 @@ Based on [Roots Sage](https://roots.io/sage/). This sets the standard for any Wo
 ## Environment variables
 
 ##### ENV
-- Common values; `local` or `dev` - other values assume we are on the live environment
-- Will print out `<meta name="robots" content="noindex, nofollow">` if local or dev
+- Common values; `local` or `development` - other values assume we are on the live environment
 - `local` will display the responsive helper for determining the active breakpoint
-- If neither set to `local` or `dev`, we apply mod_deflate and mod_expires
-
-##### WP_DEBUG
-- Enables debug and logging mode wp-config.php when set to true
-- Logs generate automatically in the root directory
+- If neither set to `local` or `development`, we apply mod_deflate and mod_expires
 
 ##### MAINTENANCE
 - Enables maintenance mode on the website when set to true
@@ -33,7 +28,7 @@ Based on [Roots Sage](https://roots.io/sage/). This sets the standard for any Wo
 ##### DB_NAME, DB_USER, DB_PASSWORD, DB_HOST, DB_PREFIX
 - These are all the familiar constants, provide them in the .env file to populate the wp-config.php file
 
-##### _KEY
+##### *_KEY
 - These replace the authentication unique keys and salts you usually get in wp-config.php
 - These can be unique per environment
 
@@ -49,27 +44,29 @@ Based on [Roots Sage](https://roots.io/sage/). This sets the standard for any Wo
 After cloning the repo, copy the sample environment file:
 
 ```bash
-cp .env.sample .env
+cp .env.example .env
 ```
 
-To setup dotenv run in the project root:
+To setup dotenv, plugins and other packages run in the project root:
 
 ```bash
 composer install
 ```
 
-Then cd into the child Sage theme:
+Running `composer install` will also clean up the `wp` directory, create a symlink for ServerPilot, install yarn on the child theme and install a handful of plugins we use from day one.
+
+Furthermore, we've included Roots Soil and enabled bcrypt (also by Roots).
+
+Next cd into the child Sage theme:
 
 ```bash
 cd httpdocs\wp-content\themes\laravel-theme-child
 ```
 
-Within the child Sage theme, install `yarn` and `composer`:
+Within the child Sage theme, install composer:
 
 ```bash
 composer install
-
-yarn install
 ```
 
 Going forward the following command can be used within the child theme, this gives you local and external URLs for ongoing testing:
