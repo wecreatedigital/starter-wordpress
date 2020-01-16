@@ -60,7 +60,7 @@ Furthermore, we've included Roots Soil and enabled bcrypt (also by Roots).
 Next cd into the child Sage theme:
 
 ```bash
-cd httpdocs\wp-content\themes\laravel-theme-child
+cd web/app/themes/laravel-theme-child/
 ```
 
 Within the child Sage theme, install composer:
@@ -91,7 +91,7 @@ yarn build:production
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
-The current version is location within the child Sage theme (`httpdocs/wp-content/themes/laravel-theme-child/resources/style.css`).
+The current version is location within the child Sage theme (`web/app/themes/laravel-theme-child/resources/style.css`).
 
 ### Security
 
