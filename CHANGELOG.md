@@ -184,6 +184,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Updated env inline with Bedrock
 - Fix: incorrect styling on hero FCB
 
+## 2.0.1 - 17-01-2020
+
+- w3c valid structure out of the box
+- Remove Roots Soil - conflict with Bootstrap WP_Bootstrap_Navwalker
+- Typo for donate FCB
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

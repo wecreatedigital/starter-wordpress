@@ -10,11 +10,8 @@
     @include('layouts.header')
     <div role="document">
       <main class="main">
-        <div class="container">
-          @include('layouts.breadcrumbs')
-          @yield('content')
-        </div>
-        @include('flexible._main')
+        @include('layouts.breadcrumbs')
+        @yield('content')
       </main>
       @if (App\display_sidebar())
         <aside class="sidebar">

@@ -23,6 +23,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e21859ff391a",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5dd45a2375e29",
                             "label": "Text",
                             "name": "text",
@@ -88,6 +107,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e218592f3919",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5d6cf48accb6a",
                             "label": "Text",
                             "name": "text",
@@ -152,6 +190,25 @@
                     "label": "Text - centre column",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5e21857ff3918",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5d6cf5cefa135",
                             "label": "Text",
@@ -372,7 +429,7 @@
                             "name": "heading",
                             "type": "text",
                             "instructions": "",
-                            "required": 0,
+                            "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
                                 "width": "",
@@ -494,6 +551,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e218b2db35ee",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5dd45e55aa43b",
                             "label": "Text",
                             "name": "text",
@@ -584,6 +660,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e218bdcb35f2",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5dd45e5daa43d",
                             "label": "Text",
                             "name": "text",
@@ -648,6 +743,44 @@
                     "label": "Gallery",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5e218bccb35f0",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e218bd4b35f1",
+                            "label": "Text",
+                            "name": "text",
+                            "type": "wysiwyg",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "tabs": "all",
+                            "toolbar": "full",
+                            "media_upload": 1,
+                            "delay": 0
+                        },
                         {
                             "key": "field_5dd85cf173f82",
                             "label": "Gallery",
@@ -739,6 +872,25 @@
                     "label": "Contact",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5e218bbab35ef",
+                            "label": "Heading",
+                            "name": "heading",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
                         {
                             "key": "field_5dd45e75aa441",
                             "label": "Text",
@@ -851,5 +1003,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1578637302
+    "modified": 1579256886
 }

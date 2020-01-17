@@ -8,6 +8,7 @@ class ComposerStaticInit946dae2918546819db66ae6d13701275
 {
     public static $files = array (
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
+        'beda72a3bff40d61ed819c75025fda66' => __DIR__ . '/..' . '/mwdelaney/sage-bootstrap4-navwalker/bootstrap4-navwalker.php',
         '841f98c5d948ce534a6f87abe5b50614' => __DIR__ . '/..' . '/roots/wp-password-bcrypt/wp-password-bcrypt.php',
     );
 

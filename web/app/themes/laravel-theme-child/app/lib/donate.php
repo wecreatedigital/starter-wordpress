@@ -1,6 +1,6 @@
 <?php
 
-function dontate($donation_prices)
+function donate($donation_prices)
 {
     $html = '';
     foreach ($donation_prices as $key => $price) {

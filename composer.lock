@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bc48cfb7b74ecf82970a1c3ec36d92b9",
+    "content-hash": "92b4301a2e6d8945bc5ffcb7c69e25e9",
     "packages": [
         {
             "name": "advanced-custom-fields/advanced-custom-fields-pro",
@@ -136,6 +136,49 @@
                 "zikula"
             ],
             "time": "2019-08-12T15:00:31+00:00"
+        },
+        {
+            "name": "mwdelaney/sage-bootstrap4-navwalker",
+            "version": "1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/MWDelaney/sage-bootstrap4-navwalker.git",
+                "reference": "325f45ed9b406c99189afc269af0e46cd8d378f5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/MWDelaney/sage-bootstrap4-navwalker/zipball/325f45ed9b406c99189afc269af0e46cd8d378f5",
+                "reference": "325f45ed9b406c99189afc269af0e46cd8d378f5",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.2"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "bootstrap4-navwalker.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael W. Delaney",
+                    "email": "michael@michaeldelaney.me"
+                }
+            ],
+            "description": "Bootstrap 4 Navbar component navwalker for Sage 9 based themes",
+            "homepage": "https://github.com/MWDelaney/sage-bootstrap4-navwalker",
+            "keywords": [
+                "bootstrap 4",
+                "navbar",
+                "navwalker",
+                "wordpress"
+            ],
+            "time": "2019-03-14T23:26:19+00:00"
         },
         {
             "name": "oscarotero/env",

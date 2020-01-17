@@ -1,7 +1,8 @@
-@if (function_exists('dontate'))
+@if (function_exists('donate'))
 <section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-donate">
   <div class="row">
     <div class="offset-lg-2 col-lg-8">
+      <h3 class="h2">@sub('heading')</h3>
       @sub('text')
     </div>
   </div>
@@ -9,7 +10,7 @@
     <div class="offset-lg-2 col-lg-8">
 
       @if( getenv('WP_ENV') == 'local' )
-        {!! dontate([
+        {!! donate([
           'sku_1' => 5,
           'sku_2' => 10,
           'sku_3' => 20,
@@ -17,7 +18,7 @@
           'sku_5' => 100,
           ]) !!}
       @else
-        {!! dontate([
+        {!! donate([
           'sku_6' => 5,
           'sku_7' => 10,
           'sku_8' => 20,

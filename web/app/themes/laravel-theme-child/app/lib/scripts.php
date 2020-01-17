@@ -18,3 +18,13 @@ function google_maps()
 }
 
 add_action('wp_enqueue_scripts', 'google_maps');
+
+/*
+ * w3c valid script and style tags
+ */
+add_action(
+    'after_setup_theme',
+    function () {
+        add_theme_support('html5', ['script', 'style']);
+    }
+);
