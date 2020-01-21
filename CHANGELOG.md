@@ -190,6 +190,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Remove Roots Soil - conflict with Bootstrap WP_Bootstrap_Navwalker
 - Typo for donate FCB
 
+## 2.0.2 - 21-01-2020
+
+- Responsive helper now includes number of nodes on the page and current window width
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin
