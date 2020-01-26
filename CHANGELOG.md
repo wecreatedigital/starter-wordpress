@@ -198,6 +198,11 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Dev toolbar added a toggle to show Bootstrap columns
 
+## 2.0.4 - 26-01-2020
+
+- Contact template not displaying in WordPress unless in root of views directory
+- Taxonomy helper separate from CPT helper - fixes issue when you have shared taxonomy over more than one CPT
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

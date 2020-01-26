@@ -6,28 +6,68 @@
  * @author Christopher Kelker 10-01-2020
  * @return array void
  */
+
+$taxonomies = [
+    'author' => ['testimonial', 'faq'],
+    'genre' => ['faq'],
+];
+
 $cpts = [
     'testimonial' => [
         'public' => true,
-        'taxonomies' => [
-            'author' => [
-                'public' => true,
-                'hierarchical' => true,
-            ],
-        ],
+        'taxonomies' => ['author', 'category'],
     ],
 
     'faq' => [
         'public' => false,
-        'taxonomies' => [
-            'tag' => [
-                'public' => true,
-                'hierarchical' => true,
-            ],
-        ],
+        'taxonomies' => ['author', 'genre'],
     ],
 ];
 
+/**
+ * FIRST REGISTER TAXONOMIES TO LATER ASSOCIATE WITH CPT
+ */
+foreach ($taxonomies as $taxonomy => $post_types) {
+    add_action('init', function () use ($post_types, $taxonomy) {
+        $taxonomy_plural = str_plural($taxonomy);
+        $uc_taxonomy_plural = ucfirst($taxonomy_plural);
+        $uc_taxonomy_singular = ucfirst($taxonomy);
+
+        // Labels part for the GUI
+        $labels = array(
+            'name' => _x($uc_taxonomy_plural, 'taxonomy general name'),
+            'singular_name' => _x('{$uc_taxonomy_singular}', 'taxonomy singular name'),
+            'search_items' => __("Search {$uc_taxonomy_plural}"),
+            'popular_items' => __("Popular {$uc_taxonomy_plural}"),
+            'all_items' => __("All {$uc_taxonomy_plural}"),
+            'parent_item' => null,
+            'parent_item_colon' => null,
+            'edit_item' => __("Edit {$uc_taxonomy_singular}"),
+            'update_item' => __("Update {$uc_taxonomy_singular}"),
+            'add_new_item' => __("Add New {$uc_taxonomy_singular}"),
+            'new_item_name' => __("New {$uc_taxonomy_singular} Name"),
+            'separate_items_with_commas' => __("Separate {$taxonomy_plural} with commas"),
+            'add_or_remove_items' => __("Add or remove {$taxonomy_plural}"),
+            'choose_from_most_used' => __("Choose from the most used {$taxonomy_plural}"),
+            'menu_name' => __($uc_taxonomy_plural),
+        );
+
+        // Now register the non-hierarchical taxonomy like tag
+        register_taxonomy($taxonomy_plural, $post_types, [
+            'hierarchical' => true,
+            'labels' => $labels,
+            'show_ui' => true,
+            'show_admin_column' => true,
+            'update_count_callback' => '_update_post_term_count',
+            'query_var' => true,
+            'rewrite' => array('slug' => $taxonomy),
+        ]);
+    }, 0);
+}
+
+/**
+ * NOW REGISTER CPTs
+ */
 foreach ($cpts as $cpt => $cpt_options) {
 
     // Register Custom Post Type
@@ -76,7 +116,7 @@ foreach ($cpts as $cpt => $cpt_options) {
             'show_in_nav_menus' => true,
             'show_in_admin_bar' => true,
             'supports' => array('title', 'editor', 'thumbnail', 'comments', 'revisions', 'page-attributes'),
-            'taxonomies' => array('category'),
+            'taxonomies' => $cpt_options['taxonomies'],
             'menu_position' => 5,
             'can_export' => true,
             'has_archive' => true,
@@ -91,55 +131,4 @@ foreach ($cpts as $cpt => $cpt_options) {
         );
         register_post_type($cpt, $args);
     }, 0);
-
-    if ( ! isset($cpt_options['taxonomies'])) {
-        continue;
-    }
-
-    if (empty($cpt_options['taxonomies'])) {
-        continue;
-    }
-
-    foreach ($cpt_options['taxonomies'] as $taxonomy => $taxonomy_options) {
-        add_action('init', function () use ($cpt, $taxonomy, $taxonomy_options) {
-            $taxonomy_plural = str_plural($taxonomy);
-            $uc_taxonomy_plural = ucfirst($taxonomy_plural);
-            $uc_taxonomy_singular = ucfirst($taxonomy);
-
-            // Labels part for the GUI
-            $labels = array(
-                'name' => _x($uc_taxonomy_plural, 'taxonomy general name'),
-                'singular_name' => _x($uc_taxonomy_singular, 'taxonomy singular name'),
-                'search_items' => __("Search {$uc_taxonomy_plural}"),
-                'popular_items' => __("Popular {$uc_taxonomy_plural}"),
-                'all_items' => __("All {$uc_taxonomy_plural}"),
-                'parent_item' => null,
-                'parent_item_colon' => null,
-                'edit_item' => __("Edit {$uc_taxonomy_singular}"),
-                'update_item' => __("Update {$uc_taxonomy_singular}"),
-                'add_new_item' => __("Add New {$uc_taxonomy_singular}"),
-                'new_item_name' => __("New {$uc_taxonomy_singular} Name"),
-                'separate_items_with_commas' => __("Separate {$taxonomy_plural} with commas"),
-                'add_or_remove_items' => __("Add or remove {$taxonomy_plural}"),
-                'choose_from_most_used' => __("Choose from the most used {$taxonomy_plural}"),
-                'menu_name' => __($uc_taxonomy_plural),
-            );
-
-            // if ($cpt != 'testimonial') {
-            //     dd($cpt);
-            // }
-
-            // Now register the non-hierarchical taxonomy like tag
-            register_taxonomy($taxonomy_plural, $cpt, [
-                'hierarchical' => isset($taxonomy_options['hierarchical']) ? $taxonomy_options['hierarchical'] : false,
-                'public' => isset($taxonomy_options['public']) ? $taxonomy_options['public'] : true,
-                'labels' => $labels,
-                'show_ui' => true,
-                'show_admin_column' => true,
-                'update_count_callback' => '_update_post_term_count',
-                'query_var' => true,
-                'rewrite' => array('slug' => $taxonomy),
-            ]);
-        }, 0);
-    }
 }
