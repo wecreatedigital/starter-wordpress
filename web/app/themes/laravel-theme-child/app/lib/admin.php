@@ -146,7 +146,7 @@ function change_permalinks()
     $wp_rewrite->set_permalink_structure('/%postname%/');
     $wp_rewrite->flush_rules();
 }
-add_action('init', 'change_permalinks');
+add_action('after_switch_theme', 'change_permalinks');
 
 /**
  * Dynamic year for the footer
