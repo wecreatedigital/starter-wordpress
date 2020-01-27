@@ -89,10 +89,10 @@
     ],
     "post-update-cmd": [
       "php -r \"symlink('web', 'public');\"",
+      "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
       "rm -rf web/wp/wp-content/plugins/",
       "yarn --cwd web/app/themes/laravel-theme-child/ install",
-      "wp plugin activate soil",
       "wp plugin activate classic-editor",
       "wp plugin activate advanced-custom-fields-pro",
       "wp plugin activate contact-form-7",

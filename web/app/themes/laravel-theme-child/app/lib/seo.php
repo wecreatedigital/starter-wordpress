@@ -17,3 +17,19 @@ function yoast_seo_sitemap_to_robotstxt_function($output)
     return $output;
 }
 add_filter('robots_txt', 'yoast_seo_sitemap_to_robotstxt_function', 9999, 1);
+
+/**
+ * Remove the tag taxonomy from WordPress
+ *
+ * @author Dean Appleton-Claydon via https://wordpress.stackexchange.com/questions/48017/remove-tag-from-theme-support
+ * @date   2020-01-27
+ */
+add_action('init', 'wecreate_remove_tags');
+function wecreate_remove_tags()
+{
+    global $wp_taxonomies;
+    $tax = 'post_tag'; // this may be wrong, I never remember the names on the defaults
+    if (taxonomy_exists($tax)) {
+        unset($wp_taxonomies[$tax]);
+    }
+}

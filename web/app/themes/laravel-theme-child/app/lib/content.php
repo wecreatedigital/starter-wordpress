@@ -89,6 +89,19 @@ function create_page_on_theme_activation()
         }
     }
 
+    // Add terms
+    // $taxonomy_terms = [
+    //     'category' => [
+    //         'Company updates',
+    //     ],
+    // ];
+    //
+    // foreach ($taxonomy_terms as $taxonomy => $terms) {
+    //     foreach ($terms as $term) {
+    //         wp_insert_term($term, $taxonomy);
+    //     }
+    // }
+
     // WP settings
     update_option('blogdescription', '');
     update_option('admin_email', 'dean@wecreate.digital');
