@@ -213,6 +213,11 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Updated composer.json
 - Sample add taxonomy terms when activating theme
 
+## 2.0.7 - 28-01-2020
+
+- Tweaked CPT script
+- Added helper text for setting up Google API Console with ACF
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

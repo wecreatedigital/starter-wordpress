@@ -30,8 +30,8 @@ $cpts = [
 foreach ($taxonomies as $taxonomy => $post_types) {
     add_action('init', function () use ($post_types, $taxonomy) {
         $taxonomy_plural = str_plural($taxonomy);
-        $uc_taxonomy_plural = ucfirst($taxonomy_plural);
-        $uc_taxonomy_singular = ucfirst($taxonomy);
+        $uc_taxonomy_plural = ucwords(str_replace('-', ' ', $taxonomy_plural));
+        $uc_taxonomy_singular = ucwords(str_replace('-', ' ', $taxonomy));
 
         // Labels part for the GUI
         $labels = array(
@@ -73,8 +73,8 @@ foreach ($cpts as $cpt => $cpt_options) {
     // Register Custom Post Type
     add_action('init', function () use ($cpt, $cpt_options) {
         $cpt_plural = str_plural($cpt);
-        $uc_post_type_plural = ucfirst($cpt_plural);
-        $uc_post_type_singular = ucfirst($cpt);
+        $uc_post_type_plural = ucwords(str_replace('-', ' ', $cpt_plural));
+        $uc_post_type_singular = ucwords(str_replace('-', ' ', $cpt));
 
         $labels = array(
             'name' => _x($uc_post_type_plural, 'Post Type General Name', 'text_domain'),

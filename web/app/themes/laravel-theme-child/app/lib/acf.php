@@ -21,6 +21,15 @@ if (function_exists('acf_add_options_page')) {
 /**
  * https://www.advancedcustomfields.com/blog/google-maps-api-settings/
  *
+ * Add the following in Google API Console:
+ * Google Maps Directions API
+ * Google Maps Distance Matrix API
+ * Google Maps Elevation API
+ * Google Maps Geocoding API
+ * Google Maps JavaScript API
+ * Google Places API Web Service
+ * Google Static Maps API
+ *
  * @author Dean Appleton-Claydon
  * @date   2019-09-02
  * @param  [type]     $api [description]
