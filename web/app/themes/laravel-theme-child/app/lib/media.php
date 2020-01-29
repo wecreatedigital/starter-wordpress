@@ -12,3 +12,10 @@ add_filter('upload_mimes', 'cc_mime_types');
  * Image sizes https://developer.wordpress.org/reference/functions/add_image_size/
  */
 // add_image_size('image_size_name', 120, 240, false);
+
+/**
+ * Increase jpeg quality from the default of 82/100
+ */
+// add_filter('jpeg_quality', function ($arg) {
+//     return 95;
+// });
