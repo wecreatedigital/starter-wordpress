@@ -222,6 +222,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Tweak image quality (optional)
 
+## 2.0.9 - 04-02-2020
+
+- Force excerpt
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

@@ -123,16 +123,21 @@ add_filter('theme_page_templates', 'tfc_remove_page_templates');
 /**
  * Screen options display excerpt by default (new users only)
  */
-function wpse_edit_post_show_excerpt($user_login, $user)
-{
-    $unchecked = get_user_meta($user->ID, 'metaboxhidden_post', true);
-    $key = array_search('postexcerpt', $unchecked);
-    if (false !== $key) {
-        array_splice($unchecked, $key, 1);
-        update_user_meta($user->ID, 'metaboxhidden_post', $unchecked);
-    }
-}
-add_action('wp_login', 'wpse_edit_post_show_excerpt', 10, 2);
+ function wpse_edit_post_show_excerpt()
+ {
+     $user = wp_get_current_user();
+     $unchecked = get_user_meta($user->ID, 'metaboxhidden_post', true);
+     if ( ! is_array($unchecked)) {
+         update_user_meta($user->ID, 'metaboxhidden_post', ['postexcerpt' => 1]);
+     } else {
+         $key = array_search('postexcerpt', $unchecked);
+         if (false !== $key) {
+             array_splice($unchecked, $key, 1);
+             update_user_meta($user->ID, 'metaboxhidden_post', $unchecked);
+         }
+     }
+ }
+ add_action('admin_init', 'wpse_edit_post_show_excerpt', 10);
 
 /**
  * Force permalinks to be postname from the point of accepting child theme
