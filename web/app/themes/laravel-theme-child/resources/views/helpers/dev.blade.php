@@ -42,7 +42,8 @@
       left: 0;
       z-index: 99999999;
     }
-    .show-col .row > div {
+    .show-col .row > div,
+    .fcb {
       border: red 1px solid;
     }
   </style>

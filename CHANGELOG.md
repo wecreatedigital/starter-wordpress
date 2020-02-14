@@ -226,6 +226,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Force excerpt
 
+## 2.0.10 - 14-02-2020
+
+- Responsive table with fade for added UX
+- Move red borders into dev helper
+- Vertical align class
+
 ## To do
 - Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
 - Pro security plugin

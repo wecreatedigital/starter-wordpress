@@ -1,5 +1,4 @@
 .fcb {
-  border-top: 1px solid red;
   padding: 5rem !important;
 
   @include media-breakpoint-down(sm) {
@@ -12,5 +11,13 @@
     padding: 1rem !important;
     padding-top: 75px !important;
     padding-bottom: 75px !important;
+  }
+
+  .fcb-v-align {
+    @extend .d-flex;
+
+    > div {
+      @extend .my-auto;
+    }
   }
 }
