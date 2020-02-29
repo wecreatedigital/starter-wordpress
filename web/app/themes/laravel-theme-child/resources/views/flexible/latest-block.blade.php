@@ -18,10 +18,10 @@
 
 @posts
   <article class="row fcb-t40">
-    <div class="offset-sm-2 offset-md-2 col-sm-8 col-md-4 fcb-t40">
+    <div class="offset-sm-2 offset-md-2 col-sm-8 col-md-4 fcb-t20">
       @thumbnail('medium')
     </div>
-    <div class="offset-sm-2 offset-md-0 col-sm-8 col-md-4 fcb-t40">
+    <div class="offset-sm-2 offset-md-0 col-sm-8 col-md-4 fcb-t20">
       <h4 class="mb-4">
         <a class="link" href="@permalink">
           @title

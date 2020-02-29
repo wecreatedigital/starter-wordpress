@@ -215,7 +215,7 @@
                             "label": "Align text?",
                             "name": "align_text",
                             "type": "true_false",
-                            "instructions": "If content aligned to centre or on the right, should the written content align as well?",
+                            "instructions": "If the box containing the text and buttons is aligned to the centre or right, should the text itself be aligned this way too?",
                             "required": 0,
                             "conditional_logic": [
                                 [
@@ -478,7 +478,7 @@
                             "default_value": [
                                 "y"
                             ],
-                            "allow_null": 1,
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
                             "return_format": "value",
@@ -546,7 +546,7 @@
                             "label": "Align text?",
                             "name": "align_text",
                             "type": "true_false",
-                            "instructions": "If content aligned to centre or on the right, should the written content align as well?",
+                            "instructions": "If the box containing the text and buttons is aligned to the centre or right, should the text itself be aligned this way too?",
                             "required": 0,
                             "conditional_logic": [
                                 [
@@ -833,7 +833,7 @@
                             "default_value": [
                                 "a"
                             ],
-                            "allow_null": 1,
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
                             "return_format": "value",
@@ -1264,7 +1264,62 @@
                             "default_value": [
                                 "y"
                             ],
-                            "allow_null": 1,
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac9a0ee464",
+                            "label": "Background colour",
+                            "name": "background_colour",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "primary": "Primary",
+                                "secondary": "Secondary",
+                                "white": "White"
+                            },
+                            "default_value": [
+                                "white"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac9c7ee465",
+                            "label": "Container type",
+                            "name": "container_type",
+                            "type": "select",
+                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "container": "Fixed",
+                                "container-fluid": "Full-width"
+                            },
+                            "default_value": [
+                                "container"
+                            ],
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
                             "return_format": "value",
@@ -1457,7 +1512,62 @@
                             "default_value": [
                                 "y"
                             ],
-                            "allow_null": 1,
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac95aee462",
+                            "label": "Background colour",
+                            "name": "background_colour",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "primary": "Primary",
+                                "secondary": "Secondary",
+                                "white": "White"
+                            },
+                            "default_value": [
+                                "white"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac984ee463",
+                            "label": "Container type",
+                            "name": "container_type",
+                            "type": "select",
+                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "container": "Fixed",
+                                "container-fluid": "Full-width"
+                            },
+                            "default_value": [
+                                "container-fluid"
+                            ],
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
                             "return_format": "value",
@@ -1627,7 +1737,62 @@
                             "default_value": [
                                 "y"
                             ],
-                            "allow_null": 1,
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac8e60a367",
+                            "label": "Background colour",
+                            "name": "background_colour",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "primary": "Primary",
+                                "secondary": "Secondary",
+                                "white": "White"
+                            },
+                            "default_value": [
+                                "white"
+                            ],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
+                            "key": "field_5e5ac9180a368",
+                            "label": "Container type",
+                            "name": "container_type",
+                            "type": "select",
+                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "container": "Fixed",
+                                "container-fluid": "Full-width"
+                            },
+                            "default_value": [
+                                "container-fluid"
+                            ],
+                            "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
                             "return_format": "value",
@@ -1705,5 +1870,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1583006963
+    "modified": 1583008655
 }

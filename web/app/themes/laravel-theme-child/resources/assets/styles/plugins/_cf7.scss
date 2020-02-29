@@ -80,17 +80,18 @@
   border: 0 none;
 
   &.wpcf7-display-none {
-    display: none;
-    visibility: hidden;
+    padding: 0;
+    margin: 0;
   }
-}
 
-div.wpcf7-validation-errors,
-div.wpcf7-acceptance-missing,
-div.wpcf7-mail-sent-ok {
-  border-radius: 5px;
-  padding: 8px 15px 10px;
-  height: 100%;
+  &.wpcf7-validation-errors,
+  &.wpcf7-acceptance-missing,
+  &.wpcf7-mail-sent-ok {
+    border-radius: 5px;
+    padding: 8px 15px 9px !important;
+    height: 100%;
+    margin-top: 15px;
+  }
 }
 
 div.wpcf7-validation-errors,

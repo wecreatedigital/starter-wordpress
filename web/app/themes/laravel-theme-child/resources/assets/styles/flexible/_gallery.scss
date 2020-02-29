@@ -1,5 +1,6 @@
 .fcb-gallery {
-  @include media-breakpoint-down(sm) {
-    padding-bottom: 0 !important;
+  .row.no-gutters {
+    margin-right: -15px;
+    margin-left: -15px;
   }
 }

@@ -37,26 +37,6 @@ class App extends Controller
     }
 
     /**
-     * Limits the amount of characters to be displayed in an excerpt and appends
-     * trailing periods.
-     * @author Brandon Hull
-     * @date 2019-05-28
-     */
-    public static function excerpt($limit)
-    {
-        $excerpt = explode(' ', get_the_excerpt(), $limit);
-        if (count($excerpt) >= $limit) {
-            array_pop($excerpt);
-            $excerpt = implode(' ', $excerpt).'...';
-        } else {
-            $excerpt = implode(' ', $excerpt);
-        }
-        $excerpt = preg_replace('`\[[^\]]*\]`', '', $excerpt);
-
-        return $excerpt;
-    }
-
-    /**
     * Custom is page template
     * @author Brandon Hull
     * @param  string  $template [description]
