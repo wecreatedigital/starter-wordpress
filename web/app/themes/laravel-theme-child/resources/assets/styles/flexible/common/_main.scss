@@ -1,23 +1,23 @@
 .fcb {
-  padding: 5rem !important;
-
-  @include media-breakpoint-down(sm) {
-    padding: 3rem !important;
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
-  }
-
-  @include media-breakpoint-down(xs) {
-    padding: 1rem !important;
-    padding-top: 75px !important;
-    padding-bottom: 75px !important;
-  }
+  min-width: 320px;
+  overflow: hidden;
 
   .fcb-v-align {
     @extend .d-flex;
 
     > div {
       @extend .my-auto;
+    }
+  }
+
+  .content {
+    p,
+    ul,
+    li {
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
     }
   }
 }

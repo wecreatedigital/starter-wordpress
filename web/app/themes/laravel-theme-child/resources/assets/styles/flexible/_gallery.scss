@@ -1,1 +1,5 @@
-//.fcb-gallery {}
+.fcb-gallery {
+  @include media-breakpoint-down(sm) {
+    padding-bottom: 0 !important;
+  }
+}

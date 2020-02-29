@@ -1,25 +1,23 @@
 .fcb-hero {
   position: relative;
-  padding-top: 125px !important;
-  padding-bottom: 125px !important;
-  margin: 0;
 
-  @include media-breakpoint-down(sm) {
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
-  }
-
-  @include media-breakpoint-down(xs) {
-    padding-top: 75px !important;
-    padding-bottom: 75px !important;
-  }
-
-  .contents {
+  .container {
     position: relative;
     z-index: 2;
 
-    h1 {
-      margin-bottom: 22px;
+    h1,
+    h2,
+    h3,
+    .btn-link {
+      color: $white;
+    }
+
+    .btn-link {
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
     }
   }
 

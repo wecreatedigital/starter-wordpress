@@ -95,6 +95,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599a3e1ba2c",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -179,6 +209,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599a941ba2d",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -293,6 +353,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599ab61ba2e",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -412,6 +502,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599ad61ba2f",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -419,8 +539,8 @@
                 },
                 "layout_5dd45dfcaa438": {
                     "key": "layout_5dd45dfcaa438",
-                    "name": "left_image_right_text_block",
-                    "label": "Left image, right text",
+                    "name": "left_right_image_text_block",
+                    "label": "Left\/right text and image",
                     "display": "block",
                     "sub_fields": [
                         {
@@ -505,6 +625,30 @@
                             "mime_types": ""
                         },
                         {
+                            "key": "field_5e59a325062ea",
+                            "label": "Image position",
+                            "name": "image_position",
+                            "type": "radio",
+                            "instructions": "Which side do you want to display the image?",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "left": "Left",
+                                "right": "Right"
+                            },
+                            "allow_null": 0,
+                            "other_choice": 0,
+                            "default_value": "",
+                            "layout": "horizontal",
+                            "return_format": "value",
+                            "save_other_choice": 0
+                        },
+                        {
                             "key": "field_5ddb7b0443d58",
                             "label": "Advanced",
                             "name": "",
@@ -539,6 +683,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599ae81ba30",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -648,6 +822,34 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599b221ba31",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [],
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -732,6 +934,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599bda317dc",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -861,6 +1093,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e599c41317dd",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -967,6 +1229,36 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
+                        },
+                        {
+                            "key": "field_5e59912d0cd60",
+                            "label": "Padding override",
+                            "name": "padding_override",
+                            "type": "select",
+                            "instructions": "Assumes top and bottom are the same, use this field to override padding",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "y": "Top and bottom",
+                                "x": "Left and right",
+                                "t": "Top",
+                                "b": "Bottom",
+                                "a": "All sides"
+                            },
+                            "default_value": [
+                                "y"
+                            ],
+                            "allow_null": 1,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
                         }
                     ],
                     "min": "",
@@ -1003,5 +1295,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1579256886
+    "modified": 1582932840
 }

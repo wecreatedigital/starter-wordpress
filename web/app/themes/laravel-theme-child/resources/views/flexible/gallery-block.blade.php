@@ -1,9 +1,8 @@
-<section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-gallery">
+<section @hassub('id') id="@sub('id')" @endsub class="fcb @hassub('padding_override') fcb-@sub('padding_override')100 @endsub fcb-gallery">
   @php( $i = 1 )
   <div class="row">
-    <div class="offset-lg-2 col-lg-8">
-      <h3 class="h2">@sub('heading')</h3>
-      @sub('text')
+    <div class="offset-lg-2 col-lg-8 text-center fcb-b20">
+      @include('flexible.content')
     </div>
   </div>
   <div class="row no-gutters justify-content-md-center">

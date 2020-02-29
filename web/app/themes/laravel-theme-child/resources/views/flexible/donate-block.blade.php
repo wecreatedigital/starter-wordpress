@@ -1,9 +1,8 @@
 @if (function_exists('donate'))
-<section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-donate">
+<section @hassub('id') id="@sub('id')" @endsub class="fcb @hassub('padding_override') fcb-@sub('padding_override')100 @endsub fcb-donate">
   <div class="row">
     <div class="offset-lg-2 col-lg-8">
-      <h3 class="h2">@sub('heading')</h3>
-      @sub('text')
+      @include('flexible.content')
     </div>
   </div>
   <div class="row text-center">

@@ -42,9 +42,15 @@
       left: 0;
       z-index: 99999999;
     }
-    .show-col .row > div,
-    .fcb {
+
+    .show-col .row > div {
       border: red 1px solid;
+    }
+
+    .fcb {
+      border-top: red 1px solid;
+      border-left: red 1px solid;
+      border-right: red 1px solid;
     }
   </style>
 @endif

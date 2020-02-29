@@ -28,3 +28,5 @@ add_action(
         add_theme_support('html5', ['script', 'style']);
     }
 );
+
+add_filter('wpcf7_load_css', '__return_false');

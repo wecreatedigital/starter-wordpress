@@ -1,3 +1,7 @@
+@php
+  $h = 1;
+@endphp
+
 @layouts('page_content_block')
 
 @layout('text_left_block')
@@ -16,8 +20,8 @@
     @include('flexible.hero-block')
 @endlayout
 
-@layout('left_image_right_text_block')
-    @include('flexible.left-image-right-text-block')
+@layout('left_right_image_text_block')
+    @include('flexible.left-right-image-text-block')
 @endlayout
 
 @layout('latest_block')
@@ -35,5 +39,9 @@
 @layout('contact_block')
     @include('flexible.contact-block')
 @endlayout
+
+@php
+  $h++;
+@endphp
 
 @endlayouts
