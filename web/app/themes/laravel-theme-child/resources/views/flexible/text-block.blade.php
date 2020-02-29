@@ -1,15 +1,6 @@
-@php
-  $url = '';
-  $background_image = get_sub_field('background');
-  if( $background_image ) {
-    $url = $background_image['url'];
-  }
-@endphp
-
 @include('flexible._start', [
-  'classes' => 'fcb-hero fcb-v-align',
+  'classes' => 'fcb-text-block',
   'padding' => $default_padding,
-  'style' => 'background-image: url('.$url.')',
 ])
 
 <div class="row">
@@ -19,7 +10,5 @@
     ])
   </div>
 </div>
-
-<div class="overlay"></div>
 
 @include('flexible._end')

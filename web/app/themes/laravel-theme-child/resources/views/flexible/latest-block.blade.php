@@ -1,27 +1,38 @@
 @query([
   'post_type' => get_sub_field('post_type'),
-  'numberposts' => 1
+  'posts_per_page' => 3
 ])
 
-@posts
-<section @hassub('id') id="@sub('id')" @endsub class="fcb @hassub('padding_override') fcb-@sub('padding_override')100 @endsub fcb-latest">
-  <div class="row text-center">
-    <div class="offset-sm-2 col-sm-8">
-      @include('flexible.content')
-    </div>
+@include('flexible._start', [
+  'classes' => 'fcb-latest',
+  'padding' => $default_padding,
+])
+
+<div class="row text-center">
+  <div class="offset-sm-2 col-sm-8">
+    @include('flexible.content', [
+      'classes' => ''
+    ])
   </div>
-  <div class="row">
-    <div class="col-sm-4 offset-sm-1">
+</div>
+
+@posts
+  <article class="row fcb-t40">
+    <div class="offset-sm-2 offset-md-2 col-sm-8 col-md-4 fcb-t40">
       @thumbnail('medium')
     </div>
-    <div class="col-sm-6">
+    <div class="offset-sm-2 offset-md-0 col-sm-8 col-md-4 fcb-t40">
       <h4 class="mb-4">
-        <a href="@permalink">
+        <a class="link" href="@permalink">
           @title
         </a>
       </h4>
       @excerpt
+      <a class="btn" href="@permalink">
+        Read more
+      </a>
     </div>
-  </div>
-</section>
+  </article>
 @endposts
+
+@include('flexible._end')

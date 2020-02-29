@@ -49,28 +49,6 @@ add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
  *
  * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
  */
- function acf_load_padding_override_choices($field)
- {
-
-     // reset choices
-     $field['choices'] = array(
-         'y' => 'Top and bottom',
-         'x' => 'Left and right',
-         't' => 'Top',
-         'b' => 'Bottom',
-         'a' => 'All sides',
-     );
-
-     // return the field
-     return $field;
- }
- add_filter('acf/load_field/name=padding_override', 'acf_load_padding_override_choices');
-
-/**
- * Example dynamic select box
- *
- * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
- */
  function acf_load_color_field_choices($field)
  {
 

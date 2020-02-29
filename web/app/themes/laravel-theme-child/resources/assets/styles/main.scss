@@ -1,6 +1,7 @@
 /** Common styles */
 @import "common/global";
 @import "common/variables";
+@import "common/mixins";
 
 // From autoload
 @import "./autoload/**/*";

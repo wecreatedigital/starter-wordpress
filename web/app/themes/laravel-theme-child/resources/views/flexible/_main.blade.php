@@ -1,19 +1,12 @@
 @php
   $h = 1;
+  $default_padding = 100;
 @endphp
 
 @layouts('page_content_block')
 
-@layout('text_left_block')
-    @include('flexible.text-left-block')
-@endlayout
-
-@layout('text_right_block')
-    @include('flexible.text-right-block')
-@endlayout
-
-@layout('text_center_block')
-    @include('flexible.text-center-block')
+@layout('text_block')
+    @include('flexible.text-block')
 @endlayout
 
 @layout('hero_block')

@@ -28,7 +28,7 @@ export default {
     });
 
     // Prevent image download
-    $('body:not(.development-mode)').on('contextmenu', 'img', function() {
+    $('html:not(.development-mode)').on('contextmenu', 'img', function() {
       return false;
     });
   },

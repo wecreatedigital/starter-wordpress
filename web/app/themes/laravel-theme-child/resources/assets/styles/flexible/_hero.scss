@@ -1,7 +1,10 @@
 .fcb-hero {
   position: relative;
+  min-height: $row-min-height;
 
-  .container {
+  @include background-image();
+
+  .content {
     position: relative;
     z-index: 2;
 
