@@ -15,6 +15,7 @@
          't' => 'Top',
          'b' => 'Bottom',
          'a' => 'All sides',
+         'n' => 'None',
      );
 
      // return the field

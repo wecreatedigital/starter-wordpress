@@ -9,6 +9,10 @@
     @include('flexible.text-block')
 @endlayout
 
+@layout('image_block')
+    @include('flexible.image-block')
+@endlayout
+
 @layout('hero_block')
     @include('flexible.hero-block')
 @endlayout

@@ -1,6 +1,6 @@
 @query([
   'post_type' => get_sub_field('post_type'),
-  'posts_per_page' => 3
+  'posts_per_page' => get_sub_field('number_of_posts')
 ])
 
 @include('flexible._start', [
