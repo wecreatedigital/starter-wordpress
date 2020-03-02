@@ -23,8 +23,10 @@ export default {
     });
 
     $('button[data-target]').on('click', function(event) {
-      event.preventDefault;
-      scrollToHash($(this.getAttribute('data-target')));
+      if( ! $(this).attr('data-toggle') ) {
+        event.preventDefault;
+        scrollToHash($(this.getAttribute('data-target')));
+      }
     });
 
     // Prevent image download
