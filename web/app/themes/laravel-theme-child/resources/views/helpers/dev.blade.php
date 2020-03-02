@@ -1,50 +1,104 @@
 @if( getenv('WP_ENV') == 'local' )
   <div class="responsive-helper bg-secondary">
-    <div class="py-2 px-3 bg-primary d-inline-block d-sm-none">
-      XS |
-      <span class="helper-width"></span>
+
+    <div class="py-2 px-3 bg-primary d-inline-block d-sm-none">XS</div>
+    <div class="py-2 px-3 bg-danger d-none d-sm-inline-block d-md-none">SM</div>
+    <div class="py-2 px-3 bg-info d-none d-md-inline-block d-lg-none">MD</div>
+    <div class="py-2 px-3 bg-warning d-none d-lg-inline-block d-xl-none">LG</div>
+    <div class="py-2 px-3 bg-dark text-white d-none d-xl-inline-block">XL</div>
+
+    <div class="btn-group dropup">
+      <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="helper-width"></span>
+      </button>
+      <div class="dropdown-menu">
+        <button class="dropdown-item resize-body"><span>2560</span>px</button>
+        <button class="dropdown-item resize-body"><span>1920</span>px</button>
+        <button class="dropdown-item resize-body"><span>1680</span>px</button>
+        <button class="dropdown-item resize-body"><span>1366</span>px</button>
+        <button class="dropdown-item resize-body"><span>1280</span>px</button>
+        <button class="dropdown-item resize-body"><span>1200</span>px (xl)</button>
+        <button class="dropdown-item resize-body"><span>1199</span>px (lg)</button>
+        <button class="dropdown-item resize-body"><span>992</span>px (lg)</button>
+        <button class="dropdown-item resize-body"><span>991</span>px (md)</button>
+        <button class="dropdown-item resize-body"><span>768</span>px (md)</button>
+        <button class="dropdown-item resize-body"><span>767</span>px (sm)</button>
+        <button class="dropdown-item resize-body"><span>576</span>px (sm)</button>
+        <button class="dropdown-item resize-body"><span>575</span>px (xs)</button>
+        <button class="dropdown-item resize-body" data-reset>Reset</button>
+      </div>
     </div>
-    <div class="py-2 px-3 bg-danger d-none d-sm-inline-block d-md-none">
-      SM |
-      <span class="helper-width"></span>
-    </div>
-    <div class="py-2 px-3 bg-info d-none d-md-inline-block d-lg-none">
-      MD |
-      <span class="helper-width"></span>
-    </div>
-    <div class="py-2 px-3 bg-warning d-none d-lg-inline-block d-xl-none">
-      LG |
-      <span class="helper-width"></span>
-    </div>
-    <div class="py-2 px-3 bg-dark text-white d-none d-xl-inline-block">
-      XL |
-      <span class="helper-width"></span>
-    </div>
+
     <span class="helper-nodes d-inline-block text-white px-2" title="Number of nodes on this page"></span>
-    <input type="checkbox" name="show-col" class="mr-3">
+
+    <input type="checkbox" name="show-cols" class="mr-3">
+
   </div>
   <script>
   jQuery(document).ready(function(){
+    // Show cols if in dev mode
+    if( jQuery('html').hasClass('development-mode') ) {
+      jQuery('body').addClass('show-cols');
+    }
+
+    // Count the number of nodes, over 1.5k and we have a problem!
     jQuery('.helper-nodes').text(jQuery("*").length);
     jQuery('.helper-width').text(jQuery(window).width()+'px');
-    jQuery('input[name=show-col]').click(function(){
-      jQuery('body').toggleClass('show-col');
+
+    // Toggle cols
+    jQuery('input[name=show-cols]').click(function(){
+      jQuery('body').toggleClass('show-cols');
+    });
+
+    jQuery('.resize-body').click(function(){
+      $width = parseInt(jQuery(this).find('span').text());
+      if( $width ){
+        jQuery('body').width($width+'px');
+        jQuery('.helper-width').text($width+'px');
+      } else {
+        jQuery('body').width(jQuery(window).width());
+        jQuery('.helper-width').text(jQuery(window).width()+'px');
+      }
     });
   });
+
+  // Current browser width
   jQuery(window).resize(function(){
+    jQuery('body').width(jQuery(window).width()+'px');
     jQuery('.helper-width').text(jQuery(window).width()+'px');
   });
   </script>
+
   <style>
+    html.development-mode {
+      background: #f1f1f1;
+    }
+
+    .development-mode body {
+      margin: 0 auto;
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.25);
+    }
+
     .responsive-helper {
       position: fixed;
       bottom: 0;
       left: 0;
       z-index: 99999999;
     }
-    .show-col .row > div,
-    .fcb {
+
+    .show-cols .row > div {
       border: red 1px solid;
+    }
+
+    .show-cols .fcb {
+      border-top: red 1px solid;
+      border-left: red 1px solid;
+      border-right: red 1px solid;
+    }
+
+    .btn-group {
+      position: relative;
+      top: -1px;
     }
   </style>
 @endif

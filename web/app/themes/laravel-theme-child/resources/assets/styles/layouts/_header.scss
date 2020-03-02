@@ -5,3 +5,7 @@
 .banner .nav a {
   @extend .nav-link;
 }
+
+.navbar {
+  min-width: 320px;
+}

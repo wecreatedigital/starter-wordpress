@@ -1,20 +1,4 @@
 <?php
-
-/**
- * Basic htaccess WP rules
- */
-function output_htaccess($rules)
-{
-    $new_rules = '
-<Files "xmlrpc.php">
-  Order deny,allow
-  Deny from all
-</Files>';
-
-    return $rules.$new_rules;
-}
-add_filter('mod_rewrite_rules', 'output_htaccess');
-
 /**
  * Enable SSL
  */

@@ -1,6 +1,7 @@
 /** Common styles */
 @import "common/global";
 @import "common/variables";
+@import "common/mixins";
 
 // From autoload
 @import "./autoload/**/*";
@@ -37,12 +38,12 @@
 
 /** Flexible content blocks **/
 @import "flexible/common/main";
+@import "flexible/common/padding";
 @import "flexible/contact";
 @import "flexible/donate";
 @import "flexible/gallery";
 @import "flexible/hero";
 @import "flexible/latest";
 @import "flexible/left-image-right-text";
-@import "flexible/text-center";
-@import "flexible/text-left";
-@import "flexible/text-right";
+@import "flexible/text";
+@import "flexible/image";

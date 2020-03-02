@@ -183,3 +183,18 @@ function wp_maintenance_mode()
     }
 }
 add_action('get_header', 'wp_maintenance_mode');
+
+/**
+ * Remove the continued link
+ * @author Dean Appleton-Claydon
+ * @date   2020-02-29
+ * @param  string     $more
+ * @return string
+ */
+function remove_excerpt_link($more)
+{
+    global $post;
+
+    return '...';
+}
+add_filter('excerpt_more', 'remove_excerpt_link');

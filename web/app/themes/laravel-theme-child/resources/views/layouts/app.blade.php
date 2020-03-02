@@ -1,11 +1,11 @@
 <!doctype html>
-<html {!! get_language_attributes() !!}>
+@if (getenv('WP_ENV') == 'local')
+  <html class="development-mode" {!! get_language_attributes() !!}>
+@else
+  <html {!! get_language_attributes() !!}>
+@endif
   @include('layouts.head')
-  @if (getenv('WP_ENV') !== 'production')
-    <body @php body_class('development-mode') @endphp>
-  @else
-    <body @php body_class() @endphp>
-  @endif
+  <body @php body_class() @endphp>
     @php do_action('get_header') @endphp
     @include('layouts.header')
     <div role="document">

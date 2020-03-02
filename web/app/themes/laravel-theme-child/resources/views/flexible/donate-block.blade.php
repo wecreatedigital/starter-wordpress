@@ -1,9 +1,13 @@
 @if (function_exists('donate'))
-<section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-donate">
+
+  @include('flexible._start', [
+    'classes' => 'fcb-donate',
+    'padding' => $default_padding,
+  ])
+
   <div class="row">
     <div class="offset-lg-2 col-lg-8">
-      <h3 class="h2">@sub('heading')</h3>
-      @sub('text')
+      @include('flexible.content')
     </div>
   </div>
   <div class="row text-center">
@@ -54,5 +58,7 @@
 
     </div>
   </div>
-</section>
+
+  @include('flexible._end')
+
 @endif

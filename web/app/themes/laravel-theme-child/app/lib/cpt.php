@@ -14,13 +14,15 @@ $taxonomies = [
 
 $cpts = [
     'testimonial' => [
-        'public' => true,
+        'public' => false,
         'taxonomies' => ['author', 'category'],
+        'supports' => ['title', 'editor', 'thumbnail', 'page-attributes'],
     ],
 
     'faq' => [
-        'public' => false,
+        'public' => true,
         'taxonomies' => ['author', 'genre'],
+        'supports' => ['title', 'editor', 'thumbnail', 'revisions'],
     ],
 ];
 
@@ -109,13 +111,12 @@ foreach ($cpts as $cpt => $cpt_options) {
             'label' => __('post_type', 'text_domain'),
             'description' => __($cpt, 'text_domain'),
             'labels' => $labels,
-            'supports' => array(),
             'show_ui' => true,
             'show_in_menu' => true,
             'query_var' => true,
             'show_in_nav_menus' => true,
             'show_in_admin_bar' => true,
-            'supports' => array('title', 'editor', 'thumbnail', 'comments', 'revisions', 'page-attributes'),
+            'supports' => $cpt_options['supports'],
             'taxonomies' => $cpt_options['taxonomies'],
             'menu_position' => 5,
             'can_export' => true,

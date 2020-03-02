@@ -1,18 +1,18 @@
-<section @hassub('id') id="@sub('id')" @endsub class="fcb fcb-gallery">
-  @php( $i = 1 )
-  <div class="row">
-    <div class="offset-lg-2 col-lg-8">
-      <h3 class="h2">@sub('heading')</h3>
-      @sub('text')
-    </div>
+@include('flexible._start', [
+  'classes' => 'fcb-gallery pb-0',
+  'padding' => $default_padding,
+])
+
+<div class="row">
+  <div class="offset-lg-2 col-lg-8 text-center">
+    @include('flexible.content')
   </div>
-  <div class="row no-gutters justify-content-md-center">
+</div>
+
+<div class="row fcb-t40 no-gutters justify-content-md-center">
   @fields('gallery')
-    <img src="@sub('image', 'sizes', 'large')" alt="@sub('image', 'alt')" class="col col-sm-6 col-md-4 img-fluid">
-    @if ($i % 3 == 0)
-      </div><div class="row no-gutters justify-content-md-center">
-    @endif
-    @php( $i++ )
+    <img src="@sub('image', 'sizes', 'large')" alt="@sub('image', 'alt')" class="col-6 col-sm-6 col-md-4 img-fluid">
   @endfields
-  </div>
-</section>
+</div>
+
+@include('flexible._end')

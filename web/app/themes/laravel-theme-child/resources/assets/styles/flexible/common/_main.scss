@@ -1,23 +1,108 @@
 .fcb {
-  padding: 5rem !important;
+  min-width: 320px;
+  overflow: hidden;
 
-  @include media-breakpoint-down(sm) {
-    padding: 3rem !important;
-    padding-top: 100px !important;
-    padding-bottom: 100px !important;
-  }
+  &.fcb-primary {
+    background-color: theme-color("primary");
+    color: $white;
 
-  @include media-breakpoint-down(xs) {
-    padding: 1rem !important;
-    padding-top: 75px !important;
-    padding-bottom: 75px !important;
-  }
+    .btn {
+      @extend .btn-secondary;
+    }
 
-  .fcb-v-align {
-    @extend .d-flex;
-
-    > div {
-      @extend .my-auto;
+    .btn-link,
+    .link {
+      @extend .text-white;
     }
   }
+
+  &.fcb-secondary {
+    background-color: theme-color("secondary");
+    color: $white;
+
+    .btn {
+      @extend .btn-primary;
+    }
+
+    .btn-link,
+    .link {
+      @extend .text-white;
+    }
+  }
+
+  &.fcb-white {
+    color: theme-color("primary");
+    background-color: $white;
+
+    .btn {
+      @extend .btn-primary;
+    }
+
+    .btn-link,
+    .link {
+      @extend .text-primary;
+    }
+  }
+
+  .content {
+    h1 {
+      &:first-child {
+        margin-top: -10px;
+      }
+    }
+
+    h2,
+    h3 {
+      &:first-child {
+        margin-top: -8px;
+      }
+    }
+
+    p,
+    ul,
+    li {
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  .fcb-col-left {
+    @extend .offset-md-0;
+
+    &.fcb-align-text {
+      @extend .text-left;
+    }
+  }
+
+  .fcb-col-center {
+    @extend .offset-md-2;
+
+    &.fcb-align-text {
+      @extend .text-center;
+    }
+  }
+
+  .fcb-col-right {
+    @extend .offset-md-4;
+
+    &.fcb-align-text {
+      @extend .text-right;
+    }
+  }
+}
+
+.fcb-v-align {
+  @extend .d-flex;
+
+  > div {
+    @extend .my-auto;
+  }
+}
+
+.fcb-col-image {
+  min-height: $row-min-height;
+
+  @include background-image();
 }

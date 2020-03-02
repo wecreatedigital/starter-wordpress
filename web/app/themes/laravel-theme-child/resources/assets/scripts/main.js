@@ -1,4 +1,4 @@
-import 'jquery';
+//import 'jquery'; - included in WordPress
 //import 'slick-carousel/slick/slick.min';
 import 'bootstrap';
 

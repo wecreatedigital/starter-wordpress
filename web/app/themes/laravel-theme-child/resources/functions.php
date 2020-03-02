@@ -88,7 +88,7 @@ $child_theme = getDirContents(dirname(__DIR__, 2).'/laravel-theme-child/app/lib'
 $files = array_merge($parent_theme, $child_theme);
 foreach ($files as $file) {
     // array to exclude files from being included
-    if (str_contains($file, ['ajax', 'donate', 'form', 'Controllers'])) {
+    if (str_contains($file, ['ajax', 'form', 'Controllers'])) {
         continue;
     }
 

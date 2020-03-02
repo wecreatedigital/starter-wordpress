@@ -38,15 +38,19 @@ Header append Vary User-Agent
 # Check that the expires module has been installed
 <IfModule mod_expires.c>
 ExpiresActive On
-ExpiresDefault "access plus 10 years"
-ExpiresByType image/gif "access plus 10 years"
-ExpiresByType image/jpeg "access plus 10 years"
-ExpiresByType image/png "access plus 10 years"
-ExpiresByType text/css "access plus 10 years"
+ExpiresByType image/gif "access plus 1 month"
+ExpiresByType image/jpg "access plus 1 month"
+ExpiresByType image/jpeg "access plus 1 month"
+ExpiresByType image/png "access plus 1 month"
+ExpiresByType image/x-icon "access plus 1 month"
+ExpiresByType text/css "access plus 1 month"
 ExpiresByType text/html "access plus 1 seconds"
-ExpiresByType text/javascript "access plus 10 years"
-ExpiresByType application/x-unknown-content-type "access plus 10 years"
-ExpiresByType application/x-javascript "access plus 10 years"
+ExpiresByType text/javascript "access plus 1 month"
+ExpiresByType text/x-javascript "access plus 1 month"
+ExpiresByType application/pdf "access plus 1 month"
+ExpiresByType application/x-unknown-content-type "access plus 1 month"
+ExpiresByType application/x-javascript "access plus 1 month"
+ExpiresDefault "access plus 2 days"
 </IfModule>
 \n\n
 EOD;
@@ -83,7 +87,6 @@ function remove_excess_links_etc()
     add_filter('json_jsonp_enabled', '__return_false');
 
     // Filters for WP-API version 2.x
-    add_filter('rest_enabled', '__return_false');
     add_filter('rest_jsonp_enabled', '__return_false');
 
     // Remove emoji scripts
