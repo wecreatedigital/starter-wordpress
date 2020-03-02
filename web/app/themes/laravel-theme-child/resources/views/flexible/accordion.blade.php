@@ -8,11 +8,6 @@
   $tabbody = get_sub_field('text_background_colour');
 @endphp
 
-<div class="row">
-  <div class="offset-lg-2 col-lg-8 text-center">
-    @include('flexible.content')
-  </div>
-</div>
 <div class="container">
     <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
         @php $i=1; while ( have_rows('accordion_item') ) : the_row() @endphp

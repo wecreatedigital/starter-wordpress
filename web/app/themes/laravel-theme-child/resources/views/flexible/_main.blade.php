@@ -41,6 +41,10 @@
     @include('flexible.accordion')
 @endlayout
 
+@layout('card_block')
+    @include('flexible.card')
+@endlayout
+
 @php
   $h++;
 @endphp

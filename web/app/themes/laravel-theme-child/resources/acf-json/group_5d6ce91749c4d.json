@@ -2061,7 +2061,7 @@
                     "key": "layout_5e5cec95c3c26",
                     "name": "accordion_block",
                     "label": "Accordion Block",
-                    "display": "block",
+                    "display": "row",
                     "sub_fields": [
                         {
                             "key": "field_5e5ceca4c3c27",
@@ -2355,8 +2355,8 @@
                                 },
                                 {
                                     "key": "field_5e5cf0ebb9feb",
-                                    "label": "Button",
-                                    "name": "button",
+                                    "label": "Link",
+                                    "name": "link",
                                     "type": "link",
                                     "instructions": "",
                                     "required": 0,
@@ -2669,5 +2669,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1583150930
+    "modified": 1583165721
 }
