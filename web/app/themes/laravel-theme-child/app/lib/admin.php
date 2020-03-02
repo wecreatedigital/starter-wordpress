@@ -206,12 +206,12 @@ add_filter('excerpt_more', 'remove_excerpt_link');
  *
  * https://stackoverflow.com/questions/1157531/how-can-i-remove-jquery-from-the-frontside-of-my-wordpress
  */
- add_filter('wp_default_scripts', 'change_default_jquery');
-
- function change_default_jquery(&$scripts)
- {
-     if ( ! is_admin()) {
-         $scripts->remove('jquery');
-         $scripts->add('jquery', false, array('jquery-core'), '1.10.2');
-     }
- }
+if ( ! is_admin()) {
+    add_action('wp_enqueue_scripts', 'my_jquery_enqueue', 11);
+}
+function my_jquery_enqueue()
+{
+    wp_deregister_script('jquery');
+    wp_register_script('jquery', '//code.jquery.com/jquery-3.4.1.slim.min.js', false, null, true);
+    wp_enqueue_script('jquery');
+}
