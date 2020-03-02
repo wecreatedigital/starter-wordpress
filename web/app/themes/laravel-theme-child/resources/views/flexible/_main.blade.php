@@ -45,6 +45,10 @@
     @include('flexible.card')
 @endlayout
 
+@layout('testimonial_block')
+    @include('flexible.testimonial-block')
+@endlayout
+
 @php
   $h++;
 @endphp
