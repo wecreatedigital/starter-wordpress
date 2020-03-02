@@ -198,3 +198,20 @@ function remove_excerpt_link($more)
     return '...';
 }
 add_filter('excerpt_more', 'remove_excerpt_link');
+
+/**
+ * jQuery is outdated in WP and has vulnerabilities, but we don't want break the WP admin_init
+ * @author Dean Appleton-Claydon
+ * @date   2020-03-02
+ *
+ * https://stackoverflow.com/questions/1157531/how-can-i-remove-jquery-from-the-frontside-of-my-wordpress
+ */
+ add_filter('wp_default_scripts', 'change_default_jquery');
+
+ function change_default_jquery(&$scripts)
+ {
+     if ( ! is_admin()) {
+         $scripts->remove('jquery');
+         $scripts->add('jquery', false, array('jquery-core'), '1.10.2');
+     }
+ }

@@ -1,4 +1,4 @@
-@if (function_exists('donate'))
+@if (function_exists('donates'))
 
   @include('flexible._start', [
     'classes' => 'fcb-donate',
