@@ -1,0 +1,72 @@
+.fcb-accordion {
+  .primary {
+    background-color: theme-color("primary");
+    color: $white;
+
+    h3 {
+      a {
+        color: $white;
+        display: block;
+      }
+    }
+
+    .btn {
+      @extend .btn-secondary;
+    }
+
+    .btn-link,
+    .link {
+      @extend .text-white;
+    }
+  }
+
+  .secondary {
+    background-color: theme-color("secondary");
+    color: $white;
+
+    h3 {
+      a {
+        color: $white;
+      }
+    }
+
+    .btn {
+      @extend .btn-primary;
+    }
+
+    .btn-link,
+    .link {
+      @extend .text-white;
+    }
+  }
+
+  .white {
+    color: $black;
+    background-color: $white;
+
+    h3 {
+      a {
+        color: $black;
+      }
+    }
+
+    .btn {
+      @extend .btn-primary;
+    }
+
+    .btn-link,
+    .link {
+      @extend .text-primary;
+    }
+  }
+
+  .panel-heading {
+    position: relative;
+
+    .accordion-button {
+      right: 20px;
+      top: 25%;
+      position: absolute;
+    }
+  }
+}

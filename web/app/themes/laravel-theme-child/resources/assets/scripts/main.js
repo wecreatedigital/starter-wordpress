@@ -4,9 +4,9 @@ import 'bootstrap';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF, faFacebook, faTwitter, faPinterestP, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faPhone, faHome, faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone, faHome, faSearch, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {} from '@fortawesome/pro-solid-svg-icons';
-library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin, faEnvelope, faPhone, faSearch, faHome); //faClock, faAcorn, faMap
+library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin, faEnvelope, faPhone, faSearch, faHome, faChevronRight); //faClock, faAcorn, faMap
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
@@ -46,3 +46,17 @@ const routes = new Router({
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
+
+/**
+ * Adds a class to the accordion to open the first item
+ */
+jQuery('#collapse1').addClass('show');
+/**
+ * Accordion open and close script
+ */
+$('#accordion').on('hide.bs.collapse', function () {
+    $('#accordion a svg').removeClass('fa-rotate-270');
+});
+$('#accordion').on('shown.bs.collapse', function () {
+    $(this).find('a[aria-expanded=true] svg').addClass('fa-rotate-270');
+});

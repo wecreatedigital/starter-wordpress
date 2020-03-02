@@ -37,6 +37,10 @@
     @include('flexible.contact-block')
 @endlayout
 
+@layout('accordion_block')
+    @include('flexible.accordion')
+@endlayout
+
 @php
   $h++;
 @endphp
