@@ -1,19 +1,19 @@
 @include('flexible._start', [
-  'classes' => 'fcb-card',
+  'classes' => 'fcb-icon',
   'padding' => $default_padding,
 ])
 
   <div class="container">
     <div class="row justify-content-center">
-      @fields('card_item')
-        <div class="col-12 col-md-4 mb-5 d-flex align-items-stretch">
-          <div class="card card-block-item shadow-lg card-with-button">
+      @fields('icon_item')
+        <div class="col-12 col-md-3 mb-5 d-flex align-items-stretch">
+          <div class="card card-block-item card-with-button border-0 text-center">
             @if(get_sub_field('link') && get_sub_field('image'))
               <a href="@sub('link', 'url')">
-                <img class="img-fluid rounded-0" src="@sub('image', 'url')" alt="@sub('image', 'alt')">
+                <img class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
               </a>
             @elseif(get_sub_field('image'))
-              <img class="img-fluid rounded-0" src="@sub('image', 'url')" alt="@sub('image', 'alt')">
+              <img class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
             @endif
               <div class="card-body pb-4">
                 @hassub('link')

@@ -45,6 +45,10 @@
     @include('flexible.card')
 @endlayout
 
+@layout('icon_block')
+    @include('flexible.icon')
+@endlayout
+
 @layout('testimonial_block')
     @include('flexible.testimonial-block')
 @endlayout
