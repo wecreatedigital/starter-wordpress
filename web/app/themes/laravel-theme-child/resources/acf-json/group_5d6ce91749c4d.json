@@ -2460,7 +2460,7 @@
                 },
                 "layout_5e5cf16280889": {
                     "key": "layout_5e5cf16280889",
-                    "name": "tesstimonial_block",
+                    "name": "testimonial_block",
                     "label": "Testimonial Block",
                     "display": "block",
                     "sub_fields": [
@@ -2669,5 +2669,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1583165721
+    "modified": 1583226430
 }

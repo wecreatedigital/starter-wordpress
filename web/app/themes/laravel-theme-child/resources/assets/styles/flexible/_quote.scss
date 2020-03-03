@@ -1,0 +1,23 @@
+.fcb-testimonial {
+  .testimonial-item {
+    @extend .text-center;
+
+    .primary {
+      path {
+        fill: theme-color("primary") !important;
+      }
+    }
+
+    .secondary {
+      path {
+        fill: theme-color("secondary") !important;
+      }
+    }
+
+    .black {
+      path {
+        fill: theme-color("secondary") !important;
+      }
+    }
+  }
+}

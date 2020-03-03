@@ -62,3 +62,14 @@ $('#accordion').on('hide.bs.collapse', function () {
 $('#accordion').on('shown.bs.collapse', function () {
     $(this).find('a[aria-expanded=true] svg').addClass('fa-rotate-270');
 });
+
+/**
+ * Quote Slick Slider
+ */
+$('.slick-featured_resources').slick({
+   dots: true,
+   infinite: true,
+   speed: 300,
+   slidesToShow: 2,
+   variableWidth: true,
+ });
