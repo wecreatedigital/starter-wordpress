@@ -84,15 +84,11 @@
     "wordpress-install-dir": "web/wp"
   },
   "scripts": {
-    "post-root-package-install": [
-      "php -r \"copy('.env.sample', '.env');\""
-    ],
     "post-update-cmd": [
       "php -r \"symlink('web', 'public');\"",
       "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
       "rm -rf web/wp/wp-content/plugins/",
-      "yarn --cwd web/app/themes/laravel-theme-child/ install",
       "wp plugin activate classic-editor",
       "wp plugin activate advanced-custom-fields-pro",
       "wp plugin activate contact-form-7",
