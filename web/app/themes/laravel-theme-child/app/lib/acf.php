@@ -145,3 +145,38 @@ function content_block_exists_first($fc_layouts, $fc_field = 'page_content_block
         return false;
     }
 }
+/*
+ * Check which header area is being used and adds acf fields
+ *
+ * @author Russell Mitchell
+ * @date   2020-03-03
+
+ *
+ * Adapted from: https://www.advancedcustomfields.com/resources/register-fields-via-php/
+*/
+
+if (env('DISABLE_HAMBURGER')):
+
+acf_add_local_field_group(array(
+	'key' => 'group_nav_button',
+	'title' => 'Nav Button',
+	'fields' => array (
+		array (
+			'key' => 'field_nav_button',
+			'label' => 'Navigation Button',
+			'name' => 'navigation_button',
+			'type' => 'link',
+      'instructions' => 'This is the link to the header navigation button. Please update ',
+		)
+	),
+  'location' => array (
+			array (
+				array (
+					'param' => 'options_page',
+					'operator' => '==',
+					'value' => 'acf-options',
+				),
+			),
+		),
+));
+endif;
