@@ -17,16 +17,14 @@
         @endsub
     </div>
 </div>
-  <div class="position-relative">
-    <div class="testimonial-slick-slider">
+  <div>
+    <div class="testimonial">
       @query([
-        'post_type' => 'testimonial',
-        'post_parent' => 0
+        'post_type' => 'testimonials'
       ])
+
       @posts
-      <div class="item">
-          @include('partials.testimonial')
-      </div>
+        @include('partials.testimonial')
       @endposts
     </div>
   </div>
