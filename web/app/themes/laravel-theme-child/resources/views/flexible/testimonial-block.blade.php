@@ -17,7 +17,7 @@
 @endphp
 
 <div class="row">
-    <div class="col-12 col-md-12 col-sm-12">
+    <div class="col-12 col-md-12 col-sm-12 text-center mb-3">
       @hassub('testimonial_intro_header')
         <{{ $heading }} class="mb-3">
           @sub('testimonial_intro_header')
@@ -26,13 +26,13 @@
 
         @hassub('testimonial_intro_header')
           <{{ $sub_heading }} class="mb-3">
-            @sub('testimonial_intro_block')
+            @sub('testimonial_intro_text')
           </{{ $sub_heading }}>
         @endsub
     </div>
 </div>
-    <div class="testimonial-slick-slider testimonial-item">
-
+  <div class="container">
+    <div class="testimonial-slick-slider mp-5">
       @php
         $post_objects = get_sub_field('testimonial_item')
       @endphp
@@ -41,13 +41,10 @@
             @php
               setup_postdata($GLOBALS['post'] =& $post);
             @endphp
-            <div class="col-12 col-md-6 col-lg-4 mb-30">
               @include("partials.testimonial")
-            </div>
         @endforeach
         @php wp_reset_postdata(); @endphp
       @endif
-
     </div>
-
+  </div>
 @include('flexible._end')

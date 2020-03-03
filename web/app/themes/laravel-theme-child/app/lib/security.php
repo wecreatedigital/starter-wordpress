@@ -46,20 +46,3 @@ if ( ! empty($_SERVER['HTTPS'])) {
  * X-Frame-Options
  */
 add_action('send_headers', 'send_frame_options_header', 10, 0);
-
-/**
- * jQuery is outdated in WP and has vulnerabilities, but we don't want break the WP admin_init
- * @author Dean Appleton-Claydon
- * @date   2020-03-02
- *
- * https://stackoverflow.com/questions/1157531/how-can-i-remove-jquery-from-the-frontside-of-my-wordpress
- */
-if ( ! is_admin()) {
-    add_action('wp_enqueue_scripts', 'my_jquery_enqueue', 11);
-}
-function my_jquery_enqueue()
-{
-    wp_deregister_script('jquery');
-    wp_register_script('jquery', get_stylesheet_directory_uri().'/assets/scripts/jquery-3.4.1.slim.min.js', false, null, true);
-    wp_enqueue_script('jquery');
-}

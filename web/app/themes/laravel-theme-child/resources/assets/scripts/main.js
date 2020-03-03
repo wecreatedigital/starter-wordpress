@@ -1,5 +1,5 @@
 import 'jquery';
-//import 'slick-carousel/slick/slick.min';
+import 'slick-carousel/slick/slick.min';
 import 'bootstrap';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
@@ -48,28 +48,3 @@ const routes = new Router({
 
 // Load Events
 jQuery(document).ready(() => routes.loadEvents());
-
-/**
- * Adds a class to the accordion to open the first item
- */
-jQuery('#collapse1').addClass('show');
-/**
- * Accordion open and close script
- */
-$('#accordion').on('hide.bs.collapse', function () {
-    $('#accordion a svg').removeClass('fa-rotate-270');
-});
-$('#accordion').on('shown.bs.collapse', function () {
-    $(this).find('a[aria-expanded=true] svg').addClass('fa-rotate-270');
-});
-
-/**
- * Quote Slick Slider
- */
-$('.slick-featured_resources').slick({
-   dots: true,
-   infinite: true,
-   speed: 300,
-   slidesToShow: 2,
-   variableWidth: true,
- });

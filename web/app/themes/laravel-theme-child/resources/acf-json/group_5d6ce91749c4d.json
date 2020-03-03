@@ -2486,8 +2486,8 @@
                         {
                             "key": "field_5e5cf1b180893",
                             "label": "Testimonial Intro Text",
-                            "name": "",
-                            "type": "text",
+                            "name": "testimonial_intro_text",
+                            "type": "textarea",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2498,9 +2498,9 @@
                             },
                             "default_value": "",
                             "placeholder": "",
-                            "prepend": "",
-                            "append": "",
-                            "maxlength": ""
+                            "maxlength": "",
+                            "rows": "",
+                            "new_lines": ""
                         },
                         {
                             "key": "field_5e5cf1e943793",
@@ -2669,5 +2669,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1583226430
+    "modified": 1583242496
 }
