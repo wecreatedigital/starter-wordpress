@@ -44,6 +44,6 @@ if ( ! is_admin()) {
 function my_jquery_enqueue()
 {
     wp_deregister_script('jquery');
-    wp_register_script('jquery', get_stylesheet_directory_uri().'/assets/scripts/jquery-3.4.1.slim.min.js', false, null, true);
+    wp_register_script('jquery', get_stylesheet_directory_uri().'/assets/scripts/jquery-3.4.1.min.js', false, null, true);
     wp_enqueue_script('jquery');
 }
