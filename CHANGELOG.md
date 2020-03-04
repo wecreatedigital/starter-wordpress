@@ -232,8 +232,36 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Move red borders into dev helper
 - Vertical align class
 
+## 3.0.0 - 04-03-2020
+- New block: image
+- New block: carousel
+- New block: accordion
+- New block: card 
+- Revised block: text (all combined into one)
+- Revised block: image/text (now can switch between left vs right)
+- All blocks: choose background colour
+- All blocks: choose padding
+- All blocks: choose container fluid or not
+- All blocks: used accordion to group by ‘Content’, ‘Style’ and ‘Advanced’
+- For all new ACF selects, we dynamically update the values in code only - using web/app/themes/laravel-theme-child/app/lib/fcb.php
+- Created mixins to have our own responsive padding (only!); define yours in variables.scss
+- Improved dev helper; can now dynamically change the body width to help with precise testing such as with common large screen sizes + BS precise start and end breakpoints
+- Dozen or so extra .fcb-* classes in web/app/themes/laravel-theme-child/resources/assets/styles/flexible/common/_main.scss
+- Added min-width 320px and overflow hidden on FCB and navbar (since we have to do it for every build!)
+- Removed CF7 CSS, added SCSS/BS4 styles
+- Enhancement: FCBs have a start and end blade - this allows us to control globally all the relevant improvements above
+- Enhancement: dynamic heading tags i.e. we have one H1, then three H2s and then the rest on the page (unless hardcoded) are H3
+- Enhancement: added WP logging on local
+- Enhancement: added two image sizes needed for 2x FCB blocks
+- Enhancement: added more htaccess rules for speed
+- Enhancement: added array value for ‘supports’ so we can determine what we need per post type i.e. title, editor, revisions, featured image etc
+- Fix: removed excerpt function in place for one that automatically assumes we don’t want the continued link
+- Fix: commented out jQuery since it’s included with WordPress and we use Autoptimize to compile
+- Fix: red line shows with dev helper only on local
+- Fix: removed wp API disable script - not needed anymore
+- Fix: removed htaccess code we no longer need
+- Fix: resolved other warnings
+
 ## To do
-- Investigate [Using Composer with WordPress](https://roots.io/using-composer-with-wordpress/) and [Receipe for WordPress/Composer](http://composer.rarst.net/#recipes)
-- Pro security plugin
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!
