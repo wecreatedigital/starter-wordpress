@@ -39,7 +39,3 @@
     </p>
   @endif
 </div>
-
-@php
-  $h++;
-@endphp

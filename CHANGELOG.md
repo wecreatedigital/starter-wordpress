@@ -236,7 +236,7 @@ All notable changes to `starter-wordpress` will be documented in this file
 - New block: image
 - New block: carousel
 - New block: accordion
-- New block: card 
+- New block: card
 - Revised block: text (all combined into one)
 - Revised block: image/text (now can switch between left vs right)
 - All blocks: choose background colour
@@ -261,6 +261,15 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Fix: removed wp API disable script - not needed anymore
 - Fix: removed htaccess code we no longer need
 - Fix: resolved other warnings
+
+## 3.0.1 - 08-03-2020
+- Include Smush.it and SendGrid plugins
+- Include production config file for catching WP Super Cache and iThemes Security constants
+- Update ACF FCB group including A-Z order and using FCB content partial on new FCBs
+- Update accordion and testimonials blocks
+- Rename: relevant FCBs files so file naming is consistent
+- Fix: allow for multiple accordions on the page
+- Fix: CTA button on xs and sm should be an anchor and not a button
 
 ## To do
 - Create sample WooCommerce, SASS and blade code

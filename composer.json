@@ -60,6 +60,8 @@
     "wpackagist-plugin/mailgun": "*",
     "wpackagist-plugin/redirection": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
+    "wpackagist-plugin/resmushit-image-optimizer": "*",
+    "wpackagist-plugin/sendgrid-email-delivery-simplified": "*",
     "wpackagist-plugin/woocommerce": "*",
     "wpackagist-plugin/wordpress-seo": "*",
     "wpackagist-plugin/wp-super-cache": "*"

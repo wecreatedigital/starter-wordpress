@@ -18,7 +18,9 @@
     ) );
     ?>
   @else
-    <button class="d-sm-block d-md-none" type="button" name="button" onclick="window.location.href = '@option('navigation_button', 'url')';">Contact</button>
+    <a class="d-sm-block d-md-none" href="@option('navigation_button')">
+      Contact
+    </a>
     <?php
     wp_nav_menu( array(
       'theme_location'    => 'primary_navigation',

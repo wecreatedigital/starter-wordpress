@@ -34,42 +34,33 @@ export default {
       return false;
     });
   },
-  finalize() {
+  finalize() { // JavaScript to be fired on all pages, after page specific JS is fired
     /**
-     * Adds a class to the accordion to open the first item
+     * Accordion open and close script
      */
+    $('.accordion').each(function(){
+      $(this).find('.panel-collapse').first().addClass('show');
+      $(this).on('hide.bs.collapse', function () {
+        $(this).find('.minus').removeClass('minus');
+      }).on('shown.bs.collapse', function () {
+        $(this).find('button[aria-expanded=true] svg').addClass('minus');
+      });
+    });
 
-      $('#collapse-1').addClass('show');
-      /**
-       * Accordion open and close script
-       */
-      $('#accordion').on('hide.bs.collapse', function () {
-          $('#accordion a svg').removeClass('fa-rotate-270');
-      });
-      $('#accordion').on('shown.bs.collapse', function () {
-          $(this).find('a[aria-expanded=true] svg').addClass('fa-rotate-270');
-      });
-    // JavaScript to be fired on all pages, after page specific JS is fired
     /**
-     * Quote Slick Slider
+     * Testimonials Slick Slider
      */
-     /**
-      * Slick Slider Script for Quotes
-      */
-
-
-      $('.testimonial-slick-slider').slick({
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        dots: false,
-        arrows: true,
-        variableWidth: false,
-        centerMode: false,
-        infinite: true,
-        fade: false,
-        nextArrow: '<button class="slick-prev"><i class="fa fa-chevron-left"></i>test</button>',
-        prevArrow: '<button class="slick-next"><i class="fa fa-chevron-right"></i>test</button>',
-     });
-
+    $('.testimonial-slick-slider').slick({
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      dots: false,
+      arrows: true,
+      variableWidth: false,
+      centerMode: false,
+      infinite: true,
+      fade: false,
+      nextArrow: '<button class="slick-prev"><i class="fa fa-chevron-left"></i>test</button>',
+      prevArrow: '<button class="slick-next"><i class="fa fa-chevron-right"></i>test</button>',
+   });
   },
 };

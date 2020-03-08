@@ -1,5 +1,6 @@
 @php
-  $h = 1;
+  $h = 1; // Heading for SEO
+  $unique_id = 1; // For counting the number of accordions
   $default_padding = 100;
 @endphp
 
@@ -38,15 +39,15 @@
 @endlayout
 
 @layout('accordion_block')
-    @include('flexible.accordion')
+    @include('flexible.accordion-block')
 @endlayout
 
 @layout('card_block')
-    @include('flexible.card')
+    @include('flexible.card-block')
 @endlayout
 
 @layout('icon_block')
-    @include('flexible.icon')
+    @include('flexible.icon-block')
 @endlayout
 
 @layout('testimonial_block')
@@ -55,6 +56,7 @@
 
 @php
   $h++;
+  $unique_id++;
 @endphp
 
 @endlayouts
