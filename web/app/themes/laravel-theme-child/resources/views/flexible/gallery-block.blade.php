@@ -11,7 +11,7 @@
 
 <div class="row fcb-t40 no-gutters justify-content-md-center">
   @fields('gallery')
-    <img src="@sub('image', 'sizes', 'large')" alt="@sub('image', 'alt')" class="col-6 col-sm-6 col-md-4 img-fluid">
+    <img loading="lazy" src="@sub('image', 'sizes', 'large')" alt="@sub('image', 'alt')" class="col-6 col-sm-6 col-md-4 img-fluid">
   @endfields
 </div>
 

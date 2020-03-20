@@ -10,10 +10,10 @@
           <div class="card card-block-item card-with-button border-0 text-center">
             @if(get_sub_field('link') && get_sub_field('image'))
               <a href="@sub('link', 'url')">
-                <img class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
+                <img loading="lazy" class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
               </a>
             @elseif(get_sub_field('image'))
-              <img class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
+              <img loading="lazy" class="rounded-0" src="@sub('image', 'sizes', 'thumbnail')" alt="@sub('image', 'alt')">
             @endif
               <div class="card-body pb-4">
                 @hassub('link')

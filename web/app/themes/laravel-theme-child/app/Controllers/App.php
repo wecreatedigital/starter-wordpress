@@ -84,6 +84,6 @@ class App extends Controller
             return $url;
         }
 
-        return '<img src="'.$url.'" class="'.$image_class.'" height="'.$height.'" width="'.$width.'" alt="'.$image['alt'].'">';
+        return '<img loading="lazy" src="'.$url.'" class="'.$image_class.'" height="'.$height.'" width="'.$width.'" alt="'.$image['alt'].'">';
     }
 }
