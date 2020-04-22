@@ -1,5 +1,5 @@
 import 'jquery';
-import 'slick-carousel/slick/slick.min';
+import 'slick-carousel/slick/slick';
 import 'bootstrap';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
