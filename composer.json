@@ -51,7 +51,7 @@
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "wpackagist-plugin/autoptimize": "*",
-    "wpackagist-plugin/better-wp-security": "*",
+    "wpackagist-plugin/acf-content-analysis-for-yoast-seo": "*",
     "wpackagist-plugin/civic-cookie-control-8": "*",
     "wpackagist-plugin/classic-editor": "*",
     "wpackagist-plugin/contact-form-7": "*",
