@@ -18,11 +18,15 @@ $cpts = [
         'taxonomies' => ['author', 'category'],
         'supports' => ['title', 'editor', 'thumbnail', 'page-attributes'],
     ],
-
     'faq' => [
         'public' => true,
         'taxonomies' => ['author', 'genre'],
         'supports' => ['title', 'editor', 'thumbnail', 'revisions'],
+    ],
+    'mega-menu' => [
+        'public' => false,
+        'taxonomies' => [],
+        'supports' => ['title', 'revisions'],
     ],
 ];
 
