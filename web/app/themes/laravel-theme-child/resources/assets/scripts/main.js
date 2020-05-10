@@ -4,9 +4,9 @@ import 'bootstrap';
 
 import { library, dom } from '@fortawesome/fontawesome-svg-core';
 import { faFacebookF, faFacebook, faTwitter, faPinterestP, faInstagram, faLinkedin } from '@fortawesome/free-brands-svg-icons';
-import { faEnvelope, faPhone, faHome, faSearch, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faPhone, faHome, faSearch, faChevronLeft, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {} from '@fortawesome/pro-solid-svg-icons';
-library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin, faEnvelope, faPhone, faSearch, faHome, faChevronRight); //faClock, faAcorn, faMap
+library.add(faFacebookF, faFacebook, faPinterestP, faTwitter, faInstagram, faLinkedin, faEnvelope, faPhone, faSearch, faHome, faChevronLeft, faChevronRight); //faClock, faAcorn, faMap
 
 // tell FontAwesome to watch the DOM and add the SVGs when it detects icon markup
 dom.watch();
@@ -17,6 +17,7 @@ import common from './routes/common';
 import home from './routes/home';
 import aboutUs from './routes/about';
 import local from './routes/local';
+import singleProduct from './routes/single-product';
 // import test from './routes/test';
 
 /** Populate Router instance with DOM routes */
@@ -28,6 +29,7 @@ const routes = new Router({
   // About Us page, note the change from about-us to aboutUs.
   aboutUs,
   local,
+  singleProduct,
   // test,
 });
 /**

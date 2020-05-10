@@ -1,0 +1,5 @@
+body.woocommerce {
+  .main {
+    @extend .container;
+  }
+}
