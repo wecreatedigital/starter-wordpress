@@ -35,7 +35,7 @@
 
 <div {{ wc_product_class( '', $product ) }}>
 
-	<div class="row">
+	<div class="row fcb-b100">
   	<div class="col-12">
 			@php
 				/**

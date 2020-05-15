@@ -50,7 +50,7 @@
 
 @if ( ! empty($product_tabs))
 
-<div class="container product-tabs">
+<div class="product-tabs fcb-b100">
   <ul class="nav nav-tabs" role="tablist">
     @php
       $t = 1;
@@ -58,9 +58,9 @@
 
     @foreach ($product_tabs as $key => $product_tab)
       <li class="nav-item">
-        <a href="#pane-{{ $key }}" class="nav-link @if($t == 1) active @endif" data-toggle="tab" role="tab" aria-controls="tab-{{ $key }}">
+        <button href="#pane-{{ $key }}" class="nav-link @if($t == 1) active @endif" data-toggle="tab" role="tab" aria-controls="tab-{{ $key }}">
           {!! wp_kses_post(apply_filters('woocommerce_product_'.$key.'_tab_title', $product_tab['title'], $key)) !!}
-        </a>
+        </button>
       </li>
 
       @php
@@ -74,17 +74,13 @@
     $t = 1;
   @endphp
 
-  <div id="content" class="tab-content" role="tablist">
+  <div id="product-accordion" class="tab-content" role="tablist">
     @foreach ($product_tabs as $key => $product_tab)
       <div id="pane-{{ $key }}" class="card tab-pane fade @if($t == 1) show active @endif" role="tabpanel" aria-labelledby="tab-{{ $key }}">
-        <div class="card-header" role="tab" id="heading-{{ $key }}">
-          <h5 class="mb-0">
-            <a data-toggle="collapse" href="#collapse-{{ $key }}" aria-expanded="true" aria-controls="collapse-{{ $key }}">
-              {!! wp_kses_post(apply_filters('woocommerce_product_'.$key.'_tab_title', $product_tab['title'], $key)) !!}
-            </a>
-          </h5>
-        </div>
-        <div id="collapse-{{ $key }}" class="collapse @if($t == 1) show @endif" data-parent="#content" role="tabpanel" aria-labelledby="heading-{{ $key }}">
+        <button class="card-header" role="tab" id="heading-{{ $key }}" data-toggle="collapse" href="#collapse-{{ $key }}" aria-expanded="true" aria-controls="collapse-{{ $key }}">
+          {!! wp_kses_post(apply_filters('woocommerce_product_'.$key.'_tab_title', $product_tab['title'], $key)) !!}
+        </button>
+        <div id="collapse-{{ $key }}" class="collapse @if($t == 1) show @endif" data-parent="#product-accordion" role="tabpanel" aria-labelledby="heading-{{ $key }}">
           <div class="card-body">
             @if (isset($product_tab['callback']))
               {!! call_user_func($product_tab['callback'], $key, $product_tab) !!}
