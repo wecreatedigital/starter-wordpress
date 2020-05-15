@@ -1,4 +1,8 @@
 .woocommerce.single-product {
+  .document {
+    overflow: hidden;
+  }
+
   .product {
     .cart,
     .variations_button {
@@ -37,7 +41,8 @@
       }
     }
 
-    .summary {
+    .summary,
+    .images {
       margin-bottom: 0;
     }
   }
