@@ -9,7 +9,7 @@
     @php do_action('get_header') @endphp
     @include('layouts.header')
     <div role="document">
-      <main class="main">
+      <main class="main" id="main">
         @include('layouts.breadcrumbs')
         @yield('content')
       </main>
