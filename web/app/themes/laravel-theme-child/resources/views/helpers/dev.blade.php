@@ -1,7 +1,8 @@
 @if( getenv('WP_ENV') == 'local' )
   <div class="responsive-helper bg-secondary">
 
-    <div class="py-2 px-3 bg-primary d-inline-block d-sm-none">XS</div>
+    <div class="py-2 px-3 bg-success d-inline-block d-xs-none">XXS</div>
+    <div class="py-2 px-3 bg-primary d-none d-xs-inline-block d-sm-none">XS</div>
     <div class="py-2 px-3 bg-danger d-none d-sm-inline-block d-md-none">SM</div>
     <div class="py-2 px-3 bg-info d-none d-md-inline-block d-lg-none">MD</div>
     <div class="py-2 px-3 bg-warning d-none d-lg-inline-block d-xl-none">LG</div>
