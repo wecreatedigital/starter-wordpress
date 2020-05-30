@@ -1,10 +1,10 @@
 {
     "key": "group_5cac4ec16e55a",
-    "title": "Site wide",
+    "title": "General Settings",
     "fields": [
         {
             "key": "field_5d5e856f8cb36",
-            "label": "Global",
+            "label": "Contact",
             "name": "",
             "type": "tab",
             "instructions": "",
@@ -92,6 +92,22 @@
             "prepend": "",
             "append": "",
             "maxlength": ""
+        },
+        {
+            "key": "field_5ed2a371512c0",
+            "label": "Address",
+            "name": "",
+            "type": "tab",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "placement": "top",
+            "endpoint": 0
         },
         {
             "key": "field_5d5e868d9c341",
@@ -208,80 +224,6 @@
             "maxlength": ""
         },
         {
-            "key": "field_5cac4ec7e0e92",
-            "label": "404",
-            "name": "",
-            "type": "tab",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "placement": "top",
-            "endpoint": 0
-        },
-        {
-            "key": "field_5cac4ee3e0e93",
-            "label": "Commonly used pages",
-            "name": "commonly_used_pages",
-            "type": "post_object",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": "",
-            "taxonomy": "",
-            "allow_null": 0,
-            "multiple": 1,
-            "return_format": "object",
-            "ui": 1
-        },
-        {
-            "key": "field_5cac4f14e0e94",
-            "label": "Supporting text 1",
-            "name": "supporting_text_1",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
-            "key": "field_5cac4f51e0e95",
-            "label": "Supporting text 2",
-            "name": "supporting_text_2",
-            "type": "wysiwyg",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
-        {
             "key": "field_5d5e862b69245",
             "label": "Footer",
             "name": "",
@@ -334,5 +276,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1583249470
+    "modified": 1590862739
 }

@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand-md navbar-light bg-light">
   <div class="container">
-    <a class="navbar-brand" href="#">Navbar</a>
+    <a class="navbar-brand" href="{{ get_home_url() }}">
+      navbar
+    </a>
     @if ( ! env('DISABLE_HAMBURGER'))
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-controls="bs-example-navbar-collapse-1" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,7 +20,7 @@
     ) );
     ?>
   @else
-    <a class="d-sm-block d-md-none" href="@option('navigation_button')">
+    <a class="d-sm-block d-md-none" href="@option('header_call_to_action_link')">
       Contact
     </a>
     <?php
