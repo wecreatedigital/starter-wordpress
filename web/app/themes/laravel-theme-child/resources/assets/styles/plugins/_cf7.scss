@@ -16,7 +16,7 @@
 // we do not want a form spanning whole page
 .wpcf7 {
   max-width: 600px;
-  margin: 0 auto !important;
+  margin: 0 auto;
 
   // all inputs except radios and checkboxes inherit from form-control
   input[type=text],
@@ -64,51 +64,30 @@
     display: block;
   }
 
-  // validation errors ourput bottom of form
-  .wpcf7-validation-errors {
+  .wpcf7-form.invalid .wpcf7-form-control-wrap .wpcf7-not-valid {
+    border-color: theme-color("danger");
+  }
+
+  // validation output bottom of form
+  .wpcf7-response-output {
+    margin: 15px 0 0;
+
     @extend .alert;
+  }
+
+  .wpcf7-validation-errors {
     @extend .alert-danger;
   }
-}
 
-.wpcf7-response-output {
-  @extend .alert;
-
-  clear: both;
-  float: left;
-  width: 100%;
-  border: 0 none;
-
-  &.wpcf7-display-none {
-    padding: 0;
-    margin: 0;
+  div.wpcf7-acceptance-missing {
+    @extend .alert-warning;
   }
 
-  &.wpcf7-validation-errors,
-  &.wpcf7-acceptance-missing,
-  &.wpcf7-mail-sent-ok {
-    border-radius: 5px;
-    padding: 8px 15px 9px !important;
-    height: 100%;
-    margin-top: 15px;
+  div.wpcf7-mail-sent-ok {
+    @extend .alert-success;
   }
-}
 
-div.wpcf7-validation-errors,
-div.wpcf7-acceptance-missing {
-  @extend .alert;
-  @extend .alert-warning;
-}
-
-div.wpcf7-mail-sent-ok {
-  @extend .alert;
-  @extend .alert-success;
-}
-
-.wpcf7 .wpcf7-form.invalid .wpcf7-form-control-wrap .wpcf7-not-valid {
-  border-color: theme-color("danger");
-}
-
-.screen-reader-response {
-  @extend .sr-only;
+  .screen-reader-response {
+    @extend .sr-only;
+  }
 }

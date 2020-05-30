@@ -10,7 +10,6 @@
   @extend .nav-link;
 }
 
-// General Navigation Styles //
 .menu-primary-navigation-container {
   width: 100%;
 
@@ -23,7 +22,7 @@
 
     li {
       display: inline-block;
-      flex: 1 1 auto !important;
+      flex: 1 1 auto;
 
       @extend .px-2;
     }

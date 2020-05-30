@@ -5,16 +5,12 @@
     width: 22px;
     height: 42px;
     display: inline-block;
-    bottom: -25px !important;
+    bottom: -25px;
     z-index: 1;
   }
 
   .slick-prev {
     left: -100px;
-
-    &::before {
-      color: red;
-    }
 
     @include media-breakpoint-down(md) {
       left: 15px;
@@ -23,10 +19,6 @@
 
   .slick-next {
     right: -100px;
-
-    &::before {
-      color: red;
-    }
 
     @include media-breakpoint-down(md) {
       right: 15px;
@@ -38,19 +30,19 @@
 
     .primary {
       path {
-        fill: theme-color("primary") !important;
+        fill: theme-color("primary");
       }
     }
 
     .secondary {
       path {
-        fill: theme-color("secondary") !important;
+        fill: theme-color("secondary");
       }
     }
 
     .black {
       path {
-        fill: theme-color("secondary") !important;
+        fill: theme-color("secondary");
       }
     }
 
