@@ -12,7 +12,7 @@
 
     .btn-link,
     .link {
-      @extend .text-white;
+      color: $white;
     }
   }
 
@@ -26,7 +26,7 @@
 
     .btn-link,
     .link {
-      @extend .text-white;
+      color: $white;
     }
   }
 
@@ -72,7 +72,7 @@
     @extend .offset-md-0;
 
     &.fcb-align-text {
-      @extend .text-left;
+      text-align: left;
     }
   }
 
@@ -80,7 +80,7 @@
     @extend .offset-md-2;
 
     &.fcb-align-text {
-      @extend .text-center;
+      text-align: center;
     }
   }
 
@@ -88,16 +88,16 @@
     @extend .offset-md-4;
 
     &.fcb-align-text {
-      @extend .text-right;
+      text-align: right;
     }
   }
 }
 
 .fcb-v-align {
-  @extend .d-flex;
+  display: flex;
 
   > div {
-    @extend .my-auto;
+    margin: auto 0;
   }
 }
 
