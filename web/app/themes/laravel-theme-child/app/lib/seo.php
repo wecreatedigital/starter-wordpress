@@ -81,3 +81,17 @@ function get_primary_taxonomy_term($post = 0, $taxonomy = 'category')
 
     return $primary_term;
 }
+
+/*
+ * Modify TinyMCE editor to remove H1 - this should be set in templates/FCBs only
+ *
+ * From: https://www.calliaweb.co.uk/code/modify-tinymce-editor/
+ */
+add_filter('tiny_mce_before_init', 'tiny_mce_remove_unused_formats');
+function tiny_mce_remove_unused_formats($init)
+{
+    // Add block format elements you want to show in dropdown
+    $init['block_formats'] = 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Address=address;Pre=pre';
+
+    return $init;
+}
