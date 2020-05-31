@@ -10,7 +10,6 @@
   @extend .nav-link;
 }
 
-// General Navigation Styles //
 .menu-primary-navigation-container {
   width: 100%;
 
@@ -23,9 +22,22 @@
 
     li {
       display: inline-block;
-      flex: 1 1 auto !important;
-
-      @extend .px-2;
+      flex: 1 1 auto;
     }
   }
+}
+
+.skip-to-content-link {
+  background: $white;
+  height: 40px;
+  left: 50%;
+  padding: 8px;
+  position: absolute;
+  transform: translateY(-150%);
+  transition: transform 0.3s;
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 0.75);
+}
+
+.skip-to-content-link:focus {
+  transform: translateY(0%);
 }

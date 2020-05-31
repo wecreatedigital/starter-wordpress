@@ -140,20 +140,6 @@ add_filter('theme_page_templates', 'tfc_remove_page_templates');
  add_action('admin_init', 'wpse_edit_post_show_excerpt', 10);
 
 /**
- * Force permalinks to be postname from the point of accepting child theme
- *
- * @author Dean Appleton-Claydon
- * @date   2019-11-17
- */
-function change_permalinks()
-{
-    global $wp_rewrite;
-    $wp_rewrite->set_permalink_structure('/%postname%/');
-    $wp_rewrite->flush_rules();
-}
-add_action('after_switch_theme', 'change_permalinks');
-
-/**
  * Dynamic year for the footer
  *
  * @author Dean Appleton-Claydon

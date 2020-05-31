@@ -8,8 +8,8 @@
   <body @php body_class(getenv('WP_ENV')) @endphp>
     @php do_action('get_header') @endphp
     @include('layouts.header')
-    <div class="document" role="document">
-      <main class="main">
+    <div role="document">
+      <main class="main" id="main">
         @include('layouts.breadcrumbs')
         @yield('content')
       </main>
