@@ -1,0 +1,16 @@
+.woocommerce ul.order_details {
+  padding-left: 0;
+
+  li {
+    @include media-breakpoint-down(md) {
+      width: 100%;
+      border-right: 0 none;
+      margin-bottom: 5px;
+      border-bottom: 1px dashed #d3ced2;
+    }
+  }
+}
+
+.woocommerce table.shop_table td small {
+  display: block;
+}

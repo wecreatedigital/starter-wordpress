@@ -73,3 +73,33 @@ function jk_dequeue_styles($enqueue_styles)
  * Or just remove them all in one line
  */
 // add_filter('woocommerce_enqueue_styles', '__return_false');
+
+/**
+ * Remove Woocommerce Select2 - Woocommerce 3.2.1+
+ */
+function woo_dequeue_select2()
+{
+    if (class_exists('woocommerce')) {
+        wp_dequeue_style('select2');
+        wp_deregister_style('select2');
+
+        wp_dequeue_script('selectWoo');
+        wp_deregister_script('selectWoo');
+    }
+}
+add_action('wp_enqueue_scripts', 'woo_dequeue_select2', 100);
+
+/**
+ * Add custom stock status
+ */
+// add_filter('woocommerce_product_stock_status_options', 'add_custom_stock_statuses');
+// function add_custom_stock_statuses($statuses)
+// {
+//     // Add a new status
+//     $statuses['twothreeworking'] = __('2-3 workings days to dispatch', 'plugin-name');
+//
+//     // Remove a built-in status
+//     // unset($statuses['onbackorder']);
+//
+//     return $statuses;
+// }
