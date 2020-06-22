@@ -56,6 +56,7 @@
     "wpackagist-plugin/classic-editor": "*",
     "wpackagist-plugin/contact-form-7": "*",
     "wpackagist-plugin/contact-form-7-honeypot": "*",
+    "wpackagist-plugin/duplicate-post": "*",
     "wpackagist-plugin/disable-json-api": "*",
     "wpackagist-plugin/mailgun": "*",
     "wpackagist-plugin/redirection": "*",
