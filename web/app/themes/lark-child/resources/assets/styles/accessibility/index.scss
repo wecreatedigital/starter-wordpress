@@ -1,0 +1,12 @@
+.skip-to-content-link {
+  background: $white;
+  transition: all 0.3s;
+  position: absolute;
+  top: -50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+
+  &:focus {
+    top: 50%;
+  }
+}

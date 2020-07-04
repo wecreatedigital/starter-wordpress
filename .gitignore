@@ -30,3 +30,7 @@ wp-cli.local.yml
 
 # PhpStorm
 .idea
+
+# Symlinks
+public
+httpdocs

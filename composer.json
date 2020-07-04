@@ -62,7 +62,6 @@
     "wpackagist-plugin/redirection": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
     "wpackagist-plugin/resmushit-image-optimizer": "*",
-    "wpackagist-plugin/sendgrid-email-delivery-simplified": "*",
     "wpackagist-plugin/woocommerce": "*",
     "wpackagist-plugin/wordpress-seo": "*",
     "wpackagist-plugin/wp-super-cache": "*"
@@ -92,10 +91,8 @@
       "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
       "rm -rf web/wp/wp-content/plugins/",
-      "wp plugin activate classic-editor",
       "wp plugin activate advanced-custom-fields-pro",
       "wp plugin activate contact-form-7",
-      "wp plugin activate contact-form-7-honeypot",
       "wp plugin activate wordpress-seo"
     ],
     "test": [

@@ -1,0 +1,44 @@
+.woocommerce {
+  .card-category {
+    height: 100%;
+
+    @extend .pb-3;
+
+    a {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+
+      img {
+        @extend .card-img-top;
+        @extend .pb-3;
+      }
+
+      h2 {
+        @extend .card-title;
+      }
+
+      .price {
+        margin-top: auto;
+      }
+
+      h2,
+      .price {
+        padding-left: $card-columns-gap;
+        padding-right: $card-columns-gap;
+      }
+
+      .star-rating {
+        margin-left: $card-columns-gap;
+        margin-right: $card-columns-gap;
+      }
+    }
+
+    .button {
+      text-align: center;
+      margin-top: 15px;
+      margin-left: $card-columns-gap;
+      margin-right: $card-columns-gap;
+    }
+  }
+}

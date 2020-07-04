@@ -1,0 +1,43 @@
+.comment-list {
+  @extend .list-unstyled;
+}
+
+.comment-list ol {
+  list-style: none;
+}
+
+.comment-form p {
+  @extend .form-group;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+  @extend .form-control;
+}
+
+.comment-form input[type="submit"] {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+/** Search form */
+.search-form {
+  @extend .form-inline;
+}
+
+.search-form label {
+  @extend .form-group;
+
+  font-weight: normal;
+}
+
+.search-form .search-field {
+  @extend .form-control;
+}
+
+.search-form .search-submit {
+  @extend .btn;
+  @extend .btn-secondary;
+}

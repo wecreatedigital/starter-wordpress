@@ -1,0 +1,19 @@
+.input-text,
+.country_select {
+  @extend .form-control;
+}
+
+.woocommerce-input-wrapper {
+  display: block;
+  width: 100%;
+}
+
+.woocommerce form .form-row {
+  @extend .form-group;
+
+  label {
+    line-height: inherit;
+    display: block;
+    width: 100%;
+  }
+}
