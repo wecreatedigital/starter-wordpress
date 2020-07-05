@@ -7,4 +7,6 @@
 ">
   @hassub('container_type')
     <div class="@sub('container_type')">
+  @else
+    <div class="container">
   @endsub

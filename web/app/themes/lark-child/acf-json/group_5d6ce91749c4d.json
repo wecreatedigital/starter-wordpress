@@ -23,6 +23,22 @@
                     "display": "row",
                     "sub_fields": [
                         {
+                            "key": "field_5e652f98d2087",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5e652fbfd2088",
                             "label": "Heading",
                             "name": "heading",
@@ -40,23 +56,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e652f98d2087",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5e652fd0d2089",
@@ -155,7 +154,7 @@
                             "key": "field_5e5ced50f848d",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -164,8 +163,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "open": 0,
-                            "multi_expand": 1,
+                            "placement": "top",
                             "endpoint": 0
                         },
                         {
@@ -189,36 +187,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e65301ed208a",
-                            "label": "Container type",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": [
-                                "container-fluid"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -230,7 +199,7 @@
                             "key": "field_5e5cee60f8491",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -241,7 +210,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5ceeeef8492",
@@ -374,7 +344,7 @@
                             "key": "field_5e5cf094b9fe4",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -385,7 +355,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5cf094b9fe7",
@@ -408,9 +379,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -422,7 +391,7 @@
                             "key": "field_5e5cf094b9fe8",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -433,7 +402,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5cf094b9fe9",
@@ -465,6 +435,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5ddb7b3243d5c",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e218bbab35ef",
                             "label": "Heading",
                             "name": "heading",
@@ -484,23 +472,6 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5ddb7b3243d5c",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
-                        },
-                        {
                             "key": "field_5dd45e75aa441",
                             "label": "Text",
                             "name": "text",
@@ -518,6 +489,22 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5f019e23f4e74",
+                            "label": "Settings",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
                         },
                         {
                             "key": "field_5ddb92bae720c",
@@ -560,7 +547,7 @@
                             "key": "field_5e5a96809a462",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -571,7 +558,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e59912d0cd60",
@@ -594,64 +582,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac8e60a367",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac9180a368",
-                            "label": "Container type",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": [
-                                "container-fluid"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -663,7 +594,7 @@
                             "key": "field_5e5a967c9a461",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -674,7 +605,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd9038daa4db",
@@ -706,6 +638,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5ddb7b2743d5a",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e218bdcb35f2",
                             "label": "Heading",
                             "name": "heading",
@@ -723,23 +673,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5ddb7b2743d5a",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5dd45e5daa43d",
@@ -764,7 +697,7 @@
                             "key": "field_5e5a96449a45d",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -775,7 +708,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e599bda317dc",
@@ -798,64 +732,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac9a0ee464",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac9c7ee465",
-                            "label": "Container type",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": [
-                                "container"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -867,7 +744,7 @@
                             "key": "field_5e5a96479a45e",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -878,7 +755,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd9036aaa4d8",
@@ -910,6 +788,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e5a965f9a45f",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e218bccb35f0",
                             "label": "Heading",
                             "name": "heading",
@@ -927,23 +823,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e5a965f9a45f",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5e218bd4b35f1",
@@ -965,8 +844,24 @@
                             "delay": 0
                         },
                         {
-                            "key": "field_5dd85cf173f82",
+                            "key": "field_5f019e0bf4e73",
                             "label": "Gallery",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
+                            "key": "field_5dd85cf173f82",
+                            "label": "Images",
                             "name": "gallery",
                             "type": "repeater",
                             "instructions": "",
@@ -1013,7 +908,7 @@
                             "key": "field_5ddb7b3143d5b",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1024,7 +919,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e599c41317dd",
@@ -1047,37 +943,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac95aee462",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1102,9 +968,7 @@
                                 "container": "Fixed",
                                 "container-fluid": "Full-width"
                             },
-                            "default_value": [
-                                "container-fluid"
-                            ],
+                            "default_value": "container-fluid",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1116,7 +980,7 @@
                             "key": "field_5e5a96629a460",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1127,7 +991,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd90381aa4da",
@@ -1159,6 +1024,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e5a95c99a457",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5dd8510047fa5",
                             "label": "Heading",
                             "name": "heading",
@@ -1176,23 +1059,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e5a95c99a457",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5e5aa6be75090",
@@ -1290,7 +1156,7 @@
                             "key": "field_5ddb7ae943d56",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1301,7 +1167,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e599ad61ba2f",
@@ -1324,37 +1191,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5a98a163018",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1380,9 +1217,7 @@
                                 "center": "Centre",
                                 "right": "Right"
                             },
-                            "default_value": [
-                                0
-                            ],
+                            "default_value": 0,
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1434,9 +1269,7 @@
                                 "container": "Fixed",
                                 "container-fluid": "Full-width"
                             },
-                            "default_value": [
-                                "container"
-                            ],
+                            "default_value": "container",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1448,7 +1281,7 @@
                             "key": "field_5e5a95eb9a458",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1459,7 +1292,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd90348aa4d5",
@@ -1592,7 +1426,7 @@
                             "key": "field_5e5e8bbd300c8",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1603,7 +1437,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5e8bbd300c9",
@@ -1626,9 +1461,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1640,7 +1473,7 @@
                             "key": "field_5e5e8bbd300ca",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1651,7 +1484,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5e8bbd300cb",
@@ -1686,7 +1520,7 @@
                             "key": "field_5e5ae1d8d6467",
                             "label": "Content",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1697,7 +1531,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5ae2570c25d",
@@ -1740,9 +1575,7 @@
                                 "container": "Fixed",
                                 "container-fluid": "Full-width"
                             },
-                            "default_value": [
-                                "container"
-                            ],
+                            "default_value": "container",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1754,7 +1587,7 @@
                             "key": "field_5e5ae1d8d646c",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1765,7 +1598,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5ae1d8d646d",
@@ -1788,9 +1622,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1799,11 +1631,11 @@
                             "placeholder": ""
                         },
                         {
-                            "key": "field_5e5ae1d8d646e",
-                            "label": "Background colour",
-                            "name": "background_colour",
+                            "key": "field_5e5ac4dfcb8bc",
+                            "label": "Container type",
+                            "name": "container_type",
                             "type": "select",
-                            "instructions": "",
+                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -1812,13 +1644,10 @@
                                 "id": ""
                             },
                             "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
+                                "container": "Fixed",
+                                "container-fluid": "Full-width"
                             },
-                            "default_value": [
-                                "white"
-                            ],
+                            "default_value": "container",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -1830,7 +1659,7 @@
                             "key": "field_5e5ae1d8d6472",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1841,7 +1670,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5ae1d8d6473",
@@ -1873,6 +1703,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e5a96289a45b",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e218b2db35ee",
                             "label": "Heading",
                             "name": "heading",
@@ -1892,23 +1740,6 @@
                             "maxlength": ""
                         },
                         {
-                            "key": "field_5e5a96289a45b",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
-                        },
-                        {
                             "key": "field_5dd45e55aa43b",
                             "label": "Text",
                             "name": "text",
@@ -1926,6 +1757,22 @@
                             "toolbar": "full",
                             "media_upload": 1,
                             "delay": 0
+                        },
+                        {
+                            "key": "field_5f019e50035a8",
+                            "label": "Settings",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
                         },
                         {
                             "key": "field_5e5be1f48e595",
@@ -1965,7 +1812,7 @@
                                 "post": "post",
                                 "page": "page"
                             },
-                            "default_value": [],
+                            "default_value": false,
                             "allow_null": 1,
                             "multiple": 0,
                             "ui": 0,
@@ -1977,7 +1824,7 @@
                             "key": "field_5e5a962c9a45c",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -1988,7 +1835,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e599b221ba31",
@@ -2011,64 +1859,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5abda760227",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
-                            "key": "field_5e5ac4dfcb8bc",
-                            "label": "Container type",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": [
-                                "container"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2080,7 +1871,7 @@
                             "key": "field_5ddb7b1f43d59",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2091,7 +1882,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd9035faa4d7",
@@ -2123,6 +1915,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e5a95fe9a459",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5dd85732ab0d7",
                             "label": "Heading",
                             "name": "heading",
@@ -2140,23 +1950,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e5a95fe9a459",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5dd85738ab0d8",
@@ -2251,10 +2044,10 @@
                             "mime_types": ""
                         },
                         {
-                            "key": "field_5ddb7b0443d58",
-                            "label": "Style",
+                            "key": "field_5f01a0ac48dc6",
+                            "label": "Settings",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2263,8 +2056,7 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "open": 0,
-                            "multi_expand": 1,
+                            "placement": "top",
                             "endpoint": 0
                         },
                         {
@@ -2292,6 +2084,24 @@
                             "save_other_choice": 0
                         },
                         {
+                            "key": "field_5ddb7b0443d58",
+                            "label": "Style",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e599ae81ba30",
                             "label": "Padding override",
                             "name": "padding_override",
@@ -2312,9 +2122,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "a"
-                            ],
+                            "default_value": "a",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2340,9 +2148,7 @@
                                 "secondary": "Secondary",
                                 "white": "White"
                             },
-                            "default_value": [
-                                "white"
-                            ],
+                            "default_value": "white",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2367,9 +2173,7 @@
                                 "container": "Fixed",
                                 "container-fluid": "Full-width"
                             },
-                            "default_value": [
-                                "container-fluid"
-                            ],
+                            "default_value": "container-fluid",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2381,7 +2185,7 @@
                             "key": "field_5e5a96019a45a",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2392,7 +2196,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5dd90355aa4d6",
@@ -2424,6 +2229,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e65308036ea8",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e6530c336ea9",
                             "label": "Heading",
                             "name": "heading",
@@ -2441,23 +2264,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e65308036ea8",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5e6530c736eaa",
@@ -2504,7 +2310,7 @@
                             "key": "field_5e5cf1628088f",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2515,35 +2321,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
-                        },
-                        {
-                            "key": "field_5e6530f136eab",
-                            "label": "Background colour",
-                            "name": "background_colour",
-                            "type": "select",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "primary": "Primary",
-                                "secondary": "Secondary",
-                                "white": "White"
-                            },
-                            "default_value": [
-                                "white"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5cf16280890",
@@ -2566,9 +2345,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2577,10 +2354,36 @@
                             "placeholder": ""
                         },
                         {
+                            "key": "field_5f019fb248dc5",
+                            "label": "Background colour",
+                            "name": "background_colour",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "primary": "Primary",
+                                "secondary": "Secondary",
+                                "white": "White"
+                            },
+                            "default_value": "white",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
                             "key": "field_5e5cf16280891",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2591,7 +2394,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5cf16280892",
@@ -2623,6 +2427,24 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5e5a7b5882d77",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "open": 0,
+                            "multi_expand": 1,
+                            "endpoint": 0,
+                            "placement": "top"
+                        },
+                        {
                             "key": "field_5e5a79b254932",
                             "label": "Heading",
                             "name": "heading",
@@ -2640,23 +2462,6 @@
                             "prepend": "",
                             "append": "",
                             "maxlength": ""
-                        },
-                        {
-                            "key": "field_5e5a7b5882d77",
-                            "label": "Content",
-                            "name": "",
-                            "type": "accordion",
-                            "instructions": "",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "open": 0,
-                            "multi_expand": 1,
-                            "endpoint": 0
                         },
                         {
                             "key": "field_5e5a79b254933",
@@ -2711,7 +2516,7 @@
                             "key": "field_5e5a79dc54939",
                             "label": "Style",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2722,7 +2527,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5a79b254938",
@@ -2745,9 +2551,7 @@
                                 "a": "All sides",
                                 "n": "None"
                             },
-                            "default_value": [
-                                "y"
-                            ],
+                            "default_value": "y",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2773,9 +2577,7 @@
                                 "secondary": "Secondary",
                                 "white": "White"
                             },
-                            "default_value": [
-                                "white"
-                            ],
+                            "default_value": "white",
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2801,9 +2603,7 @@
                                 "center": "Centre",
                                 "right": "Right"
                             },
-                            "default_value": [
-                                0
-                            ],
+                            "default_value": 0,
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
@@ -2839,37 +2639,10 @@
                             "ui_off_text": ""
                         },
                         {
-                            "key": "field_5e5a7a1e5493b",
-                            "label": "Container type",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": [
-                                "container"
-                            ],
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
                             "key": "field_5e5a79b254936",
                             "label": "Advanced",
                             "name": "",
-                            "type": "accordion",
+                            "type": "tab",
                             "instructions": "",
                             "required": 0,
                             "conditional_logic": 0,
@@ -2880,7 +2653,8 @@
                             },
                             "open": 0,
                             "multi_expand": 1,
-                            "endpoint": 0
+                            "endpoint": 0,
+                            "placement": "top"
                         },
                         {
                             "key": "field_5e5a79b254937",
@@ -2936,5 +2710,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1593896525
+    "modified": 1593942314
 }
