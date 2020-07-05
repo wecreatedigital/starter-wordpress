@@ -7,18 +7,17 @@
         Sorry - this page cannot be found!
       </h1>
       @option('supporting_text_1')
-      <hr class="my-4">
-      @option('supporting_text_2')
-      @php( $post_objects = get_field('commonly_used_pages', 'options') )
-        @if( $post_objects )
+      <hr class="fcb--4">
+      @php( $common_pages = get_field('commonly_used_pages', 'options') )
+        @if( $common_pages )
           <h5>
             Other popular pages:
           </h5>
           <ul>
-            @foreach( $post_objects as $post_object)
+            @foreach( $common_pages as $page )
               <li>
-                <a href="{{ get_permalink($post_object->ID) }}">
-                  {{ get_the_title($post_object->ID)}}
+                <a href="{{ get_permalink($page) }}">
+                  {{ get_the_title($page)}}
                 </a>
               </li>
             @endforeach

@@ -16,6 +16,40 @@ if (function_exists('acf_add_options_page')) {
         'menu_title' => __('404 Page'),
         'parent_slug' => $parent['menu_slug'],
     ));
+
+    acf_add_local_field_group(array(
+        'key' => 'group_404',
+        'title' => '404 page Settings',
+        'fields' => array(
+            array(
+                'key' => 'field_5ed2a298c6cd7',
+                'label' => 'Commonly used pages',
+                'name' => 'commonly_used_pages',
+                'type' => 'post_object',
+                'instructions' => 'Choose pages that you think might be best next steps for someone landing on a 404 page',
+                'allow_null' => 1,
+                'multiple' => 1,
+                'return_format' => 'id',
+                'ui' => 1,
+            ),
+            array(
+                'key' => 'field_5ed2a298c6cdb',
+                'label' => 'Supporting text 1',
+                'name' => 'supporting_text_1',
+                'type' => 'wysiwyg',
+                'instructions' => 'This field provides the relevant link for the main call to action button in the header. You can specify both the link and the label using this single button.',
+            ),
+        ),
+        'location' => array(
+            array(
+                array(
+                    'param' => 'options_page',
+                    'operator' => '==',
+                    'value' => $child_header_page['menu_slug'],
+                ),
+            ),
+        ),
+    ));
 }
 
 /*
