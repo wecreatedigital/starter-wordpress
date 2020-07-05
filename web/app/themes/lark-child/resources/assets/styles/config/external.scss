@@ -4,7 +4,45 @@
 // @import "~bootstrap/scss/bootstrap/~bootstrap/scss/bootstrap"; // Remove this line for the below
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
 
+/**
+ * Within scss/_variables.scss,
+ * you’ll find Bootstrap’s color variables and Sass map.
+ *
+ * The code below removes the default colour Bootstrap 4 provides.
+ */
+$colors: map-remove(
+  $colors,
+  "blue",
+  "indigo",
+  "purple",
+  "pink",
+  "red",
+  "orange",
+  "yellow",
+  "green",
+  "teal",
+  "cyan",
+  "white",
+  "gray"
+);
+
+/**
+ * Within scss/_variables.scss,
+ * you’ll find Bootstrap’s color variables and Sass map.
+ *
+ * To remove colors from $theme-colors, or any other map, use map-remove.
+ * The code below removes the default colours Bootstrap 4 provides.
+ */
+$theme-colors: map-remove(
+  $theme-colors,
+  "info",
+);
+
+/**
+ * Adds XXS breakpoint
+ */
 $grid-breakpoints: (
   xxs: 0,
   xs: 375px,
@@ -23,7 +61,10 @@ $container-max-widths: (
   xl: 1140px
 );
 
-@import "~bootstrap/scss/mixins";
+/**
+ * Continue as normal
+ * We've commented out some of the SCSS files we don't often use
+ */
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
