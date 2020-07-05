@@ -61,7 +61,7 @@
     "wpackagist-plugin/mailgun": "*",
     "wpackagist-plugin/redirection": "*",
     "wpackagist-plugin/regenerate-thumbnails": "*",
-    "wpackagist-plugin/resmushit-image-optimizer": "*",
+    "wpackagist-plugin/webp-express": "*",
     "wpackagist-plugin/woocommerce": "*",
     "wpackagist-plugin/wordpress-seo": "*",
     "wpackagist-plugin/wp-super-cache": "*"
