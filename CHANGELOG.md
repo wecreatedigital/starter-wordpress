@@ -271,6 +271,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Fix: allow for multiple accordions on the page
 - Fix: CTA button on xs and sm should be an anchor and not a button
 
+## 3.0.11 - 21-07-2020
+
+- Added Mega Menu Blade templating when using Custom Post Type selector
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!
