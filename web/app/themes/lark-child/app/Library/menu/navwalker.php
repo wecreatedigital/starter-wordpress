@@ -143,11 +143,12 @@ if ( ! class_exists('WP_Bootstrap_Navwalker')) {
                 $output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
             } // End if().
 
-            if ($mega_menu_id = get_field('has_mega_menu', $item->ID)) {
-                $output .= \Roots\view('mega-menu.index', [
-                    'post_id' => $mega_menu_id,
-                ])->render();
-            }
+            // NOTE: Uncomment for MEGA MENU
+            // if ($mega_menu_id = get_field('has_mega_menu', $item->ID)) {
+            //     $output .= \Roots\view('mega-menu.index', [
+            //         'post_id' => $mega_menu_id,
+            //     ])->render();
+            // }
         }
 
         /**

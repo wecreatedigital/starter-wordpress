@@ -275,6 +275,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added Mega Menu Blade templating when using Custom Post Type selector
 
+## 3.0.12 - 22-07-2020
+
+- Laid out Mega Menu setup instructions
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

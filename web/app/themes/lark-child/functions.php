@@ -47,8 +47,9 @@ collect([
     // 'Library/donate',
     // 'Library/form',
     'Library/media',
-    'Library/menu',
-    'Library/navwalker',
+    'Library/menu/register-nav-menus',
+    // 'Library/menu/mega-menu', // NOTE: Visit for setup instructions
+    'Library/menu/navwalker',
     'Library/scripts',
     'Library/security',
     'Library/seo',
