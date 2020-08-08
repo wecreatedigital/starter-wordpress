@@ -36,3 +36,4 @@ wp-cli.local.yml
 # Symlinks
 public
 httpdocs
+web/app/db.php
