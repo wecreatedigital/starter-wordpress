@@ -66,6 +66,9 @@ $container-max-widths: (
  * Continue as normal
  * We've commented out some of the SCSS files we don't often use
  */
+
+/* purgecss start ignore */
+
 @import "~bootstrap/scss/root";
 @import "~bootstrap/scss/reboot";
 @import "~bootstrap/scss/type";
@@ -100,3 +103,5 @@ $container-max-widths: (
 // @import "~bootstrap/scss/spinners";
 @import "~bootstrap/scss/utilities";
 @import "~bootstrap/scss/print";
+
+/* purgecss end ignore */

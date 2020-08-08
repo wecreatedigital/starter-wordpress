@@ -1,3 +1,5 @@
+/* purgecss start ignore */
+
 .fcb {
   min-width: 320px;
   overflow: hidden;
@@ -113,3 +115,5 @@
 
   @include background-image();
 }
+
+/* purgecss end ignore */

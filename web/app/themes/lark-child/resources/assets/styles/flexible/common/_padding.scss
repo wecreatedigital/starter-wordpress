@@ -1,3 +1,5 @@
+/* purgecss start ignore */
+
 /* -------------------------------------------*\
   _margin.scss
 
@@ -138,3 +140,5 @@
 @each $padding in $paddings {
   @include generate-padding-classes($padding);
 }
+
+/* purgecss end ignore */
