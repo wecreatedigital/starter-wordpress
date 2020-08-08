@@ -32,3 +32,17 @@ function my_acf_google_map_api($api)
 }
 
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
+
+/**
+ * When ACF is init, check the environment and disable ACF fields when in production
+ *
+ * @author Dean Appleton-Claydon
+ * @date   2020-08-08
+ */
+add_action('acf/init', 'my_acf_init');
+function my_acf_init()
+{
+    if (getenv('WP_ENV') == 'production') {
+        acf_update_setting('show_admin', false); // Disable interface
+    }
+}
