@@ -23,6 +23,7 @@ AddOutputFilterByType DEFLATE font/otf
 AddOutputFilterByType DEFLATE font/ttf
 AddOutputFilterByType DEFLATE image/svg+xml
 AddOutputFilterByType DEFLATE image/x-icon
+AddOutputFilterByType DEFLATE image/webp
 AddOutputFilterByType DEFLATE text/css
 AddOutputFilterByType DEFLATE text/html
 AddOutputFilterByType DEFLATE text/javascript
@@ -38,6 +39,7 @@ Header append Vary User-Agent
 # Check that the expires module has been installed
 <IfModule mod_expires.c>
 ExpiresActive On
+ExpiresByType image/webp "access plus 1 month"
 ExpiresByType image/gif "access plus 1 month"
 ExpiresByType image/jpg "access plus 1 month"
 ExpiresByType image/jpeg "access plus 1 month"
