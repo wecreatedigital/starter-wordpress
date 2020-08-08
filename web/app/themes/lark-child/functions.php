@@ -38,6 +38,7 @@ collect([
     'Library/acf/general',
     'Library/acf/helpers',
     'Library/acf/options',
+    'Library/helpers/text',
     'Library/plural/plural',
     'Library/plural/en',
     'Library/admin',
