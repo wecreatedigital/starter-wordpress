@@ -2,9 +2,13 @@
   $h = 1; // Heading for SEO
   $unique_id = 1; // For counting the number of accordions
   $default_padding = 100;
+
+  if( ! isset($post_id) ) { // For blog home
+    $post_id = false;
+  }
 @endphp
 
-@layouts('page_content_block')
+@layouts('page_content_block', $post_id)
 
 @layout('text_block')
     @include('flexible.text-block')
