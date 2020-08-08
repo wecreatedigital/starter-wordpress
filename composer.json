@@ -64,7 +64,8 @@
     "wpackagist-plugin/webp-express": "*",
     "wpackagist-plugin/woocommerce": "*",
     "wpackagist-plugin/wordpress-seo": "*",
-    "wpackagist-plugin/wp-super-cache": "*"
+    "wpackagist-plugin/wp-super-cache": "*",
+    "wpackagist-plugin/query-monitor": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.4.2",
