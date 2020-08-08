@@ -8,23 +8,27 @@
  * can.
  */
 
+use function Env\env;
 use Roots\WPConfig\Config;
 
-/** @var string Directory containing all of the site's files */
+/**
+ * Directory containing all of the site's files
+ *
+ * @var string
+ */
 $root_dir = dirname(__DIR__);
 
-/** @var string Document Root */
-$webroot_dir = $root_dir.'/web';
-
 /**
- * Expose global env() function from oscarotero/env
+ * Document Root
+ *
+ * @var string
  */
-Env::init();
+$webroot_dir = $root_dir.'/web';
 
 /**
  * Use Dotenv to set required environment variables and load .env file in root
  */
-$dotenv = Dotenv\Dotenv::create($root_dir);
+$dotenv = Dotenv\Dotenv::createImmutable($root_dir);
 if (file_exists($root_dir.'/.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME', 'WP_SITEURL']);
@@ -94,6 +98,7 @@ Config::define('NONCE_SALT', env('NONCE_SALT'));
  */
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
 Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
+
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
 
@@ -101,6 +106,7 @@ Config::define('DISALLOW_FILE_MODS', true);
  * Debugging Settings
  */
 Config::define('WP_DEBUG_DISPLAY', false);
+Config::define('WP_DEBUG_LOG', env('WP_DEBUG_LOG') ?? false);
 Config::define('SCRIPT_DEBUG', false);
 ini_set('display_errors', '0');
 

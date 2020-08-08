@@ -32,7 +32,7 @@
       "type": "package",
       "package": {
         "name": "advanced-custom-fields/advanced-custom-fields-pro",
-        "version": "5.8.7",
+        "version": "5.8.12",
         "type": "wordpress-plugin",
         "dist": {
           "type": "zip",
@@ -44,12 +44,13 @@
   "require": {
     "php": ">=7.1",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "composer/installers": "^1.8",
-    "vlucas/phpdotenv": "^3.6.0",
-    "oscarotero/env": "^1.2.0",
-    "roots/wordpress": "5.3.2",
+    "roots/bedrock-autoloader": "^1.0",
+    "composer/installers": "^1.9",
+    "vlucas/phpdotenv": "^4.1.8",
+    "oscarotero/env": "^2.1",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
+    "roots/wordpress": "*",
     "wpackagist-plugin/autoptimize": "*",
     "wpackagist-plugin/acf-content-analysis-for-yoast-seo": "*",
     "wpackagist-plugin/civic-cookie-control-8": "*",
@@ -91,10 +92,7 @@
       "php -r \"symlink('web', 'public');\"",
       "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
-      "rm -rf web/wp/wp-content/plugins/",
-      "wp plugin activate advanced-custom-fields-pro",
-      "wp plugin activate contact-form-7",
-      "wp plugin activate wordpress-seo"
+      "rm -rf web/wp/wp-content/plugins/"
     ],
     "test": [
       "phpcs"

@@ -1,7 +1,6 @@
 <?php
 /**
  * Configuration overrides for WP_ENV === 'development'
- * TODO: maybe output errors to a log rather than on screen
  */
 
 use Roots\WPConfig\Config;
