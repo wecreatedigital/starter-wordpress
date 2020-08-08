@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('flexible._main', [
+  @include('layouts.flexible', [
     'post_id' => get_option('page_for_posts')
   ])
 

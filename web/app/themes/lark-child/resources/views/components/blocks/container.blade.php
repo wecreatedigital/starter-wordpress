@@ -10,3 +10,10 @@
   @else
     <div class="container">
   @endsub
+
+  {!! $slot !!}
+
+  @hassub('container_type')
+    </div>
+  @endsub
+</section>

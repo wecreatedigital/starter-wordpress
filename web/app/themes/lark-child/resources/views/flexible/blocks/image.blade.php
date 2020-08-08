@@ -3,7 +3,7 @@
 @endphp
 @if( $image )
 
-  @include('flexible._start', [
+  @component('components.blocks.container', [
     'classes' => 'fcb-image-block',
     'padding' => $default_padding,
   ])
@@ -12,6 +12,6 @@
     'class' => 'img-fluid'
   ]) !!}
 
-  @include('flexible._end')
+  @endcomponent
 
 @endif

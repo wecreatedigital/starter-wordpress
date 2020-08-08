@@ -1,8 +1,27 @@
-.card-body {
-  display: flex;
-  flex-direction: column;
+.fcb-icon {
+  .card {
+    text-align: center;
+    border: 0 none;
 
-  .btn {
-    margin-top: auto;
+    .btn {
+      margin-top: auto;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    .card-body {
+      padding-bottom: 0;
+    }
+
+    @include media-breakpoint-down(md) {
+      margin-bottom: 30px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }

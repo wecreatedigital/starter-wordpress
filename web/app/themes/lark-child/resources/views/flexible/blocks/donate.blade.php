@@ -1,6 +1,6 @@
 @if (function_exists('donates'))
 
-  @include('flexible._start', [
+  @component('components.blocks.container', [
     'classes' => 'fcb-donate',
     'padding' => $default_padding,
   ])
@@ -59,6 +59,6 @@
     </div>
   </div>
 
-  @include('flexible._end')
+  @endcomponent
 
 @endif

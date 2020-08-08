@@ -1200,6 +1200,32 @@
                             "placeholder": ""
                         },
                         {
+                            "key": "field_5f2ec90d123e4",
+                            "label": "Background colour",
+                            "name": "background_colour",
+                            "type": "select",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "choices": {
+                                "primary": "Primary",
+                                "secondary": "Secondary",
+                                "white": "White"
+                            },
+                            "default_value": false,
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "ui": 0,
+                            "return_format": "value",
+                            "ajax": 0,
+                            "placeholder": ""
+                        },
+                        {
                             "key": "field_5e5a98cc63019",
                             "label": "Align content",
                             "name": "column_offset",
@@ -1324,6 +1350,22 @@
                     "label": "Icon",
                     "display": "block",
                     "sub_fields": [
+                        {
+                            "key": "field_5f2ec4b7f45d9",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
                         {
                             "key": "field_5e5e8bbd300c3",
                             "label": "Icon item",
@@ -1559,31 +1601,6 @@
                             "mime_types": ""
                         },
                         {
-                            "key": "field_5e5ae1d8d6471",
-                            "label": "Image full width?",
-                            "name": "container_type",
-                            "type": "select",
-                            "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
-                            "required": 0,
-                            "conditional_logic": 0,
-                            "wrapper": {
-                                "width": "",
-                                "class": "",
-                                "id": ""
-                            },
-                            "choices": {
-                                "container": "Fixed",
-                                "container-fluid": "Full-width"
-                            },
-                            "default_value": "container",
-                            "allow_null": 0,
-                            "multiple": 0,
-                            "ui": 0,
-                            "return_format": "value",
-                            "ajax": 0,
-                            "placeholder": ""
-                        },
-                        {
                             "key": "field_5e5ae1d8d646c",
                             "label": "Style",
                             "name": "",
@@ -1632,7 +1649,7 @@
                         },
                         {
                             "key": "field_5e5ac4dfcb8bc",
-                            "label": "Container type",
+                            "label": "Image full width?",
                             "name": "container_type",
                             "type": "select",
                             "instructions": "Should we constrain content to the centre of the page or should it span the entire width of the page?",
@@ -1651,8 +1668,8 @@
                             "allow_null": 0,
                             "multiple": 0,
                             "ui": 0,
-                            "ajax": 0,
                             "return_format": "value",
+                            "ajax": 0,
                             "placeholder": ""
                         },
                         {
@@ -2692,6 +2709,13 @@
                 "operator": "==",
                 "value": "page"
             }
+        ],
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
         ]
     ],
     "menu_order": 0,
@@ -2710,5 +2734,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1593942314
+    "modified": 1596901768
 }

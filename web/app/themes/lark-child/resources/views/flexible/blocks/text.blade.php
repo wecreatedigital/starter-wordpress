@@ -1,4 +1,4 @@
-@include('flexible._start', [
+@component('components.blocks.container', [
   'classes' => 'fcb-text-block',
   'padding' => $default_padding,
 ])
@@ -11,4 +11,4 @@
   </div>
 </div>
 
-@include('flexible._end')
+@endcomponent
