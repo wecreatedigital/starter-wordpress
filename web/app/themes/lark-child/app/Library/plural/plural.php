@@ -28,7 +28,7 @@ class Plural
                 'plural' => array(),
                 'irregular' => array(),
             );
-            $langFile = dirname(__FILE__)."/rules/$language.php";
+            $langFile = dirname(__FILE__)."/$language.php";
             if ((@include_once $langFile) === false) {
                 return false;
             }
