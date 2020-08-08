@@ -6,7 +6,7 @@
   <div class="row no-gutters">
     <div class="fcb-col-center fcb-align-text col-md-8">
       @include('flexible.content', [
-        'classes' => 'fcb-b30 fcb-x70'
+        'classes' => 'fcb-b40'
       ])
     </div>
   </div>
@@ -43,7 +43,7 @@
   @if( get_sub_field('call_to_action') )
     <div class="row no-gutters">
       <div class="fcb-col-center fcb-align-text col-md-8">
-        <p class="lead fcb-t50">
+        <p class="lead fcb-t40">
           @hassub('call_to_action')
             <a target="@sub('call_to_action', 'target')" class="btn-link btn-lg" href="@sub('call_to_action', 'url')">
               @sub('call_to_action', 'title')

@@ -31,7 +31,7 @@
 @if( is_single() )
   <div class="col-12">
 @else
-  <div class="col-sm-6 col-md-4 col-lg-{{ $default_columns }} fcb-b50">
+  <div class="col-sm-6 col-md-4 col-lg-{{ $default_columns }} fcb-b40">
 @endif
 	<div class="card card-product">
     @php

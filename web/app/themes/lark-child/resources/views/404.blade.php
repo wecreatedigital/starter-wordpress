@@ -7,7 +7,7 @@
         Sorry - this page cannot be found!
       </h1>
       @option('supporting_text_1')
-      <hr class="fcb--4">
+      <hr class="fcb-y40">
       @php( $common_pages = get_field('commonly_used_pages', 'options') )
         @if( $common_pages )
           <h5>

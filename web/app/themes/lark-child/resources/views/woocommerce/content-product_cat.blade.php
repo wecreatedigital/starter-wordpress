@@ -21,7 +21,7 @@
 
   $default_columns = str_replace('.', '-', esc_attr(12 / wc_get_loop_prop('columns')));
 @endphp
-<div class="col-sm-6 col-md-4 col-lg-{{ $default_columns }} fcb-b50">
+<div class="col-sm-6 col-md-4 col-lg-{{ $default_columns }} fcb-b40">
 	<div class="card card-category">
 	  @php
       /**
