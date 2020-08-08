@@ -25,7 +25,7 @@ mix.sass('resources/assets/styles/app.scss', 'styles')
      whitelistPatterns: require('purgecss-with-wordpress').whitelistPatterns,
    })
   .criticalCss({
-      enabled: true,
+      enabled: mix.inProduction(),
       paths: {
           base: 'https://starter.test/',
           templates: './dist/critical/',
