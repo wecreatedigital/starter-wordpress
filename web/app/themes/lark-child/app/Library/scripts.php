@@ -1,16 +1,4 @@
 <?php
-/*
- * w3c valid script and style tags
- */
-add_action(
-    'after_setup_theme',
-    function () {
-        add_theme_support('html5', ['script', 'style']);
-    }
-);
-
-add_filter('wpcf7_load_css', '__return_false');
-
 /**
  * jQuery is outdated in WP and has vulnerabilities, but we don't want break the WP admin_init
  * @author Dean Appleton-Claydon
@@ -82,3 +70,39 @@ add_action('wp_head', function (): void {
         echo '<style id="critical-css">'.file_get_contents($file).'</style>';
     }
 }, 1);
+
+/**
+* Make background images responsive with this handy JS file and Blade components
+*
+* @author Dean Appleton-Claydon
+* @date   2020-08-08
+ */
+wp_enqueue_script('responsive-background-images', get_stylesheet_directory_uri().'/resources/assets/scripts/responsive-background-images.js', false, null, true);
+
+function mind_defer_scripts($tag, $handle, $src)
+{
+    $defer = array(
+        'responsive-background-images',
+    );
+    if (in_array($handle, $defer)) {
+        return '<script src="'.$src.'" defer="defer"></script>'."\n";
+    }
+
+    return $tag;
+}
+add_filter('script_loader_tag', 'mind_defer_scripts', 10, 3);
+
+/*
+ * w3c valid script and style tags
+ */
+add_action(
+    'after_setup_theme',
+    function () {
+        add_theme_support('html5', ['script', 'style']);
+    }
+);
+
+/*
+ * Remove WP contact form 7 CSS
+ */
+add_filter('wpcf7_load_css', '__return_false');

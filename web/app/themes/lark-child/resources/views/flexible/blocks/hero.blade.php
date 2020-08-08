@@ -1,15 +1,7 @@
-@php
-  $url = '';
-  $background_image = get_sub_field('background');
-  if( $background_image ) {
-    $url = $background_image['url'];
-  }
-@endphp
-
 @component('components.blocks.container', [
   'classes' => 'fcb-hero fcb-v-align',
   'padding' => $default_padding,
-  'style' => 'background-image: url('.$url.')',
+  'background_image' => get_sub_field('background'),
 ])
 
   <div class="row">

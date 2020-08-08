@@ -11,7 +11,7 @@
 
   <div class="row fcb-t40 no-gutters justify-content-md-center">
     @fields('gallery')
-      <img loading="lazy" src="@sub('image', 'sizes', 'large')" alt="@sub('image', 'alt')" class="col-6 col-sm-6 col-md-4 img-fluid">
+      <img srcset="{{ wp_get_attachment_image_srcset(get_sub_field('image'), 'large') }}" src="{{ wp_get_attachment_image_src(get_sub_field('image'), 'large')[0] }}" alt="{{ get_sub_field('image')['alt'] }}" class="col-6 col-sm-6 col-md-4 img-fluid">
     @endfields
   </div>
 

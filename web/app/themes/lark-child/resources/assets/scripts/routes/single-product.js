@@ -12,8 +12,8 @@ export default {
       speed: 300,
       slidesToShow: 4,
       slidesToScroll: 1,
-      nextArrow: '<button class="slick-prev"><i class="fa fa-chevron-left"></i>test</button>',
-      prevArrow: '<button class="slick-next"><i class="fa fa-chevron-right"></i>test</button>',
+      // nextArrow: '<button class="slick-prev"><i class="fa fa-chevron-left"></i>test</button>',
+      // prevArrow: '<button class="slick-next"><i class="fa fa-chevron-right"></i>test</button>',
       //rows: 0,
       responsive: [
         {

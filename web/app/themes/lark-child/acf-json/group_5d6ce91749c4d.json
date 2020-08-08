@@ -243,6 +243,22 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5f2f02cd50690",
+                            "label": "Content",
+                            "name": "",
+                            "type": "tab",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "placement": "top",
+                            "endpoint": 0
+                        },
+                        {
                             "key": "field_5e5cf093b9fe1",
                             "label": "Card",
                             "name": "card_item",
@@ -891,7 +907,7 @@
                                         "class": "",
                                         "id": ""
                                     },
-                                    "return_format": "array",
+                                    "return_format": "id",
                                     "preview_size": "medium",
                                     "library": "all",
                                     "min_width": "",
@@ -1141,10 +1157,10 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "array",
+                            "return_format": "id",
                             "preview_size": "medium",
                             "library": "all",
-                            "min_width": "",
+                            "min_width": 1440,
                             "min_height": "",
                             "min_size": "",
                             "max_width": "",
@@ -2049,10 +2065,10 @@
                                 "class": "",
                                 "id": ""
                             },
-                            "return_format": "array",
+                            "return_format": "id",
                             "preview_size": "medium",
                             "library": "all",
-                            "min_width": "",
+                            "min_width": 768,
                             "min_height": "",
                             "min_size": "",
                             "max_width": "",
@@ -2734,5 +2750,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596901768
+    "modified": 1596916442
 }

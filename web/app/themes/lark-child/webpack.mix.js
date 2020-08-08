@@ -42,6 +42,7 @@ mix.sass('resources/assets/styles/app.scss', 'styles')
 
 mix.js('resources/assets/scripts/app.js', 'scripts')
    .js('resources/assets/scripts/customizer.js', 'scripts')
+   //.js('resources/assets/scripts/responsive-background-images.js', 'scripts') TODO: dist version causes error in console
    .blocks('resources/assets/scripts/editor.js', 'scripts')
    .extract();
 

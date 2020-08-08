@@ -2,7 +2,7 @@
  * External Dependencies
  */
 // import 'jquery'; - web/app/themes/lark-child/app/Library/scripts.php we include jQuery here instead
-//import 'slick-carousel/slick/slick'; - only enable if needed
+import 'slick-carousel/slick/slick'; //- only enable if needed
 import 'bootstrap';
 
 // import { library, dom } from '@fortawesome/fontawesome-svg-core';

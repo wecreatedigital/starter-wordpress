@@ -1,10 +1,5 @@
 @php
   $position = get_sub_field('image_position');
-  $url = '';
-  $background_image = get_sub_field('image');
-  if( $background_image ) {
-    $url = $background_image['sizes']['large_square'];
-  }
 @endphp
 
 @component('components.blocks.container', [
@@ -18,7 +13,7 @@
         'classes' => ''
       ])
     </div>
-    <div style="background-image: url({{ $url }})" class="fcb-col-image col-sm-12 col-md-5 @if( $position == "left" ) order-1 @else order-1 order-sm-1 order-md-2 @endif"></div>
+    <div data-background-image-srcset="{{ wp_get_attachment_image_srcset(get_sub_field('image'), 'large_square') }}" class="fcb-col-image background-image col-sm-12 col-md-5 @if( $position == "left" ) order-1 @else order-1 order-sm-1 order-md-2 @endif"></div>
   </div>
 
 @endcomponent

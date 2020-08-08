@@ -13,13 +13,13 @@
 
 <div class="content @if( isset($classes) ) {{ $classes }} @else fcb-b20 @endif">
   @hassub('heading')
-    <{{ $heading }} class="fcb-b30">
+    <{{ $heading }} class="fcb-b20">
       @sub('heading')
     </{{ $heading }}>
   @endsub
 
   @hassub('sub_heading')
-    <{{ $sub_heading }} class="fcb-b30">
+    <{{ $sub_heading }} class="fcb-b20">
       @sub('sub_heading')
     </{{ $sub_heading }}>
   @endsub
