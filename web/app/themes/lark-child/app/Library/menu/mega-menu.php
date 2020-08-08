@@ -5,10 +5,11 @@
 | MEGA MENU - Setup instructions
 |--------------------------------------------------------------------------
 |
+| TODO: Can we automate a lot of this with post_type_exists()?
+|
 | Here you may customize and register the Mega Menu for the given application.
 | Instructions:
 |   Backend Setup:
-|
 |     1. Uncomment the mega-menu CPT (Custom Post Type) in
 |        'lark-child/app/Library/cpt.php'.
 |     2. Uncomment 'lark-child/app/Library/menu/mega-menu.php'
@@ -16,6 +17,7 @@
 |     3. Make sure the correct Field Group Location is for 'nav_menu_item'
 |        i.e. 'value' => 'location/primary_navigation' - these can be configured
 |        in lark-child/app/Library/menu/register-nav-menus.php.
+
 |   Frontend Setup:
 |     1. Uncomment the has_mega_menu code within
 |        'lark-child/app/Library/menu/navwalker.php' - this relays the backend
