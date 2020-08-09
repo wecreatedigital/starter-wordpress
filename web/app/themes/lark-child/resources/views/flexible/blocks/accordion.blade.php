@@ -28,7 +28,7 @@
                   </button>
                 </h3>
               </div>
-              <div id="collapse-{{ $unique_id }}-{{$i}}" data-parent="#accordion-{{ $unique_id }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading-{{ $unique_id }}-{{$i}}">
+              <div id="collapse-{{ $unique_id }}-{{$i}}" data-parent="#accordion-{{ $unique_id }}" class="panel-collapse collapse @if( $i == 1 ) show @endif" role="tabpanel" aria-labelledby="heading-{{ $unique_id }}-{{$i}}">
                 <div class="panel-body fcb-a40">
                   @sub('text')
                 </div>
