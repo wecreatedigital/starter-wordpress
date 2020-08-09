@@ -10,38 +10,6 @@
 
 @layouts('page_content_block', $post_id)
 
-@layout('text_block')
-    @include('flexible.blocks.text')
-@endlayout
-
-@layout('image_block')
-    @include('flexible.blocks.image')
-@endlayout
-
-@layout('hero_block')
-    @include('flexible.blocks.hero')
-@endlayout
-
-@layout('left_right_image_text_block')
-    @include('flexible.blocks.text-image')
-@endlayout
-
-@layout('latest_block')
-    @include('flexible.blocks.latest')
-@endlayout
-
-@layout('donate_block')
-    @include('flexible.blocks.donate')
-@endlayout
-
-@layout('gallery_block')
-    @include('flexible.blocks.gallery')
-@endlayout
-
-@layout('contact_block')
-    @include('flexible.blocks.contact')
-@endlayout
-
 @layout('accordion_block')
     @include('flexible.blocks.accordion')
 @endlayout
@@ -50,12 +18,48 @@
     @include('flexible.blocks.card')
 @endlayout
 
+@layout('contact_block')
+    @include('flexible.blocks.contact')
+@endlayout
+
+@layout('donate_block')
+    @include('flexible.blocks.donate')
+@endlayout
+
+@layout('hero_block')
+    @include('flexible.blocks.hero')
+@endlayout
+
 @layout('icon_block')
     @include('flexible.blocks.icon')
 @endlayout
 
+@layout('image_block')
+    @include('flexible.blocks.image')
+@endlayout
+
+@layout('instagram_block')
+    @include('flexible.blocks.instagram')
+@endlayout
+
+@layout('gallery_block')
+    @include('flexible.blocks.gallery')
+@endlayout
+
+@layout('latest_block')
+    @include('flexible.blocks.latest')
+@endlayout
+
+@layout('left_right_image_text_block')
+    @include('flexible.blocks.text-image')
+@endlayout
+
 @layout('testimonial_block')
     @include('flexible.blocks.testimonial')
+@endlayout
+
+@layout('text_block')
+    @include('flexible.blocks.text')
 @endlayout
 
 @php

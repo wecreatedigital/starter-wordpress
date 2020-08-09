@@ -1729,6 +1729,15 @@
                     "min": "",
                     "max": ""
                 },
+                "layout_5f2ff8711c8b8": {
+                    "key": "layout_5f2ff8711c8b8",
+                    "name": "instagram_block",
+                    "label": "Instagram",
+                    "display": "block",
+                    "sub_fields": [],
+                    "min": "",
+                    "max": ""
+                },
                 "layout_5dd45e55aa43a": {
                     "key": "layout_5dd45e55aa43a",
                     "name": "latest_block",
@@ -2730,7 +2739,7 @@
             {
                 "param": "post_type",
                 "operator": "==",
-                "value": "product"
+                "value": "post"
             }
         ]
     ],
@@ -2750,5 +2759,5 @@
     ],
     "active": 1,
     "description": "",
-    "modified": 1596916442
+    "modified": 1596979348
 }

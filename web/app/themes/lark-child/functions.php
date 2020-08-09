@@ -41,6 +41,8 @@ collect([
     'Library/helpers/text',
     'Library/plural/plural',
     'Library/plural/en',
+    'Library/social/index',
+    'Library/social/instagram',
     'Library/admin',
     // 'Library/ajax',
     'Library/content',
@@ -54,7 +56,6 @@ collect([
     'Library/scripts',
     'Library/security',
     'Library/seo',
-    'Library/social',
     'Library/speed',
     // 'Library/woocommerce',
 ])
