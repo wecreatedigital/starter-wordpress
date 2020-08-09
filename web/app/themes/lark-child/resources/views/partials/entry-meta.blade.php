@@ -2,7 +2,7 @@
   {{ get_the_date() }}
 </time>
 
-<p class="byline author vcard">
+<p class="byline author vcard m-0">
   <span>{{ __('By', 'sage') }}</span>
   <a href="{{ get_author_posts_url(get_the_author_meta('ID')) }}" rel="author" class="fn">
     {{ get_the_author() }}

@@ -1,4 +1,4 @@
-<article @php(post_class())>
+<article @php(post_class('container'))>
   <header>
     <h1 class="entry-title">
       {!! $title !!}
