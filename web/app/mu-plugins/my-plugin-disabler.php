@@ -10,7 +10,7 @@ if (defined('DEV_DISABLED_PLUGINS')) {
     $plugins_to_disable = unserialize(DEV_DISABLED_PLUGINS);
 
     if ( ! empty($plugins_to_disable) && is_array($plugins_to_disable)) {
-        require_once(dirname(__FILE__).'/tools/DisablePlugins.php');
+        require_once(dirname(__FILE__).'/disable-plugins.php');
         $utility = new DisablePlugins($plugins_to_disable);
 
         // part below is optional but for me it is crucial
