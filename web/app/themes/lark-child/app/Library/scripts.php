@@ -77,7 +77,11 @@ add_action('wp_head', function (): void {
 * @author Dean Appleton-Claydon
 * @date   2020-08-08
  */
-wp_enqueue_script('responsive-background-images', get_stylesheet_directory_uri().'/resources/assets/scripts/responsive-background-images.js', false, null, true);
+add_action('wp_enqueue_scripts', 'responsive_background_images', 11);
+function responsive_background_images()
+{
+    wp_enqueue_script('responsive-background-images', get_stylesheet_directory_uri().'/resources/assets/scripts/responsive-background-images.js', false, null, true);
+}
 
 function mind_defer_scripts($tag, $handle, $src)
 {
