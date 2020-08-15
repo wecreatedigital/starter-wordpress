@@ -12,6 +12,8 @@
     </div>
   </div>
 
-  <div class="overlay"></div>
+  @hassub('background')
+    <div class="overlay"></div>
+  @endsub
 
 @endcomponent
