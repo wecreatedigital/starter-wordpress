@@ -22,9 +22,14 @@
           'walker'            => new WP_Bootstrap_Navwalker(),
         ) ); !!}
       @else
-        <a class="d-sm-block d-md-none" href="@option('header_call_to_action_link')">
-          Contact
-        </a>
+        @php
+          $header_cta = get_field('header_call_to_action_link', 'option');
+        @endphp
+        @if( $header_cta )
+          <a class="d-block btn btn-dark order-1 order-sm-1 order-md-2" href="{{ $header_cta['url'] }}">
+            {{ $header_cta['title'] }}
+          </a>
+        @endif
         {!! wp_nav_menu( array(
           'theme_location'    => 'primary_navigation',
           'depth'             => 1,
