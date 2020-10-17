@@ -139,7 +139,7 @@ add_action('wp_enqueue_scripts', 'remove_block_css', 100);
  */
 function itsme_disable_feed()
 {
-    wp_die(__('No feed available'));
+    wp_die(__('No feed available'), 'No feed available', ['response' => 200]);
 }
 
 add_action('do_feed', 'itsme_disable_feed', 1);
