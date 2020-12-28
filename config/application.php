@@ -8,8 +8,8 @@
  * can.
  */
 
-use function Env\env;
 use Roots\WPConfig\Config;
+use function Env\env;
 
 /**
  * Directory containing all of the site's files
@@ -23,16 +23,16 @@ $root_dir = dirname(__DIR__);
  *
  * @var string
  */
-$webroot_dir = $root_dir.'/web';
+$webroot_dir = $root_dir . '/web';
 
 /**
  * Use Dotenv to set required environment variables and load .env file in root
  */
-$dotenv = Dotenv\Dotenv::createImmutable($root_dir);
-if (file_exists($root_dir.'/.env')) {
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable($root_dir);
+if (file_exists($root_dir . '/.env')) {
     $dotenv->load();
     $dotenv->required(['WP_HOME', 'WP_SITEURL']);
-    if ( ! env('DATABASE_URL')) {
+    if (!env('DATABASE_URL')) {
         $dotenv->required(['DB_NAME', 'DB_USER', 'DB_PASSWORD']);
     }
 }
@@ -58,8 +58,8 @@ Config::define('WP_SITEURL', env('WP_SITEURL'));
  * Custom Content Directory
  */
 Config::define('CONTENT_DIR', '/app');
-Config::define('WP_CONTENT_DIR', $webroot_dir.Config::get('CONTENT_DIR'));
-Config::define('WP_CONTENT_URL', Config::get('WP_HOME').Config::get('CONTENT_DIR'));
+Config::define('WP_CONTENT_DIR', $webroot_dir . Config::get('CONTENT_DIR'));
+Config::define('WP_CONTENT_URL', Config::get('WP_HOME') . Config::get('CONTENT_DIR'));
 
 /**
  * DB settings
@@ -98,7 +98,8 @@ Config::define('NONCE_SALT', env('NONCE_SALT'));
  */
 Config::define('AUTOMATIC_UPDATER_DISABLED', true);
 Config::define('DISABLE_WP_CRON', env('DISABLE_WP_CRON') ?: false);
-
+// Disable the plugin and theme file editor in the admin
+Config::define('DISALLOW_FILE_EDIT', true);
 // Disable plugin and theme updates and installation from the admin
 Config::define('DISALLOW_FILE_MODS', true);
 
@@ -118,7 +119,7 @@ if (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROT
     $_SERVER['HTTPS'] = 'on';
 }
 
-$env_config = __DIR__.'/environments/'.WP_ENV.'.php';
+$env_config = __DIR__ . '/environments/' . WP_ENV . '.php';
 
 if (file_exists($env_config)) {
     require_once $env_config;
@@ -129,6 +130,6 @@ Config::apply();
 /**
  * Bootstrap WordPress
  */
-if ( ! defined('ABSPATH')) {
-    define('ABSPATH', $webroot_dir.'/wp/');
+if (!defined('ABSPATH')) {
+    define('ABSPATH', $webroot_dir . '/wp/');
 }

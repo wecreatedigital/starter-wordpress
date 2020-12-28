@@ -59,7 +59,7 @@ if (function_exists('acf_add_options_page')) {
  * @author Russell Mitchell
  * @date   2020-03-03
 */
-if (function_exists('acf_add_options_sub_page') && env('DISABLE_HAMBURGER')) {
+if (function_exists('acf_add_options_sub_page') && getenv('DISABLE_HAMBURGER')) {
     $child_header_page = acf_add_options_sub_page(array(
         'page_title' => __('Header'),
         'menu_title' => __('Header'),

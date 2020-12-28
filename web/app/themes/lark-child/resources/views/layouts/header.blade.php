@@ -7,7 +7,7 @@
       <button class="btn skip-to-content-link" data-target="#main">
         Skip to content
       </button>
-      @if ( ! env('DISABLE_HAMBURGER'))
+      @if ( ! getenv('DISABLE_HAMBURGER'))
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#hamburger-menu" aria-controls="hamburger-menu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>

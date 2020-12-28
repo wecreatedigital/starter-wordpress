@@ -26,7 +26,8 @@
   "repositories": [
     {
       "type": "composer",
-      "url": "https://wpackagist.org"
+      "url": "https://wpackagist.org",
+      "only": ["wpackagist-plugin/*", "wpackagist-theme/*"]
     },
     {
       "type": "package",
@@ -43,14 +44,14 @@
   ],
   "require": {
     "php": ">=7.1",
-    "advanced-custom-fields/advanced-custom-fields-pro": "*",
-    "roots/bedrock-autoloader": "^1.0",
-    "composer/installers": "^1.9",
-    "vlucas/phpdotenv": "^4.1.8",
+    "composer/installers": "^1.8",
+    "vlucas/phpdotenv": "^5.2",
     "oscarotero/env": "^2.1",
+    "roots/bedrock-autoloader": "^1.0",
     "roots/wp-config": "1.0.0",
     "roots/wp-password-bcrypt": "1.0.0",
     "roots/wordpress": "*",
+    "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "wpackagist-plugin/autoptimize": "*",
     "wpackagist-plugin/acf-content-analysis-for-yoast-seo": "*",
     "wpackagist-plugin/civic-cookie-control-8": "*",
@@ -69,13 +70,12 @@
     "wpackagist-plugin/query-monitor": "*"
   },
   "require-dev": {
-    "squizlabs/php_codesniffer": "^3.4.2",
+    "squizlabs/php_codesniffer": "^3.5.8",
     "roave/security-advisories": "dev-master"
   },
   "config": {
     "optimize-autoloader": true,
-    "preferred-install": "dist",
-    "sort-packages": true
+    "preferred-install": "dist"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
@@ -93,6 +93,9 @@
       "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
       "rm -rf web/wp/wp-content/plugins/"
+    ],
+    "post-root-package-install": [
+      "php -r \"copy('.env.example', '.env');\""
     ],
     "test": [
       "phpcs"
