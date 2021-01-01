@@ -18,31 +18,30 @@ if (filter_var(getenv('SSL_ENABLED'), FILTER_VALIDATE_BOOLEAN)) {
 }
 
 /**
- * Strict-Transport-Security
+ * Security headers, use https://securityheaders.com/ to verify
+ *
+ * Strict-Transport-Security: helps to protect websites against man-in-the-middle attacks
+ * X-XSS-Protection: to stop pages from loading when they detect reflected cross-site scripting
+ * X-Content-Type-Options: prevent MIME type sniffing
+ * X-Frame-Options: to indicate whether or not a browser should be allowed to render a page in a frame, iframe, embed or object tag
+ * Content-Security-Policy: prevent cross-site scripting (XSS), clickjacking and other code injection attacks
+ * Permissions-Policy: allows site owners to enable and disable certain web platform features on their own pages and those they embed
+ * Referrer-Policy: controls how much referrer information should be included with requests
  */
-if ( ! empty($_SERVER['HTTPS'])) {
-    function add_hsts_header($headers)
-    {
-        $headers['strict-transport-security'] = 'max-age=31536000; includeSubDomains';
-
-        return $headers;
+function add_security_headers($headers)
+{
+    if ( ! empty($_SERVER['HTTPS'])) {
+      $headers['Strict-Transport-Security'] = 'max-age=15552000; includeSubDomains';
     }
+    $headers['X-XSS-Protection'] = "1; mode=block";
+    $headers['X-Content-Type-Options'] = "nosniff";
+    $headers['X-Frame-Options'] = "SAMEORIGIN";
+    $headers['Content-Security-Policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src * data: *.tawk.to 'unsafe-inline' 'unsafe-eval';";
+    $headers['Permissions-Policy'] = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()";
+    $headers['Referrer-Policy'] = "strict-origin-when-cross-origin";
 
-    add_filter('wp_headers', 'add_hsts_header');
+    return $headers;
 }
+add_filter('wp_headers', 'add_security_headers');
 
-/**
- * Content-Security-Policy
- */
-// function add_csp_header($headers)
-// {
-//     $headers['content-security-policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';";
-//
-//     return $headers;
-// }
-// add_filter('wp_headers', 'add_csp_header');
-
-/**
- * X-Frame-Options
- */
-add_action('send_headers', 'send_frame_options_header', 10, 0);
+header_remove("X-Powered-By");
