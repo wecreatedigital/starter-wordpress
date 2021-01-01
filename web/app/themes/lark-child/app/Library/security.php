@@ -36,7 +36,7 @@ function add_security_headers($headers)
     $headers['X-XSS-Protection'] = "1; mode=block";
     $headers['X-Content-Type-Options'] = "nosniff";
     $headers['X-Frame-Options'] = "SAMEORIGIN";
-    $headers['Content-Security-Policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval'; connect-src * data: *.tawk.to 'unsafe-inline' 'unsafe-eval';";
+    $headers['Content-Security-Policy'] = "default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';"; //connect-src * data: *.tawk.to 'unsafe-inline' 'unsafe-eval';
     $headers['Permissions-Policy'] = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()";
     $headers['Referrer-Policy'] = "strict-origin-when-cross-origin";
 
