@@ -90,7 +90,6 @@
   "scripts": {
     "post-update-cmd": [
       "php -r \"symlink('web', 'public');\"",
-      "php -r \"symlink('web', 'httpdocs');\"",
       "rm -rf web/wp/wp-content/themes/",
       "rm -rf web/wp/wp-content/plugins/"
     ],
