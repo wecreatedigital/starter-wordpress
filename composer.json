@@ -67,7 +67,15 @@
     "wpackagist-plugin/woocommerce": "*",
     "wpackagist-plugin/wordpress-seo": "*",
     "wpackagist-plugin/wp-super-cache": "*",
-    "wpackagist-plugin/query-monitor": "*"
+    "wpackagist-plugin/query-monitor": "*",
+    "symfony/console": "^5.2",
+    "symfony/process": "^5.2"
+  },
+  "autoload": {
+      "psr-4": {
+          "Console\\": "src"
+      },
+      "classmap": ["src"]
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.8",

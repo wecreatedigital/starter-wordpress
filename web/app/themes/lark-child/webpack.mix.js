@@ -17,7 +17,7 @@ require('laravel-mix-criticalcss');
 
 mix
   .setPublicPath('./dist')
-  .browserSync('starter.test');
+  .browserSync('starter-wordpress.test');
 
 mix
   .sass('resources/assets/styles/app.scss', 'styles')
@@ -30,7 +30,7 @@ mix
  .criticalCss({
     enabled: mix.inProduction(),
     paths: {
-       base: 'https://starter.test/',
+       base: 'https://starter-wordpress.test/',
        templates: './dist/critical/',
        suffix: '_critical.min'
     },

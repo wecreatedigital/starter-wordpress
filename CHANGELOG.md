@@ -289,6 +289,7 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Updated Flexible Blade to use custom flexible.php config variables and Sage Roots View Composer class
 - Added custom WordPress filter to hide ACF 'Custom Fields' menu from WordPress when on live by checking .env value
+- Moved entire installation setup to a terminal command `php bin/console lark:install {sitename}`
 
 ## To do
 - Create sample WooCommerce, SASS and blade code
