@@ -288,6 +288,7 @@ All notable changes to `starter-wordpress` will be documented in this file
 ## 3.0.20 - 25-01-2021
 
 - Updated Flexible Blade to use custom flexible.php config variables and Sage Roots View Composer class
+- Added custom WordPress filter to hide ACF 'Custom Fields' menu from WordPress when on live by checking .env value
 
 ## To do
 - Create sample WooCommerce, SASS and blade code

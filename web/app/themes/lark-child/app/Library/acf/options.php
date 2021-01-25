@@ -89,3 +89,15 @@ if (function_exists('acf_add_options_sub_page') && getenv('DISABLE_HAMBURGER')) 
         ),
     ));
 }
+
+/**
+ * Hide the 'Custom Fields' menu from WordPress Admin when on live.
+ */
+add_filter('acf/settings/show_admin', function () {
+    // hide the acf menu item
+    if (in_array(env('WP_ENV'), ['prod', 'production', 'live'])) {
+        return false;
+    }
+
+    return true;
+});
