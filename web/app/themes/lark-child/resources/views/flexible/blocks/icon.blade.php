@@ -1,6 +1,5 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-icon',
-  'padding' => $default_padding,
 ])
 
   <div class="container">

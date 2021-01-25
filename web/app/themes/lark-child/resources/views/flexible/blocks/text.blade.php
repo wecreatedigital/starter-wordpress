@@ -1,6 +1,5 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-text-block',
-  'padding' => $default_padding,
 ])
 
 <div class="row">

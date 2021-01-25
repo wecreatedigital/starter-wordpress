@@ -1,6 +1,5 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-gallery pb-0',
-  'padding' => $default_padding,
 ])
 
   <div class="row">

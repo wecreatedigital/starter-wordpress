@@ -5,7 +5,6 @@
 
   @component('components.blocks.container', [
     'classes' => 'fcb-latest',
-    'padding' => $default_padding,
   ])
 
   <div class="row text-center">

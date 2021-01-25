@@ -1,4 +1,7 @@
 <?php
+
+use Illuminate\Support\Str;
+
 /**
  * Truncate by word, not character
  *
@@ -23,4 +26,19 @@ function truncate($string, $your_desired_width)
     }
 
     return implode(array_slice($parts, 0, $last_part));
+}
+
+/**
+ * Facades don't work in Blade at the moment with Roots Sage, so created
+ * a helper to make use of the Str helper class.
+ *
+ * @author Christopher Kelker
+ * @param  string $string
+ * @return \Illuminate\Support\Str string
+ */
+if ( ! function_exists('str_of')) {
+    function str_of(string $value)
+    {
+        return Str::of($value);
+    }
 }

@@ -1,6 +1,5 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-accordion',
-  'padding' => $default_padding,
 ])
 
   <div class="row no-gutters">

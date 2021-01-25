@@ -2,7 +2,6 @@
 
   @component('components.blocks.container', [
     'classes' => 'fcb-donate',
-    'padding' => $default_padding,
   ])
 
   <div class="row">

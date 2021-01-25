@@ -5,7 +5,6 @@
 
   @component('components.blocks.container', [
     'classes' => 'fcb-image-block',
-    'padding' => $default_padding,
   ])
 
   {!! wp_get_attachment_image( $image['ID'], 'full_width' , '', [

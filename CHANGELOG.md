@@ -279,6 +279,16 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Laid out Mega Menu setup instructions
 
+## 3.0.13 - 22-01-2021
+
+- Created installation.md
+- Updated cpt.php file to use Laravel Str class helper
+- Removed httpdocs symlink
+
+## 3.0.20 - 25-01-2021
+
+- Updated Flexible Blade to use custom flexible.php config variables and Sage Roots View Composer class
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

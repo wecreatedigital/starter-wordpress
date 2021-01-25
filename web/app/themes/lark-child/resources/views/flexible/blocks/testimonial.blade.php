@@ -1,12 +1,11 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-testimonial',
-  'padding' => $default_padding,
 ])
 
   @php
     $post_objects = get_sub_field('testimonials')
   @endphp
-  
+
   @if( $post_objects )
 
     <div class="row no-gutters">

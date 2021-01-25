@@ -1,6 +1,5 @@
 @component('components.blocks.container', [
   'classes' => 'fcb-hero fcb-v-align',
-  'padding' => $default_padding,
   'background_image' => get_sub_field('background'),
 ])
 
