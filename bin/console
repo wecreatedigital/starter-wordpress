@@ -3,9 +3,10 @@
 require_once __DIR__ . '/../vendor/autoload.php';
 
 use Symfony\Component\Console\Application;
+use App\Commands\Install;
 
 $app = new Application();
 
-$app->add(new \App\Commands\Install());
+$app->add(new Install);
 
 $app->run();

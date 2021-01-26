@@ -73,9 +73,9 @@
   },
   "autoload": {
       "psr-4": {
-          "Console\\": "src"
+          "Console\\": "web/app/Commands"
       },
-      "classmap": ["src"]
+      "classmap": ["web/app/Commands"]
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.5.8",

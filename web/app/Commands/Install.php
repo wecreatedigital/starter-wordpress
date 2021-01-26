@@ -12,6 +12,8 @@ use Symfony\Component\Process\Process;
 
 class Install extends Command
 {
+    private $appName = '';
+
     protected function configure()
     {
         $this->addArgument(
@@ -31,6 +33,8 @@ class Install extends Command
             return Command::SUCCESS;
         }
 
+        $this->appName = $input->getArgument('app');
+
         (new SymfonyStyle($input, $output))->success('Installation starting...');
 
         $methodsToCall = array_filter(get_class_methods($this), function ($method) {
@@ -48,8 +52,8 @@ class Install extends Command
     {
         $output->writeln([
             '',
-            "Your root directory is called '".$input->getArgument('app')."'?",
-            "If so that would mean this installation would create '".$input->getArgument('app').".test'",
+            "Your root directory is called '{$this->appName}'?",
+            "If so that would mean this installation would create '{$this->appName}.test'",
             '',
         ]);
 
@@ -73,14 +77,13 @@ class Install extends Command
     private function stepOne(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
-            '<info>Running: valet link '.$input->getArgument('app').'</>',
-            '',
+            "<info>Running: 'valet link {$this->appName}'</>",
         ]);
 
         (new Process([
             'valet',
             'link',
-            $input->getArgument('app'),
+            $this->appName,
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
@@ -90,14 +93,13 @@ class Install extends Command
     private function stepTwo(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
-            '<info>Running: valet secure '.$input->getArgument('app').'</>',
-            '',
+            "<info>Running: 'valet secure {$this->appName}'</>",
         ]);
 
         (new Process([
             'valet',
             'secure',
-            $input->getArgument('app'),
+            $this->appName,
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
@@ -106,9 +108,10 @@ class Install extends Command
 
     private function stepThree(InputInterface $input, OutputInterface $output)
     {
+        $directory = getcwd().'/web/app/themes/lark';
+
         $output->writeln([
-            '<info>Running: composer install within '.getcwd().'/web/app/themes/lark'.'</>',
-            '',
+            "<info>Running: 'composer install' within {$directory}</>",
         ]);
 
         (new Process([
@@ -117,15 +120,16 @@ class Install extends Command
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
-        ->setWorkingDirectory(getcwd().'/web/app/themes/lark')
+        ->setWorkingDirectory($directory)
         ->run();
     }
 
     private function stepFour(InputInterface $input, OutputInterface $output)
     {
+        $directory = getcwd().'/web/app/themes/lark-child';
+
         $output->writeln([
-            '<info>Running: composer install within '.getcwd().'/web/app/themes/lark-child'.'</>',
-            '',
+            "<info>Running: 'composer install' within {$directory}</>",
         ]);
 
         (new Process([
@@ -134,31 +138,29 @@ class Install extends Command
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
-        ->setWorkingDirectory(getcwd().'/web/app/themes/lark-child')
+        ->setWorkingDirectory($directory)
         ->run();
     }
 
     private function stepFive(InputInterface $input, OutputInterface $output)
     {
-        $baseAppUrl = $input->getArgument('app').'.test';
+        $baseAppUrl = "{$this->appName}.test";
 
         $output->writeln([
             "<info>Replacing starter.test with {$baseAppUrl}</>",
-            '',
         ]);
 
-        $file = getcwd().'/web/app/themes/lark-child/webpack.mix.js';
+        $filePath = getcwd().'/web/app/themes/lark-child/webpack.mix.js';
 
         file_put_contents(
-            $file,
-            str_replace('starter.test', $baseAppUrl, file_get_contents($file))
+            $filePath,
+            str_replace('starter.test', $baseAppUrl, file_get_contents($filePath))
         );
 
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: yarn install within {$directory}</>",
-            '',
+            "<info>Running: 'yarn install' within {$directory}</>",
         ]);
 
         (new Process([
@@ -176,8 +178,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: start within {$directory}</>",
-            '',
+            "<info>Running: 'yarn start' start within {$directory}</>",
         ]);
 
         (new Process([
@@ -195,8 +196,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: yarn clean:views within {$directory}</>",
-            '',
+            "<info>Running: 'yarn clean:views' within {$directory}</>",
         ]);
 
         (new Process([
