@@ -30,7 +30,7 @@ mix
  .criticalCss({
     enabled: mix.inProduction(),
     paths: {
-       base: 'https://starter-wordpress.test/',
+       base: 'https://starter-wordpress.test',
        templates: './dist/critical/',
        suffix: '_critical.min'
     },

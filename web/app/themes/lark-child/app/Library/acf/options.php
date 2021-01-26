@@ -95,7 +95,7 @@ if (function_exists('acf_add_options_sub_page') && getenv('DISABLE_HAMBURGER')) 
  */
 add_filter('acf/settings/show_admin', function () {
     // hide the acf menu item
-    if (in_array(env('WP_ENV'), ['prod', 'production', 'live'])) {
+    if (in_array(getenv('WP_ENV'), ['prod', 'production', 'live'])) {
         return false;
     }
 

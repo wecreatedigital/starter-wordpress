@@ -35,7 +35,7 @@ class Install extends Command
             return Command::SUCCESS;
         }
 
-        (new SymfonyStyle($input, $output))->success('Installation starting...');
+        (new SymfonyStyle($input, $output))->success('Installation starting.');
 
         $methodsToCall = array_filter(get_class_methods($this), function ($method) {
             return substr($method, 0, 4) === 'step';
@@ -44,6 +44,18 @@ class Install extends Command
         foreach ($methodsToCall as $method) {
             $this->{$method}($input, $output);
         }
+
+        (new SymfonyStyle($input, $output))->success('Installation finished.');
+
+        $output->writeln([
+            '<info>Next steps...</>',
+            '',
+            "1. Please create the db using WordPress at '{$this->appName}.test/wp-admin'",
+            "2. Switch over the theme to 'Lark Starter Child Theme'",
+            "3. Activate the 'Advanced Custom Fields PRO' plugin",
+            "3. See that the installation has worked by running 'yarn start' within the child theme directory",
+            "   'cd ".getcwd().'/web/app/themes/lark-child'."'",
+        ]);
 
         return Command::SUCCESS;
     }
@@ -111,7 +123,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark';
 
         $output->writeln([
-            "<info>Running: 'composer install' within {$directory}</>",
+            "<info>Running: 'composer install' in parent theme</>",
         ]);
 
         (new Process([
@@ -129,7 +141,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: 'composer install' within {$directory}</>",
+            "<info>Running: 'composer install' in child theme</>",
         ]);
 
         (new Process([
@@ -160,7 +172,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: 'yarn install --ignore-engines' within {$directory}</>",
+            "<info>Running: 'yarn install --ignore-engines' in child theme</>",
         ]);
 
         (new Process([
@@ -179,25 +191,7 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: 'yarn start' start within {$directory}</>",
-        ]);
-
-        (new Process([
-            'yarn',
-            'start',
-        ]))
-        ->setTimeout(null)
-        ->setIdleTimeout(null)
-        ->setWorkingDirectory($directory)
-        ->run();
-    }
-
-    private function stepSeven(InputInterface $input, OutputInterface $output)
-    {
-        $directory = getcwd().'/web/app/themes/lark-child';
-
-        $output->writeln([
-            "<info>Running: 'yarn clean:views' within {$directory}</>",
+            "<info>Running: 'yarn clean:views' in child theme</>",
         ]);
 
         (new Process([
