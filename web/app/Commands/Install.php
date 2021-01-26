@@ -160,12 +160,13 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         $output->writeln([
-            "<info>Running: 'yarn install' within {$directory}</>",
+            "<info>Running: 'yarn install --ignore-engines' within {$directory}</>",
         ]);
 
         (new Process([
             'yarn',
             'install',
+            '--ignore-engines',
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
