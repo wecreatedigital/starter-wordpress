@@ -29,11 +29,11 @@ class Install extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->appName = $input->getArgument('app');
+
         if ( ! $this->userConfirmation($input, $output)) {
             return Command::SUCCESS;
         }
-
-        $this->appName = $input->getArgument('app');
 
         (new SymfonyStyle($input, $output))->success('Installation starting...');
 
