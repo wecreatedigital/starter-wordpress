@@ -6,9 +6,11 @@
       ->replaceMatches('/_/', '-');
     @endphp
 
-    @include("flexible.blocks.{$blockFilename}")
-
-    @php $previousBlock = get_row_layout(); @endphp
+    @if(viewExists("flexible.blocks.{$blockFilename}"))
+      @include("flexible.blocks.{$blockFilename}")
+    @else
+      @php dd("flexible.blocks.{$blockFilename}" . ' does not exist.'); @endphp
+    @endif
   @endlayout
 
   @php $h++; @endphp

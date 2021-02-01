@@ -291,6 +291,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Added custom WordPress filter to hide ACF 'Custom Fields' menu from WordPress when on live by checking .env value
 - Moved entire installation setup to a terminal command `php bin/console lark:install {sitename}`, this requires some more testing though
 
+## 3.0.21 - 01-02-2021
+
+- Added `dd()` when block blade view does not exist instead of a exception
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!
