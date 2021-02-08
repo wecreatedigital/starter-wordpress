@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * ACF options https://www.advancedcustomfields.com/add-ons/options-page/
  */
@@ -94,10 +96,12 @@ if (function_exists('acf_add_options_sub_page') && getenv('DISABLE_HAMBURGER')) 
  * Hide the 'Custom Fields' menu from WordPress Admin when on live.
  */
 add_filter('acf/settings/show_admin', function () {
-    // hide the acf menu item
-    if (in_array(getenv('WP_ENV'), ['prod', 'production', 'live'])) {
+    if ( ! is_user_logged_in()) {
         return false;
     }
 
-    return true;
+    return in_array(
+        wp_get_current_user()->user_email,
+        Config::get('flexible.developers')
+    );
 });

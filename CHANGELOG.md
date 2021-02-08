@@ -295,6 +295,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added `dd()` when block blade view does not exist instead of a exception
 
+## 3.0.22 - 08-02-2021
+
+- Added new variable to flexible configuration file whereby we can show and hide the ACF menu in WordPress programmatically.
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

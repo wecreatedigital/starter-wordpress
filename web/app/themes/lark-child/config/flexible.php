@@ -4,6 +4,20 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Developers
+    |--------------------------------------------------------------------------
+    |
+    | Here defines the key whereby developer emails are specified. This is used
+    | so that the signed in user can see the ACF menu.
+    |
+    */
+
+    'developers' => [
+        // 'chris@wecreatedigital.co.uk',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Default Padding
     |--------------------------------------------------------------------------
     |
