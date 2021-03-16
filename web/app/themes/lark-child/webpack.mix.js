@@ -17,7 +17,7 @@ require('laravel-mix-criticalcss');
 
 mix
   .setPublicPath('./dist')
-  .browserSync('lark.test');
+  .browserSync('starter.test');
 
 mix
   .sass('resources/assets/styles/app.scss', 'styles')
@@ -30,7 +30,7 @@ mix
  .criticalCss({
     enabled: mix.inProduction(),
     paths: {
-       base: 'https://lark.test',
+       base: 'https://starter.test',
        templates: './dist/critical/',
        suffix: '_critical.min'
     },
