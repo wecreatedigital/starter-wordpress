@@ -29,6 +29,12 @@ class Install extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        // Bit of added security, you cannot run this installation script when .env exists
+        if ( file_exists(getcwd().'/.env') ) {
+          (new SymfonyStyle($input, $output))->error('Cannot run this command when env exists.');
+          return Command::FAILURE;
+        }
+
         $this->appName = $input->getArgument('app');
 
         if ( ! $this->userConfirmation($input, $output)) {
@@ -49,12 +55,11 @@ class Install extends Command
 
         $output->writeln([
             '<info>Next steps...</>',
-            '',
-            "1. Please create the db using WordPress at '{$this->appName}.test/wp-admin'",
-            "2. Switch over the theme to 'Lark Starter Child Theme'",
-            "3. Activate the 'Advanced Custom Fields PRO' plugin",
-            "3. See that the installation has worked by running 'yarn start' within the child theme directory",
-            "   'cd ".getcwd().'/web/app/themes/lark-child'."'",
+            '1. Create database and update .env',
+            "2. Visit https://{$this->appName}.test/wp/wp-admin and follow installation process",
+            "3. Switch over the theme to 'Lark Starter Child Theme'",
+            "4. Activate the 'Advanced Custom Fields PRO' plugin",
+            "5. See that the installation has worked by running 'yarn start' within the child theme directory",
         ]);
 
         return Command::SUCCESS;
@@ -197,6 +202,38 @@ class Install extends Command
         (new Process([
             'yarn',
             'clean:views',
+        ]))
+        ->setTimeout(null)
+        ->setIdleTimeout(null)
+        ->setWorkingDirectory($directory)
+        ->run();
+    }
+
+    private function stepSeven(InputInterface $input, OutputInterface $output)
+    {
+        $baseAppUrl = "{$this->appName}";
+        $directory = getcwd();
+
+        $output->writeln([
+            "<info>Creating env from sample</>",
+        ]);
+
+        $filePath = getcwd().'/.env.example';
+
+        file_put_contents(
+            $filePath,
+            str_replace('starter', $baseAppUrl, file_get_contents($filePath))
+        );
+
+        file_put_contents(
+            $filePath,
+            str_replace('unique_', substr(str_shuffle(MD5(microtime())), 0, 6).'_', file_get_contents($filePath))
+        );
+
+        (new Process([
+            'cp',
+            '.env.example',
+            '.env',
         ]))
         ->setTimeout(null)
         ->setIdleTimeout(null)
