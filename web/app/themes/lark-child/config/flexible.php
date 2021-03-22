@@ -13,7 +13,7 @@ return [
     */
 
     'developers' => [
-        // 'chris@wecreatedigital.co.uk',
+        'wecreatedigital.co.uk',
     ],
 
     /*
