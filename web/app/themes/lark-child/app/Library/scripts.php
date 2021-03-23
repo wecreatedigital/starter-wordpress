@@ -2,6 +2,9 @@
 /**
  * Favicons in head
  *
+ * 1. Use https://www.favicon-generator.org/ to generate images
+ * 2. Copy files into web/app/themes/lark-child/resources/assets/favicon
+ *
  * @author Dean Appleton-Claydon
  * @date   2020-07-04
  */
