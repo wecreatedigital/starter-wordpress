@@ -10,6 +10,8 @@ web/app/uploads/*
 !web/app/uploads/.gitkeep
 web/app/cache/*
 !web/app/cache/.gitkeep
+web/app/languages/*
+!web/app/languages/.gitkeep
 
 # WordPress
 web/wp
