@@ -1,7 +1,7 @@
 /**
  * External Dependencies
  */
-// import 'jquery'; - web/app/themes/lark-child/app/Library/scripts.php we include jQuery here instead
+import 'jquery';
 // import 'slick-carousel/slick/slick'; //- only enable if needed
 import 'bootstrap';
 
