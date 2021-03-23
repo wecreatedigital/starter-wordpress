@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Config;
-
 /**
  * ACF options https://www.advancedcustomfields.com/add-ons/options-page/
  */

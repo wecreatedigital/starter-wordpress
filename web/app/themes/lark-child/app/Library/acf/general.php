@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * ACF filter to speed up backend loading time
  * https://awesomeacf.com/snippets/speed-acf-backend-loading-time/
