@@ -91,19 +91,3 @@ if (function_exists('acf_add_options_sub_page') && getenv('DISABLE_HAMBURGER')) 
         ),
     ));
 }
-
-/**
- * Hide the 'Custom Fields' menu from WordPress Admin when logged in user email address matches TLD
- */
-add_filter('acf/settings/show_admin', function () {
-    if ( ! is_user_logged_in()) {
-        return false;
-    }
-
-    $user_email = explode("@", wp_get_current_user()->user_email);
-
-    return in_array(
-        $user_email[1],
-        Config::get('flexible.developers')
-    );
-});

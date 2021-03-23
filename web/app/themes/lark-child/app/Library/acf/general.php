@@ -34,15 +34,17 @@ function my_acf_google_map_api($api)
 add_filter('acf/fields/google_map/api', 'my_acf_google_map_api');
 
 /**
- * When ACF is init, check the environment and disable ACF fields when in production
- *
- * @author Dean Appleton-Claydon
- * @date   2020-08-08
+ * Hide the 'Custom Fields' menu from WordPress Admin when logged in user email address matches TLD
  */
-add_action('acf/init', 'my_acf_init');
-function my_acf_init()
-{
-    if (getenv('WP_ENV') == 'production') {
-        acf_update_setting('show_admin', false); // Disable interface
+add_filter('acf/settings/show_admin', function () {
+    if ( ! is_user_logged_in()) {
+        return false;
     }
-}
+
+    $user_email = explode("@", wp_get_current_user()->user_email);
+
+    return in_array(
+        $user_email[1],
+        Config::get('flexible.developers')
+    );
+});
