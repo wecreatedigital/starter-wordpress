@@ -299,6 +299,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added new variable to flexible configuration file whereby we can show and hide the ACF menu in WordPress programmatically.
 
+## 3.0.22 - 24-03-2021
+
+- viewExists method wasn't added in recent update
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

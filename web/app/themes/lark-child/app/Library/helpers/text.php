@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
 /**
@@ -40,5 +41,20 @@ if ( ! function_exists('str_of')) {
     function str_of(string $value)
     {
         return Str::of($value);
+    }
+}
+
+/**
+ * Facades don't work in Blade at the moment with Roots Sage, so created
+ * a helper to make use of the View helper class.
+ *
+ * @author Christopher Kelker
+ * @param  string $string
+ * @return \Illuminate\Support\Facades\View
+ */
+if ( ! function_exists('viewExists')) {
+    function viewExists(string $value)
+    {
+        return View::exists($value);
     }
 }
