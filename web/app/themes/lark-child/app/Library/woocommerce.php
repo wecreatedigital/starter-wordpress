@@ -67,18 +67,6 @@ function grd_woocommerce_script_cleaner()
 }
 add_action('wp_enqueue_scripts', 'grd_woocommerce_script_cleaner', 99);
 
-function woocommerce_dequeue_styles($enqueue_styles)
-{
-    if ( ! is_woocommerce() && ! is_cart() && ! is_checkout()) {
-        unset($enqueue_styles['woocommerce-general']);
-        unset($enqueue_styles['woocommerce-layout']);
-        unset($enqueue_styles['woocommerce-smallscreen']);
-    }
-
-    return $enqueue_styles;
-}
-add_filter('woocommerce_enqueue_styles', 'woocommerce_dequeue_styles');
-
 /**
  * Add revisions to Products CPT
  * Won't store all the meta data but gives feedback in the revision logs
