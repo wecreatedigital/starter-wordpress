@@ -9,6 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Process\Process;
+use Symfony\Component\Filesystem\Filesystem;
 
 class Install extends Command
 {
@@ -91,6 +92,31 @@ class Install extends Command
         return true;
     }
 
+    private function IsWooCommerce(InputInterface $input, OutputInterface $output): bool
+    {
+        $output->writeln([
+            '',
+            "Is '{$this->appName}' a WooCommerce build?",
+            '',
+        ]);
+
+        $question = new ConfirmationQuestion(
+            '<question>Would you like to copy WooCommerce stubs?</question> (y/N)',
+            false
+        );
+
+        $question->setMaxAttempts(2);
+        $helper = $this->getHelper('question');
+
+        if ( ! $helper->ask($input, $output, $question)) {
+            $output->writeln('<info>Installation halted. Nothing has been done.</info>');
+
+            return false;
+        }
+
+        return true;
+    }
+
     private function stepOne(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
@@ -106,7 +132,6 @@ class Install extends Command
         ->setIdleTimeout(null)
         ->run();
     }
-
     private function stepTwo(InputInterface $input, OutputInterface $output)
     {
         $output->writeln([
@@ -125,6 +150,64 @@ class Install extends Command
 
     private function stepThree(InputInterface $input, OutputInterface $output)
     {
+        $directory = getcwd().'/web/app/themes/lark-child';
+
+        if ($this->IsWooCommerce($input, $output)) {
+
+            $output->writeln([
+                "<info>Updated composer.json with WooCommerce dependancies</>",
+            ]);
+
+            $filesystem = new Filesystem();
+            $filesystem->copy($directory.'/stub/woocommerce/composer.json', $directory.'/composer.json');
+
+
+            $output->writeln([
+                "<info>Add SageWoocommerce to namespaces</>",
+            ]);
+
+            $filePath = $directory.'/config/view.php';
+            file_put_contents(
+                $filePath,
+                str_replace(
+                  "// 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',",
+                  "'SageWoocommerce' => get_theme_file_path('/vendor/roots/sage-woocommerce/src/resources/views'),",
+                  file_get_contents($filePath))
+            );
+
+
+            $output->writeln([
+                "<info>Uncomment WooCommerce SASS</>",
+            ]);
+
+            $filePath = $directory.'/resources/assets/styles/app.scss';
+            file_put_contents(
+                $filePath,
+                str_replace(
+                  '// @import "woocommerce";',
+                  '@import "woocommerce";',
+                  file_get_contents($filePath))
+            );
+
+
+            $output->writeln([
+                "<info>Uncomment WooCommerce library functions</>",
+            ]);
+
+            $filePath = $directory.'/functions.php';
+            file_put_contents(
+                $filePath,
+                str_replace(
+                  "// 'Library/woocommerce',",
+                  "'Library/woocommerce',",
+                  file_get_contents($filePath))
+            );
+
+        }
+    }
+
+    private function stepFour(InputInterface $input, OutputInterface $output)
+    {
         $directory = getcwd().'/web/app/themes/lark';
 
         $output->writeln([
@@ -141,9 +224,11 @@ class Install extends Command
         ->run();
     }
 
-    private function stepFour(InputInterface $input, OutputInterface $output)
+    private function stepFive(InputInterface $input, OutputInterface $output)
     {
         $directory = getcwd().'/web/app/themes/lark-child';
+
+        // Storage::copy($directory.'/stub/woocommerce/composer.json', $directory.'composer.json');
 
         $output->writeln([
             "<info>Running: 'composer install' in child theme</>",
@@ -159,7 +244,7 @@ class Install extends Command
         ->run();
     }
 
-    private function stepFive(InputInterface $input, OutputInterface $output)
+    private function stepSix(InputInterface $input, OutputInterface $output)
     {
         $baseAppUrl = "{$this->appName}.test";
 
@@ -191,7 +276,7 @@ class Install extends Command
         ->run();
     }
 
-    private function stepSix(InputInterface $input, OutputInterface $output)
+    private function stepSeven(InputInterface $input, OutputInterface $output)
     {
         $directory = getcwd().'/web/app/themes/lark-child';
 
@@ -209,7 +294,7 @@ class Install extends Command
         ->run();
     }
 
-    private function stepSeven(InputInterface $input, OutputInterface $output)
+    private function stepEight(InputInterface $input, OutputInterface $output)
     {
         $baseAppUrl = "{$this->appName}";
         $directory = getcwd();

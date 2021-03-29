@@ -69,7 +69,8 @@
     "wpackagist-plugin/wp-super-cache": "*",
     "wpackagist-plugin/query-monitor": "*",
     "symfony/console": "^5.2",
-    "symfony/process": "^5.2"
+    "symfony/process": "^5.2",
+    "symfony/filesystem": "^5.2"
   },
   "autoload": {
       "psr-4": {
