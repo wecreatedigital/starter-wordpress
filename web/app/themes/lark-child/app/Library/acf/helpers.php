@@ -87,8 +87,8 @@ function edit_body_classes($classes)
                 $classes[] = 'has-'.str_replace('_', '-', $block['acf_fc_layout']);
             }
         }
-
-        return $classes;
     }
+
+    return $classes;
 }
 add_filter('body_class', 'edit_body_classes');
