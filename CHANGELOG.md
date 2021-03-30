@@ -303,6 +303,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - viewExists method wasn't added in recent update
 
+## 3.0.24 - 30-03-2021
+
+- Added new install param whereby stack stubs are available. For example, `php bin/console lark:install {sitename} --stack=tailwindcss`
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

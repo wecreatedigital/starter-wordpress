@@ -235,6 +235,11 @@ class Install extends Command
 
             $filesystem = new Filesystem();
 
+            $filesystem->remove([
+                getcwd().'/web/app/themes/lark-child/resources/assets/scripts',
+                getcwd().'/web/app/themes/lark-child/resources/assets/styles',
+            ]);
+
             $filesystem->mirror(
                 getcwd().'/config/stubs/tailwindcss/assets/scripts',
                 getcwd().'/web/app/themes/lark-child/resources/assets/scripts'
