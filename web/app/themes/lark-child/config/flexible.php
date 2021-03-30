@@ -14,6 +14,7 @@ return [
 
     'developers' => [
         'wecreatedigital.co.uk',
+        'vincomarketing.com',
     ],
 
     /*
