@@ -5,11 +5,12 @@ namespace App\Commands;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Process\Process;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Process\Process;
 
 class Install extends Command
 {
@@ -23,6 +24,14 @@ class Install extends Command
             'Please enter your application name.'
         );
 
+        $this->addOption(
+            'stack',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            'What stack should be used? i.e. Tailwindcss/Bootstrap',
+            false
+        );
+
         $this->setName('lark:install');
 
         $this->setDescription('Command that sequentially runs lark installation commands from Terminal.');
@@ -31,9 +40,10 @@ class Install extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         // Bit of added security, you cannot run this installation script when .env exists
-        if ( file_exists(getcwd().'/.env') ) {
-          (new SymfonyStyle($input, $output))->error('Cannot run this command when env exists.');
-          return Command::FAILURE;
+        if (file_exists(getcwd().'/.env')) {
+            (new SymfonyStyle($input, $output))->error('Cannot run this command when env exists.');
+
+            return Command::FAILURE;
         }
 
         $this->appName = $input->getArgument('app');
@@ -152,56 +162,88 @@ class Install extends Command
         $directory = getcwd().'/web/app/themes/lark-child';
 
         if ($this->IsWooCommerce($input, $output)) {
-
             $output->writeln([
-                "<info>Updated composer.json with WooCommerce dependancies</>",
+                '<info>Updated composer.json with WooCommerce dependancies</>',
             ]);
 
             $filesystem = new Filesystem();
             $filesystem->copy($directory.'/stub/woocommerce/composer.json', $directory.'/composer.json');
 
-
             $output->writeln([
-                "<info>Add SageWoocommerce to namespaces</>",
+                '<info>Add SageWoocommerce to namespaces</>',
             ]);
 
             $filePath = $directory.'/config/view.php';
             file_put_contents(
                 $filePath,
                 str_replace(
-                  "// 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',",
-                  "'SageWoocommerce' => get_theme_file_path('/vendor/roots/sage-woocommerce/src/resources/views'),",
-                  file_get_contents($filePath))
+                    "// 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',",
+                    "'SageWoocommerce' => get_theme_file_path('/vendor/roots/sage-woocommerce/src/resources/views'),",
+                    file_get_contents($filePath)
+                )
             );
 
-
             $output->writeln([
-                "<info>Uncomment WooCommerce SASS</>",
+                '<info>Uncomment WooCommerce SASS</>',
             ]);
 
             $filePath = $directory.'/resources/assets/styles/app.scss';
             file_put_contents(
                 $filePath,
                 str_replace(
-                  '// @import "woocommerce";',
-                  '@import "woocommerce";',
-                  file_get_contents($filePath))
+                    '// @import "woocommerce";',
+                    '@import "woocommerce";',
+                    file_get_contents($filePath)
+                )
             );
 
-
             $output->writeln([
-                "<info>Uncomment WooCommerce library functions</>",
+                '<info>Uncomment WooCommerce library functions</>',
             ]);
 
             $filePath = $directory.'/functions.php';
             file_put_contents(
                 $filePath,
                 str_replace(
-                  "// 'Library/woocommerce',",
-                  "'Library/woocommerce',",
-                  file_get_contents($filePath))
+                    "// 'Library/woocommerce',",
+                    "'Library/woocommerce',",
+                    file_get_contents($filePath)
+                )
+            );
+        }
+
+        if ( ! is_null($input->getOption('stack'))
+        && in_array($input->getOption('stack'), ['tailwindcss', 'tailwind'])) {
+            $output->writeln([
+                '<info>Copying TailwindCSS stubs</>',
+            ]);
+
+            file_put_contents(
+                getcwd().'/web/app/themes/lark-child/tailwind.config.js',
+                file_get_contents(getcwd().'/config/stubs/tailwindcss/tailwind.config.js')
             );
 
+            file_put_contents(
+                getcwd().'/web/app/themes/lark-child/package.json',
+                file_get_contents(getcwd().'/config/stubs/tailwindcss/package.json')
+            );
+
+            file_put_contents(
+                getcwd().'/web/app/themes/lark-child/webpack.mix.js',
+                file_get_contents(getcwd().'/config/stubs/tailwindcss/webpack.mix.js')
+            );
+
+            $filesystem = new Filesystem();
+
+            $filesystem->mirror(
+                getcwd().'/config/stubs/tailwindcss/assets/scripts',
+                getcwd().'/web/app/themes/lark-child/resources/assets/scripts'
+            );
+
+            $filesystem->mirror(
+                getcwd().'/config/stubs/tailwindcss/assets/styles',
+                getcwd().'/web/app/themes/lark-child/resources/assets/styles'
+            );
         }
     }
 
@@ -299,7 +341,7 @@ class Install extends Command
         $directory = getcwd();
 
         $output->writeln([
-            "<info>Creating env from sample</>",
+            '<info>Creating env from sample</>',
         ]);
 
         $filePath = getcwd().'/.env.example';
