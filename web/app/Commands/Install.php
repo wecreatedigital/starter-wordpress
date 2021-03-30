@@ -59,8 +59,7 @@ class Install extends Command
             '1. Create database and update .env',
             "2. Visit https://{$this->appName}.test/wp/wp-admin and follow installation process",
             "3. Switch over the theme to 'Lark Starter Child Theme'",
-            "4. Activate the 'Advanced Custom Fields PRO' plugin",
-            "5. See that the installation has worked by running 'yarn start' within the child theme directory",
+            "4. See that the installation has worked by running 'yarn start' within the child theme directory",
         ]);
 
         return Command::SUCCESS;
