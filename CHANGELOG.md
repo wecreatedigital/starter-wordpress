@@ -307,6 +307,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added new install param whereby stack stubs are available. For example, `php bin/console lark:install {sitename} --stack=tailwindcss`
 
+## 3.0.25 - 13-04-2021
+
+- Added `menu_for()` helper method
+- Added `fullAddress()` helper method
+- Added `headingSize()` helper method
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

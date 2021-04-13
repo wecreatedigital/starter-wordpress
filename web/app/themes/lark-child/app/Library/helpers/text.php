@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
 
@@ -56,5 +57,64 @@ if ( ! function_exists('viewExists')) {
     function viewExists(string $value)
     {
         return View::exists($value);
+    }
+}
+
+if ( ! function_exists('menu_for')) {
+    function menu_for(string $menuName)
+    {
+        $locations = get_nav_menu_locations();
+
+        if ( ! isset($locations[$menuName])) {
+            return collect([]);
+        }
+
+        $menu = wp_get_nav_menu_object($locations[$menuName]);
+        $menuItems = wp_get_nav_menu_items($menu->term_id);
+
+        $menuItems = collect($menuItems);
+
+        return collect($menuItems)->reject(function ($item) {
+            return ! empty($item->menu_item_parent);
+        })->transform(function ($menuItem, $key) use ($menuItems) {
+            $menuItem->childMenuItems = $menuItems->where('menu_item_parent', $menuItem->ID);
+
+            return $menuItem;
+        });
+    }
+}
+
+if ( ! function_exists('fullAddress')) {
+    function fullAddress()
+    {
+        $address = [
+            get_field('address_1', 'option'),
+            get_field('address_2', 'option'),
+            get_field('town', 'option'),
+            get_field('county', 'option'),
+            get_field('postcode', 'option'),
+            get_field('country', 'option'),
+        ];
+
+        return implode(', ', array_filter($address, function ($value) {
+            return ! is_null($value) && $value !== '';
+        }));
+    }
+}
+
+if ( ! function_exists('headingSize')) {
+    function headingSize(array $options)
+    {
+        if (isset($options['size'])
+        && array_key_exists($options['size'], Config::get('theme.fonts'))) {
+            extract(Config::get('theme.fonts.'.$options['size']));
+        }
+
+        return sprintf(
+            '%s %s %s',
+            $headingSize,
+            $options['margin'] ?? $margin,
+            $options['font'] ?? $font
+        );
     }
 }
