@@ -29,15 +29,22 @@ if( isset($background_image) ) {
     {{ 'fcb-' }}@sub('background_colour')
   @endsub
 ">
-  @hassub('container_type')
-    <div class="@sub('container_type')">
-  @else
-    <div class="container">
-  @endsub
+  {{ $beforeSlot }}
 
-  {!! $slot !!}
+  @if ( ! isset($noContainer))
+    <div class="
+    @isset($overrideContainerClasses)
+      {{ $overrideContainerClasses}}
+    @else
+      container
+    @endisset
 
-  @hassub('container_type')
+    @isset($containerClasses)
+      {{ $containerClasses}}
+    @endisset">
+      {!! $slot !!}
     </div>
-  @endsub
+  @endif
+
+  {{ $afterSlot }}
 </section>
