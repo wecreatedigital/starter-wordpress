@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Str;
@@ -103,18 +104,20 @@ if ( ! function_exists('fullAddress')) {
 }
 
 if ( ! function_exists('headingSize')) {
-    function headingSize(array $options)
+    function headingSize(string $size, array $options = [])
     {
-        if (isset($options['size'])
-        && array_key_exists($options['size'], Config::get('theme.fonts'))) {
-            extract(Config::get('theme.fonts.'.$options['size']));
+        if ( ! array_key_exists($size, Config::get('theme.fonts'))) {
+            dd("Cannot find heading options for '{$size}'");
         }
 
-        return sprintf(
-            '%s %s %s',
-            $headingSize,
-            $options['margin'] ?? $margin,
-            $options['font'] ?? $font
-        );
+        $heading = Config::get('theme.fonts.'.$size);
+
+        if ( ! empty($options)) {
+            foreach ($options as $key => $value) {
+                Arr::set($heading, $key, $value);
+            }
+        }
+
+        return implode(' ', Arr::flatten($heading));
     }
 }

@@ -53,6 +53,7 @@
     "roots/wordpress": "*",
     "advanced-custom-fields/advanced-custom-fields-pro": "*",
     "wpackagist-plugin/autoptimize": "*",
+    "wpackagist-plugin/wp-pagenavi": "*",
     "wpackagist-plugin/acf-content-analysis-for-yoast-seo": "*",
     "wpackagist-plugin/civic-cookie-control-8": "*",
     "wpackagist-plugin/classic-editor": "*",

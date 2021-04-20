@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Config;
+
 /**
  * Create content when theme activated
  *
@@ -101,6 +103,27 @@ function create_page_on_theme_activation()
     //         wp_insert_term($term, $taxonomy);
     //     }
     // }
+
+    for ($x = 0; $x <= 30; $x++) {
+        wp_insert_post(array(
+            'post_title' => 'Test Post: '.($x + 1),
+            'post_content' => 'post content goes here...',
+            'post_status' => 'publish',
+            'post_type' => 'post',
+            'post_excerpt' => 'Post excerpt goes here... Post excerpt goes here... Post excerpt goes here... Post excerpt goes here...',
+            'post_author' => get_current_user_id(),
+        ));
+    }
+
+    include_once(ABSPATH.'wp-admin/includes/plugin.php');
+
+    $pluginsToActivate = Config::get('theme.required-plugins');
+
+    if ( ! empty($pluginsToActivate)) {
+        foreach ($pluginsToActivate as $plugin) {
+            activate_plugin($plugin);
+        }
+    }
 
     // WP settings
     update_option('blogdescription', '');
