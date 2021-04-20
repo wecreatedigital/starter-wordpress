@@ -46,4 +46,8 @@ return [
         ],
     ],
 
+    'siteName' => get_bloginfo('name', 'display'),
+
+    'homeUrl' => get_home_url(),
+
 ];

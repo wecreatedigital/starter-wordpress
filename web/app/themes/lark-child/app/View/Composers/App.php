@@ -2,6 +2,8 @@
 
 namespace App\View\Composers;
 
+use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Config;
 use Roots\Acorn\View\Composer;
 
 class App extends Composer
@@ -22,28 +24,9 @@ class App extends Composer
      */
     public function with()
     {
-        return [
-            'siteName' => $this->siteName(),
-        ];
-    }
-
-    /**
-     * Returns the site name.
-     *
-     * @return string
-     */
-    public function siteName()
-    {
-        return get_bloginfo('name', 'display');
-    }
-
-    /**
-     * Returns the home URL.
-     *
-     * @return string
-     */
-    public function homeUrl()
-    {
-        return get_home_url();
+        return Arr::only(
+            Config::get('theme'),
+            ['siteName', 'homeUrl']
+        );
     }
 }
