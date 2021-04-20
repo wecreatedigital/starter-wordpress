@@ -117,10 +117,19 @@ function create_page_on_theme_activation()
 
     include_once(ABSPATH.'wp-admin/includes/plugin.php');
 
-    $pluginsToActivate = Config::get('theme.required-plugins');
+    $pluginsToActivate = Config::get('theme.auto-activiated-plugins');
+    $installedPlugins = get_plugins();
 
     if ( ! empty($pluginsToActivate)) {
         foreach ($pluginsToActivate as $plugin) {
+            if (is_plugin_active($$plugin)) {
+                continue;
+            }
+
+            if ( ! array_key_exists($plugin, $installedPlugins)) {
+                continue;
+            }
+
             activate_plugin($plugin);
         }
     }

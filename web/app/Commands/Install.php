@@ -67,9 +67,10 @@ class Install extends Command
         $output->writeln([
             '<info>Next steps...</>',
             '1. Create database and update .env',
-            "2. Visit https://{$this->appName}.test/wp/wp-admin and follow installation process",
-            "3. Switch over the theme to 'Lark Starter Child Theme'",
-            "4. See that the installation has worked by running 'yarn start' within the child theme directory",
+            '2. Optional: check `web/app/themes/lark-child/config/theme.php` for the Auto-Activiated Plugins',
+            "3. Visit https://{$this->appName}.test/wp/wp-admin and follow installation process",
+            "4. Switch over the theme to 'Lark Starter Child Theme'",
+            "5. See that the installation has worked by running 'yarn start' within the child theme directory",
         ]);
 
         return Command::SUCCESS;

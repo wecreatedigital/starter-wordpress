@@ -4,16 +4,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Required Plugins
+    | Auto Activiated Plugins
     |--------------------------------------------------------------------------
     |
     | List of plugins which get automatically activated upon
-    | switching/activating a theme. Some of these are required that's
-    | why they are specified within this list.
+    | switching/activating a theme. These plugins are generally used across
+    | every single Lark build which is why they are listed here.
+    |
+    | Please add or remove any when/if called for.
     |
     */
 
-    'required-plugins' => [
+    'auto-activiated-plugins' => [
         'mailgun/mailgun.php',
         'contact-form-7/wp-contact-form-7.php',
         'wp-pagenavi/wp-pagenavi.php',
