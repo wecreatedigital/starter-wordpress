@@ -1,0 +1,21 @@
+.content {
+  > :not(:last-child) {
+    @apply mb-15;
+  }
+
+  ul {
+    @apply list-disc ml-20;
+  }
+
+  p {
+    strong {
+      @apply font-bold;
+    }
+  }
+
+  p {
+    a {
+      @apply underline;
+    }
+  }
+}

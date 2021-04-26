@@ -11,29 +11,31 @@ module.exports = {
         },
         borderWidth: {
             DEFAULT: '1px',
-            '0': '0',
-            '1': '1px',
-            '2': '2px',
-            '3': '3px',
+            0: '0',
+            1: '1px',
+            2: '2px',
+            3: '3px',
         },
         fontFamily: {
         },
         fontSize: {
-          // base: ['18px', '30px'],
-          // '44': ['44px', {
-          //     lineHeight: '43px',
-          // }],
+            // base: ['18px', '30px'],
+            // '44': ['44px', {
+            //     lineHeight: '43px',
+            // }],
         },
         colors: {
-          'transparent': 'transparent',
-          'white': '#FFFFFF',
+            transparent: 'transparent',
+            white: '#FFFFFF',
         },
         spacing: {
             'full': '100%',
-            '0': '0px',
-            '5': '5px',
-            '10': '10px',
-            '15': '15px',
+            0: '0px',
+            5: '5px',
+            10: '10px',
+            15: '15px',
+            20: '20px',
+            25: '25px',
             // '30%': '30%',
         },
         extend: {

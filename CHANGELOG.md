@@ -319,6 +319,10 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Upon switching themes, auto activate plugins defined in the theme configuration file
 - Added ability to set dynamic heading values for both mobile and desktop where necessary using the `headingSize()` helper method
 
+## 3.0.27 - 26-04-2021
+
+- Added some default styling to the rendered wysiwyg text editor content
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!
