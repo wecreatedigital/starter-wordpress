@@ -111,7 +111,7 @@ class Install extends Command
         ]);
 
         $question = new ConfirmationQuestion(
-            '<question>Would you like to copy WooCommerce stubs?</question> (y/N)',
+            '<question>Would you like to setup WooCommerce?</question> (y/N)',
             false
         );
 
@@ -160,35 +160,100 @@ class Install extends Command
 
     private function stepThree(InputInterface $input, OutputInterface $output)
     {
+        $directory = getcwd().'/web/app/themes/lark';
+
+        $output->writeln([
+            "<info>Running: 'composer install' in parent theme</>",
+        ]);
+
+        (new Process([
+            'composer',
+            'install',
+        ]))
+        ->setTimeout(null)
+        ->setIdleTimeout(null)
+        ->setWorkingDirectory($directory)
+        ->run();
+    }
+
+    private function stepFour(InputInterface $input, OutputInterface $output)
+    {
         $directory = getcwd().'/web/app/themes/lark-child';
+
+        // Storage::copy($directory.'/stub/woocommerce/composer.json', $directory.'composer.json');
+
+        $output->writeln([
+            "<info>Running: 'composer install' in child theme</>",
+        ]);
+
+        (new Process([
+            'composer',
+            'install',
+        ]))
+        ->setTimeout(null)
+        ->setIdleTimeout(null)
+        ->setWorkingDirectory($directory)
+        ->run();
+    }
+
+    private function stepFive(InputInterface $input, OutputInterface $output)
+    {
+        $theme_directory = getcwd().'/web/app/themes/lark-child';
 
         if ($this->IsWooCommerce($input, $output)) {
             $output->writeln([
-                '<info>Updated composer.json with WooCommerce dependancies</>',
+                '<info>Requiring https://github.com/generoi/sage-woocommerce</info>',
             ]);
 
-            $filesystem = new Filesystem();
-            $filesystem->copy($directory.'/stub/woocommerce/composer.json', $directory.'/composer.json');
+            (new Process([
+                'composer',
+                'require',
+                'generoi/sage-woocommerce',
+            ]))
+            ->setTimeout(null)
+            ->setIdleTimeout(null)
+            ->setWorkingDirectory($theme_directory)
+            ->run();
 
             $output->writeln([
-                '<info>Add SageWoocommerce to namespaces</>',
+                '<info>Running Roots Acorn commands</>',
             ]);
 
-            $filePath = $directory.'/config/view.php';
-            file_put_contents(
-                $filePath,
-                str_replace(
-                    "// 'MyPlugin' => WP_PLUGIN_DIR . '/my-plugin/resources/views',",
-                    "'SageWoocommerce' => get_theme_file_path('/vendor/roots/sage-woocommerce/src/resources/views'),",
-                    file_get_contents($filePath)
-                )
-            );
+            (new Process([
+                'wp',
+                'acorn',
+                'package:discover',
+            ]))
+            ->setTimeout(null)
+            ->setIdleTimeout(null)
+            ->setWorkingDirectory($theme_directory)
+            ->run();
+
+            (new Process([
+                'wp',
+                'acorn',
+                'vendor:publish --tag="WooCommerce Templates"',
+            ]))
+            ->setTimeout(null)
+            ->setIdleTimeout(null)
+            ->setWorkingDirectory($theme_directory)
+            ->run();
+
+            (new Process([
+                'wp',
+                'acorn',
+                'vendor:publish --tag="WooCommerce Template Hook Overrides"',
+            ]))
+            ->setTimeout(null)
+            ->setIdleTimeout(null)
+            ->setWorkingDirectory($theme_directory)
+            ->run();
 
             $output->writeln([
                 '<info>Uncomment WooCommerce SASS</>',
             ]);
 
-            $filePath = $directory.'/resources/assets/styles/app.scss';
+            $filePath = $theme_directory.'/resources/assets/styles/app.scss';
             file_put_contents(
                 $filePath,
                 str_replace(
@@ -202,7 +267,7 @@ class Install extends Command
                 '<info>Uncomment WooCommerce library functions</>',
             ]);
 
-            $filePath = $directory.'/functions.php';
+            $filePath = $theme_directory.'/functions.php';
             file_put_contents(
                 $filePath,
                 str_replace(
@@ -251,44 +316,6 @@ class Install extends Command
                 getcwd().'/web/app/themes/lark-child/resources/assets/styles'
             );
         }
-    }
-
-    private function stepFour(InputInterface $input, OutputInterface $output)
-    {
-        $directory = getcwd().'/web/app/themes/lark';
-
-        $output->writeln([
-            "<info>Running: 'composer install' in parent theme</>",
-        ]);
-
-        (new Process([
-            'composer',
-            'install',
-        ]))
-        ->setTimeout(null)
-        ->setIdleTimeout(null)
-        ->setWorkingDirectory($directory)
-        ->run();
-    }
-
-    private function stepFive(InputInterface $input, OutputInterface $output)
-    {
-        $directory = getcwd().'/web/app/themes/lark-child';
-
-        // Storage::copy($directory.'/stub/woocommerce/composer.json', $directory.'composer.json');
-
-        $output->writeln([
-            "<info>Running: 'composer install' in child theme</>",
-        ]);
-
-        (new Process([
-            'composer',
-            'install',
-        ]))
-        ->setTimeout(null)
-        ->setIdleTimeout(null)
-        ->setWorkingDirectory($directory)
-        ->run();
     }
 
     private function stepSix(InputInterface $input, OutputInterface $output)
