@@ -19,6 +19,10 @@ return [
         'mailgun/mailgun.php',
         'contact-form-7/wp-contact-form-7.php',
         'wp-pagenavi/wp-pagenavi.php',
+
+        // Used for duplicating pages as well as the ACF on the page,
+        // very useful for when copying the homepage on dev
+        // 'duplicate-page/duplicatepage.php',
     ],
 
     /*
@@ -35,19 +39,31 @@ return [
 
     'fonts' => [
         'h1' => [
-            'mobile' => [
-                'size' => 'text-30',
-                'margin' => 'mb-30',
-                'font' => 'font-cardo font-weight-bold',
-            ],
-            'desktop' => [
-                'size' => 'md:text-44',
-            ],
+            'size' => '',
+            'font' => '',
+            'margin' => '',
+        ],
+
+        'h2' => [
+            'size' => '',
+            'font' => '',
+            'margin' => '',
         ],
     ],
 
     'siteName' => get_bloginfo('name', 'display'),
 
     'homeUrl' => get_home_url(),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Heading for SEO
+    |--------------------------------------------------------------------------
+    |
+    | Defining the very first heading <h1> tag.
+    |
+    */
+
+    'h' => 1,
 
 ];

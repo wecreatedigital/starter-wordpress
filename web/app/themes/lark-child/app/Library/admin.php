@@ -79,3 +79,11 @@ function remove_excerpt_link($more)
     return '...';
 }
 add_filter('excerpt_more', 'remove_excerpt_link');
+
+/**
+ * Add excerpt to pages
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ */
+add_post_type_support( 'page', 'excerpt' );

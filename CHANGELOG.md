@@ -323,6 +323,15 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added some default styling to the rendered wysiwyg text editor content
 
+## 3.1 - 29-07-2021
+
+- Added more custom, dynamic heading size options support, including it's own component
+- Add excerpt support to page post type
+- Added descriptions to text helpers within `helpers/text.php`
+- Updated ACF dynamic select file since those variables are always used in Lark sites
+- Updated shared global variables
+- Added `link.blade.php` file which dynamically changes based on link type passed
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
 - Add more customisation!

@@ -16,6 +16,7 @@ class FlexibleContainer extends Composer
         'layouts.flexible',
         'components.blocks.container',
         'flexible.blocks.*',
+        'components.heading',
     ];
 
     /**
@@ -35,14 +36,6 @@ class FlexibleContainer extends Composer
 
     private function object()
     {
-        if (isset($GLOBALS['term'])) {
-            return get_term_by(
-                'slug',
-                get_query_var('term'),
-                get_query_var('taxonomy')
-            );
-        }
-
         return get_queried_object();
     }
 }

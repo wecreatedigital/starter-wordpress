@@ -1,113 +1,87 @@
 <?php
+
+
 /**
- * Example dynamic select box
+ * ACF - define all alignment options here.
  *
- * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
+ * @author Christopher Kelker
+ * @date   29-07-2021
  */
- function acf_load_color_field_choices($field)
- {
+$alignmentOptions = function ($field) {
+    // reset choices
+    $field['choices'] = array(
+        'left' => 'Left',
+        'center' => 'Centre',
+        'right' => 'Right',
+    );
 
-     // reset choices
-     $field['choices'] = array();
+    // return the field
+    return $field;
+};
 
-     // get the textarea value from options page without any formatting
-     $choices = get_field('my_select_values', 'option', false);
+// Default Alignment Options
+add_filter('acf/load_field/name=alignment', $alignmentOptions);
+add_filter('acf/load_field/name=links_alignment', $alignmentOptions);
+add_filter('acf/load_field/name=text_alignment', $alignmentOptions);
+add_filter('acf/load_field/name=heading_alignment', $alignmentOptions);
 
-     // explode the value so that each line is a new array piece
-     $choices = explode("\n", $choices);
+/**
+ * ACF - define all theme colours here.
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ */
+$colourOptions = function ($field) {
+    // reset choices
+    $field['choices'] = array(
+        'default' => '-- SELECT --',
+        'transparent' => 'Transparent', // transparent
+    );
 
-     // remove any unwanted white space
-     $choices = array_map('trim', $choices);
+    return $field;
+};
 
-     // loop through array and add to field 'choices'
-     if (is_array($choices)) {
-         foreach ($choices as $choice) {
-             $field['choices'][ $choice ] = $choice;
-         }
-     }
+// Default Colours Options
+add_filter('acf/load_field/name=heading_colour', $colourOptions);
+add_filter('acf/load_field/name=text_colour', $colourOptions);
+add_filter('acf/load_field/name=background_colour', $colourOptions);
+add_filter('acf/load_field/name=colour', $colourOptions);
 
-     // return the field
-     return $field;
- }
- // add_filter('acf/load_field/name=color', 'acf_load_color_field_choices');
+/**
+ * ACF - define all heading sizes here.
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ */
+add_filter('acf/load_field/name=heading_size', function ($field) {
+    // reset choices
+    $field['choices'] = array(
+        'default' => '-- SELECT --',
+        'h1' => 'Heading 1',
+        'h2' => 'Heading 2',
+        'h3' => 'Heading 3',
+        'h4' => 'Heading 4',
+        'h5' => 'Heading 5',
+    );
 
- /**
-  * FCB padding
-  *
-  * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
-  */
-  function acf_load_padding_override_choices($field)
-  {
+    // return the field
+    return $field;
+});
 
-      // reset choices
-      $field['choices'] = array(
-          'y' => 'Top and bottom',
-          'x' => 'Left and right',
-          't' => 'Top',
-          'b' => 'Bottom',
-          'a' => 'All sides',
-          'n' => 'None',
-      );
+/**
+ * ACF - define all link types here.
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ */
+add_filter('acf/load_field/name=link_type', function ($field) {
+    // reset choices
+    $field['choices'] = array(
+        'default' => '-- SELECT --',
+        'primary' => 'Primary',
+        'secondary' => 'Secondary',
+    );
 
-      // return the field
-      return $field;
-  }
-  add_filter('acf/load_field/name=padding_override', 'acf_load_padding_override_choices');
-
- /**
-  * FCB offset
-  *
-  * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
-  */
-  function acf_load_column_offset_choices($field)
-  {
-      // reset choices
-      $field['choices'] = array(
-          'left' => 'Left',
-          'center' => 'Centre',
-          'right' => 'Right',
-      );
-
-      // return the field
-      return $field;
-  }
-  add_filter('acf/load_field/name=column_offset', 'acf_load_column_offset_choices');
-
- /**
-  * FCB container
-  *
-  * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
-  */
-  function acf_load_container_type_choices($field)
-  {
-
-      // reset choices
-      $field['choices'] = array(
-          'container' => 'Fixed',
-          'container-fluid' => 'Full-width',
-      );
-
-      // return the field
-      return $field;
-  }
-  add_filter('acf/load_field/name=container_type', 'acf_load_container_type_choices');
-
- /**
-  * FCB background colour
-  *
-  * https://www.advancedcustomfields.com/resources/dynamically-populate-a-select-fields-choices/
-  */
-  function acf_load_background_colour_choices($field)
-  {
-
-      // reset choices
-      $field['choices'] = array(
-          'primary' => 'Primary',
-          'secondary' => 'Secondary',
-          'white' => 'White',
-      );
-
-      // return the field
-      return $field;
-  }
-  add_filter('acf/load_field/name=background_colour', 'acf_load_background_colour_choices');
+    // return the field
+    return $field;
+});

@@ -61,6 +61,14 @@ if ( ! function_exists('viewExists')) {
     }
 }
 
+/**
+ * Return a friendly collection based on the menu name passed.
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ * @param  string $menuName
+ * @return \Illuminate\Support\Collection
+ */
 if ( ! function_exists('menu_for')) {
     function menu_for(string $menuName)
     {
@@ -85,6 +93,13 @@ if ( ! function_exists('menu_for')) {
     }
 }
 
+/**
+ * Combine the ACF option values together and filter out the empty values.
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ * @return string
+ */
 if ( ! function_exists('fullAddress')) {
     function fullAddress()
     {
@@ -103,6 +118,19 @@ if ( ! function_exists('fullAddress')) {
     }
 }
 
+/**
+ * Pass a heading tag i.e. h1,h2,h3,h4,h5 and if a key exists within
+ * the theme/fonts configuration file then we should return the value.
+ *
+ * The second argument is an optional array in which accepts the dot syntax;
+ * replacing the value if the key matches i.e. `['desktop.font' => 'font-custom']`
+ *
+ * @author Christopher Kelker
+ * @date   29-07-2021
+ * @param  string     $string
+ * @param  array      $options
+ * @return mixed
+ */
 if ( ! function_exists('headingSize')) {
     function headingSize(string $size, array $options = [])
     {

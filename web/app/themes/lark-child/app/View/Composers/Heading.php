@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Config;
 use Roots\Acorn\View\Composer;
 
-class App extends Composer
+class Heading extends Composer
 {
     /**
      * List of views served by this composer.
@@ -14,7 +14,7 @@ class App extends Composer
      * @var array
      */
     protected static $views = [
-        '*',
+        'components.heading',
     ];
 
     /**
@@ -22,11 +22,11 @@ class App extends Composer
      *
      * @return array
      */
-    protected function with()
+    public function with()
     {
         return Arr::only(
             Config::get('theme'),
-            ['siteName', 'homeUrl']
+            ['h']
         );
     }
 }
