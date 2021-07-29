@@ -1,13 +1,11 @@
-@component('components.blocks.container', [
-  'classes' => 'fcb-text-block',
-])
+@component('components.blocks.container')
 
-<div class="row">
-  <div class="fcb-col-@sub('column_offset') @hassub('align_text'){{ 'fcb-align-text' }}@endsub col-md-8">
-    @include('flexible.content', [
-      'classes' => ''
-    ])
+  <div class="max-w-800 flex flex-col {{ $alignment }}">
+    @include('flexible.partials.heading')
+
+    @include('flexible.partials.text')
+
+    @include('flexible.partials.links')
   </div>
-</div>
 
 @endcomponent
