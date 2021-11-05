@@ -38,6 +38,7 @@ collect([
     'Library/acf/general',
     'Library/acf/helpers',
     'Library/acf/options',
+    'Library/acf/override-padding',
     'Library/helpers/text',
     'Library/social/index',
     'Library/social/instagram',
@@ -56,6 +57,9 @@ collect([
     'Library/seo',
     'Library/speed',
     // 'Library/woocommerce',
+    // 'Library/stripe',
+    // 'Library/google-maps',
+    'Library/tinymce',
 ])
     ->each(function ($file) {
         $file = "app/{$file}.php";

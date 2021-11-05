@@ -332,6 +332,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Updated shared global variables
 - Added `link.blade.php` file which dynamically changes based on link type passed
 
+## 3.3 - 05-11-2021
+
+- Override padding is now included by default
+- TinyMCE Advanced plugin is now included by default
+- GoogleMaps API script - optional
+- Stripe webhook - optional
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
-- Add more customisation!
