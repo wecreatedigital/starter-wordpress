@@ -339,5 +339,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 - GoogleMaps API script - optional
 - Stripe webhook - optional
 
+## 3.3.1 - 08-11-2021
+
+- Included some default styling for both list and ordered list HTMl elements
+
 ## To do
 - Create sample WooCommerce, SASS and blade code

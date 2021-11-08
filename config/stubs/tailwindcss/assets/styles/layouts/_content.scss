@@ -4,7 +4,20 @@
   }
 
   ul {
-    @apply list-disc ml-20;
+    @apply list-disc;
+  }
+
+  ol {
+    @apply list-decimal;
+  }
+
+  ul,
+  ol {
+    @apply ml-20;
+
+    li:not(:last-child) {
+      margin-bottom: 20px;
+    }
   }
 
   p {
@@ -16,6 +29,11 @@
   p {
     a {
       @apply underline;
+
+      &:hover,
+      &:focus {
+        @apply no-underline;
+      }
     }
   }
 }
