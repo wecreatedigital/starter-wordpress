@@ -20,6 +20,7 @@ return [
         'contact-form-7/wp-contact-form-7.php',
         'wp-pagenavi/wp-pagenavi.php',
         'tinymce-advanced/tinymce-advanced.php',
+        'go-live-update-urls/go-live-update-urls.php',
 
         // Used for duplicating pages as well as the ACF on the page,
         // very useful for when copying the homepage on dev
