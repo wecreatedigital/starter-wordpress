@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * ACF - define all alignment options here.
  *
@@ -35,6 +34,8 @@ $colourOptions = function ($field) {
     // reset choices
     $field['choices'] = array(
         'default' => '-- SELECT --',
+        'white' => 'White', // #ffffff
+        'black' => 'Black', // #000000
         'transparent' => 'Transparent', // transparent
     );
 
