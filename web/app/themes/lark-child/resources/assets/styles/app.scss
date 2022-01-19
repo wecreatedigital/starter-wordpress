@@ -1,43 +1,18 @@
-/** Config */
-@import 'config/variables';
-@import 'config/external';
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
 
-/** Accessibility */
-@import 'accessibility';
+// Components
+@import 'components/hamburger';
+@import 'components/button';
 
-/** Common */
-@import 'common/global';
-@import 'common/mixins';
+// Blocks
+// @import 'blocks/blog';
+// @import 'blocks/contact';
+// @import 'blocks/newsletter';
+// @import 'blocks/testimonial';
 
-/** Components */
-@import 'components';
+// @import 'layouts/content';
 
-/** Partials */
-@import 'partials/header';
+@import 'tailwindcss/utilities';
 
-/** Pages */
-@import 'pages/home';
-
-/** Partials */
-@import 'third-party/cf7';
-@import 'third-party/wp-classes';
-// @import 'third-party/wp';
-
-/** Flexible content blocks **/
-@import "flexible/common/main";
-@import "flexible/common/padding";
-@import "flexible/accordion";
-@import "flexible/contact";
-@import "flexible/donate";
-@import "flexible/gallery";
-@import "flexible/hero";
-@import "flexible/icon";
-@import "flexible/image";
-@import "flexible/instagram";
-@import "flexible/latest";
-@import "flexible/left-image-right-text";
-@import "flexible/quote";
-@import "flexible/text";
-
-/** WooCommerce - enable if needed **/
-// @import "woocommerce";
+// @import '~@splidejs/splide/dist/css/splide.min.css';

@@ -1,4 +1,9 @@
 @layouts('page_content_block', $object)
+  @php
+    global $layoutCount;
+    $layoutCount = count(get_field('page_content_block', $object));
+  @endphp
+
   @layout(get_row_layout())
     @php
       $blockFilename = str_of(get_row_layout())
@@ -13,6 +18,5 @@
     @endif
   @endlayout
 
-  @php $h++; @endphp
   @php $uniqueId++; @endphp
 @endlayouts

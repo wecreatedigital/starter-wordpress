@@ -1,0 +1,9 @@
+.fcb-testimonial {
+  ul.splide__pagination > li button {
+    @apply bg-transparent;
+
+    &.is-active {
+      // @apply bg-pink;
+    }
+  }
+}

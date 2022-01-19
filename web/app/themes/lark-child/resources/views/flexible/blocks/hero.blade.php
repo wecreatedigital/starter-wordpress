@@ -1,7 +1,9 @@
 @component('components.blocks.container')
 
-  <div class="max-w-825 flex flex-col {{ $alignment }}">
-    @include('flexible.partials.heading')
+  <div>
+    @include('flexible.partials.heading', [
+      'default' => 'h1',
+    ])
 
     @include('flexible.partials.text')
 

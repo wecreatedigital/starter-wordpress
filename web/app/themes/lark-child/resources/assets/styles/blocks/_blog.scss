@@ -1,0 +1,56 @@
+.wp-pagenavi {
+  @apply relative;
+
+  .pages {
+    @apply hidden;
+  }
+
+  span.current {
+    @apply border-0 text-pink;
+  }
+
+  a.page,
+  span.extend {
+    @apply border-0;
+  }
+
+  span.current,
+  a.page,
+  span.extend {
+    line-height: 20px;
+
+    @apply p-0 mx-5 font-normal text-24 inline-block;
+  }
+
+  a.previouspostslink,
+  a.nextpostslink {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    top: 3px;
+
+    @apply border-0 inline-block relative;
+  }
+
+  a.previouspostslink::before,
+  a.nextpostslink::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+
+    @apply bg-center bg-cover bg-no-repeat absolute top-50% left-50% transform -translate-x-50% -translate-y-50%;
+  }
+
+  a.previouspostslink::before {
+    background-image: url('../images/arrow-left.png');
+  }
+
+  a.nextpostslink::before {
+    background-image: url('../images/arrow-right.png');
+  }
+
+  a.first,
+  a.last {
+    @apply hidden;
+  }
+}

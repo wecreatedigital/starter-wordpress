@@ -1,18 +1,28 @@
+@php
+  global $layoutCount;
+@endphp
+
 <section class="fcb
 
   @isset($classes)
     {{ $classes }}
   @endisset
 
-  @hassub('background_colour')
-    bg-@sub('background_colour')
-  @endsub
+  @if ( ! isset($noBackgroundColour) && $noBackgroundColour != true)
+    @hassub('background_colour')
+      bg-@sub('background_colour')
+    @endsub
+  @endif
 
-  @if ($overridePadding)
+  @if ($overridePaddingFieldValue)
+    {{ $overridePaddingFieldValue }}
+  @elseif ($overridePadding)
     {{ $overridePadding }}
+  @elseif ($paddingOverride)
+    {{ $paddingOverride }}
   @else
-    @if (in_array(get_sub_field('background_colour'), ['default', 'white']))
-      {{-- TODO:  default padding for when the default colour is selected --}}
+    @if (in_array(get_sub_field('background_colour'), ['default', 'white', false]))
+      py-25 md:py-50 my-25 md:my-50
     @else
       {{ $defaultPadding }}
     @endif
@@ -21,6 +31,10 @@
   @if(get_sub_field('has_overlay') == true )
     blend
   @endif
+
+  @isset(get_sub_field('background_image')['ID'] )
+    bg-center bg-cover bg-no-repeat
+  @endisset
 "
 @if( isset($style) )
   style="{{ $style }}"
@@ -33,11 +47,11 @@
   {{ $beforeSlot }}
 
   <div class="
-  @isset($overrideContainerClasses)
+  @if(isset($overrideContainerClasses) && ! empty($overrideContainerClasses))
     {{ $overrideContainerClasses}}
   @else
     container max-w-screen-xl
-  @endisset
+  @endif
 
   @isset($containerClasses)
     {{ $containerClasses}}

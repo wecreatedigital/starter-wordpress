@@ -1,10 +1,16 @@
-<time class="updated" datetime="{{ get_post_time('c', true) }}">
-  {{ get_the_date() }}
-</time>
+<div class="flex flex-row font-spectral text-18">
+  @php $terms = collect(get_the_terms($post->ID, 'category')); @endphp
 
-<p class="byline author vcard m-0">
-  <span>{{ __('By', 'sage') }}</span>
-  <a href="{{ get_author_posts_url(get_the_author_meta('ID')) }}" rel="author" class="fn">
-    {{ get_the_author() }}
-  </a>
-</p>
+  @if ( ! $terms->isEmpty())
+    @php $term = $terms->shift(); @endphp
+    <a href="{{ get_term_link($term->term_id) }}" class="text-teal underline font-bold">
+      {{ $term->name }}
+    </a>
+  @endif
+
+  <span class="mx-5 text-current">-</span>
+
+  <time datetime="{{ get_post_time('c', true) }}" pubdate="updated">
+    {{ gmdate('j F Y', get_post_timestamp()) }}
+  </time>
+</div>

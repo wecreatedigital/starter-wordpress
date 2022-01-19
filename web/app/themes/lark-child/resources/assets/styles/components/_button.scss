@@ -1,0 +1,9 @@
+.button {
+  @apply flex items-center justify-center;
+
+  padding-left: 28px;
+  padding-right: 28px;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  line-height: 16px !important;
+}

@@ -1,0 +1,78 @@
+.content {
+  > :not(:last-child) {
+    @apply mb-15;
+  }
+  p {
+    @apply text-base;
+
+    strong {
+      @apply font-bold;
+    }
+  }
+
+  p {
+    a {
+      @apply underline;
+    }
+  }
+
+  table {
+    @apply table-auto;
+
+    tbody {
+      tr {
+        td {
+           vertical-align: top;
+        }
+      }
+
+      tr:first-child {
+        td {
+          @apply border-1 border-teal py-20 px-30 bg-teal text-white font-bitter;
+        }
+      }
+
+      tr:not(:first-child) {
+        td {
+          @apply py-20 px-30 text-black;
+        }
+      }
+
+      tr:not(:last-child):not(:first-child) {
+        td {
+          @apply border-b-1 py-20 px-30 text-black border-grey-dark;
+        }
+      }
+    }
+  }
+
+  ul {
+    @apply list-none;
+
+    margin-left: 50px;
+
+    li {
+      @apply relative;
+
+      line-height: 25px;
+
+      &:not(:last-child) {
+        margin-bottom: 20px;
+      }
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 10px;
+        left: -20px;
+        width: 10px;
+        height: 10px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: center;
+      	background-size: contain;
+        background-image: url('../images/bulletpoint.png');
+      }
+    }
+  }
+}

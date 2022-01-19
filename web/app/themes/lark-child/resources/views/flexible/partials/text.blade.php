@@ -29,14 +29,19 @@
       @isset($spacing)
         {{ $spacing }}
       @else
-        space-y-18
+        space-y-25
       @endisset
       {{ $classes }}
       text-@sub('text_colour')
       {{ $alignmentClasses }}"
     >
       @hassub('text')
-        @sub('text')
+      @php
+        $text = \Illuminate\Support\Str::of(get_sub_field('text'))
+        ->replace('<table', '<div class="overflow-x-scroll"><table')
+        ->replace('</table>', '</table></div>');
+      @endphp
+        {!! $text !!}
       @endsub
     </div>
 

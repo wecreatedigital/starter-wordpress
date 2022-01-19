@@ -1,0 +1,11 @@
+.fcb-contact {
+  .wpcf7-form-control-wrap {
+    @apply block;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    @apply py-12 w-full;
+  }
+}
