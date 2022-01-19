@@ -343,5 +343,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Included some default styling for both list and ordered list HTMl elements
 
+## 3.3.2 - 19-01-2022
+
+- Default added new ACF field to toggle displaying a primary navigation menu item as a button
+
 ## To do
 - Create sample WooCommerce, SASS and blade code
