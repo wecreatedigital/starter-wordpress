@@ -27,6 +27,8 @@ web/.htaccess
 
 # Composer
 /vendor
+web/app/themes/lark/vendor
+web/app/themes/lark-child/vendor
 composer.lock
 
 # WP-CLI
