@@ -350,5 +350,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Added the 'Go Live' plugin by default
 - Added some default blade views based on recent Lark sites
 
+## 3.5 - 01-02-2022
+
+- Removed instances of Bootstrap 4, Popperjs and FontAwesome
+
 ## To do
 - Create sample WooCommerce
