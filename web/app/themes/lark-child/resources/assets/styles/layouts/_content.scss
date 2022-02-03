@@ -28,7 +28,7 @@
 
       tr:first-child {
         td {
-          @apply border-1 border-teal py-20 px-30 bg-teal text-white font-bitter;
+          @apply border-1 border-black py-20 px-30 bg-black text-white font-bitter;
         }
       }
 
@@ -40,7 +40,7 @@
 
       tr:not(:last-child):not(:first-child) {
         td {
-          @apply border-b-1 py-20 px-30 text-black border-grey-dark;
+          @apply border-b-1 py-20 px-30 text-black border-black;
         }
       }
     }

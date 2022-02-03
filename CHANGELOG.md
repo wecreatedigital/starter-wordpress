@@ -355,5 +355,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Removed instances of Bootstrap 4, Popperjs and FontAwesome
 - Updated Roots Sage parent theme
 
+## 3.6 - 03-02-2022
+
+- FIX: latest Roots Sage theme was not working, waiting until stable release
+
 ## To do
 - Create sample WooCommerce

@@ -6,7 +6,7 @@
   }
 
   span.current {
-    @apply border-0 text-pink;
+    @apply border-0 text-black;
   }
 
   a.page,
@@ -19,7 +19,7 @@
   span.extend {
     line-height: 20px;
 
-    @apply p-0 mx-5 font-normal text-24 inline-block;
+    @apply p-0 mx-5 font-normal inline-block;
   }
 
   a.previouspostslink,

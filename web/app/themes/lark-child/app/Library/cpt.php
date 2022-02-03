@@ -17,7 +17,7 @@ $taxonomies = [
 $cpts = [
     'testimonial' => [
         'public' => false,
-        'taxonomies' => ['author', 'category'],
+        'taxonomies' => ['author'],
         'supports' => ['title', 'editor', 'thumbnail', 'page-attributes'],
     ],
 
@@ -117,6 +117,14 @@ foreach ($cpts as $cpt => $cpt_options) {
             'filter_items_list' => __("Filter {$uc_post_type_plural}", 'text_domain'),
         );
 
+        $rewriteRules = [
+            'with_front' => false,
+        ];
+
+        if (isset($cpt_options['rewrite'])) {
+            $rewriteRules = array_merge($rewriteRules, $cpt_options['rewrite']);
+        }
+
         $args = array(
             'label' => __('post_type', 'text_domain'),
             'description' => __($cpt, 'text_domain'),
@@ -131,10 +139,7 @@ foreach ($cpts as $cpt => $cpt_options) {
             'menu_position' => 5,
             'can_export' => true,
             'has_archive' => true,
-            'rewrite' => [
-                // 'slug' => 'case-studies',
-                'with_front' => false,
-            ],
+            'rewrite' => $rewriteRules,
 
             // --- PUBLIC OPTIONS ---
             'exclude_from_search' => isset($cpt_options['public']) ? $cpt_options['public'] : false,

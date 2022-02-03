@@ -14,7 +14,7 @@ class FlexibleContainer extends Composer
      */
     protected static $views = [
         'layouts.flexible',
-        'components.blocks.container',
+        'container',
         'flexible.blocks.*',
         'components.heading',
     ];
@@ -31,11 +31,48 @@ class FlexibleContainer extends Composer
     {
         return array_merge(Config::get('flexible'), [
             'object' => $this->object(),
+            'overridePaddingFieldValue' => $this->overridePadding(),
         ]);
     }
 
     private function object()
     {
         return get_queried_object();
+    }
+
+    public function overridePadding()
+    {
+        if (
+          empty(get_sub_field('padding_override'))
+          || is_null(get_sub_field('padding_override'))
+          || get_sub_field('padding_override') == 'default'
+        ) {
+            return '';
+        }
+
+        switch (get_sub_field('padding_override')) {
+            case('t'):
+                $paddingOverride = 'pb-0 pt-50 md:pt-100';
+
+                break;
+            case('b'):
+                $paddingOverride = 'pt-0 pb-50 md:pb-100';
+
+                break;
+            case('y'):
+                $paddingOverride = 'py-50 md:py-100';
+
+                break;
+            case('n'):
+                $paddingOverride = 'p-0';
+
+                break;
+            default:
+                $paddingOverride = '';
+
+                break;
+        }
+
+        return $paddingOverride;
     }
 }

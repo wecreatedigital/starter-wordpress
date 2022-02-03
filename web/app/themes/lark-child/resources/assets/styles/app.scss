@@ -6,13 +6,13 @@
 @import 'components/button';
 
 // Blocks
-// @import 'blocks/blog';
-// @import 'blocks/contact';
-// @import 'blocks/newsletter';
-// @import 'blocks/testimonial';
+@import 'blocks/blog';
+@import 'blocks/contact';
+@import 'blocks/newsletter';
+@import 'blocks/testimonial';
 
-// @import 'layouts/content';
+@import 'layouts/content';
 
 @import 'tailwindcss/utilities';
 
-// @import '~@splidejs/splide/dist/css/splide.min.css';
+@import '~@splidejs/splide/dist/css/splide.min.css';

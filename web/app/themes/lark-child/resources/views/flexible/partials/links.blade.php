@@ -25,7 +25,7 @@
 @endphp
 
 @if ($linksCount)
-  <ul class="flex flex-wrap flex-row items-center justify-{{ $linksAlignment }} -mx-15 {{ $spacing ?? '-mb-15 mt-10' }} text-16 font-spectral">
+  <ul class="flex flex-wrap flex-row items-center justify-{{ $linksAlignment }} -mx-15 {{ $spacing ?? '-mb-15 mt-30' }}">
     @fields('links')
       @group('link')
         @hassub('link')
@@ -34,6 +34,7 @@
                     style="{{ get_sub_field('link_type') }}"
                     target="{{ get_sub_field('link')['target'] }}"
                     colour="{{ get_sub_field('colour') }}"
+                    bordered="{{ isset($bordered) ? $bordered : false }}"
             >
               @sub('link', 'title')
             </x-link>

@@ -1,9 +1,9 @@
-@component('components.blocks.container')
+@component('components.container')
+  'overridePaddingFieldValue' => ' ',
+])
 
-  <div>
-    @include('flexible.partials.heading', [
-      'default' => 'h1',
-    ])
+  <div class="max-w-1000 flex flex-col {{ $alignment }}">
+    @include('flexible.partials.heading')
 
     @include('flexible.partials.text')
 

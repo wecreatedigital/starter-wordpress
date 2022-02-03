@@ -1,40 +1,25 @@
-@component('components.blocks.container', [
-  'classes' => 'overflow-hidden relative',
-  'overridePaddingFieldValue' => ' ',
+@component('components.container')
+  'classes' => 'overflow-hidden relative mx-20',
 ])
 
   @php $imageUrl = wp_get_attachment_image_src(get_sub_field('image')['ID'], 'full')[0]; @endphp
   @php $imageTitle = get_the_title(get_sub_field('image')['ID']); @endphp
 
+  <div class="max-w-1270 mx-auto items-start relative">
 
-  <x-slot name="beforeSlot">
-    <div class="md:absolute top-0 bottom-0 md:w-50% {{ get_sub_field('image_position') == 'left' ? 'left-0' : 'right-0' }}">
       <img src="{{ $imageUrl }}"
-           alt="{{ $imageTitle }}"
-           class="w-full h-full object-cover min-h-310 max-h-310 md:max-h-unset"
+          alt="{{ $imageTitle }}"
+          class="lg:max-h-900 lg:min-h-900 max-w-580 block lg:max-w-400 lg:min-w-400 xl:max-h-900 xl:min-h-900 xl:max-w-615 xl:min-w-615 object-cover mb-20 md:mb-75 lg:mb-0 {{ get_sub_field('image_position') === 'right' ? 'lg:order-2 lg:ml-75 float-none md:float-right lg:float-right' : 'lg:order-1 lg:mr-75 float-none md:float-left lg:float-left' }}"
       />
-    </div>
-  </x-slot>
 
-  <div class="md:grid md:grid-cols-2">
-    <div class="relative {{ $defaultPadding }} {{ get_sub_field('image_position') == 'left' ? 'col-start-2' : 'col-start-1' }}">
-      <div class="xl:max-w-580 {{ get_sub_field('image_position') == 'left' ? 'md:col-start-2 md:ml-50 md:mr-auto' : 'col-start-1 md:mr-50 md:ml-auto' }}">
+    <div class="rounded-0 md:rounded-lg lg:rounded-lg max-w-805 md:max-w-805 lg:max-w-805 static mt-20 md:absolute lg:absolute inset-center p-50 bg-{{ get_sub_field('background_text') }} order-1 {{ get_sub_field('image_position') === 'right' ? 'lg:order-1 lg:ml-auto left-0 md:left-0 lg:left-0' : 'lg:order-2 lg:mr-auto right-0 md:right-0 lg:right-0' }}">
+      <div class="xl:max-w-580">
         @include('flexible.partials.heading')
 
         @include('flexible.partials.text')
 
         @include('flexible.partials.links')
       </div>
-
-      <svg class="{{ get_sub_field('image_position') == 'left' ? 'hidden' : 'block' }} left-auto right-1 transform translate-x-100% w-auto top-0 bottom-0 absolute fill-current text-{{ get_sub_field('background_colour') }}" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 150 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-          <g transform="matrix(-1,0,0,1,150,0)">
-              <path d="M0,-0L150,-0L150,300L0,300C82.787,300 150,232.787 150,150C150,67.378 83.056,0.269 0.485,0.001L0,-0Z"/>
-          </g>
-      </svg>
-
-      <svg class="{{ get_sub_field('image_position') == 'left' ? 'block' : 'hidden' }} left-1 right-auto transform -translate-x-100% w-auto top-0 bottom-0 absolute fill-current text-{{ get_sub_field('background_colour') }}" preserveAspectRatio="none" width="100%" height="100%" viewBox="0 0 150 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
-          <path d="M0,-0L150,-0L150,300L0,300C82.787,300 150,232.787 150,150C150,67.378 83.056,0.269 0.485,0.001L0,-0Z" />
-      </svg>
     </div>
   </div>
 

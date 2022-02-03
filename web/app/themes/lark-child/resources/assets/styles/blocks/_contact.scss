@@ -6,6 +6,8 @@
   input[type="text"],
   input[type="email"],
   textarea {
-    @apply py-12 w-full;
+    background-color: #EDF2F3;
+
+    @apply py-12 w-full text-black;
   }
 }

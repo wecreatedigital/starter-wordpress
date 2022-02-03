@@ -11,7 +11,15 @@
 function google_maps()
 {
     $api = 'https://maps.googleapis.com/maps/api/js?key='.getenv('GOOGLEMAPS');
+
     wp_enqueue_script('google-map', $api, array(), '3', true);
-    wp_enqueue_script('google-map-init', get_stylesheet_directory_uri().'/assets/scripts/google-maps.js', array('google-map', 'jquery'), '0.1', true);
+
+    wp_enqueue_script(
+        'google-map-init',
+        get_stylesheet_directory_uri().'/resources/assets/scripts/google-maps.js',
+        array('google-map', 'jquery'),
+        null,
+        false
+    );
 }
 add_action('wp_enqueue_scripts', 'google_maps');

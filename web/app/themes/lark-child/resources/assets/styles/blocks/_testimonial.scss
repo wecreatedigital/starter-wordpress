@@ -3,7 +3,18 @@
     @apply bg-transparent;
 
     &.is-active {
-      // @apply bg-pink;
+      @apply bg-black;
+    }
+  }
+
+  .icon {
+    width: 37.7px;
+    height: 27.8px;
+
+    // md and above
+    @screen md {
+      width: 57.7px;
+      height: 42.4px;
     }
   }
 }

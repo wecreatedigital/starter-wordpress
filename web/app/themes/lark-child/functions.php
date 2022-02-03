@@ -1,5 +1,7 @@
 <?php
 
+// $h = 1;
+
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
@@ -58,7 +60,7 @@ collect([
     'Library/speed',
     // 'Library/woocommerce',
     // 'Library/stripe',
-    // 'Library/google-maps',
+    'Library/google-maps',
     'Library/tinymce',
 ])
     ->each(function ($file) {
@@ -96,3 +98,16 @@ add_theme_support('sage');
 */
 
 new Roots\Acorn\Bootloader();
+
+// $items = new \WP_Query([
+//     'posts_per_page' => -1,
+//     'post_type' => 'post',
+//     'orderby' => 'date',
+//     'order' => 'DESC',
+// ]);
+
+// $mediaIds = [246, 247, 248];
+
+// foreach ($items->posts as $item) {
+//     set_post_thumbnail($item->ID, $mediaIds[ array_rand($mediaIds)]);
+// }

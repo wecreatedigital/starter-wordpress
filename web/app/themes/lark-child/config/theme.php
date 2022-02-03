@@ -20,7 +20,6 @@ return [
         'contact-form-7/wp-contact-form-7.php',
         'wp-pagenavi/wp-pagenavi.php',
         'tinymce-advanced/tinymce-advanced.php',
-        'go-live-update-urls/go-live-update-urls.php',
 
         // Used for duplicating pages as well as the ACF on the page,
         // very useful for when copying the homepage on dev
@@ -41,33 +40,27 @@ return [
 
     'fonts' => [
         'h1' => [
-            'size' => 'text-32 md:text-42',
-            'font' => 'font-questrial',
-            'margin' => 'mb-30',
+            'size' => 'text-46',
+            'font' => 'font-bitter',
+            'margin' => 'mb-20',
         ],
 
         'h2' => [
-            'size' => 'text-26 leading-36 -tracking-0.6 md:text-36 md:-tracking-0.4 md:leading-45 md:-word-spacing-2.6',
-            'font' => 'font-questrial',
-            'margin' => 'mb-30 md:mb-40',
+            'size' => 'text-36 -word-spacing-0.4',
+            'font' => 'font-bitter',
+            'margin' => 'mb-35',
         ],
 
         'h3' => [
-            'size' => 'text-24 leading-32',
-            'font' => 'font-questrial',
-            'margin' => 'mb-30',
+            'size' => 'text-24',
+            'font' => 'font-bitter',
+            'margin' => 'mb-35',
         ],
 
         'h4' => [
-            'size' => 'text-18',
-            'font' => 'font-questrial',
-            'margin' => '',
-        ],
-
-        'h5' => [
-            'size' => 'text-16',
-            'font' => 'font-questrial',
-            'margin' => '',
+            'size' => 'text-20',
+            'font' => 'font-bitter',
+            'margin' => 'mb-35',
         ],
     ],
 

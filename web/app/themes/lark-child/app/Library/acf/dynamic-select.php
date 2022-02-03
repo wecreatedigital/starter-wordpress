@@ -34,9 +34,13 @@ $colourOptions = function ($field) {
     // reset choices
     $field['choices'] = array(
         'default' => '-- SELECT --',
-        'white' => 'White', // #ffffff
-        'black' => 'Black', // #000000
         'transparent' => 'Transparent', // transparent
+        'white' => 'White', // #FFFFFF
+        'black' => 'Black', // #000000
+        'pink' => 'Pink', #D2659B
+        'grey-dark' => 'Dark Grey', #4F5356
+        'grey-light' => 'Light Grey', #F2F2F2
+        'teal' => 'Teal', #1B95AD
     );
 
     return $field;
@@ -47,6 +51,8 @@ add_filter('acf/load_field/name=heading_colour', $colourOptions);
 add_filter('acf/load_field/name=text_colour', $colourOptions);
 add_filter('acf/load_field/name=background_colour', $colourOptions);
 add_filter('acf/load_field/name=colour', $colourOptions);
+add_filter('acf/load_field/name=box_background_colour', $colourOptions);
+add_filter('acf/load_field/name=testimonials_colour', $colourOptions);
 
 /**
  * ACF - define all heading sizes here.

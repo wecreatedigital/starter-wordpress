@@ -1,48 +1,52 @@
 @if($latestPosts->have_posts())
-  @component('components.blocks.container')
+
+  @component('components.container')
 
     <div class="mx-auto">
-      @include('flexible.partials.heading')
+      <x-heading size="h2" alignment="center">
+        Latest Posts
+      </x-heading>
 
-      @include('flexible.partials.text')
-
-      <ul class="space-y-30">
-        @php
-        $counter = 1;
-        @endphp
-
+      <ul class="grid lg:grid-cols-2 gap-x-65 gap-y-30">
         @while($latestPosts->have_posts()) @php $latestPosts->the_post(); @endphp
-          <li class="flex flex-col md:flex-row">
-            <img src="@thumbnail('full', false)"
-                 alt="@title"
-                 class="md:max-w-412 md:min-w-412 object-cover max-h-300 md:max-h-unset md:min-h-340"
-            />
+          <li class="">
+            <a href="@permalink" class="block">
+              <img src="@thumbnail('full', false)"
+                   alt="@title"
+                   class="max-h-185 min-h-185 md:max-h-360 md:min-h-360 object-cover w-full"
+              />
+            </a>
 
-            <div class="flex flex-col items-start justify-center p-30 md:px-60 md:py-65 bg-white">
-              <a href="{{ get_permalink() }}" class="block mb-25">
-                <x-heading size="h3" alignment="start" :size-options="['margin' => 'mb-0']">
+            <div class="px-50 pb-50 pt-45 bg-lightGrey rounded-b-md">
+              <a href="@permalink" class="block mb-15">
+                <x-heading size="h2" alignment="left" :size-options="['margin' => 'mb-0']">
                   @title
                 </x-heading>
               </a>
 
-              <div class="mb-25">
+              <div class="mb-30">
                 @excerpt
               </div>
 
-              <x-link href="{{ get_permalink() }}" colour="dark-grey">
-                Read story
-              </x-link>
+              @php $terms = collect(get_the_terms($post->ID, 'category')); @endphp
+
+              @if ( ! $terms->isEmpty())
+                <div class="flex flex-row items-center space-x-10">
+                  @foreach ($terms as $term)
+                    <a href="{{ get_term_link($term->term_id) }}" class="text-16 bg-Grey py-10 px-12 rounded-sm">
+                      {{ $term->name }}
+                    </a>
+                  @endforeach
+                </div>
+              @endif
             </div>
           </li>
-
-          @php $counter++; @endphp
         @endwhile
       </ul>
 
-      @include('flexible.partials.links', [
-        'spacing' => 'mt-35'
-      ])
+      @include('flexible.partials.links')
     </div>
 
   @endcomponent
+
 @endif
