@@ -359,5 +359,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - FIX: latest Roots Sage theme was not working, waiting until stable release
 
+## 3.6.1 - 07-03-2022
+
+- FIX: resolved include responsive-background-image.js path
+
 ## To do
 - Create sample WooCommerce
