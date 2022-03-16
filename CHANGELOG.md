@@ -363,5 +363,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - FIX: resolved include responsive-background-image.js path
 
+## 3.6.2 - 16-03-2022
+
+- Added some commented out rewrite logic for CPT
+
 ## To do
 - Create sample WooCommerce

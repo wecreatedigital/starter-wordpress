@@ -25,6 +25,9 @@ $cpts = [
         'public' => true,
         'taxonomies' => ['author', 'genre'],
         'supports' => ['title', 'editor', 'thumbnail', 'revisions'],
+        // 'rewrite' => [
+        //     'slug' => 'faqs',
+        // ],
     ],
 
     // NOTE: Please follow instructions in
@@ -117,14 +120,6 @@ foreach ($cpts as $cpt => $cpt_options) {
             'filter_items_list' => __("Filter {$uc_post_type_plural}", 'text_domain'),
         );
 
-        $rewriteRules = [
-            'with_front' => false,
-        ];
-
-        if (isset($cpt_options['rewrite'])) {
-            $rewriteRules = array_merge($rewriteRules, $cpt_options['rewrite']);
-        }
-
         $args = array(
             'label' => __('post_type', 'text_domain'),
             'description' => __($cpt, 'text_domain'),
@@ -139,7 +134,9 @@ foreach ($cpts as $cpt => $cpt_options) {
             'menu_position' => 5,
             'can_export' => true,
             'has_archive' => true,
-            'rewrite' => $rewriteRules,
+            'rewrite' => array_merge([
+                'with_front' => false,
+            ], $cpt_options['rewrite'] ?? []),
 
             // --- PUBLIC OPTIONS ---
             'exclude_from_search' => isset($cpt_options['public']) ? $cpt_options['public'] : false,
