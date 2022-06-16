@@ -1,7 +1,6 @@
 @include('layouts.header')
 
 <main class="main font-lora text-base relative z-3" id="main">
-  @include('layouts.breadcrumbs')
   @yield('content')
 </main>
 

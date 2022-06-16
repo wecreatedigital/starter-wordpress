@@ -367,5 +367,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Added some commented out rewrite logic for CPT
 
+## 3.6.3 - 16-06-2022
+
+- Removed some of the default breadcrumbs
+
 ## To do
 - Create sample WooCommerce
