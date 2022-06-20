@@ -1,13 +1,16 @@
-@php
-  global $h;
-@endphp
+@php global $h; @endphp
 
-@if ($size == 'h1')
+@if (is_null($h))
   @php $h++; @endphp
-@endif
+@endif 
 
 @if ($size == 'h1' && $h > 1)
   @php $size = 'h2'; @endphp
+@elseif($size == 'h1')
+  @php $h++; @endphp
+@elseif($size == 'h2' && $h === 1)
+  @php $size = 'h1'; @endphp
+  @php $h++; @endphp
 @endif
 
 <{{ $size }} class="{{ $classes }}">

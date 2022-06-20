@@ -10,6 +10,10 @@
  */
 function google_maps()
 {
+    if (is_null(getenv('GOOGLEMAPS')) || empty(getenv('GOOGLEMAPS'))) {
+        return;
+    }
+
     $api = 'https://maps.googleapis.com/maps/api/js?key='.getenv('GOOGLEMAPS');
 
     wp_enqueue_script('google-map', $api, array(), '3', true);

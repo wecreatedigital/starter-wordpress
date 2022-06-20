@@ -371,5 +371,12 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Removed some of the default breadcrumbs
 
+## 3.6.4 - 20-06-2022
+
+- Resolved Google Maps API console issue when an config key isn't presented
+- Resolved Flexible Content issue whereby the same Post Type is specified 3 times over
+- Resolved heading partial issue whereby the incrementation isn't quite working as expected
+- Resolved Hero Flexible Content Block example whereby there are a few broken tags
+
 ## To do
 - Create sample WooCommerce
