@@ -14,7 +14,7 @@ class FlexibleContainer extends Composer
      */
     protected static $views = [
         'layouts.flexible',
-        'container',
+        'components.container',
         'flexible.blocks.*',
         'components.heading',
     ];

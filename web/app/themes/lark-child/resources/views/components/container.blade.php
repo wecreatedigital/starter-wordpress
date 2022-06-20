@@ -28,17 +28,21 @@
     blend
   @endif
 
-  @isset(get_sub_field('background_image')['ID'] )
-    bg-center bg-cover bg-no-repeat
-  @endisset
+  @if(!isset($noBackgroundImage) || $noBackgroundImage !== true)
+    @isset(get_sub_field('background_image')['ID'] )
+      bg-center bg-cover bg-no-repeat
+    @endisset
+  @endif
 "
 @if( isset($style) )
   style="{{ $style }}"
 @endif
 
-@hassub('background_image')
-  style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.7)), url('{{ wp_get_attachment_image_src(get_sub_field('background_image')['ID'], 'full')[0] }}');"
-@endsub
+@if(!isset($noBackgroundImage) || $noBackgroundImage !== true)
+  @hassub('background_image')
+    style="background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.7)), url('{{ wp_get_attachment_image_src(get_sub_field('background_image')['ID'], 'full')[0] }}');"
+  @endsub
+@endif
 >
   {{ $beforeSlot }}
 

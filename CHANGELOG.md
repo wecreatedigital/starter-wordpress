@@ -377,6 +377,7 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Resolved Flexible Content issue whereby the same Post Type is specified 3 times over
 - Resolved heading partial issue whereby the incrementation isn't quite working as expected
 - Resolved Hero Flexible Content Block example whereby there are a few broken tags
-
+- Resolved Flexible Container path for sharing global variables writtin in flexible.php
+- Added some more features to the container layout for Flexible Content Blocks when wanting to remove the background image and use it elsewhere within the block
 ## To do
 - Create sample WooCommerce
