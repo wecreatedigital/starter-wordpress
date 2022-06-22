@@ -1,4 +1,4 @@
-@component('components.container')
+@component('components.container', [
   'classes' => 'fcb-testimonial',
 ])
 
@@ -18,7 +18,7 @@
                    @include('svgs.quote-left')
 
                    <div class="text-center mx-auto">
-                     <h3 class="text-current text-24 md:text-26 font-jost italic md:-tracking-0.8 md:word-spacing-0.9 md:leading-50 mb-20">
+                     <h3 class="text-current text-24 md:text-26 italic md:-tracking-0.8 md:word-spacing-0.9 md:leading-50 mb-20">
                            <?php echo $featured_post->post_content; ?>
                      </h3>
 

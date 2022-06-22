@@ -1,6 +1,6 @@
 @include('layouts.header')
 
-<main class="main font-lora text-base relative z-3" id="main">
+<main class="main font-bitter text-base relative z-3" id="main">
   @yield('content')
 </main>
 

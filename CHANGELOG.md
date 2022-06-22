@@ -379,5 +379,11 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Resolved Hero Flexible Content Block example whereby there are a few broken tags
 - Resolved Flexible Container path for sharing global variables writtin in flexible.php
 - Added some more features to the container layout for Flexible Content Blocks when wanting to remove the background image and use it elsewhere within the block
+
+## 3.6.5 - 22-06-2022
+
+- Resolved some flexible/block templating issues whereby there are broken tags
+- Making default 'bitter' font consistent across views
+
 ## To do
 - Create sample WooCommerce

@@ -1,4 +1,4 @@
-<footer class="font-jost relative text-white z-2 max-w-1470 mx-auto">
+<footer class="font-bitter relative text-white z-2 max-w-1470 mx-auto">
   <div class="bg-teal px-30 py-50 mx-20">
     <div class="flex flex-col space-y-20 lg:flex-row justify-between">
       <div class="flex flex-col order-2 lg:order-1 items-center lg:items-start mt-50 lg:mt-0">

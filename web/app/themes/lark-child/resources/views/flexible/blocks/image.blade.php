@@ -1,4 +1,4 @@
-  @component('components.container')
+@component('components.container', [
     'classes' => 'overflow-hidden relative echo w-full min-h-538 container px-20 bg-overlay',
   ])
 

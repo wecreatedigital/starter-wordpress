@@ -1,4 +1,4 @@
-<div class="flex flex-row font-spectral text-18">
+<div class="flex flex-row font-bitter text-18">
   @php $terms = collect(get_the_terms($post->ID, 'category')); @endphp
 
   @if ( ! $terms->isEmpty())

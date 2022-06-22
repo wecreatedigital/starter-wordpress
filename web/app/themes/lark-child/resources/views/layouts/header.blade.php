@@ -1,4 +1,4 @@
-<nav class="relative z-999 bg-white font-libre-baskerville Grande text-black"
+<nav class="relative z-999 bg-white font-bitter text-black"
      x-data="{ isOpen: false }"
 >
   <div class="container md:max-w-1470 md:mx-auto">

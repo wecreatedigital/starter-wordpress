@@ -1,4 +1,4 @@
-@component('components.container')
+@component('components.container', [
   'classes' => 'overflow-hidden relative mx-20',
 ])
 

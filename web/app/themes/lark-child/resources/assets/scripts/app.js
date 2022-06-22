@@ -21,7 +21,6 @@ require('alpinejs');
  */
 window.WebFontConfig = {
   google: { families: [
-    'Nunito+Sans:200,300,400,600,700,800,900i,200i,300i,400i,600i,700i,800i,900',
     'Bitter:100,200,300,400,500,600,700,800,900i,100i,200i,300i,400i,500i,600i,700i,800i,900',
   ] },
 };

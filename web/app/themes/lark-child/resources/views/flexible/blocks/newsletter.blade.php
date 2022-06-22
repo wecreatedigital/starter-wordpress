@@ -1,4 +1,4 @@
-@component('components.container')
+@component('components.container', [
   'classes' => 'fcb-newsletter',
   'overridePadding' => 'py-50',
 ])
@@ -23,7 +23,7 @@
           <input type="email"
                  name="EMAIL"
                  placeholder="Enter your email address"
-                 class="bg-grey-mid border-0 rounded-full w-full font-cardo py-12 px-25 max-w-540 text-blue-dark"
+                 class="bg-grey-mid border-0 rounded-full w-full py-12 px-25 max-w-540 text-blue-dark"
                  required
           />
 
