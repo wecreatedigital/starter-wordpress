@@ -10,8 +10,8 @@ use Illuminate\Support\Str;
  */
 
 $taxonomies = [
-    'author' => ['testimonial', 'faq'],
-    'genre' => ['faq'],
+    'author' => ['post_types' => ['testimonial', 'faq']],
+    'genre' => ['post_types' => ['faq']],
 ];
 
 $cpts = [
@@ -43,7 +43,9 @@ $cpts = [
  * FIRST REGISTER TAXONOMIES TO LATER ASSOCIATE WITH CPT
  */
 foreach ($taxonomies as $taxonomy => $post_types) {
-    add_action('init', function () use ($post_types, $taxonomy) {
+    $post_types = $args['post_types'];
+
+    add_action('init', function () use ($post_types, $taxonomy, $args) {
         $taxonomy_plural = str_replace('-', ' ', $taxonomy);
         $uc_taxonomy_plural = Str::of($taxonomy_plural)->plural()->title();
         $uc_taxonomy_singular = Str::of($taxonomy_plural)->singular()->title();
@@ -67,16 +69,30 @@ foreach ($taxonomies as $taxonomy => $post_types) {
             'menu_name' => $uc_taxonomy_plural,
         );
 
+        if (isset($args['private']) && $args['private'] === true) {
+            $public = [
+                'public' => false,
+                'query_var' => false,
+                'rewrite' => false,
+                'hierarchical' => false,
+            ];
+        } else {
+            $public = [
+                'public' => true,
+                'query_var' => true,
+                'rewrite' => ['slug' => $taxonomy],
+                'hierarchical' => true,
+            ];
+        }
+
         // Now register the non-hierarchical taxonomy like tag
-        register_taxonomy($taxonomy_plural, $post_types, [
-            'hierarchical' => true,
+        register_taxonomy($taxonomy_plural, $post_types, array_merge([
             'labels' => $labels,
             'show_ui' => true,
             'show_admin_column' => true,
             'update_count_callback' => '_update_post_term_count',
             'query_var' => true,
-            'rewrite' => ['slug' => $taxonomy],
-        ]);
+        ], $public));
     }, 0);
 }
 
