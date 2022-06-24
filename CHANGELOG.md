@@ -386,5 +386,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 - Making default 'bitter' font consistent across views
 - Adding capabilities for custom taxonomies to be private
 
+## 3.7.1 - 24-06-2022
+
+- Tweaks: resolving the production config whereby the wrong env method was being used
+
 ## To do
 - Create sample WooCommerce
