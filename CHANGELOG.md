@@ -390,5 +390,9 @@ All notable changes to `starter-wordpress` will be documented in this file
 
 - Tweaks: resolving the production config whereby the wrong env method was being used
 
+## 3.7.5 - 29-06-2022
+
+- Tweaks: added in missing Stripi REST API file and added some brief instructions
+
 ## To do
 - Create sample WooCommerce

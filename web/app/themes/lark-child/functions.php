@@ -59,7 +59,7 @@ collect([
     'Library/seo',
     'Library/speed',
     // 'Library/woocommerce',
-    // 'Library/stripe',
+    // 'Library/stripe-api', // NOTE: please install: https://github.com/stripe/stripe-php and enable the Stripe REST routes
     'Library/google-maps',
     'Library/tinymce',
 ])
